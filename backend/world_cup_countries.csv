@@ -1,49 +1,49 @@
-Name,Base_Elo,Base_Camp_City
-Algeria,1743,Kansas City
-Argentina,2113,Kansas City
-Australia,1775,San Francisco Bay Area
-Austria,1827,Goleta
-Belgium,1867,Renton
-Bosnia and Herzegovina,1591,Sandy
-Brazil,1988,New York New Jersey
-Canada,1784,Vancouver
-Cape Verde,1576,Tampa
-Colombia,1975,Guadalajara
-Croatia,1930,Alexandria
-Curacao,1433,Boca Raton
-Czechia,1733,Dallas
-DR Congo,1655,Houston
-Ecuador,1935,Columbus
-Egypt,1699,Spokane
-England,2020,Kansas City
-France,2081,Boston
-Germany,1925,Winston-Salem
-Ghana,1503,Boston
-Haiti,1532,New York New Jersey
-Iran,1764,Tijuana
-Iraq,1608,Greenbrier County
-Ivory Coast,1676,Philadelphia
-Japan,1906,Nashville
-Jordan,1685,Portland
-Mexico,1868,Mexico City
-Morocco,1822,New York New Jersey
-Netherlands,1961,Kansas City
-New Zealand,1585,San Diego
-Norway,1912,Greensboro
-Panama,1733,New Tecumseth
-Paraguay,1833,San Francisco Bay Area
-Portugal,1984,Palm Beach Gardens
-Qatar,1423,Santa Barbara
-Saudi Arabia,1566,Austin
-Scotland,1770,Charlotte
-Senegal,1866,New York New Jersey
-South Africa,1517,Pachuca
-South Korea,1756,Guadalajara
-Spain,2165,Chattanooga
-Sweden,1719,Dallas
-Switzerland,1894,San Diego
-Tunisia,1636,Monterrey
-Turkey,1902,Mesa
-United States,1733,Irvine
-Uruguay,1892,Cancun
-Uzbekistan,1727,Atlanta
+Name,Base_Elo,Base_Camp_City,Total_Utility_Value
+Algeria,1743,Kansas City,0.0
+Argentina,2113,Kansas City,0.0
+Australia,1775,San Francisco Bay Area,0.0
+Austria,1830,Goleta,0.0
+Belgium,1866,Renton,0.0
+Bosnia and Herzegovina,1591,Sandy,0.0
+Brazil,1988,New York New Jersey,0.0
+Canada,1793,Vancouver,0.0
+Cape Verde,1576,Tampa,0.0
+Colombia,1977,Guadalajara,0.0
+Croatia,1930,Alexandria,0.0
+Curacao,1433,Boca Raton,0.0
+Czechia,1733,Dallas,0.0
+DR Congo,1655,Houston,0.0
+Ecuador,1935,Columbus,0.0
+Egypt,1699,Spokane,0.0
+England,2020,Kansas City,0.0
+France,2081,Boston,0.0
+Germany,1925,Winston-Salem,0.0
+Ghana,1503,Boston,0.0
+Haiti,1532,New York New Jersey,0.0
+Iran,1764,Tijuana,0.0
+Iraq,1608,Greenbrier County,0.0
+Ivory Coast,1676,Philadelphia,0.0
+Japan,1906,Nashville,0.0
+Jordan,1685,Portland,0.0
+Mexico,1868,Mexico City,0.0
+Morocco,1822,New York New Jersey,0.0
+Netherlands,1961,Kansas City,0.0
+New Zealand,1585,San Diego,0.0
+Norway,1917,Greensboro,0.0
+Panama,1733,New Tecumseth,0.0
+Paraguay,1833,San Francisco Bay Area,0.0
+Portugal,1984,Palm Beach Gardens,0.0
+Qatar,1423,Santa Barbara,0.0
+Saudi Arabia,1566,Austin,0.0
+Scotland,1770,Charlotte,0.0
+Senegal,1866,New York New Jersey,0.0
+South Africa,1517,Pachuca,0.0
+South Korea,1756,Guadalajara,0.0
+Spain,2165,Chattanooga,0.0
+Sweden,1714,Dallas,0.0
+Switzerland,1894,San Diego,0.0
+Tunisia,1633,Monterrey,0.0
+Turkey,1906,Mesa,0.0
+United States,1733,Irvine,0.0
+Uruguay,1892,Cancun,0.0
+Uzbekistan,1718,Atlanta,0.0
