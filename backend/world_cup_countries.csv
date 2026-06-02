@@ -1,49 +1,49 @@
-Name,Base_Elo,Base_Camp_City,Total_Utility_Value
-Algeria,1743,Kansas City,0.0
-Argentina,2113,Kansas City,0.0
-Australia,1775,San Francisco Bay Area,0.0
-Austria,1830,Goleta,0.0
-Belgium,1866,Renton,0.0
-Bosnia and Herzegovina,1591,Sandy,0.0
-Brazil,1988,New York New Jersey,0.0
-Canada,1793,Vancouver,0.0
-Cape Verde,1576,Tampa,0.0
-Colombia,1977,Guadalajara,0.0
-Croatia,1930,Alexandria,0.0
-Curacao,1433,Boca Raton,0.0
-Czechia,1733,Dallas,0.0
-DR Congo,1655,Houston,0.0
-Ecuador,1935,Columbus,0.0
-Egypt,1699,Spokane,0.0
-England,2020,Kansas City,0.0
-France,2081,Boston,0.0
-Germany,1925,Winston-Salem,0.0
-Ghana,1503,Boston,0.0
-Haiti,1532,New York New Jersey,0.0
-Iran,1764,Tijuana,0.0
-Iraq,1608,Greenbrier County,0.0
-Ivory Coast,1676,Philadelphia,0.0
-Japan,1906,Nashville,0.0
-Jordan,1685,Portland,0.0
-Mexico,1868,Mexico City,0.0
-Morocco,1822,New York New Jersey,0.0
-Netherlands,1961,Kansas City,0.0
-New Zealand,1585,San Diego,0.0
-Norway,1917,Greensboro,0.0
-Panama,1733,New Tecumseth,0.0
-Paraguay,1833,San Francisco Bay Area,0.0
-Portugal,1984,Palm Beach Gardens,0.0
-Qatar,1423,Santa Barbara,0.0
-Saudi Arabia,1566,Austin,0.0
-Scotland,1770,Charlotte,0.0
-Senegal,1866,New York New Jersey,0.0
-South Africa,1517,Pachuca,0.0
-South Korea,1756,Guadalajara,0.0
-Spain,2165,Chattanooga,0.0
-Sweden,1714,Dallas,0.0
-Switzerland,1894,San Diego,0.0
-Tunisia,1633,Monterrey,0.0
-Turkey,1906,Mesa,0.0
-United States,1733,Irvine,0.0
-Uruguay,1892,Cancun,0.0
-Uzbekistan,1718,Atlanta,0.0
+Name,Group,Base_Elo,Base_Camp_City,Total_Utility_Value
+Czechia,A,1733,Dallas,0.0
+Mexico,A,1867,Mexico City,0.0
+South Africa,A,1518,Pachuca,0.0
+South Korea,A,1756,Guadalajara,0.0
+Bosnia and Herzegovina,B,1591,Sandy,0.0
+Canada,B,1793,Vancouver,0.0
+Qatar,B,1423,Santa Barbara,0.0
+Switzerland,B,1894,San Diego,0.0
+Brazil,C,1988,New York New Jersey,0.0
+Haiti,C,1532,New York New Jersey,0.0
+Morocco,C,1824,New York New Jersey,0.0
+Scotland,C,1770,Charlotte,0.0
+Australia,D,1774,San Francisco Bay Area,0.0
+Paraguay,D,1832,San Francisco Bay Area,0.0
+Turkey,D,1906,Mesa,0.0
+United States,D,1733,Irvine,0.0
+Curacao,E,1433,Boca Raton,0.0
+Ecuador,E,1935,Columbus,0.0
+Germany,E,1925,Winston-Salem,0.0
+Ivory Coast,E,1676,Philadelphia,0.0
+Japan,F,1906,Nashville,0.0
+Netherlands,F,1961,Kansas City,0.0
+Sweden,F,1714,Dallas,0.0
+Tunisia,F,1633,Monterrey,0.0
+Belgium,G,1888,Renton,0.0
+Egypt,G,1699,Spokane,0.0
+Iran,G,1764,Tijuana,0.0
+New Zealand,G,1585,San Diego,0.0
+Cape Verde,H,1576,Tampa,0.0
+Saudi Arabia,H,1566,Austin,0.0
+Spain,H,2165,Chattanooga,0.0
+Uruguay,H,1892,Cancun,0.0
+France,I,2081,Boston,0.0
+Iraq,I,1608,Greenbrier County,0.0
+Norway,I,1917,Greensboro,0.0
+Senegal,I,1867,New York New Jersey,0.0
+Algeria,J,1743,Kansas City,0.0
+Argentina,J,2113,Kansas City,0.0
+Austria,J,1830,Goleta,0.0
+Jordan,J,1685,Portland,0.0
+Colombia,K,1977,Guadalajara,0.0
+DR Congo,K,1655,Houston,0.0
+Portugal,K,1984,Palm Beach Gardens,0.0
+Uzbekistan,K,1718,Atlanta,0.0
+Croatia,L,1908,Alexandria,0.0
+England,L,2020,Kansas City,0.0
+Ghana,L,1510,Boston,0.0
+Panama,L,1733,New Tecumseth,0.0

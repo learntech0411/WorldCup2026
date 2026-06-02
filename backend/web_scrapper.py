@@ -74,7 +74,6 @@ def scrape_countries_data():
     elo_ratings = {}
     
     for row in soup_elo.find_all('div', class_='slick-row'):
-        # SlickGrid dynamically assigns classes, so we use regex to find the team cell
         import re
         team_cell = row.find('div', class_=re.compile(r'team-cell'))
         rating_cell = row.find('div', class_='l2') # Column l2 holds the rating
@@ -90,10 +89,66 @@ def scrape_countries_data():
                     pass
                     
     print(f"Found {len(elo_ratings)} total Elo Ratings.")
+
+    # ---------------------------------------------------------
+    # STEP 3: Scrape Groups from Wikipedia (Using Selenium)
+    # ---------------------------------------------------------
+    print("Fetching Group assignments from Wikipedia...")
+    wiki_url = "https://en.wikipedia.org/wiki/2026_FIFA_World_Cup_draw"
+    driver.get(wiki_url)
+    time.sleep(2) # Brief wait for page load
+    
+    soup_wiki = BeautifulSoup(driver.page_source, 'html.parser')
+    
+    # Wikipedia names sometimes differ from your existing Elo keys
+    wiki_to_elo = {
+        "Algeria": "Algeria", "Argentina": "Argentina", "Australia": "Australia", 
+        "Austria": "Austria", "Belgium": "Belgium", "Bosnia and Herzegovina": "Bosnia_and_Herzegovina", 
+        "Brazil": "Brazil", "Cape Verde": "Cape_Verde", "Canada": "Canada", 
+        "Colombia": "Colombia", "DR Congo": "DR_Congo", "Ivory Coast": "Ivory_Coast", 
+        "Croatia": "Croatia", "Curaçao": "Curacao", "Czech Republic": "Czechia", 
+        "Ecuador": "Ecuador", "Egypt": "Egypt", "England": "England", 
+        "France": "France", "Germany": "Germany", "Ghana": "Ghana", 
+        "Haiti": "Haiti", "Iran": "Iran", "Iraq": "Iraq", 
+        "Japan": "Japan", "Jordan": "Jordan", "South Korea": "South_Korea", 
+        "Mexico": "Mexico", "Morocco": "Morocco", "Netherlands": "Netherlands", 
+        "New Zealand": "New_Zealand", "Norway": "Norway", "Panama": "Panama", 
+        "Paraguay": "Paraguay", "Portugal": "Portugal", "Qatar": "Qatar", 
+        "Saudi Arabia": "Saudi_Arabia", "Scotland": "Scotland", "Senegal": "Senegal", 
+        "South Africa": "South_Africa", "Spain": "Spain", "Sweden": "Sweden", 
+        "Switzerland": "Switzerland", "Tunisia": "Tunisia", "Turkey": "Turkey", 
+        "United States": "United_States", "Uruguay": "Uruguay", "Uzbekistan": "Uzbekistan"
+    }
+    
+    elo_to_group = {}
+    
+    # Locate all tables containing the group data
+    for table in soup_wiki.find_all('table', class_='wikitable col1center'):
+        caption = table.find('caption')
+        if not caption:
+            continue
+            
+        group_text = caption.get_text(strip=True)
+        if "Group" in group_text:
+            # Extract just the letter (e.g., "Group A" -> "A")
+            group_letter = group_text.replace("Group", "").strip()
+            
+            # Skip the header row and iterate over team rows
+            for row in table.find_all('tr')[1:]:
+                tds = row.find_all('td')
+                if len(tds) >= 2:
+                    team_link = tds[1].find('a')
+                    if team_link:
+                        team_name = team_link.get_text(strip=True)
+                        # Map Wikipedia name to your Elo key
+                        elo_key = wiki_to_elo.get(team_name, team_name.replace(" ", "_"))
+                        elo_to_group[elo_key] = group_letter
+                        
+    print(f"Found {len(elo_to_group)} group assignments.")
     driver.quit()
 
     # ---------------------------------------------------------
-    # STEP 3: Map Names and Filter 48 Participating Teams
+    # STEP 4: Map Names and Filter 48 Participating Teams
     # ---------------------------------------------------------
     name_mapping = {
         "Algeria": "Algeria", "Argentina": "Argentina", "Australia": "Australia", 
@@ -129,6 +184,7 @@ def scrape_countries_data():
             
             final_data.append({
                 "Name": elo_display_name,
+                "Group": elo_to_group.get(elo_lookup_key, "Unknown"), # <-- Added Group mapping
                 "Base_Elo": elo_ratings[elo_lookup_key],
                 "Base_Camp_City": city,
                 "Total_Utility_Value": 0.0
@@ -137,7 +193,7 @@ def scrape_countries_data():
             print(f"Warning: Could not find Elo rating for mapped key: {elo_lookup_key}")
 
     # ---------------------------------------------------------
-    # STEP 4: Save to CSV
+    # STEP 5: Save to CSV
     # ---------------------------------------------------------
     df = pd.DataFrame(final_data)
     
@@ -145,7 +201,7 @@ def scrape_countries_data():
         print("\nError: DataFrame is empty. Something went wrong with the mapping.")
         return
         
-    df = df.sort_values(by="Name").reset_index(drop=True)
+    df = df.sort_values(by=["Group", "Name"]).reset_index(drop=True)
     
     print(f"\nSuccessfully compiled {len(df)} of the 48 participating countries.")
     
