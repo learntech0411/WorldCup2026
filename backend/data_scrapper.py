@@ -45,11 +45,9 @@ def parse_market_value(mv_string):
 def scrape_world_cup_players():
     print("Starting Firefox...")
     
-    # Set up Firefox options
     options = Options()
-    # options.add_argument('--headless') # Uncomment this if you want it to run invisibly in the background
+    # options.add_argument('--headless') 
     
-    # Initialize the Firefox driver
     driver = webdriver.Firefox(options=options)
     
     base_url = "https://www.transfermarkt.com"
@@ -57,25 +55,53 @@ def scrape_world_cup_players():
     
     print(f"Loading main tournament page: {start_url}")
     driver.get(start_url)
-    time.sleep(3) # Wait for Cloudflare/Page to load
+    time.sleep(3) 
     
     soup = BeautifulSoup(driver.page_source, 'html.parser')
     
-    # 1. Get all participating countries and their links
     countries_data = []
     main_table = soup.find('table', class_='items')
     
     if not main_table:
-        print("Error: Could not find the main countries table. Transfermarkt might be blocking the request.")
+        print("Error: Could not find the main countries table.")
         driver.quit()
         return
+
+    # 1. Master Mapping Dictionary
+    # We use this to map Transfermarkt names to our standardized Elo/DB names.
+    name_mapping = {
+        "Algeria": "Algeria", "Argentina": "Argentina", "Australia": "Australia", 
+        "Austria": "Austria", "Belgium": "Belgium", "Bosnia-Herzegovina": "Bosnia and Herzegovina", 
+        "Brazil": "Brazil", "Cape Verde": "Cape Verde", "Canada": "Canada", 
+        "Colombia": "Colombia", "Democratic Republic of the Congo": "DR Congo", "Ivory Coast": "Ivory Coast", 
+        "Croatia": "Croatia", "Curaçao": "Curacao", "Czechia": "Czechia", 
+        "Ecuador": "Ecuador", "Egypt": "Egypt", "England": "England", 
+        "France": "France", "Germany": "Germany", "Ghana": "Ghana", 
+        "Haiti": "Haiti", "Iran": "Iran", "Iraq": "Iraq", 
+        "Japan": "Japan", "Jordan": "Jordan", "South Korea": "South Korea", 
+        "Mexico": "Mexico", "Morocco": "Morocco", "Netherlands": "Netherlands", 
+        "New Zealand": "New Zealand", "Norway": "Norway", "Panama": "Panama", 
+        "Paraguay": "Paraguay", "Portugal": "Portugal", "Qatar": "Qatar", 
+        "Saudi Arabia": "Saudi Arabia", "Scotland": "Scotland", "Senegal": "Senegal", 
+        "South Africa": "South Africa", "Spain": "Spain", "Sweden": "Sweden", 
+        "Switzerland": "Switzerland", "Tunisia": "Tunisia", "Turkiye": "Turkey", 
+        "United States": "United States", "Uruguay": "Uruguay", "Uzbekistan": "Uzbekistan"
+    }
 
     for row in main_table.find('tbody').find_all('tr'):
         link_tag = row.find('td', class_='hauptlink').find('a')
         if link_tag:
-            country_name = link_tag.get_text(strip=True)
-            country_url = base_url + link_tag['href']
-            countries_data.append({'name': country_name, 'url': country_url})
+            raw_tm_name = link_tag.get_text(strip=True)
+            
+            # 2. Filter and Map the Country Name
+            clean_name = name_mapping.get(raw_tm_name)
+            
+            # Only append if it's one of our 48 mapped teams
+            if clean_name:
+                country_url = base_url + link_tag['href']
+                countries_data.append({'name': clean_name, 'url': country_url})
+            else:
+                print(f"Skipping {raw_tm_name} (Not in our 48-team list)")
 
     print(f"Found {len(countries_data)} countries. Beginning player extraction...")
     
@@ -86,8 +112,6 @@ def scrape_world_cup_players():
         print(f"Scraping players for {country['name']}...")
         driver.get(country['url'])
         
-        # BE POLITE: Transfermarkt will IP ban you if you scrape too fast. 
-        # A 3-5 second delay between page loads is highly recommended.
         time.sleep(4) 
         
         country_soup = BeautifulSoup(driver.page_source, 'html.parser')
@@ -101,32 +125,29 @@ def scrape_world_cup_players():
         for row in players_table.find('tbody').find_all('tr', recursive=False):
             player_dict = {}
             
-            # --- Country ---
+            # --- Country (Now uses our mapped, standardized name) ---
             player_dict['Country'] = country['name']
+            
+            # ... [The rest of your extraction logic remains exactly the same] ...
             
             # --- Player Number ---
             num_div = row.find('div', class_='rn_nummer')
             player_dict['Player_Number'] = num_div.get_text(strip=True) if num_div else "-"
             
             # --- Name & Injury Status ---
-            # Transfermarkt nests the name inside an inline-table
             hauptlink_td = row.find('td', class_='hauptlink')
             if hauptlink_td:
                 a_tag = hauptlink_td.find('a')
                 if a_tag:
-                    # Using list(stripped_strings)[0] to avoid capturing the hidden text of the injury span
                     player_dict['Name'] = list(a_tag.stripped_strings)[0]
-                    
-                    # Check for injury span
                     injury_span = a_tag.find('span', class_='verletzt-table')
                     player_dict['Is_Injured'] = True if injury_span else False
                 else:
-                    continue # Skip if no name found
+                    continue
             else:
                 continue
                 
             # --- Positions ---
-            # Raw position is usually in the second row of the inline-table under the name
             inline_table = row.find('table', class_='inline-table')
             if inline_table:
                 trs = inline_table.find_all('tr')
@@ -136,14 +157,13 @@ def scrape_world_cup_players():
                     player_dict['Model_Position'] = map_model_position(raw_pos)
             
             # --- Age ---
-            # Format: 21/08/2002 (23) -> We use regex to grab the number in parentheses
-            age_td = row.find_all('td', class_='zentriert')[1] # Usually the second centered td
+            age_td = row.find_all('td', class_='zentriert')[1] 
             age_text = age_td.get_text(strip=True)
             age_match = re.search(r'\((\d+)\)', age_text)
             player_dict['Age'] = int(age_match.group(1)) if age_match else None
             
             # --- Club ---
-            club_img = row.find('img', class_='') # Usually the club crest
+            club_img = row.find('img', class_='') 
             if club_img and 'title' in club_img.attrs:
                 player_dict['Club'] = club_img['title']
             else:
@@ -168,7 +188,6 @@ def scrape_world_cup_players():
     # 4. Save to CSV using pandas
     df = pd.DataFrame(all_players)
     
-    # Reorder columns to match your exact specification
     columns_order = [
         'Name', 'Country', 'Age', 'Player_Number', 
         'Raw_Position', 'Model_Position', 'Club', 
@@ -595,7 +614,7 @@ def build_locations(df_matches, base_camps_csv="world_cup_countries.csv"):
 
 if __name__ == "__main__":
     scrape_world_cup_players()
-    scrape_countries_data()
-    matches_df = scrape_matches()
-    build_locations(matches_df)
+    #scrape_countries_data()
+    #matches_df = scrape_matches()
+    #build_locations(matches_df)
     print("\nAll data collections completed!")
