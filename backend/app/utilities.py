@@ -102,6 +102,74 @@ def calculate_total_utility_values(
             connection.close()
 
 
+def calculate_base_strengths(db: Session | Connection | Engine) -> pd.DataFrame:
+    """Calculate and store each country's blended base strength.
+
+    Utility values are min-max scaled onto the tournament's Elo range, then merged
+    with Base_Elo using: Base_Strength = 0.6 * Base_Elo + 0.4 * Utility_Elo.
+    """
+    connection = _get_connection(db)
+    transaction = connection.begin() if isinstance(db, Engine) else None
+    should_close = isinstance(db, Engine)
+
+    try:
+        _ensure_column(connection, "countries", "Total_Utility_Value", "FLOAT DEFAULT 0")
+        _ensure_column(connection, "countries", "Base_Strength", "FLOAT DEFAULT 0")
+
+        countries = pd.read_sql_query(text('SELECT * FROM countries'), connection)
+        if countries.empty:
+            if transaction is not None:
+                transaction.commit()
+            _commit_if_session(db)
+            return _empty_base_strength_result()
+
+        countries["Base_Elo"] = pd.to_numeric(countries["Base_Elo"], errors="coerce").fillna(0.0)
+        countries["Total_Utility_Value"] = pd.to_numeric(
+            countries["Total_Utility_Value"],
+            errors="coerce",
+        ).fillna(0.0)
+
+        min_utility = countries["Total_Utility_Value"].min()
+        max_utility = countries["Total_Utility_Value"].max()
+        min_elo = countries["Base_Elo"].min()
+        max_elo = countries["Base_Elo"].max()
+
+        if max_utility == min_utility:
+            countries["Utility_Ratio"] = 0.0
+        else:
+            countries["Utility_Ratio"] = (
+                (countries["Total_Utility_Value"] - min_utility)
+                / (max_utility - min_utility)
+            )
+
+        countries["Utility_Elo"] = min_elo + countries["Utility_Ratio"] * (max_elo - min_elo)
+        countries["Base_Strength"] = 0.6 * countries["Base_Elo"] + 0.4 * countries["Utility_Elo"]
+
+        result = countries[
+            [
+                "Name",
+                "Base_Elo",
+                "Total_Utility_Value",
+                "Utility_Elo",
+                "Base_Strength",
+            ]
+        ].sort_values("Base_Strength", ascending=False)
+
+        _update_country_base_strengths(connection, result)
+        if transaction is not None:
+            transaction.commit()
+        _commit_if_session(db)
+
+        return result
+    except Exception:
+        if transaction is not None:
+            transaction.rollback()
+        raise
+    finally:
+        if should_close:
+            connection.close()
+
+
 def _calculate_player_values(players: pd.DataFrame, stage: Stage) -> pd.DataFrame:
     players = players.copy()
     players["Age_Mult"] = players["Age"].apply(_age_multiplier)
@@ -282,6 +350,24 @@ def _update_country_totals(connection: Connection, totals: pd.DataFrame) -> None
     connection.execute(update_query, params)
 
 
+def _update_country_base_strengths(connection: Connection, countries: pd.DataFrame) -> None:
+    update_query = text(
+        '''
+        UPDATE countries
+        SET "Base_Strength" = :base_strength
+        WHERE "Name" = :country
+        '''
+    )
+    params = [
+        {
+            "country": row.Name,
+            "base_strength": float(row.Base_Strength),
+        }
+        for row in countries.itertuples(index=False)
+    ]
+    connection.execute(update_query, params)
+
+
 def _get_connection(db: Session | Connection | Engine) -> Connection:
     if isinstance(db, Session):
         return db.connection()
@@ -310,5 +396,17 @@ def _empty_result() -> pd.DataFrame:
             "Rank_Mult",
             "Synergy_Mult",
             "Expected_Utility_Value",
+        ]
+    )
+
+
+def _empty_base_strength_result() -> pd.DataFrame:
+    return pd.DataFrame(
+        columns=[
+            "Name",
+            "Base_Elo",
+            "Total_Utility_Value",
+            "Utility_Elo",
+            "Base_Strength",
         ]
     )
