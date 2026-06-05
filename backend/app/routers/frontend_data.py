@@ -12,7 +12,6 @@ router = APIRouter(prefix="/api", tags=["frontend-data"])
 
 
 @router.get("/predicted-score/{match_id}")
-@router.get("/predicted-score/{match_id}")
 def get_predicted_score(match_id: int, engine: Engine = Depends(get_engine)):
     match = _get_match(engine, match_id)
     prediction_columns = [

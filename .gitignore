@@ -9,6 +9,7 @@ backend/app/schemas/__pycache__/
 backend/app/services/__pycache__/
 backend/app/utils/__pycache__/
 backend/operators/__pycache__/
+backend/app/routers/__pycache__/
 
 # Node/React
 frontend/node_modules/
