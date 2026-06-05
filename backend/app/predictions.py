@@ -1,4 +1,5 @@
 from math import exp, factorial
+from pathlib import Path
 from typing import Optional
 
 import pandas as pd
@@ -6,15 +7,20 @@ from sqlalchemy import inspect, text
 from sqlalchemy.engine import Connection, Engine
 from sqlalchemy.orm import Session
 
-from app.utilities import calculate_match_power_score
+from app.utilities import (
+    calculate_all_group_score_matrices,
+    calculate_match_power_score,
+    get_third_place_opponents_dict,
+)
 
 
-BASE_EXPECTED_GOALS = 1.35
-ELO_XG_SCALE = 800.0
-MIN_EXPECTED_GOALS = 0.2
-MAX_EXPECTED_GOALS = 4.5
-MAX_GOALS_IN_MATRIX = 10
-DIXON_COLES_RHO = -0.10
+BASE_EXPECTED_GOALS = 1.3
+ELO_XG_SCALE = 600.0
+MIN_EXPECTED_GOALS = 0.5
+MAX_EXPECTED_GOALS = 4.0
+MAX_GOALS_IN_MATRIX = 7
+DIXON_COLES_RHO = 0.07
+BACKEND_DIR = Path(__file__).resolve().parents[1]
 
 
 def winner_prediction(
@@ -116,6 +122,134 @@ def run_predictions_for_matches(
             connection.close()
 
 
+def prediction_round_of_32(db: Session | Connection | Engine) -> pd.DataFrame:
+    """Fill Round of 32 teams, then run predictions for matches 73-88."""
+    connection = _get_connection(db)
+    transaction = connection.begin() if isinstance(db, Engine) else None
+    should_close = isinstance(db, Engine)
+
+    try:
+        group_score_matrices = calculate_all_group_score_matrices(connection, "Prediction")
+        third_place_opponents = get_third_place_opponents_dict(connection)
+        matches = pd.read_sql_query(
+            text('SELECT * FROM matches WHERE "Match_ID" BETWEEN 73 AND 88 ORDER BY "Match_ID"'),
+            connection,
+        )
+
+        updates = []
+        for match in matches.itertuples(index=False):
+            original_team_a = str(match.Team_A)
+            original_team_b = str(match.Team_B)
+            team_a = _resolve_round_of_32_slot(original_team_a, group_score_matrices)
+            team_b = _resolve_round_of_32_slot(original_team_b, group_score_matrices)
+
+            if original_team_a.startswith("1") and original_team_b.startswith("3"):
+                third_place_slot = third_place_opponents.get(original_team_a)
+                if third_place_slot is None:
+                    raise ValueError(f"No third-place opponent option found for {original_team_a}")
+                team_b = _resolve_round_of_32_slot(third_place_slot, group_score_matrices)
+
+            updates.append(
+                {
+                    "match_id": int(match.Match_ID),
+                    "team_a": team_a,
+                    "team_b": team_b,
+                }
+            )
+
+        _update_round_of_32_teams(connection, updates)
+        predictions = run_predictions_for_matches(connection, 73, 88)
+
+        if transaction is not None:
+            transaction.commit()
+        _commit_if_session(db)
+
+        return predictions
+    except Exception:
+        if transaction is not None:
+            transaction.rollback()
+        raise
+    finally:
+        if should_close:
+            connection.close()
+
+
+def prediction_final_rounds(
+    db: Session | Connection | Engine,
+    match_id: int,
+) -> pd.DataFrame:
+    """Fill knockout rounds after the Round of 32 and run predictions round by round."""
+    round_endings = [96, 100, 102, 104]
+    starting_id = int(match_id)
+    connection = _get_connection(db)
+    transaction = connection.begin() if isinstance(db, Engine) else None
+    should_close = isinstance(db, Engine)
+
+    try:
+        all_predictions = []
+        while starting_id <= round_endings[-1]:
+            ending_id = _next_round_ending(starting_id, round_endings)
+            _fill_final_round_teams(connection, starting_id, ending_id)
+            predictions = run_predictions_for_matches(connection, starting_id, ending_id)
+            if not predictions.empty:
+                all_predictions.append(predictions)
+
+            if ending_id >= round_endings[-1]:
+                break
+            starting_id = ending_id + 1
+
+        if transaction is not None:
+            transaction.commit()
+        _commit_if_session(db)
+
+        return pd.concat(all_predictions, ignore_index=True) if all_predictions else _empty_prediction_result()
+    except Exception:
+        if transaction is not None:
+            transaction.rollback()
+        raise
+    finally:
+        if should_close:
+            connection.close()
+
+
+def set_real_round_of_32_participants_and_run_prediction(
+    db: Session | Connection | Engine,
+    round_of_32_participants: dict[int, tuple[str, str]],
+) -> pd.DataFrame:
+    """Set real Round of 32 teams, then rerun Round of 32 and later predictions."""
+    if not round_of_32_participants:
+        raise ValueError("round_of_32_participants cannot be empty")
+
+    connection = _get_connection(db)
+    transaction = connection.begin() if isinstance(db, Engine) else None
+    should_close = isinstance(db, Engine)
+
+    try:
+        smallest_match_id = min(int(match_id) for match_id in round_of_32_participants)
+        _reset_matches_from_template(connection, smallest_match_id, 104)
+        _set_round_of_32_participants(connection, round_of_32_participants)
+
+        round_of_32_predictions = run_predictions_for_matches(connection, 73, 88)
+        final_round_predictions = prediction_final_rounds(connection, 89)
+
+        if transaction is not None:
+            transaction.commit()
+        _commit_if_session(db)
+
+        if final_round_predictions.empty:
+            return round_of_32_predictions
+        if round_of_32_predictions.empty:
+            return final_round_predictions
+        return pd.concat([round_of_32_predictions, final_round_predictions], ignore_index=True)
+    except Exception:
+        if transaction is not None:
+            transaction.rollback()
+        raise
+    finally:
+        if should_close:
+            connection.close()
+
+
 def _expected_goals(match_power_score_a: float, match_power_score_b: float) -> tuple[float, float]:
     score_difference = match_power_score_a - match_power_score_b
     xg_a = BASE_EXPECTED_GOALS * exp(score_difference / ELO_XG_SCALE)
@@ -187,6 +321,175 @@ def _dixon_coles_adjustment(goals_a: int, goals_b: int, xg_a: float, xg_b: float
 
 def _poisson_probability(goals: int, expected_goals: float) -> float:
     return (expected_goals**goals * exp(-expected_goals)) / factorial(goals)
+
+
+def _reset_matches_from_template(connection: Connection, starting_match_id: int, ending_match_id: int) -> None:
+    template_matches = pd.read_csv(BACKEND_DIR / "world_cup_matches.csv")
+    template_matches = template_matches[
+        (template_matches["Match_ID"] >= starting_match_id)
+        & (template_matches["Match_ID"] <= ending_match_id)
+    ]
+
+    for match in template_matches.itertuples(index=False):
+        connection.execute(
+            text(
+                '''
+                UPDATE matches
+                SET "Team_A" = :team_a,
+                    "Team_B" = :team_b,
+                    "Predicted_Goals_A" = NULL,
+                    "Predicted_Goals_B" = NULL,
+                    "Winning_Probability_A" = NULL,
+                    "Winning_Probability_B" = NULL,
+                    "Draw_Probability" = NULL
+                WHERE "Match_ID" = :match_id
+                '''
+            ),
+            {
+                "match_id": int(match.Match_ID),
+                "team_a": str(match.Team_A),
+                "team_b": str(match.Team_B),
+            },
+        )
+
+
+def _set_round_of_32_participants(
+    connection: Connection,
+    round_of_32_participants: dict[int, tuple[str, str]],
+) -> None:
+    updates = []
+    for match_id, teams in round_of_32_participants.items():
+        if len(teams) != 2:
+            raise ValueError(f"Match {match_id} must have a (Team_A, Team_B) tuple")
+        updates.append(
+            {
+                "match_id": int(match_id),
+                "team_a": str(teams[0]),
+                "team_b": str(teams[1]),
+            }
+        )
+
+    _update_round_of_32_teams(connection, updates)
+
+
+def _next_round_ending(starting_id: int, round_endings: list[int]) -> int:
+    for ending_id in round_endings:
+        if ending_id >= starting_id:
+            return ending_id
+    return round_endings[-1]
+
+
+def _fill_final_round_teams(connection: Connection, starting_id: int, ending_id: int) -> None:
+    countries = pd.read_sql_query(text('SELECT "Name" FROM countries'), connection)
+    country_names = set(countries["Name"].astype(str))
+    matches = pd.read_sql_query(text('SELECT * FROM matches'), connection)
+    round_matches = matches[
+        (pd.to_numeric(matches["Match_ID"], errors="coerce") >= starting_id)
+        & (pd.to_numeric(matches["Match_ID"], errors="coerce") <= ending_id)
+    ].sort_values("Match_ID")
+
+    updates = []
+    for match in round_matches.itertuples(index=False):
+        team_a = _resolve_final_round_team(connection, str(match.Team_A), country_names)
+        team_b = _resolve_final_round_team(connection, str(match.Team_B), country_names)
+        updates.append(
+            {
+                "match_id": int(match.Match_ID),
+                "team_a": team_a,
+                "team_b": team_b,
+            }
+        )
+
+    _update_round_of_32_teams(connection, updates)
+
+
+def _resolve_final_round_team(connection: Connection, team_value: str, country_names: set[str]) -> str:
+    if team_value in country_names:
+        return team_value
+
+    marker = team_value[:1]
+    source_match_id = team_value[1:]
+    if marker not in {"W", "L"} or not source_match_id.isdigit():
+        return team_value
+
+    source_match = pd.read_sql_query(
+        text('SELECT * FROM matches WHERE "Match_ID" = :match_id'),
+        connection,
+        params={"match_id": int(source_match_id)},
+    )
+    if source_match.empty:
+        raise ValueError(f"Source match not found for slot {team_value}")
+
+    winner, loser = _predicted_winner_and_loser(source_match.iloc[0])
+    return winner if marker == "W" else loser
+
+
+def _predicted_winner_and_loser(match: pd.Series) -> tuple[str, str]:
+    team_a = str(match["Team_A"])
+    team_b = str(match["Team_B"])
+    goals_a = pd.to_numeric(match["Predicted_Goals_A"], errors="coerce")
+    goals_b = pd.to_numeric(match["Predicted_Goals_B"], errors="coerce")
+
+    if pd.isna(goals_a) or pd.isna(goals_b):
+        raise ValueError(f"Match {match['Match_ID']} does not have predicted goals yet")
+
+    if goals_a > goals_b:
+        return team_a, team_b
+    if goals_b > goals_a:
+        return team_b, team_a
+
+    probability_a = pd.to_numeric(match["Winning_Probability_A"], errors="coerce")
+    probability_b = pd.to_numeric(match["Winning_Probability_B"], errors="coerce")
+    if not pd.isna(probability_a) and not pd.isna(probability_b) and probability_a != probability_b:
+        return (team_a, team_b) if probability_a > probability_b else (team_b, team_a)
+
+    return team_a, team_b
+
+
+def _resolve_round_of_32_slot(slot: str, group_score_matrices: dict[str, pd.DataFrame]) -> str:
+    slot = str(slot)
+    if len(slot) != 2:
+        return slot
+
+    rank_marker = slot[0]
+    group_name = slot[1]
+    if rank_marker not in {"1", "2", "3"}:
+        return slot
+
+    return _team_from_group_rank(group_score_matrices, group_name, int(rank_marker))
+
+
+def _team_from_group_rank(
+    group_score_matrices: dict[str, pd.DataFrame],
+    group_name: str,
+    rank: int,
+) -> str:
+    if group_name not in group_score_matrices:
+        raise ValueError(f"Group not found in score matrix: {group_name}")
+
+    group_table = group_score_matrices[group_name]
+    team_row = group_table[group_table["Rank"] == rank]
+    if team_row.empty:
+        raise ValueError(f"Rank {rank} not found for Group {group_name}")
+
+    return str(team_row.iloc[0]["Team"])
+
+
+def _update_round_of_32_teams(connection: Connection, updates: list[dict[str, object]]) -> None:
+    if not updates:
+        return
+
+    connection.execute(
+        text(
+            '''
+            UPDATE matches
+            SET "Team_A" = :team_a,
+                "Team_B" = :team_b
+            WHERE "Match_ID" = :match_id
+            '''
+        ),
+        updates,
+    )
 
 
 def _update_match_prediction(
