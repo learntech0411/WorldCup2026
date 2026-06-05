@@ -12,6 +12,7 @@ router = APIRouter(prefix="/api", tags=["frontend-data"])
 
 
 @router.get("/predicted-score/{match_id}")
+@router.get("/predicted-score/{match_id}")
 def get_predicted_score(match_id: int, engine: Engine = Depends(get_engine)):
     match = _get_match(engine, match_id)
     prediction_columns = [
@@ -23,6 +24,18 @@ def get_predicted_score(match_id: int, engine: Engine = Depends(get_engine)):
     ]
 
     if any(_is_missing(match[column]) for column in prediction_columns):
+        # Prevent crashing by checking if teams are resolved (countries don't contain digits)
+        team_a, team_b = str(match["Team_A"]), str(match["Team_B"])
+        if any(char.isdigit() for char in team_a) or any(char.isdigit() for char in team_b):
+            return _sanitize({
+                "Match_ID": match_id,
+                "Predicted_Goals_A": None,
+                "Predicted_Goals_B": None,
+                "Winning_Probability_A": None,
+                "Winning_Probability_B": None,
+                "Draw_Probability": None,
+            })
+
         power_score = calculate_match_power_score(engine, match_id)
         winner_prediction(
             engine,
@@ -137,6 +150,9 @@ def _sanitize(value):
         return [_sanitize(item) for item in value]
     if pd.isna(value):
         return None
+    # Add this check to handle NumPy int64/float64 serialization
+    if hasattr(value, "item"):  
+        return value.item()
     return value
 
 

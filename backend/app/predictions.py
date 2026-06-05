@@ -158,7 +158,14 @@ def prediction_round_of_32(db: Session | Connection | Engine) -> pd.DataFrame:
                 if third_place_slot is None:
                     raise ValueError(f"No third-place opponent option found for {original_team_a}")
                 team_b = _resolve_round_of_32_slot(third_place_slot, group_score_matrices)
-
+            
+            # Add this missing block to handle when Team B is the 1st place team
+            elif original_team_b.startswith("1") and original_team_a.startswith("3"):
+                third_place_slot = third_place_opponents.get(original_team_b)
+                if third_place_slot is None:
+                    raise ValueError(f"No third-place opponent option found for {original_team_b}")
+                team_a = _resolve_round_of_32_slot(third_place_slot, group_score_matrices)
+                
             updates.append(
                 {
                     "match_id": int(match["Match_ID"]),
