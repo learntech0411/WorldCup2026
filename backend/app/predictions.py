@@ -81,24 +81,35 @@ def run_predictions_for_matches(
     should_close = isinstance(db, Engine)
 
     try:
-        matches = pd.read_sql_query(text('SELECT * FROM matches'), connection)
-        if matches.empty:
+        selected_matches = connection.execute(
+            text(
+                '''
+                SELECT *
+                FROM matches
+                WHERE "Match_ID" BETWEEN :starting_match_id AND :ending_match_id
+                  AND (
+                    "Goals_A" IS NULL
+                    OR "Goals_B" IS NULL
+                    OR CAST("Goals_A" AS TEXT) = ''
+                    OR CAST("Goals_B" AS TEXT) = ''
+                  )
+                ORDER BY "Match_ID"
+                '''
+            ),
+            {
+                "starting_match_id": int(starting_match_id),
+                "ending_match_id": int(ending_match_id),
+            },
+        ).mappings().all()
+        if not selected_matches:
             if transaction is not None:
                 transaction.commit()
             _commit_if_session(db)
             return _empty_prediction_result()
 
-        matches["Match_ID_Numeric"] = pd.to_numeric(matches["Match_ID"], errors="coerce")
-        selected_matches = matches[
-            (matches["Match_ID_Numeric"] >= starting_match_id)
-            & (matches["Match_ID_Numeric"] <= ending_match_id)
-            & matches["Goals_A"].apply(_is_missing_score)
-            & matches["Goals_B"].apply(_is_missing_score)
-        ].sort_values("Match_ID_Numeric")
-
         predictions = []
-        for match in selected_matches.itertuples(index=False):
-            match_id = int(match.Match_ID)
+        for match in selected_matches:
+            match_id = int(match["Match_ID"])
             power_score = calculate_match_power_score(connection, match_id)
             prediction = winner_prediction(
                 connection,
@@ -131,15 +142,14 @@ def prediction_round_of_32(db: Session | Connection | Engine) -> pd.DataFrame:
     try:
         group_score_matrices = calculate_all_group_score_matrices(connection, "Prediction")
         third_place_opponents = get_third_place_opponents_dict(connection)
-        matches = pd.read_sql_query(
-            text('SELECT * FROM matches WHERE "Match_ID" BETWEEN 73 AND 88 ORDER BY "Match_ID"'),
-            connection,
-        )
+        matches = connection.execute(
+            text('SELECT * FROM matches WHERE "Match_ID" BETWEEN 73 AND 88 ORDER BY "Match_ID"')
+        ).mappings().all()
 
         updates = []
-        for match in matches.itertuples(index=False):
-            original_team_a = str(match.Team_A)
-            original_team_b = str(match.Team_B)
+        for match in matches:
+            original_team_a = str(match["Team_A"])
+            original_team_b = str(match["Team_B"])
             team_a = _resolve_round_of_32_slot(original_team_a, group_score_matrices)
             team_b = _resolve_round_of_32_slot(original_team_b, group_score_matrices)
 
@@ -151,7 +161,7 @@ def prediction_round_of_32(db: Session | Connection | Engine) -> pd.DataFrame:
 
             updates.append(
                 {
-                    "match_id": int(match.Match_ID),
+                    "match_id": int(match["Match_ID"]),
                     "team_a": team_a,
                     "team_b": team_b,
                 }
@@ -380,21 +390,32 @@ def _next_round_ending(starting_id: int, round_endings: list[int]) -> int:
 
 
 def _fill_final_round_teams(connection: Connection, starting_id: int, ending_id: int) -> None:
-    countries = pd.read_sql_query(text('SELECT "Name" FROM countries'), connection)
-    country_names = set(countries["Name"].astype(str))
-    matches = pd.read_sql_query(text('SELECT * FROM matches'), connection)
-    round_matches = matches[
-        (pd.to_numeric(matches["Match_ID"], errors="coerce") >= starting_id)
-        & (pd.to_numeric(matches["Match_ID"], errors="coerce") <= ending_id)
-    ].sort_values("Match_ID")
+    country_names = {
+        str(row["Name"])
+        for row in connection.execute(text('SELECT "Name" FROM countries')).mappings()
+    }
+    round_matches = connection.execute(
+        text(
+            '''
+            SELECT *
+            FROM matches
+            WHERE "Match_ID" BETWEEN :starting_id AND :ending_id
+            ORDER BY "Match_ID"
+            '''
+        ),
+        {
+            "starting_id": int(starting_id),
+            "ending_id": int(ending_id),
+        },
+    ).mappings().all()
 
     updates = []
-    for match in round_matches.itertuples(index=False):
-        team_a = _resolve_final_round_team(connection, str(match.Team_A), country_names)
-        team_b = _resolve_final_round_team(connection, str(match.Team_B), country_names)
+    for match in round_matches:
+        team_a = _resolve_final_round_team(connection, str(match["Team_A"]), country_names)
+        team_b = _resolve_final_round_team(connection, str(match["Team_B"]), country_names)
         updates.append(
             {
-                "match_id": int(match.Match_ID),
+                "match_id": int(match["Match_ID"]),
                 "team_a": team_a,
                 "team_b": team_b,
             }
@@ -412,15 +433,14 @@ def _resolve_final_round_team(connection: Connection, team_value: str, country_n
     if marker not in {"W", "L"} or not source_match_id.isdigit():
         return team_value
 
-    source_match = pd.read_sql_query(
+    source_match = connection.execute(
         text('SELECT * FROM matches WHERE "Match_ID" = :match_id'),
-        connection,
-        params={"match_id": int(source_match_id)},
-    )
-    if source_match.empty:
+        {"match_id": int(source_match_id)},
+    ).mappings().first()
+    if source_match is None:
         raise ValueError(f"Source match not found for slot {team_value}")
 
-    winner, loser = _predicted_winner_and_loser(source_match.iloc[0])
+    winner, loser = _predicted_winner_and_loser(source_match)
     return winner if marker == "W" else loser
 
 
