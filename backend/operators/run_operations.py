@@ -3,14 +3,14 @@ import os
 import sys
 
 import pandas as pd
-from dotenv import load_dotenv
-from sqlalchemy import create_engine, inspect, text
+from sqlalchemy import inspect, text
 from sqlalchemy.engine import Engine
 
 
 BACKEND_DIR = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(BACKEND_DIR))
 
+from app.database import get_engine
 from app.predictions import (
     prediction_final_rounds,
     prediction_round_of_32,
@@ -23,11 +23,6 @@ from app.utilities import (
     pretty_print_group_score_matrices,
 )
 from data_scrapper import scrape_countries_data
-
-
-load_dotenv(BACKEND_DIR / ".env")
-db_url = os.getenv("DATABASE_URL")
-engine = create_engine(db_url) if db_url else None
 
 
 def run_full_prediction_pipeline(db: Engine = None) -> None:
@@ -295,9 +290,7 @@ def _match_injured_players_column(connection) -> str | None:
 def _engine_or_default(db: Engine = None) -> Engine:
     if db is not None:
         return db
-    if engine is None:
-        raise ValueError("DATABASE_URL not found in backend/.env")
-    return engine
+    return get_engine()
 
 
 if __name__ == "__main__":
