@@ -361,8 +361,8 @@ Timothy Fayulu,DR Congo,0.8,1.0,1.5,0.1,1.0,0.12000000000000002
 Lionel Mpasi-Nzau,DR Congo,0.4,1.15,1.5,0.1,1.0,0.06899999999999999
 Gaël Kakuta,DR Congo,0.3,1.0,1.0,0.1,1.0,0.03
 Aaron Tshibola,DR Congo,0.15,1.15,1.0,0.1,1.0,0.017249999999999998
-Willian Pacho,Ecuador,80.0,1.0,1.25,1.0,1.0,100.0
 Moisés Caicedo,Ecuador,100.0,1.0,1.0,1.0,1.0,100.0
+Willian Pacho,Ecuador,80.0,1.0,1.25,1.0,1.0,100.0
 Piero Hincapié,Ecuador,50.0,1.0,1.25,1.0,1.0,62.5
 Joel Ordóñez,Ecuador,33.0,0.7,1.25,1.0,1.0,28.874999999999996
 Pervis Estupiñán,Ecuador,12.0,1.0,1.25,1.0,1.0,15.0
@@ -788,8 +788,8 @@ Antonio Nusa,Norway,32.0,0.7,0.85,1.0,1.0,19.04
 Andreas Schjelderup,Norway,30.0,0.7,0.85,1.0,1.02,18.206999999999997
 Fredrik Aursnes,Norway,15.0,1.15,1.0,1.0,1.02,17.595
 Oscar Bobb,Norway,28.0,0.7,0.85,0.8,1.02,13.594559999999998
-Leo Østigård,Norway,13.0,1.0,1.25,0.8,1.0,13.0
 Torbjørn Heggem,Norway,13.0,1.0,1.25,0.8,1.0,13.0
+Leo Østigård,Norway,13.0,1.0,1.25,0.8,1.0,13.0
 Kristian Thorstvedt,Norway,12.0,1.0,1.0,0.8,1.0,9.600000000000001
 Jens Petter Hauge,Norway,12.0,1.0,0.85,0.8,1.0,8.16
 Sander Tangvik,Norway,3.0,1.0,1.5,1.0,1.0,4.5
@@ -806,8 +806,8 @@ Egil Selvik,Norway,1.5,1.0,1.5,0.1,1.0,0.225
 Amir Murillo,Panama,7.0,1.15,1.25,1.0,1.0,10.062499999999998
 José Córdoba,Panama,5.0,1.0,1.25,1.0,1.0,6.25
 Adalberto Carrasquilla,Panama,4.0,1.0,1.0,1.0,1.0,4.0
-Andrés Andrade,Panama,2.5,1.0,1.25,1.0,1.0,3.125
 César Blackman,Panama,2.5,1.0,1.25,1.0,1.0,3.125
+Andrés Andrade,Panama,2.5,1.0,1.25,1.0,1.0,3.125
 José Luis Rodríguez,Panama,2.5,1.0,0.85,1.0,1.0,2.125
 Ismael Díaz,Panama,1.8,1.0,0.85,1.0,1.0,1.53
 Orlando Mosquera,Panama,0.7,1.15,1.5,1.0,1.0,1.2075
@@ -861,8 +861,8 @@ João Neves,Portugal,140.0,0.7,1.0,1.0,1.06,103.88000000000001
 Rúben Dias,Portugal,55.0,1.0,1.25,1.0,1.04,71.5
 Matheus Nunes,Portugal,50.0,1.0,1.25,1.0,1.04,65.0
 Diogo Costa,Portugal,40.0,1.0,1.5,1.0,1.0,60.0
-Gonçalo Inácio,Portugal,40.0,1.0,1.25,1.0,1.02,51.0
 Pedro Neto,Portugal,60.0,1.0,0.85,1.0,1.0,51.0
+Gonçalo Inácio,Portugal,40.0,1.0,1.25,1.0,1.02,51.0
 Rafael Leão,Portugal,50.0,1.0,0.85,1.0,1.0,42.5
 Bruno Fernandes,Portugal,35.0,1.15,1.0,1.0,1.02,41.055
 Francisco Trincão,Portugal,40.0,1.0,1.0,1.0,1.02,40.8
@@ -1041,8 +1041,8 @@ Pedri,Spain,150.0,1.0,1.0,1.0,1.1,165.0
 Lamine Yamal,Spain,200.0,0.7,0.85,1.0,1.1,130.9
 Pau Cubarsí,Spain,80.0,0.7,1.25,1.0,1.1,77.0
 Martín Zubimendi,Spain,75.0,1.0,1.0,1.0,1.0,75.0
-Joan García,Spain,40.0,1.0,1.5,1.0,1.1,66.0
 Dani Olmo,Spain,60.0,1.0,1.0,1.0,1.1,66.0
+Joan García,Spain,40.0,1.0,1.5,1.0,1.1,66.0
 Marc Cucurella,Spain,50.0,1.0,1.25,1.0,1.0,62.5
 Rodri,Spain,50.0,1.0,1.0,1.0,1.0,50.0
 Eric García,Spain,35.0,1.0,1.25,1.0,1.1,48.12500000000001
