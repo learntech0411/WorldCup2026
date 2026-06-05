@@ -1,0 +1,168 @@
+.baselineCard {
+  max-width: 780px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.baselineHead {
+  text-align: center;
+}
+
+.baselineHead h2 {
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  color: var(--ink-dark);
+  margin: 0 0 6px;
+}
+
+.baselineSub {
+  font-size: 13px;
+  color: var(--ink-light);
+  line-height: 1.6;
+  max-width: 580px;
+  margin: 0 auto;
+  padding: 0 12px;
+}
+
+.baselineChampCard {
+  background: linear-gradient(135deg, rgba(229, 194, 106, 0.08), var(--bg-card) 65%);
+  border: 1px solid rgba(229, 194, 106, 0.32);
+  border-radius: 18px;
+  padding: 22px 24px;
+  text-align: center;
+  box-shadow: 0 0 20px rgba(229, 194, 106, 0.06);
+}
+
+.blChampLabel {
+  font-size: 11px;
+  letter-spacing: 2.5px;
+  color: var(--ink-light);
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.blChampRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+
+.blChampName {
+  font-size: 32px;
+  font-weight: 800;
+  color: #C8A050;
+  letter-spacing: -0.5px;
+}
+
+.blThird {
+  font-size: 14px;
+  color: var(--ink-medium);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.blPathCard {
+  background: var(--bg-card);
+  border: 1px solid var(--line-delicate);
+  border-radius: 14px;
+  padding: 18px 20px;
+}
+
+.blPathCard h3 {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--ink-dark);
+  margin: 0 0 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.blPathRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--line-delicate);
+  font-size: 13px;
+}
+
+.blPathRow:last-child {
+  border-bottom: none;
+}
+
+.blStage {
+  width: 60px;
+  font-size: 11px;
+  color: var(--ink-light);
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  flex-shrink: 0;
+}
+
+.blMatch {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  color: var(--ink-dark);
+}
+
+.blVs {
+  color: var(--ink-light);
+  font-size: 11px;
+  margin: 0 2px;
+}
+
+.blScore {
+  font-family: monospace;
+  font-weight: 700;
+  color: var(--ink-dark);
+  font-size: 14px;
+  flex-shrink: 0;
+  letter-spacing: 0.5px;
+}
+
+.blCompareCard {
+  background: var(--bg-card);
+  border: 1px solid var(--line-delicate);
+  border-radius: 14px;
+  padding: 18px 20px;
+}
+
+.blCompareCard h3 {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--ink-dark);
+  margin: 0 0 10px;
+}
+
+.blCompareCard p {
+  margin: 6px 0;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.blSame {
+  color: var(--accent-success);
+  font-weight: 700;
+}
+
+.blDiff {
+  color: var(--ink-medium);
+}
+
+.blPending {
+  color: var(--ink-light);
+  font-style: italic;
+  font-size: 13px;
+}

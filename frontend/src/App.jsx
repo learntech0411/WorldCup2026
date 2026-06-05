@@ -1,122 +1,152 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+import React, { useState, useEffect, useCallback } from 'react';
+import Header from './components/Header';
+import Tabs from './components/Tabs';
+import GroupStage from './components/GroupStage';
+import Knockout from './components/Knockout';
+import History from './components/History';
+import Author from './components/Author';
+import './App.css';
+
+const API_PREFIX = '/api';
+const MODES = {
+  Current: 'current',
+  Prediction: 'predicted',
+};
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [activeTab, setActiveTab] = useState('groups');
+  const [mode, setMode] = useState('Current');
+  const [groupMatrices, setGroupMatrices] = useState({ Current: null, Prediction: null });
+  const [matchScores, setMatchScores] = useState({ Current: {}, Prediction: {} });
+  const [loadingGroups, setLoadingGroups] = useState(false);
+  const [theme, setTheme] = useState(() => {
+    return localStorage.getItem('wc26_theme') ||
+      (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  });
+
+  const fetchGroupMatrix = useCallback(async (targetMode) => {
+    if (groupMatrices[targetMode]) return;
+    setLoadingGroups(true);
+    try {
+      const endpoint = `${API_PREFIX}/all-groups-${MODES[targetMode]}-matrix`;
+      const response = await fetch(endpoint);
+      if (!response.ok) {
+        throw new Error(`Failed to load ${targetMode} groups`);
+      }
+      const data = await response.json();
+      setGroupMatrices((prev) => ({
+        ...prev,
+        [targetMode]: data.Groups || data.groups || {},
+      }));
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoadingGroups(false);
+    }
+  }, [groupMatrices]);
+
+  const fetchMatchScore = useCallback(async (matchId) => {
+    if (!matchId) return;
+    const cache = matchScores[mode];
+    if (cache[matchId] && !cache[matchId].error) return;
+
+    setMatchScores((prev) => ({
+      ...prev,
+      [mode]: {
+        ...prev[mode],
+        [matchId]: { loading: true },
+      },
+    }));
+
+    try {
+      const endpoint = `${API_PREFIX}/${MODES[mode]}-score/${matchId}`;
+      const response = await fetch(endpoint);
+      if (!response.ok) {
+        throw new Error(`Failed to load score ${matchId}`);
+      }
+      const data = await response.json();
+      setMatchScores((prev) => ({
+        ...prev,
+        [mode]: {
+          ...prev[mode],
+          [matchId]: { ...data, loading: false },
+        },
+      }));
+    } catch (error) {
+      console.error(error);
+      setMatchScores((prev) => ({
+        ...prev,
+        [mode]: {
+          ...prev[mode],
+          [matchId]: { error: true, loading: false },
+        },
+      }));
+    }
+  }, [mode, matchScores]);
+
+  useEffect(() => {
+    fetchGroupMatrix(mode);
+  }, [mode, fetchGroupMatrix]);
+
+  useEffect(() => {
+    localStorage.setItem('wc26_theme', theme);
+    if (theme === 'dark') {
+      document.body.classList.add('dark');
+    } else {
+      document.body.classList.remove('dark');
+    }
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
+  };
+
+  const toggleMode = () => {
+    setMode((prev) => (prev === 'Current' ? 'Prediction' : 'Current'));
+  };
+
+  const currentGroupMatrix = groupMatrices[mode];
+  const currentMatchScores = matchScores[mode];
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
+    <div className="App">
+      <div className="topbar-ctrl">
+        <button className="ctrl-icon" onClick={toggleTheme} title="Toggle theme">
+          {theme === 'dark' ? '☀' : '🌙'}
         </button>
-      </section>
+      </div>
 
-      <div className="ticks"></div>
+      <Header />
+      <Tabs activeTab={activeTab} onTabChange={setActiveTab} />
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+      <main className="main-content">
+        {activeTab === 'groups' && (
+          <GroupStage
+            mode={mode}
+            onToggleMode={toggleMode}
+            groupMatrix={currentGroupMatrix}
+            matchScores={currentMatchScores}
+            fetchMatchScore={fetchMatchScore}
+            loading={loadingGroups}
+          />
+        )}
+        {activeTab === 'knockout' && (
+          <Knockout
+            mode={mode}
+            groupMatrix={currentGroupMatrix}
+            matchScores={currentMatchScores}
+            fetchMatchScore={fetchMatchScore}
+          />
+        )}
+        {activeTab === 'history' && (
+          <History />
+        )}
+        {activeTab === 'author' && (
+          <Author />
+        )}
+      </main>
+    </div>
+  );
 }
 
-export default App
+export default App;

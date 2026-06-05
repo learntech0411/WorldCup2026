@@ -1,0 +1,40 @@
+.flag {
+  border-radius: 50%;
+  object-fit: cover;
+  vertical-align: middle;
+  background: var(--bg-card);
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.06);
+  filter: drop-shadow(0 3px 5px rgba(0, 0, 0, 0.1));
+  transition: filter 0.3s ease;
+}
+
+.placeholder {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--bg-soft);
+  color: var(--ink-light);
+  font-weight: 700;
+  font-size: 10px;
+}
+
+.md {
+  width: 28px;
+  height: 28px;
+}
+
+.sm {
+  width: 20px;
+  height: 20px;
+}
+
+.xs {
+  width: 16px;
+  height: 16px;
+}
+
+.lg {
+  width: 64px;
+  height: 64px;
+}

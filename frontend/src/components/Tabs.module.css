@@ -1,0 +1,77 @@
+.tabs {
+  display: flex;
+  gap: 8px;
+  padding: 12px 20px 20px;
+  justify-content: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: linear-gradient(180deg, var(--bg-paper) 60%, rgba(248, 249, 250, 0) 100%);
+}
+
+.inner {
+  display: flex;
+  background: rgba(235, 236, 239, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 5px;
+  border-radius: 100px;
+  width: 520px;
+  max-width: calc(100vw - 24px);
+}
+
+.tabs button {
+  padding: 10px 14px;
+  border-radius: 100px;
+  border: none;
+  background: transparent;
+  color: var(--ink-medium);
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  white-space: nowrap;
+}
+
+.tabs button.on {
+  background: var(--bg-card);
+  color: var(--ink-dark);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.tabs button svg {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.3s ease;
+}
+
+.tabs button.on svg {
+  transform: scale(1.15);
+  color: var(--ink-dark);
+}
+
+@media (max-width: 520px) {
+  .tabs button svg {
+    display: none;
+  }
+  .tabs button {
+    gap: 0;
+    font-size: 12px;
+    padding: 8px 10px;
+  }
+}
+
+@media (max-width: 400px) {
+  .tabs {
+    padding: 8px 8px 12px;
+  }
+  .tabs button {
+    padding: 7px 10px;
+    font-size: 11px;
+  }
+}

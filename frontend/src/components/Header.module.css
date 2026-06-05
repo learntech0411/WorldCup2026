@@ -1,0 +1,48 @@
+.hdr {
+  text-align: center;
+  padding: 40px 20px 24px;
+  background: var(--bg-paper);
+}
+
+.hdr h1 {
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: -0.8px;
+  color: var(--ink-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.logo {
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  filter: drop-shadow(0 2px 4px rgba(229, 194, 106, 0.18));
+}
+
+.sub {
+  color: var(--ink-medium);
+  font-size: 13px;
+  margin-top: 8px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+@media (max-width: 400px) {
+  .hdr {
+    padding: 20px 12px 12px;
+  }
+  .hdr h1 {
+    font-size: 20px;
+    gap: 6px;
+  }
+  .logo {
+    width: 34px;
+    height: 34px;
+  }
+  .sub {
+    font-size: 11px;
+  }
+}
