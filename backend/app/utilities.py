@@ -9,6 +9,7 @@ from sqlalchemy.orm import Session
 
 
 Stage = Literal["group", "knockout"]
+ScoreMode = Literal["Prediction", "Current"]
 
 AGE_MULTIPLIERS = {
     "young": 0.70,
@@ -289,6 +290,110 @@ def calculate_match_power_score(
             connection.close()
 
 
+def calculate_all_group_score_matrices(
+    db: Session | Connection | Engine,
+    mode: ScoreMode,
+) -> dict[str, pd.DataFrame]:
+    """Calculate standings tables for every group.
+
+    Args:
+        db: SQLAlchemy Session, Connection, or Engine connected to the app database.
+        mode: "Prediction" uses predicted goals. "Current" uses actual goals.
+
+    Returns:
+        A dictionary keyed by group name, with one standings DataFrame per group.
+    """
+    if mode not in {"Prediction", "Current"}:
+        raise ValueError('mode must be either "Prediction" or "Current"')
+
+    connection = _get_connection(db)
+    should_close = isinstance(db, Engine)
+
+    try:
+        countries = pd.read_sql_query(text('SELECT * FROM countries'), connection)
+        matches = pd.read_sql_query(text('SELECT * FROM matches'), connection)
+        if countries.empty:
+            return {}
+
+        group_tables = _initialize_group_tables(countries)
+        if matches.empty:
+            return _rank_all_groups(group_tables)
+
+        goals_a_column, goals_b_column = _score_columns_for_mode(mode)
+        group_matches = matches[matches["Match_Type"] == "Group"].copy()
+        for match in group_matches.itertuples(index=False):
+            goals_a = getattr(match, goals_a_column)
+            goals_b = getattr(match, goals_b_column)
+            if _is_missing_score(goals_a) or _is_missing_score(goals_b):
+                continue
+
+            team_a = _country_lookup_name(str(match.Team_A))
+            team_b = _country_lookup_name(str(match.Team_B))
+            if team_a not in group_tables or team_b not in group_tables:
+                continue
+
+            _apply_group_match_result(
+                group_tables,
+                team_a,
+                team_b,
+                int(float(goals_a)),
+                int(float(goals_b)),
+            )
+
+        return _rank_all_groups(group_tables)
+    finally:
+        if should_close:
+            connection.close()
+
+
+def pretty_print_group_score_matrices(group_score_matrices: dict[str, pd.DataFrame]) -> str:
+    """Pretty print and return all group standings."""
+    if not group_score_matrices:
+        output = "No group standings available."
+        print(output)
+        return output
+
+    sections = []
+    display_columns = ["Rank", "Team", "Pld", "W", "D", "L", "GF", "GA", "GD", "Pts"]
+    for group_name in sorted(group_score_matrices):
+        table = group_score_matrices[group_name][display_columns]
+        sections.append(f"Group {group_name}\n{table.to_string(index=False)}")
+
+    output = "\n\n".join(sections)
+    print(output)
+    return output
+
+
+def get_third_place_opponents_dict(
+    db: Session | Connection | Engine,
+    options_csv_path: Optional[str | Path] = None,
+) -> dict[str, str]:
+    """Return the knockout option row matching the predicted top third-place teams."""
+    group_score_matrices = calculate_all_group_score_matrices(db, "Prediction")
+    third_places = _third_place_rows(group_score_matrices)
+    if len(third_places) < 8:
+        raise ValueError("At least 8 third-place teams are required to select knockout opponents")
+
+    top_third_places = set(
+        "3" + str(row.Group)
+        for row in third_places.head(8).itertuples(index=False)
+    )
+
+    options_path = Path(options_csv_path) if options_csv_path else _default_options_path()
+    options = pd.read_csv(options_path)
+    for _, option in options.iterrows():
+        option_dict = option.to_dict()
+        row_set = {
+            str(value)
+            for column_name, value in option_dict.items()
+            if column_name != "Option" and not pd.isna(value)
+        }
+        if row_set == top_third_places:
+            return _normalize_option_row(option_dict)
+
+    raise ValueError(f"No options.csv row matched third-place set: {sorted(top_third_places)}")
+
+
 def _calculate_player_values(players: pd.DataFrame, stage: Stage) -> pd.DataFrame:
     players = players.copy()
     players["Age_Mult"] = players["Age"].apply(_age_multiplier)
@@ -492,6 +597,124 @@ def _haversine_km(lat_a: object, lon_a: object, lat_b: object, lon_b: object) ->
     return 2 * EARTH_RADIUS_KM * asin(sqrt(haversine))
 
 
+def _initialize_group_tables(countries: pd.DataFrame) -> dict[str, pd.DataFrame]:
+    tables = {}
+    countries = countries.sort_values(["Group", "Name"])
+    for country in countries.itertuples(index=False):
+        group_name = str(country.Group)
+        team_name = str(country.Name)
+        base_elo = pd.to_numeric(getattr(country, "Base_Elo", 0.0), errors="coerce")
+        base_elo = 0.0 if pd.isna(base_elo) else float(base_elo)
+        row = {
+            "Group": group_name,
+            "Team": team_name,
+            "Base_Elo": base_elo,
+            "Rank": 0,
+            "Pld": 0,
+            "W": 0,
+            "D": 0,
+            "L": 0,
+            "GF": 0,
+            "GA": 0,
+            "GD": 0,
+            "Pts": 0,
+        }
+        if team_name not in tables:
+            tables[team_name] = row
+
+    return tables
+
+
+def _score_columns_for_mode(mode: ScoreMode) -> tuple[str, str]:
+    if mode == "Prediction":
+        return "Predicted_Goals_A", "Predicted_Goals_B"
+    return "Goals_A", "Goals_B"
+
+
+def _apply_group_match_result(
+    team_rows: dict[str, dict[str, object]],
+    team_a: str,
+    team_b: str,
+    goals_a: int,
+    goals_b: int,
+) -> None:
+    row_a = team_rows[team_a]
+    row_b = team_rows[team_b]
+
+    row_a["Pld"] += 1
+    row_b["Pld"] += 1
+    row_a["GF"] += goals_a
+    row_a["GA"] += goals_b
+    row_b["GF"] += goals_b
+    row_b["GA"] += goals_a
+    row_a["GD"] = row_a["GF"] - row_a["GA"]
+    row_b["GD"] = row_b["GF"] - row_b["GA"]
+
+    if goals_a > goals_b:
+        row_a["W"] += 1
+        row_b["L"] += 1
+        row_a["Pts"] += 3
+    elif goals_b > goals_a:
+        row_b["W"] += 1
+        row_a["L"] += 1
+        row_b["Pts"] += 3
+    else:
+        row_a["D"] += 1
+        row_b["D"] += 1
+        row_a["Pts"] += 1
+        row_b["Pts"] += 1
+
+
+def _rank_all_groups(team_rows: dict[str, dict[str, object]]) -> dict[str, pd.DataFrame]:
+    standings = pd.DataFrame(team_rows.values())
+    if standings.empty:
+        return {}
+
+    grouped_tables = {}
+    for group_name, group_table in standings.groupby("Group", sort=True):
+        ranked_table = group_table.sort_values(
+            ["Pts", "GD", "GF", "Base_Elo", "Team"],
+            ascending=[False, False, False, False, True],
+        ).reset_index(drop=True)
+        ranked_table["Rank"] = ranked_table.index + 1
+        grouped_tables[str(group_name)] = ranked_table[
+            ["Rank", "Team", "Pld", "W", "D", "L", "GF", "GA", "GD", "Pts", "Base_Elo"]
+        ]
+
+    return grouped_tables
+
+
+def _third_place_rows(group_score_matrices: dict[str, pd.DataFrame]) -> pd.DataFrame:
+    rows = []
+    for group_name, group_table in group_score_matrices.items():
+        third_place = group_table[group_table["Rank"] == 3]
+        if third_place.empty:
+            continue
+
+        row = third_place.iloc[0].copy()
+        row["Group"] = group_name
+        rows.append(row)
+
+    if not rows:
+        return pd.DataFrame(columns=["Group", "Team", "Pts", "GD", "GF"])
+
+    third_places = pd.DataFrame(rows)
+    return third_places.sort_values(
+        ["Pts", "GD", "GF", "Group"],
+        ascending=[False, False, False, True],
+    ).reset_index(drop=True)
+
+
+def _normalize_option_row(option_dict: dict[str, object]) -> dict[str, object]:
+    normalized = {}
+    for column_name, value in option_dict.items():
+        if column_name == "Option":
+            normalized[column_name] = int(value) if not pd.isna(value) else value
+        else:
+            normalized[str(column_name)] = str(value)
+    return normalized
+
+
 def _age_multiplier(age: object) -> float:
     if pd.isna(age):
         return 1.0
@@ -558,6 +781,12 @@ def _is_injured(value: object) -> bool:
     if pd.isna(value):
         return False
     return str(value).strip().lower() in {"true", "1", "yes", "y"}
+
+
+def _is_missing_score(value: object) -> bool:
+    if pd.isna(value):
+        return True
+    return str(value).strip() == ""
 
 
 def _club_key(club: object) -> str:
@@ -655,6 +884,10 @@ def _commit_if_session(db: Session | Connection | Engine) -> None:
 
 def _default_output_path() -> Path:
     return Path(__file__).resolve().parents[1] / "value_transform.csv"
+
+
+def _default_options_path() -> Path:
+    return Path(__file__).resolve().parents[1] / "options.csv"
 
 
 def _empty_result() -> pd.DataFrame:
