@@ -209,18 +209,7 @@ def calculate_match_power_score(
     should_close = isinstance(db, Engine)
 
     try:
-        countries = pd.read_sql_query(text('SELECT * FROM countries'), connection)
-        matches = pd.read_sql_query(text('SELECT * FROM matches'), connection)
-        locations = pd.read_sql_query(text('SELECT * FROM locations'), connection)
-
-        if countries.empty:
-            raise ValueError("countries table is empty")
-        if matches.empty:
-            raise ValueError("matches table is empty")
-        if locations.empty:
-            raise ValueError("locations table is empty")
-
-        current_match = _get_match(matches, match_id)
+        current_match = _get_match_row(connection, match_id)
         match_team_a = str(current_match["Team_A"])
         match_team_b = str(current_match["Team_B"])
 
@@ -229,19 +218,15 @@ def calculate_match_power_score(
         if team_b is not None and team_b != match_team_b:
             raise ValueError(f"team_b must match the match row Team_B: {match_team_b}")
 
-        countries = countries.set_index("Name", drop=False)
-        locations = locations.set_index("Location_Name", drop=False)
         country_a = _country_lookup_name(match_team_a)
         country_b = _country_lookup_name(match_team_b)
-        if country_a not in countries.index:
-            raise ValueError(f"country not found: {match_team_a}")
-        if country_b not in countries.index:
-            raise ValueError(f"country not found: {match_team_b}")
+        country_a_row = _get_country_row(connection, country_a, match_team_a)
+        country_b_row = _get_country_row(connection, country_b, match_team_b)
 
         current_stadium = str(current_match["Stadium_Name"])
-        current_location = _get_location(locations, current_stadium)
-        previous_a = _previous_team_match(matches, match_id, match_team_a)
-        previous_b = _previous_team_match(matches, match_id, match_team_b)
+        current_location = _get_location_row(connection, current_stadium)
+        previous_a = _previous_team_match_row(connection, match_id, match_team_a)
+        previous_b = _previous_team_match_row(connection, match_id, match_team_b)
 
         rest_adjustment_a, rest_adjustment_b = _rest_adjustments(
             current_match,
@@ -250,31 +235,27 @@ def calculate_match_power_score(
         )
 
         score_a = (
-            _base_strength(countries.loc[country_a])
+            _base_strength(country_a_row)
             + _home_boost(match_team_a, current_stadium)
             + rest_adjustment_a
-            + _travel_adjustment(
-                countries,
-                locations,
-                matches,
+            + _travel_adjustment_row(
+                connection,
                 current_match,
                 current_location,
                 match_team_a,
-                country_a,
+                country_a_row,
             )
         )
         score_b = (
-            _base_strength(countries.loc[country_b])
+            _base_strength(country_b_row)
             + _home_boost(match_team_b, current_stadium)
             + rest_adjustment_b
-            + _travel_adjustment(
-                countries,
-                locations,
-                matches,
+            + _travel_adjustment_row(
+                connection,
                 current_match,
                 current_location,
                 match_team_b,
-                country_b,
+                country_b_row,
             )
         )
 
@@ -451,10 +432,40 @@ def _get_match(matches: pd.DataFrame, match_id: int) -> pd.Series:
     return match_rows.iloc[0]
 
 
+def _get_match_row(connection: Connection, match_id: int) -> dict:
+    match = connection.execute(
+        text('SELECT * FROM matches WHERE "Match_ID" = :match_id'),
+        {"match_id": int(match_id)},
+    ).mappings().first()
+    if match is None:
+        raise ValueError(f"match not found: {match_id}")
+    return dict(match)
+
+
+def _get_country_row(connection: Connection, country_name: str, display_name: str) -> dict:
+    country = connection.execute(
+        text('SELECT * FROM countries WHERE "Name" = :country_name'),
+        {"country_name": country_name},
+    ).mappings().first()
+    if country is None:
+        raise ValueError(f"country not found: {display_name}")
+    return dict(country)
+
+
 def _get_location(locations: pd.DataFrame, location_name: str) -> pd.Series:
     if location_name not in locations.index:
         raise ValueError(f"location not found: {location_name}")
     return locations.loc[location_name]
+
+
+def _get_location_row(connection: Connection, location_name: str) -> dict:
+    location = connection.execute(
+        text('SELECT * FROM locations WHERE "Location_Name" = :location_name'),
+        {"location_name": location_name},
+    ).mappings().first()
+    if location is None:
+        raise ValueError(f"location not found: {location_name}")
+    return dict(location)
 
 
 def _country_lookup_name(country_name: str) -> str:
@@ -488,6 +499,23 @@ def _previous_team_match(matches: pd.DataFrame, match_id: int, team: str) -> Opt
     return previous_matches.iloc[0]
 
 
+def _previous_team_match_row(connection: Connection, match_id: int, team: str) -> Optional[dict]:
+    previous_match = connection.execute(
+        text(
+            '''
+            SELECT *
+            FROM matches
+            WHERE "Match_ID" < :match_id
+              AND ("Team_A" = :team OR "Team_B" = :team)
+            ORDER BY "Match_ID" DESC
+            LIMIT 1
+            '''
+        ),
+        {"match_id": int(match_id), "team": team},
+    ).mappings().first()
+    return dict(previous_match) if previous_match is not None else None
+
+
 def _previous_knockout_match(matches: pd.DataFrame, match_id: int, team: str) -> Optional[pd.Series]:
     match_ids = pd.to_numeric(matches["Match_ID"], errors="coerce")
     previous_matches = matches[
@@ -500,6 +528,24 @@ def _previous_knockout_match(matches: pd.DataFrame, match_id: int, team: str) ->
     previous_matches["Match_ID_Numeric"] = pd.to_numeric(previous_matches["Match_ID"], errors="coerce")
     previous_matches = previous_matches.sort_values("Match_ID_Numeric", ascending=False)
     return previous_matches.iloc[0]
+
+
+def _previous_knockout_match_row(connection: Connection, match_id: int, team: str) -> Optional[dict]:
+    previous_match = connection.execute(
+        text(
+            '''
+            SELECT *
+            FROM matches
+            WHERE "Match_ID" < :match_id
+              AND "Match_Type" = 'Knockout'
+              AND ("Team_A" = :team OR "Team_B" = :team)
+            ORDER BY "Match_ID" DESC
+            LIMIT 1
+            '''
+        ),
+        {"match_id": int(match_id), "team": team},
+    ).mappings().first()
+    return dict(previous_match) if previous_match is not None else None
 
 
 def _rest_adjustments(
@@ -530,6 +576,49 @@ def _rest_days(current_match: pd.Series, previous_match: Optional[pd.Series]) ->
     current_date = pd.to_datetime(current_match["Date"])
     previous_date = pd.to_datetime(previous_match["Date"])
     return float((current_date - previous_date).days)
+
+
+def _travel_adjustment_row(
+    connection: Connection,
+    current_match: dict,
+    current_location: dict,
+    schedule_team: str,
+    country: dict,
+) -> float:
+    source_location = _travel_source_location_row(
+        connection,
+        current_match,
+        schedule_team,
+        country,
+    )
+    distance_km = _haversine_km(
+        source_location["Latitude"],
+        source_location["Longitude"],
+        current_location["Latitude"],
+        current_location["Longitude"],
+    )
+    timezone_crossings = abs(float(current_location["UTC_Offset"]) - float(source_location["UTC_Offset"]))
+    return -(
+        timezone_crossings * TIMEZONE_ELO_PENALTY
+        + (distance_km / 500.0) * DISTANCE_ELO_PENALTY_PER_500_KM
+    )
+
+
+def _travel_source_location_row(
+    connection: Connection,
+    current_match: dict,
+    schedule_team: str,
+    country: dict,
+) -> dict:
+    match_type = str(current_match["Match_Type"])
+    match_id = int(current_match["Match_ID"])
+
+    if match_type == "Knockout":
+        previous_knockout = _previous_knockout_match_row(connection, match_id, schedule_team)
+        if previous_knockout is not None:
+            return _get_location_row(connection, str(previous_knockout["Stadium_Name"]))
+
+    return _get_location_row(connection, str(country["Base_Camp_City"]))
 
 
 def _travel_adjustment(
