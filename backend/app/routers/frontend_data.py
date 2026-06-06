@@ -1,5 +1,7 @@
 import pandas as pd
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Security
+import os
+from fastapi.security import APIKeyHeader
 from sqlalchemy import text
 from sqlalchemy.engine import Engine
 
@@ -9,6 +11,23 @@ from app.utilities import calculate_all_group_score_matrices, calculate_match_po
 
 
 router = APIRouter(prefix="/api", tags=["frontend-data"])
+
+# 1. Define the custom security header
+API_KEY_NAME = "X-Keep-Alive-Token"
+api_key_header = APIKeyHeader(name=API_KEY_NAME, auto_error=True)
+
+# 2. Pull your secret token from Render's Environment Variables
+SECRET_TOKEN = os.getenv("KEEP_ALIVE_TOKEN", "fallback_secret_for_local_testing")
+
+def verify_token(api_key: str = Security(api_key_header)):
+    if api_key != SECRET_TOKEN:
+        raise HTTPException(status_code=403, detail="Unauthorized ping")
+    return api_key
+
+# 3. Protect the endpoint by injecting the dependency
+@router.get("/health", dependencies=[Depends(verify_token)])
+def keep_alive():
+    return {"status": "awake"}
 
 
 @router.get("/predicted-score/{match_id}")
