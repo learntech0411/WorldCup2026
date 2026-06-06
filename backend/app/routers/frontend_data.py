@@ -68,6 +68,49 @@ def get_current_score(match_id: int, engine: Engine = Depends(get_engine)):
     )
 
 
+@router.get("/all-predicted-scores")
+def get_all_predicted_scores(engine: Engine = Depends(get_engine)):
+    with engine.connect() as connection:
+        matches = connection.execute(
+            text(
+                '''
+                SELECT
+                    "Match_ID",
+                    "Team_A",
+                    "Team_B",
+                    "Predicted_Goals_A",
+                    "Predicted_Goals_B",
+                    "Winning_Probability_A",
+                    "Winning_Probability_B",
+                    "Draw_Probability"
+                FROM matches
+                ORDER BY "Match_ID"
+                '''
+            )
+        ).mappings().all()
+    return _sanitize([dict(match) for match in matches])
+
+
+@router.get("/all-current-scores")
+def get_all_current_scores(engine: Engine = Depends(get_engine)):
+    with engine.connect() as connection:
+        matches = connection.execute(
+            text(
+                '''
+                SELECT
+                    "Match_ID",
+                    "Team_A",
+                    "Team_B",
+                    "Goals_A",
+                    "Goals_B"
+                FROM matches
+                ORDER BY "Match_ID"
+                '''
+            )
+        ).mappings().all()
+    return _sanitize([dict(match) for match in matches])
+
+
 @router.get("/predicted-matrix/{group}")
 def get_predicted_matrix(group: str, engine: Engine = Depends(get_engine)):
     _ensure_group_predictions_available(engine)
