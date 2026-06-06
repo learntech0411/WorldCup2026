@@ -10,6 +10,8 @@ backend/app/services/__pycache__/
 backend/app/utils/__pycache__/
 backend/operators/__pycache__/
 backend/app/routers/__pycache__/
+__pycache__/
+backend/app/routers/__pycache__/frontend_data.cpython-313.pyc
 
 # Node/React
 frontend/node_modules/
