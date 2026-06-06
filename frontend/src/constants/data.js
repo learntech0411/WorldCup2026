@@ -1,8 +1,8 @@
 export const FC = {
-  "Mexico": "mx", "South Africa": "za", "South Korea": "kr", "Czechia": "cz", "Canada": "ca", "Bosnia": "ba",
+  "Mexico": "mx", "South Africa": "za", "South Korea": "kr", "Czechia": "cz", "Canada": "ca", "Bosnia and Herzegovina": "ba",
   "Qatar": "qa", "Switzerland": "ch", "Brazil": "br", "Morocco": "ma", "Haiti": "ht", "Scotland": "gb-sct",
-  "USA": "us", "Paraguay": "py", "Australia": "au", "Türkiye": "tr", "Germany": "de", "Curaçao": "cw",
-  "Côte d'Ivoire": "ci", "Ecuador": "ec", "Netherlands": "nl", "Japan": "jp", "Sweden": "se", "Tunisia": "tn",
+  "United States": "us", "Paraguay": "py", "Australia": "au", "Turkey": "tr", "Germany": "de", "Curacao": "cw",
+  "Ivory Coast": "ci", "Ecuador": "ec", "Netherlands": "nl", "Japan": "jp", "Sweden": "se", "Tunisia": "tn",
   "Belgium": "be", "Egypt": "eg", "Iran": "ir", "New Zealand": "nz", "Spain": "es", "Cape Verde": "cv",
   "Saudi Arabia": "sa", "Uruguay": "uy", "France": "fr", "Iraq": "iq", "Senegal": "sn", "Norway": "no",
   "Argentina": "ar", "Algeria": "dz", "Austria": "at", "Jordan": "jo", "Portugal": "pt", "DR Congo": "cd",
