@@ -57,7 +57,6 @@ const GroupStage = ({ mode, onToggleMode, groupMatrix, matchScores, fetchMatchSc
               <tr>
                 <th style={{ width: '20px' }}></th>
                 <th>Team</th>
-                <th style={{ width: '20px' }}>P</th>
                 <th style={{ width: '20px' }}>W</th>
                 <th style={{ width: '20px' }}>D</th>
                 <th style={{ width: '20px' }}>L</th>
@@ -77,7 +76,6 @@ const GroupStage = ({ mode, onToggleMode, groupMatrix, matchScores, fetchMatchSc
                     <td className={styles.teamCell}>
                       <Flag team={team.Team} size="sm" /> {team.Team}
                     </td>
-                    <td className={styles.ctr}>{team.MP}</td>
                     <td className={styles.ctr}>{team.W}</td>
                     <td className={styles.ctr}>{team.D}</td>
                     <td className={styles.ctr}>{team.L}</td>
