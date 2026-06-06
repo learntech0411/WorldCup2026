@@ -1,15 +1,10 @@
-import React, { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo } from 'react';
 import Flag from './Flag';
 import styles from './GroupStage.module.css';
 import { GROUP_MATCHES } from '../constants/matchSchedule';
 
-const GroupStage = ({ mode, onToggleMode, groupMatrix, matchScores, fetchMatchScore, loading }) => {
+const GroupStage = ({ mode, onToggleMode, groupMatrix, matchScores, loading }) => {
   const [expandedGroup, setExpandedGroup] = useState(null);
-
-  useEffect(() => {
-    if (!groupMatrix) return;
-    GROUP_MATCHES.forEach((match) => fetchMatchScore(match.id));
-  }, [groupMatrix, fetchMatchScore]);
 
   const groupKeys = useMemo(() => {
     if (!groupMatrix) return [];
@@ -22,8 +17,6 @@ const GroupStage = ({ mode, onToggleMode, groupMatrix, matchScores, fetchMatchSc
     const awayScore = mode === 'Current' ? score.Goals_B : score.Predicted_Goals_B;
     const homeVal = homeScore == null || homeScore === '' ? '-' : homeScore;
     const awayVal = awayScore == null || awayScore === '' ? '-' : awayScore;
-    const isHomeWinner = homeScore != null && awayScore != null && homeScore !== '' && awayScore !== '' && Number(homeScore) > Number(awayScore);
-    const isAwayWinner = homeScore != null && awayScore != null && homeScore !== '' && awayScore !== '' && Number(awayScore) > Number(homeScore);
 
     return (
       <div key={match.id} className={styles.matchRow}>

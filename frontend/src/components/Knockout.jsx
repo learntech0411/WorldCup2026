@@ -1,17 +1,11 @@
-import React, { useMemo, useEffect } from 'react';
+import { useMemo, useCallback } from 'react';
 import Flag from './Flag';
 import { R32D, R16P, QFP, SFP } from '../constants/data';
 import { KNOCKOUT_MATCH_IDS } from '../constants/matchSchedule';
 import { getTeamFromRank, getT3FromMatrices, assignThirds } from '../utils/logic';
 import styles from './Knockout.module.css';
 
-const Knockout = ({ mode, groupMatrix, matchScores, fetchMatchScore }) => {
-  useEffect(() => {
-    if (!groupMatrix) return;
-    const ids = Object.values(KNOCKOUT_MATCH_IDS).flat();
-    ids.forEach((id) => fetchMatchScore(id));
-  }, [groupMatrix, fetchMatchScore]);
-
+const Knockout = ({ mode, groupMatrix, matchScores }) => {
   const groupRankings = useMemo(() => {
     if (!groupMatrix) return {};
     const result = {};
@@ -26,8 +20,9 @@ const Knockout = ({ mode, groupMatrix, matchScores, fetchMatchScore }) => {
     return assignThirds(getT3FromMatrices(groupMatrix));
   }, [groupMatrix]);
 
-  const scoreFor = (id) => matchScores?.[id] || {};
-  const resultFor = (id, ht, at) => {
+  const scoreFor = useCallback((id) => matchScores?.[id] || {}, [matchScores]);
+
+  const resultFor = useCallback((id, ht, at) => {
     const score = scoreFor(id);
     const h = mode === 'Current' ? score.Goals_A : score.Predicted_Goals_A;
     const a = mode === 'Current' ? score.Goals_B : score.Predicted_Goals_B;
@@ -37,34 +32,37 @@ const Knockout = ({ mode, groupMatrix, matchScores, fetchMatchScore }) => {
     if (Number.isNaN(hVal) || Number.isNaN(aVal)) return null;
     const winner = hVal > aVal ? ht : aVal > hVal ? at : null;
     return { h: hVal, a: aVal, w: winner };
-  };
+  }, [mode, scoreFor]);
 
-  const resolveTeam = (slot) => getTeamFromRank(slot, groupRankings, thirdAssignments);
+  const resolveTeam = useCallback(
+    (slot) => getTeamFromRank(slot, groupRankings, thirdAssignments),
+    [groupRankings, thirdAssignments]
+  );
 
   const r32m = useMemo(() => R32D.map((match, idx) => ({
     id: KNOCKOUT_MATCH_IDS.R32[idx],
     ht: resolveTeam(match.h),
     at: resolveTeam(match.a),
     placeholder: match.i,
-  })), [groupRankings, thirdAssignments]);
+  })), [resolveTeam]);
 
   const r32ByPlaceholder = useMemo(() => Object.fromEntries(r32m.map((m) => [m.placeholder, m])), [r32m]);
 
-  const winnerFromPlaceholder = (placeholder, sourceMap) => {
+  const winnerFromPlaceholder = useCallback((placeholder, sourceMap) => {
     const source = sourceMap[placeholder];
     if (!source || !source.ht || !source.at) return null;
     const result = resultFor(source.id, source.ht, source.at);
     return result?.w || null;
-  };
+  }, [resultFor]);
 
-  const loserFromPlaceholder = (placeholder, sourceMap) => {
+  const loserFromPlaceholder = useCallback((placeholder, sourceMap) => {
     const source = sourceMap[placeholder];
     if (!source || !source.ht || !source.at) return null;
     const result = resultFor(source.id, source.ht, source.at);
     if (!result?.w) return null;
     if (result.w === source.ht) return source.at;
     return source.ht;
-  };
+  }, [resultFor]);
 
   const r16m = useMemo(() => {
     const map = {};
@@ -75,7 +73,7 @@ const Knockout = ({ mode, groupMatrix, matchScores, fetchMatchScore }) => {
       map[`L${idx + 1}`] = { id, ht, at };
     });
     return Object.values(map);
-  }, [r32ByPlaceholder]);
+  }, [r32ByPlaceholder, winnerFromPlaceholder]);
 
   const r16ByPlaceholder = useMemo(() => Object.fromEntries(r16m.map((m, idx) => [`L${idx + 1}`, m])), [r16m]);
 
@@ -90,7 +88,7 @@ const Knockout = ({ mode, groupMatrix, matchScores, fetchMatchScore }) => {
       };
     });
     return Object.values(map);
-  }, [r16ByPlaceholder]);
+  }, [r16ByPlaceholder, winnerFromPlaceholder]);
 
   const qfByPlaceholder = useMemo(() => Object.fromEntries(qfm.map((m, idx) => [`Q${idx + 1}`, m])), [qfm]);
 
@@ -105,7 +103,7 @@ const Knockout = ({ mode, groupMatrix, matchScores, fetchMatchScore }) => {
       };
     });
     return Object.values(map);
-  }, [qfByPlaceholder]);
+  }, [qfByPlaceholder, winnerFromPlaceholder]);
 
   const sfByPlaceholder = useMemo(() => Object.fromEntries(sfm.map((m, idx) => [`S${idx + 1}`, m])), [sfm]);
 
@@ -113,13 +111,13 @@ const Knockout = ({ mode, groupMatrix, matchScores, fetchMatchScore }) => {
     id: KNOCKOUT_MATCH_IDS.FINAL,
     ht: winnerFromPlaceholder('S1', sfByPlaceholder),
     at: winnerFromPlaceholder('S2', sfByPlaceholder),
-  }), [sfByPlaceholder]);
+  }), [sfByPlaceholder, winnerFromPlaceholder]);
 
   const thirdPlaceMatch = useMemo(() => ({
     id: KNOCKOUT_MATCH_IDS.THIRD,
     ht: loserFromPlaceholder('S1', sfByPlaceholder),
     at: loserFromPlaceholder('S2', sfByPlaceholder),
-  }), [sfByPlaceholder]);
+  }), [sfByPlaceholder, loserFromPlaceholder]);
 
   const buildRound = (matchList) => matchList.map((m) => ({ ...m, result: resultFor(m.id, m.ht, m.at) }));
 
@@ -202,7 +200,7 @@ const Knockout = ({ mode, groupMatrix, matchScores, fetchMatchScore }) => {
     );
   };
 
-  const Round = ({ title, matches }) => (
+  const renderRound = (title, matches) => (
     <div className={styles.bkRound}>
       <div className={styles.bkTitle}>{title}</div>
       {matches.map((m) => (
@@ -224,13 +222,13 @@ const Knockout = ({ mode, groupMatrix, matchScores, fetchMatchScore }) => {
 
       <div className={styles.bkWrap}>
         <div className={styles.bk}>
-          <Round title="Round of 32" matches={leftR32} />
+          {renderRound('Round of 32', leftR32)}
           <div className={styles.bkConn} />
-          <Round title="Round of 16" matches={leftR16} />
+          {renderRound('Round of 16', leftR16)}
           <div className={styles.bkConn} />
-          <Round title="Quarterfinals" matches={leftQF} />
+          {renderRound('Quarterfinals', leftQF)}
           <div className={styles.bkConn} />
-          <Round title="Semifinals" matches={sfList.slice(0, 1)} />
+          {renderRound('Semifinals', sfList.slice(0, 1))}
           <div className={styles.bkConn} />
 
           <div className={`${styles.bkRound} ${styles.finalCol}`}>
@@ -243,13 +241,13 @@ const Knockout = ({ mode, groupMatrix, matchScores, fetchMatchScore }) => {
           </div>
 
           <div className={styles.bkConn} />
-          <Round title="Semifinals" matches={sfList.slice(1)} />
+          {renderRound('Semifinals', sfList.slice(1))}
           <div className={styles.bkConn} />
-          <Round title="Quarterfinals" matches={rightQF} />
+          {renderRound('Quarterfinals', rightQF)}
           <div className={styles.bkConn} />
-          <Round title="Round of 16" matches={rightR16} />
+          {renderRound('Round of 16', rightR16)}
           <div className={styles.bkConn} />
-          <Round title="Round of 32" matches={rightR32} />
+          {renderRound('Round of 32', rightR32)}
         </div>
       </div>
     </div>
@@ -257,4 +255,3 @@ const Knockout = ({ mode, groupMatrix, matchScores, fetchMatchScore }) => {
 };
 
 export default Knockout;
-

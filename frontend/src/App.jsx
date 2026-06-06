@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import Header from './components/Header';
 import Tabs from './components/Tabs';
 import GroupStage from './components/GroupStage';
@@ -19,6 +19,7 @@ function App() {
   const [groupMatrices, setGroupMatrices] = useState({ Current: null, Prediction: null });
   const [matchScores, setMatchScores] = useState({ Current: {}, Prediction: {} });
   const [loadingGroups, setLoadingGroups] = useState(false);
+  const [loadingScores, setLoadingScores] = useState({ Current: false, Prediction: false });
   const [theme, setTheme] = useState(() => {
     return localStorage.getItem('wc26_theme') ||
       (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
@@ -45,48 +46,44 @@ function App() {
     }
   }, [groupMatrices]);
 
-  const fetchMatchScore = useCallback(async (matchId) => {
-    if (!matchId) return;
-    const cache = matchScores[mode];
-    if (cache[matchId] && !cache[matchId].error) return;
-
-    setMatchScores((prev) => ({
-      ...prev,
-      [mode]: {
-        ...prev[mode],
-        [matchId]: { loading: true },
-      },
-    }));
-
+  const fetchMatchScores = useCallback(async (targetMode) => {
+    setLoadingScores((prev) => ({ ...prev, [targetMode]: true }));
     try {
-      const endpoint = `${API_PREFIX}/${MODES[mode]}-score/${matchId}`;
+      const endpoint = `${API_PREFIX}/all-${MODES[targetMode]}-scores`;
       const response = await fetch(endpoint);
       if (!response.ok) {
-        throw new Error(`Failed to load score ${matchId}`);
+        throw new Error(`Failed to load ${targetMode} scores`);
       }
       const data = await response.json();
+      const scoresById = Object.fromEntries(
+        (Array.isArray(data) ? data : []).map((score) => [Number(score.Match_ID), score])
+      );
+
       setMatchScores((prev) => ({
         ...prev,
-        [mode]: {
-          ...prev[mode],
-          [matchId]: { ...data, loading: false },
-        },
+        [targetMode]: scoresById,
       }));
     } catch (error) {
       console.error(error);
-      setMatchScores((prev) => ({
-        ...prev,
-        [mode]: {
-          ...prev[mode],
-          [matchId]: { error: true, loading: false },
-        },
-      }));
+    } finally {
+      setLoadingScores((prev) => ({ ...prev, [targetMode]: false }));
     }
-  }, [mode, matchScores]);
+  }, []);
 
   useEffect(() => {
-    fetchGroupMatrix(mode);
+    const timer = window.setTimeout(() => {
+      fetchGroupMatrix(mode);
+    }, 0);
+    return () => window.clearTimeout(timer);
   }, [mode, fetchGroupMatrix]);
+
+  useEffect(() => {
+    const timer = window.setTimeout(() => {
+      fetchMatchScores('Current');
+      fetchMatchScores('Prediction');
+    }, 0);
+    return () => window.clearTimeout(timer);
+  }, [fetchMatchScores]);
 
   useEffect(() => {
     localStorage.setItem('wc26_theme', theme);
@@ -126,8 +123,7 @@ function App() {
             onToggleMode={toggleMode}
             groupMatrix={currentGroupMatrix}
             matchScores={currentMatchScores}
-            fetchMatchScore={fetchMatchScore}
-            loading={loadingGroups}
+            loading={loadingGroups || loadingScores[mode]}
           />
         )}
         {activeTab === 'knockout' && (
@@ -135,7 +131,6 @@ function App() {
             mode={mode}
             groupMatrix={currentGroupMatrix}
             matchScores={currentMatchScores}
-            fetchMatchScore={fetchMatchScore}
           />
         )}
         {activeTab === 'history' && (
