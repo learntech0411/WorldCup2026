@@ -3,8 +3,8 @@ import Header from './components/Header';
 import Tabs from './components/Tabs';
 import GroupStage from './components/GroupStage';
 import Knockout from './components/Knockout';
-import History from './components/History';
-import Author from './components/Author';
+import Stats from './components/History';
+import HowItWorks from './components/Author';
 import './App.css';
 
 const API_PREFIX = import.meta.env.VITE_API_PREFIX || 'http://localhost:8000/api';
@@ -133,11 +133,11 @@ function App() {
             matchScores={currentMatchScores}
           />
         )}
-        {activeTab === 'history' && (
-          <History />
+        {activeTab === 'stats' && (
+          <Stats />
         )}
-        {activeTab === 'author' && (
-          <Author />
+        {activeTab === 'how-it-works' && (
+          <HowItWorks />
         )}
       </main>
     </div>

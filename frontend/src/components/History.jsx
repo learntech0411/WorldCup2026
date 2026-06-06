@@ -1,4 +1,3 @@
-import React from 'react';
 import Flag from './Flag';
 import styles from './History.module.css';
 
@@ -6,9 +5,9 @@ const History = ({ history = [], onLoadHistory = () => {}, onClearHistory = () =
   if (!history || history.length === 0) {
     return (
       <div className={styles.empty}>
-        <div style={{ fontSize: '32px', marginBottom: '12px' }}>🕰️</div>
-        <p>No saved predictions yet.</p>
-        <p style={{ fontSize: '12px', marginTop: '8px' }}>Finish a knockout stage to save it to your history.</p>
+        <div style={{ fontSize: '32px', marginBottom: '12px' }}>📊</div>
+        <p>No stats available yet.</p>
+        <p style={{ fontSize: '12px', marginTop: '8px' }}>Stats and saved prediction summaries can live here.</p>
       </div>
     );
   }
@@ -16,7 +15,7 @@ const History = ({ history = [], onLoadHistory = () => {}, onClearHistory = () =
   return (
     <div className={styles.historyCard}>
       <div className={styles.historyHead}>
-        <span className={styles.historyTitle}>📅 Your history</span>
+        <span className={styles.historyTitle}>📊 Stats</span>
         <button className={styles.historyClear} onClick={onClearHistory}>Clear</button>
       </div>
       <div className={styles.historyRow}>

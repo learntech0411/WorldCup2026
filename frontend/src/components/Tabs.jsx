@@ -1,4 +1,3 @@
-import React from 'react';
 import styles from './Tabs.module.css';
 
 const Tabs = ({ activeTab, onTabChange }) => {
@@ -19,12 +18,12 @@ const Tabs = ({ activeTab, onTabChange }) => {
         <path d="M18 12l-3 3"></path>
       </svg>
     )},
-    { id: 'history', name: 'History', icon: (
+    { id: 'stats', name: 'Stats', icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
         <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
       </svg>
     )},
-    { id: 'author', name: 'Author', icon: (
+    { id: 'how-it-works', name: 'How it works', icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
         <circle cx="12" cy="12" r="9"></circle>
         <path d="M12 7v5l3 3"></path>

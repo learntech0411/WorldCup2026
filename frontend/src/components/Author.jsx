@@ -1,61 +1,50 @@
-import React from 'react';
-import Flag from './Flag';
-import { BASELINE } from '../constants/data';
 import styles from './Author.module.css';
 
-const Author = ({ ko = {} }) => {
-  const stageLbl = { R32: "R32", R16: "R16", QF: "QF", SF: "SF", F: "FINAL" };
-  const userChamp = ko["FINAL"]?.w;
-
+const Author = () => {
   return (
     <div className={styles.baselineCard}>
       <div className={styles.baselineHead}>
-        <h2>✍️ Author's Pick</h2>
-        <p className={styles.baselineSub}>This is the author's own call. See how your bracket stacks up against it.</p>
+        <h2>How it works</h2>
+        <p className={styles.baselineSub}>
+          A guided space for explaining the data, prediction flow, and design choices behind this World Cup dashboard.
+        </p>
       </div>
 
       <div className={styles.baselineChampCard}>
-        <div className={styles.blChampLabel}>🏆 Author's champion</div>
-        <div className={styles.blChampRow}>
-          <Flag team={BASELINE.champion} size="md" />
-          <span className={styles.blChampName}>{BASELINE.champion}</span>
-        </div>
-        <div className={styles.blThird}>
-          🥉 Third place：<Flag team={BASELINE.third} size="sm" /> {BASELINE.third}
-        </div>
+        <div className={styles.blChampLabel}>Project overview</div>
+        <p className={styles.blPending}>
+          Use this section to introduce what the app does, what data it uses, and the main idea behind the predictions.
+        </p>
       </div>
 
       <div className={styles.blPathCard}>
-        <h3>Path to glory</h3>
-        {BASELINE.path.map((p, i) => (
-          <div key={i} className={styles.blPathRow}>
-            <span className={styles.blStage}>{stageLbl[p.stage]}</span>
-            <span className={styles.blMatch}>
-              <Flag team={BASELINE.champion} size="sm" /> {BASELINE.champion}
-              <span className={styles.blVs}>vs</span>
-              <Flag team={p.opp} size="sm" /> {p.opp}
-            </span>
-            <span className={styles.blScore}>{p.us}-{p.them}</span>
-          </div>
-        ))}
+        <h3>Data pipeline</h3>
+        <div className={styles.blPathRow}>
+          <span className={styles.blStage}>Input</span>
+          <span className={styles.blMatch}>Match schedule, teams, scores, and supporting football data</span>
+        </div>
+        <div className={styles.blPathRow}>
+          <span className={styles.blStage}>Backend</span>
+          <span className={styles.blMatch}>Processing, transformations, and prediction calculations</span>
+        </div>
+        <div className={styles.blPathRow}>
+          <span className={styles.blStage}>Frontend</span>
+          <span className={styles.blMatch}>Group tables, knockout bracket, and stats views</span>
+        </div>
       </div>
 
       <div className={styles.blCompareCard}>
-        <h3>Your prediction vs Author</h3>
-        {userChamp ? (
-          userChamp === BASELINE.champion ? (
-            <p className={styles.blSame}>✓ You and the author backed the same champion! Great minds.</p>
-          ) : (
-            <p className={styles.blDiff}>Your champion: {userChamp} · Author backed: {BASELINE.champion}</p>
-          )
-        ) : (
-          <p className={styles.blPending}>Finish your knockout to compare with the author</p>
-        )}
+        <h3>Prediction method</h3>
+        <p className={styles.blPending}>
+          Use this section to explain how team strength, expected goals, match probabilities, and simulated results are produced.
+        </p>
       </div>
 
       <div className={styles.blCompareCard}>
-        <h3>📊 Result scoring</h3>
-        <p className={styles.blPending}>⏳ Once the cup kicks off (June 11, 2026), your prediction score shows up here</p>
+        <h3>Frontend behavior</h3>
+        <p className={styles.blPending}>
+          Use this section to describe how the interface loads scores, switches between current and prediction modes, and updates the bracket.
+        </p>
       </div>
     </div>
   );
