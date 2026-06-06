@@ -7,7 +7,7 @@ import History from './components/History';
 import Author from './components/Author';
 import './App.css';
 
-const API_PREFIX = '/api';
+const API_PREFIX = 'https://worldcup2026-ksnz.onrender.com/api';
 const MODES = {
   Current: 'current',
   Prediction: 'predicted',
