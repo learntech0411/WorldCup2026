@@ -27,13 +27,13 @@ const GroupStage = ({ mode, onToggleMode, groupMatrix, matchScores, fetchMatchSc
 
     return (
       <div key={match.id} className={styles.matchRow}>
-        <div className={`${styles.matchTeam} ${isHomeWinner ? styles.teamWinner : ''}`}>
+        <div className={`${styles.matchTeam}`}>
           <Flag team={match.h} size="sm" /> {match.h}
         </div>
         <div className={styles.scoreBadge}>{homeVal}</div>
         <span className={styles.sep}>-</span>
         <div className={styles.scoreBadge}>{awayVal}</div>
-        <div className={`${styles.matchTeam} ${isAwayWinner ? styles.teamWinner : ''}`}>
+        <div className={`${styles.matchTeam}`}>
           <Flag team={match.a} size="sm" /> {match.a}
         </div>
       </div>
@@ -67,8 +67,9 @@ const GroupStage = ({ mode, onToggleMode, groupMatrix, matchScores, fetchMatchSc
             </thead>
             <tbody>
               {standings.map((team) => {
-                const rowClass = team.Rank <= 2 ? styles.q1 : team.Rank === 3 ? styles.q3 : '';
-                const posClass = team.Rank <= 2 ? styles.p1 : team.Rank === 3 ? styles.p3 : styles.p4;
+                const rank = Number(team.Rank);
+                const rowClass = rank === 1 ? styles.goldRow : rank === 2 ? styles.silverRow : rank === 3 ? styles.q3 : '';
+                const posClass = rank <= 2 ? styles.p1 : rank === 3 ? styles.p3 : styles.p4;
                 const gdClass = Number(team.GD) > 0 ? styles.gdP : Number(team.GD) < 0 ? styles.gdN : styles.gdZ;
                 return (
                   <tr key={team.Team} className={rowClass}>
