@@ -21,7 +21,10 @@ SECRET_TOKEN = os.getenv("KEEP_ALIVE_TOKEN", "fallback_secret_for_local_testing"
 
 def verify_token(api_key: str = Security(api_key_header)):
     if api_key != SECRET_TOKEN:
-        raise HTTPException(status_code=403, detail="Unauthorized ping")
+        # This will reveal exactly what cron-job sent vs what Render has loaded
+        debug_message = f"Mismatch! cron-job sent: '{api_key}' | Render loaded: '{SECRET_TOKEN}'"
+        print(debug_message) 
+        raise HTTPException(status_code=403, detail=debug_message)
     return api_key
 
 # 3. Protect the endpoint by injecting the dependency
