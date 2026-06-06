@@ -10,8 +10,8 @@ const Header = () => {
           className={styles.logo}
           src={WORLD_CUP_EMBLEM_URL}
           alt="2026 FIFA World Cup emblem"
-          width="44"
-          height="70"
+          width="20"
+          height="50"
         />
         <span>2026 World Cup Predictor</span>
       </h1>
