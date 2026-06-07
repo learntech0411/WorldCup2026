@@ -164,6 +164,7 @@ function App() {
         {activeTab === 'knockout' && (
           <Knockout
             mode={mode}
+            onToggleMode={toggleMode}
             matchScores={currentMatchScores}
             predictionScores={matchScores.Prediction}
             currentGroupStageComplete={currentGroupStageComplete}

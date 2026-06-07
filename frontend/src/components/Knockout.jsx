@@ -18,7 +18,7 @@ const getNumericProbability = (value) => {
   return Number.isFinite(numeric) ? numeric : null;
 };
 
-const Knockout = ({ mode, matchScores, predictionScores, currentGroupStageComplete }) => {
+const Knockout = ({ mode, onToggleMode, matchScores, predictionScores, currentGroupStageComplete }) => {
   const hideCurrentKnockoutTeams = mode === 'Current' && !currentGroupStageComplete;
 
   const scoreFor = useCallback((id) => matchScores?.[id] || {}, [matchScores]);
@@ -207,11 +207,17 @@ const Knockout = ({ mode, matchScores, predictionScores, currentGroupStageComple
 
   return (
     <div className={styles.container}>
+      <div className={styles.modebar}>
+        <button className={styles.btnMode} onClick={onToggleMode}>
+          Switch to {mode === 'Current' ? 'Prediction' : 'Current'} Mode
+        </button>
+      </div>
+
       <div className={styles.bkWrap}>
         <div className={styles.bkContent}>
           <div className={styles.topbar}>
             <div className={styles.statusOk}>
-              {mode} knockout bracket is powered by backend scores.
+              Prediction knockout bracket is powered by backend scores.
             </div>
             <p className={styles.hint}>👈 Scroll horizontally to view the bracket. Winning teams are highlighted.</p>
           </div>
