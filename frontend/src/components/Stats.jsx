@@ -1,7 +1,7 @@
 import Flag from './Flag';
-import styles from './History.module.css';
+import styles from './Stats.module.css';
 
-const History = ({ history = [], onLoadHistory = () => {}, onClearHistory = () => {} }) => {
+const Stats = ({ history = [], onLoadHistory = () => {}, onClearHistory = () => {} }) => {
   if (!history || history.length === 0) {
     return (
       <div className={styles.empty}>
@@ -35,4 +35,4 @@ const History = ({ history = [], onLoadHistory = () => {}, onClearHistory = () =
   );
 };
 
-export default History;
+export default Stats;

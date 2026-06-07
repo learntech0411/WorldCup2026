@@ -1,6 +1,6 @@
-import styles from './Author.module.css';
+import styles from './HowItWorks.module.css';
 
-const Author = () => {
+const HowItWorks = () => {
   return (
     <div className={styles.baselineCard}>
       <div className={styles.baselineHead}>
@@ -50,4 +50,4 @@ const Author = () => {
   );
 };
 
-export default Author;
+export default HowItWorks;
