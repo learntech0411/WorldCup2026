@@ -157,6 +157,7 @@ function App() {
             onToggleMode={toggleMode}
             groupMatrix={currentGroupMatrix}
             matchScores={currentMatchScores}
+            predictionScores={matchScores.Prediction}
             loading={loadingGroups || loadingScores[mode]}
           />
         )}

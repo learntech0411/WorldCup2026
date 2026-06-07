@@ -3,7 +3,15 @@ import Flag from './Flag';
 import styles from './GroupStage.module.css';
 import { GROUP_MATCHES } from '../constants/matchSchedule';
 
-const GroupStage = ({ mode, onToggleMode, groupMatrix, matchScores, loading }) => {
+const formatProbability = (value) => {
+  if (value == null || value === '') return '-';
+  const numeric = Number(value);
+  if (!Number.isFinite(numeric)) return '-';
+  const percent = numeric <= 1 ? numeric * 100 : numeric;
+  return `${percent.toFixed(1)}%`;
+};
+
+const GroupStage = ({ mode, onToggleMode, groupMatrix, matchScores, predictionScores, loading }) => {
   const [expandedGroup, setExpandedGroup] = useState(null);
 
   const groupKeys = useMemo(() => {
@@ -13,6 +21,7 @@ const GroupStage = ({ mode, onToggleMode, groupMatrix, matchScores, loading }) =
 
   const renderMatchRow = (match) => {
     const score = matchScores?.[match.id] || {};
+    const prediction = predictionScores?.[match.id] || {};
     const homeScore = mode === 'Current' ? score.Goals_A : score.Predicted_Goals_A;
     const awayScore = mode === 'Current' ? score.Goals_B : score.Predicted_Goals_B;
     const homeVal = homeScore == null || homeScore === '' ? '-' : homeScore;
@@ -28,6 +37,27 @@ const GroupStage = ({ mode, onToggleMode, groupMatrix, matchScores, loading }) =
         <div className={styles.scoreBadge}>{awayVal}</div>
         <div className={`${styles.matchTeam}`}>
           <Flag team={match.a} size="sm" /> {match.a}
+        </div>
+        <div className={styles.probPanel}>
+          <div className={styles.probTitle}>Win probability</div>
+          <div className={styles.probRow}>
+            <span className={styles.probTeam}>{match.h}</span>
+            <span className={`${styles.probValue} ${styles.probHome}`}>
+              {formatProbability(prediction.Winning_Probability_A)}
+            </span>
+          </div>
+          <div className={styles.probRow}>
+            <span className={styles.probTeam}>Draw</span>
+            <span className={`${styles.probValue} ${styles.probDraw}`}>
+              {formatProbability(prediction.Draw_Probability)}
+            </span>
+          </div>
+          <div className={styles.probRow}>
+            <span className={styles.probTeam}>{match.a}</span>
+            <span className={`${styles.probValue} ${styles.probAway}`}>
+              {formatProbability(prediction.Winning_Probability_B)}
+            </span>
+          </div>
         </div>
       </div>
     );

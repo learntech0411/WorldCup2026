@@ -89,7 +89,7 @@
   border-radius: 20px;
   box-shadow: var(--shadow-float);
   margin-bottom: 24px;
-  overflow: hidden;
+  overflow: visible;
   transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
 
@@ -253,6 +253,7 @@ td {
     position: sticky;
     top: 100px;
     max-height: calc(100vh - 120px);
+    overflow-x: visible;
     overflow-y: auto;
     padding: 0 8px;
   }
@@ -307,6 +308,16 @@ td {
   background: var(--bg-soft);
   border-radius: 16px;
   margin-bottom: 10px;
+  position: relative;
+  transition: box-shadow 0.18s ease, transform 0.18s ease;
+  z-index: 1;
+}
+
+.matchRow:hover,
+.matchRow:focus-within {
+  box-shadow: 0 10px 24px rgba(33, 46, 66, 0.14);
+  transform: translateY(-1px);
+  z-index: 20;
 }
 
 .matchTeam {
@@ -334,6 +345,82 @@ td {
   color: var(--ink-dark);
   background: var(--bg-card);
   border-radius: 12px;
+}
+
+.probPanel {
+  position: absolute;
+  left: 50%;
+  top: calc(100% + 8px);
+  width: 210px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--line-delicate);
+  background: var(--bg-card);
+  box-shadow: 0 14px 30px rgba(18, 20, 23, 0.18);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translate(-50%, -6px);
+  transition: opacity 0.16s ease, transform 0.16s ease, visibility 0.16s ease;
+}
+
+.matchRow:hover .probPanel,
+.matchRow:focus-within .probPanel {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, 0);
+}
+
+.probTitle {
+  color: var(--ink-light);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+.probRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 4px 0;
+}
+
+.probTeam {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--ink-medium);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.probValue {
+  flex-shrink: 0;
+  min-width: 48px;
+  padding: 3px 7px;
+  border-radius: 999px;
+  text-align: center;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.probHome {
+  color: #047857;
+  background: rgba(5, 150, 105, 0.12);
+}
+
+.probDraw {
+  color: #2563eb;
+  background: rgba(37, 99, 235, 0.12);
+}
+
+.probAway {
+  color: #b91c1c;
+  background: rgba(220, 38, 38, 0.11);
 }
 
 .btnMode {
@@ -408,6 +495,7 @@ td {
   .gName { font-size: 14px; }
   th { font-size: 10px; padding: 8px 4px; }
   td { padding: 8px 4px; font-size: 12px; }
+  .probPanel { width: 170px; padding: 8px 10px; }
   .mrTeams input { width: 36px; height: 36px; font-size: 15px; border-radius: 8px; }
   .tn { font-size: 12px; gap: 6px; }
 }
