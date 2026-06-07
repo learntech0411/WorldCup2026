@@ -1,24 +1,11 @@
 import { useMemo, useCallback } from 'react';
 import Flag from './Flag';
-import { R32D, R16P, QFP, SFP } from '../constants/data';
+import { R32D } from '../constants/data';
 import { KNOCKOUT_MATCH_IDS } from '../constants/matchSchedule';
-import { getTeamFromRank, getT3FromMatrices, assignThirds } from '../utils/logic';
 import styles from './Knockout.module.css';
 
-const Knockout = ({ mode, groupMatrix, matchScores }) => {
-  const groupRankings = useMemo(() => {
-    if (!groupMatrix) return {};
-    const result = {};
-    Object.keys(groupMatrix).forEach((groupKey) => {
-      result[groupKey] = [...groupMatrix[groupKey]].sort((a, b) => Number(a.Rank) - Number(b.Rank));
-    });
-    return result;
-  }, [groupMatrix]);
-
-  const thirdAssignments = useMemo(() => {
-    if (!groupMatrix) return {};
-    return assignThirds(getT3FromMatrices(groupMatrix));
-  }, [groupMatrix]);
+const Knockout = ({ mode, matchScores, currentGroupStageComplete }) => {
+  const hideCurrentKnockoutTeams = mode === 'Current' && !currentGroupStageComplete;
 
   const scoreFor = useCallback((id) => matchScores?.[id] || {}, [matchScores]);
 
@@ -34,94 +21,55 @@ const Knockout = ({ mode, groupMatrix, matchScores }) => {
     return { h: hVal, a: aVal, w: winner };
   }, [mode, scoreFor]);
 
-  const resolveTeam = useCallback(
-    (slot) => getTeamFromRank(slot, groupRankings, thirdAssignments),
-    [groupRankings, thirdAssignments]
-  );
+  const teamFor = useCallback((id, field) => {
+    if (hideCurrentKnockoutTeams) return null;
+    const team = scoreFor(id)[field];
+    if (team == null || String(team).trim() === '') return null;
+    return team;
+  }, [hideCurrentKnockoutTeams, scoreFor]);
 
-  const r32m = useMemo(() => R32D.map((match, idx) => ({
-    id: KNOCKOUT_MATCH_IDS.R32[idx],
-    ht: resolveTeam(match.h),
-    at: resolveTeam(match.a),
-    placeholder: match.i,
-  })), [resolveTeam]);
+  const buildMatch = useCallback((id) => {
+    const ht = teamFor(id, 'Team_A');
+    const at = teamFor(id, 'Team_B');
+    return {
+      id,
+      ht,
+      at,
+      result: resultFor(id, ht, at),
+    };
+  }, [resultFor, teamFor]);
 
-  const r32ByPlaceholder = useMemo(() => Object.fromEntries(r32m.map((m) => [m.placeholder, m])), [r32m]);
+  const r32ByPlaceholder = useMemo(() => {
+    return Object.fromEntries(
+      R32D.map((match, idx) => [match.i, buildMatch(KNOCKOUT_MATCH_IDS.R32[idx])])
+    );
+  }, [buildMatch]);
 
-  const winnerFromPlaceholder = useCallback((placeholder, sourceMap) => {
-    const source = sourceMap[placeholder];
-    if (!source || !source.ht || !source.at) return null;
-    const result = resultFor(source.id, source.ht, source.at);
-    return result?.w || null;
-  }, [resultFor]);
+  const r16ByPlaceholder = useMemo(() => {
+    return Object.fromEntries(
+      KNOCKOUT_MATCH_IDS.R16.map((id, idx) => [`L${idx + 1}`, buildMatch(id)])
+    );
+  }, [buildMatch]);
 
-  const loserFromPlaceholder = useCallback((placeholder, sourceMap) => {
-    const source = sourceMap[placeholder];
-    if (!source || !source.ht || !source.at) return null;
-    const result = resultFor(source.id, source.ht, source.at);
-    if (!result?.w) return null;
-    if (result.w === source.ht) return source.at;
-    return source.ht;
-  }, [resultFor]);
+  const qfByPlaceholder = useMemo(() => {
+    return Object.fromEntries(
+      KNOCKOUT_MATCH_IDS.QF.map((id, idx) => [`Q${idx + 1}`, buildMatch(id)])
+    );
+  }, [buildMatch]);
 
-  const r16m = useMemo(() => {
-    const map = {};
-    R16P.forEach((pair, idx) => {
-      const id = KNOCKOUT_MATCH_IDS.R16[idx];
-      const ht = winnerFromPlaceholder(pair[0], r32ByPlaceholder);
-      const at = winnerFromPlaceholder(pair[1], r32ByPlaceholder);
-      map[`L${idx + 1}`] = { id, ht, at };
-    });
-    return Object.values(map);
-  }, [r32ByPlaceholder, winnerFromPlaceholder]);
+  const sfByPlaceholder = useMemo(() => {
+    return Object.fromEntries(
+      KNOCKOUT_MATCH_IDS.SF.map((id, idx) => [`S${idx + 1}`, buildMatch(id)])
+    );
+  }, [buildMatch]);
 
-  const r16ByPlaceholder = useMemo(() => Object.fromEntries(r16m.map((m, idx) => [`L${idx + 1}`, m])), [r16m]);
+  const finalMatch = useMemo(() => buildMatch(KNOCKOUT_MATCH_IDS.FINAL), [buildMatch]);
 
-  const qfm = useMemo(() => {
-    const map = {};
-    QFP.forEach((pair, idx) => {
-      const id = KNOCKOUT_MATCH_IDS.QF[idx];
-      map[`Q${idx + 1}`] = {
-        id,
-        ht: winnerFromPlaceholder(pair[0], r16ByPlaceholder),
-        at: winnerFromPlaceholder(pair[1], r16ByPlaceholder),
-      };
-    });
-    return Object.values(map);
-  }, [r16ByPlaceholder, winnerFromPlaceholder]);
+  const thirdPlaceMatch = useMemo(() => {
+    return buildMatch(KNOCKOUT_MATCH_IDS.THIRD);
+  }, [buildMatch]);
 
-  const qfByPlaceholder = useMemo(() => Object.fromEntries(qfm.map((m, idx) => [`Q${idx + 1}`, m])), [qfm]);
-
-  const sfm = useMemo(() => {
-    const map = {};
-    SFP.forEach((pair, idx) => {
-      const id = KNOCKOUT_MATCH_IDS.SF[idx];
-      map[`S${idx + 1}`] = {
-        id,
-        ht: winnerFromPlaceholder(pair[0], qfByPlaceholder),
-        at: winnerFromPlaceholder(pair[1], qfByPlaceholder),
-      };
-    });
-    return Object.values(map);
-  }, [qfByPlaceholder, winnerFromPlaceholder]);
-
-  const sfByPlaceholder = useMemo(() => Object.fromEntries(sfm.map((m, idx) => [`S${idx + 1}`, m])), [sfm]);
-
-  const finalMatch = useMemo(() => ({
-    id: KNOCKOUT_MATCH_IDS.FINAL,
-    ht: winnerFromPlaceholder('S1', sfByPlaceholder),
-    at: winnerFromPlaceholder('S2', sfByPlaceholder),
-  }), [sfByPlaceholder, winnerFromPlaceholder]);
-
-  const thirdPlaceMatch = useMemo(() => ({
-    id: KNOCKOUT_MATCH_IDS.THIRD,
-    ht: loserFromPlaceholder('S1', sfByPlaceholder),
-    at: loserFromPlaceholder('S2', sfByPlaceholder),
-  }), [sfByPlaceholder, loserFromPlaceholder]);
-
-  const buildRound = (matchList) => matchList.map((m) => ({ ...m, result: resultFor(m.id, m.ht, m.at) }));
-
-  const leftR32 = buildRound([
+  const leftR32 = [
     r32ByPlaceholder.R2,
     r32ByPlaceholder.R5,
     r32ByPlaceholder.R1,
@@ -130,9 +78,9 @@ const Knockout = ({ mode, groupMatrix, matchScores }) => {
     r32ByPlaceholder.R12,
     r32ByPlaceholder.R9,
     r32ByPlaceholder.R10,
-  ].filter(Boolean));
+  ].filter(Boolean);
 
-  const rightR32 = buildRound([
+  const rightR32 = [
     r32ByPlaceholder.R4,
     r32ByPlaceholder.R6,
     r32ByPlaceholder.R7,
@@ -141,41 +89,41 @@ const Knockout = ({ mode, groupMatrix, matchScores }) => {
     r32ByPlaceholder.R16,
     r32ByPlaceholder.R13,
     r32ByPlaceholder.R15,
-  ].filter(Boolean));
+  ].filter(Boolean);
 
-  const leftR16 = buildRound([
+  const leftR16 = [
     r16ByPlaceholder.L1,
     r16ByPlaceholder.L2,
     r16ByPlaceholder.L5,
     r16ByPlaceholder.L6,
-  ].filter(Boolean));
+  ].filter(Boolean);
 
-  const rightR16 = buildRound([
+  const rightR16 = [
     r16ByPlaceholder.L3,
     r16ByPlaceholder.L4,
     r16ByPlaceholder.L7,
     r16ByPlaceholder.L8,
-  ].filter(Boolean));
+  ].filter(Boolean);
 
-  const leftQF = buildRound([
+  const leftQF = [
     qfByPlaceholder.Q1,
     qfByPlaceholder.Q2,
-  ].filter(Boolean));
+  ].filter(Boolean);
 
-  const rightQF = buildRound([
+  const rightQF = [
     qfByPlaceholder.Q3,
     qfByPlaceholder.Q4,
-  ].filter(Boolean));
+  ].filter(Boolean);
 
-  const sfList = buildRound([sfByPlaceholder.S1, sfByPlaceholder.S2].filter(Boolean));
+  const sfList = [sfByPlaceholder.S1, sfByPlaceholder.S2].filter(Boolean);
 
   const renderMatch = (m) => {
     if (!m.ht || !m.at) {
       return (
         <div className={`${styles.bkM} ${styles.wait}`}>
-          <div className={styles.bkRow}><span className={styles.name}>?</span></div>
+          <div className={styles.bkRow}><span className={styles.name}>-</span></div>
           <div className={styles.bkVs}>vs</div>
-          <div className={styles.bkRow}><span className={styles.name}>?</span></div>
+          <div className={styles.bkRow}><span className={styles.name}>-</span></div>
         </div>
       );
     }

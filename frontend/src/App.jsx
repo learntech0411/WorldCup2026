@@ -13,6 +13,33 @@ const MODES = {
   Prediction: 'predicted',
 };
 
+const hasScore = (value) => value != null && String(value).trim() !== '';
+
+const normalizeScore = (score, targetMode) => {
+  const base = {
+    Match_ID: Number(score.Match_ID),
+    Team_A: score.Team_A ?? null,
+    Team_B: score.Team_B ?? null,
+  };
+
+  if (targetMode === 'Current') {
+    return {
+      ...base,
+      Goals_A: score.Goals_A ?? null,
+      Goals_B: score.Goals_B ?? null,
+    };
+  }
+
+  return {
+    ...base,
+    Predicted_Goals_A: score.Predicted_Goals_A ?? null,
+    Predicted_Goals_B: score.Predicted_Goals_B ?? null,
+    Winning_Probability_A: score.Winning_Probability_A ?? null,
+    Winning_Probability_B: score.Winning_Probability_B ?? null,
+    Draw_Probability: score.Draw_Probability ?? null,
+  };
+};
+
 function App() {
   const [activeTab, setActiveTab] = useState('groups');
   const [mode, setMode] = useState('Current');
@@ -56,7 +83,10 @@ function App() {
       }
       const data = await response.json();
       const scoresById = Object.fromEntries(
-        (Array.isArray(data) ? data : []).map((score) => [Number(score.Match_ID), score])
+        (Array.isArray(data) ? data : [])
+          .map((score) => normalizeScore(score, targetMode))
+          .filter((score) => Number.isFinite(score.Match_ID))
+          .map((score) => [score.Match_ID, score])
       );
 
       setMatchScores((prev) => ({
@@ -104,6 +134,10 @@ function App() {
 
   const currentGroupMatrix = groupMatrices[mode];
   const currentMatchScores = matchScores[mode];
+  const currentGroupStageComplete = Array.from(
+    { length: 72 },
+    (_, index) => matchScores.Current[index + 1]
+  ).every((score) => score && hasScore(score.Goals_A) && hasScore(score.Goals_B));
 
   return (
     <div className="App">
@@ -129,8 +163,8 @@ function App() {
         {activeTab === 'knockout' && (
           <Knockout
             mode={mode}
-            groupMatrix={currentGroupMatrix}
             matchScores={currentMatchScores}
+            currentGroupStageComplete={currentGroupStageComplete}
           />
         )}
         {activeTab === 'stats' && (
