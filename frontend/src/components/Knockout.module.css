@@ -16,9 +16,12 @@
 
 .topbar {
   display: flex;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
-  gap: 12px;
+  gap: 6px;
   margin: 24px 0 32px;
+  min-width: 100%;
 }
 
 .btnReset {
@@ -34,13 +37,14 @@
 
 .hint {
   text-align: center;
-  font-size: 11px;
+  font-size: 14px;
   color: var(--ink-light);
-  margin-bottom: 12px;
+  margin: 0;
 }
 
 .bkWrap {
   overflow-x: auto;
+  overflow-y: visible;
   padding: 16px 0 40px;
   -webkit-overflow-scrolling: touch;
 }
@@ -54,10 +58,16 @@
   border-radius: 4px;
 }
 
+.bkContent {
+  width: max-content;
+  min-width: 100%;
+}
+
 .bk {
   display: flex;
   align-items: stretch;
   min-width: min-content;
+  isolation: isolate;
 }
 
 .bkRound {
@@ -83,6 +93,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
+  z-index: 1;
+}
+
+.bkMWrap:hover,
+.bkMWrap:focus-within {
+  z-index: 30;
 }
 
 .bkM {
@@ -99,6 +116,16 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
+  z-index: 1;
+}
+
+.bkM:hover,
+.bkM:focus-within {
+  border-color: rgba(66, 165, 245, 0.45);
+  box-shadow: 0 10px 24px rgba(33, 46, 66, 0.16);
+  transform: translateY(-1px);
+  z-index: 20;
 }
 
 .wait {
@@ -136,6 +163,80 @@
 
 .bkVs {
   display: none;
+}
+
+.probPanel {
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 8px);
+  width: 190px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--line-delicate);
+  background: var(--bg-card);
+  box-shadow: 0 14px 30px rgba(18, 20, 23, 0.18);
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, 6px);
+  transition: opacity 0.16s ease, transform 0.16s ease;
+}
+
+.bkM:hover .probPanel,
+.bkM:focus-within .probPanel {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+.probTitle {
+  color: var(--ink-light);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+.probRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 4px 0;
+}
+
+.probTeam {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--ink-medium);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.probValue {
+  flex-shrink: 0;
+  min-width: 48px;
+  padding: 3px 7px;
+  border-radius: 999px;
+  text-align: center;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.probHome {
+  color: #047857;
+  background: rgba(5, 150, 105, 0.12);
+}
+
+.probDraw {
+  color: #2563eb;
+  background: rgba(37, 99, 235, 0.12);
+}
+
+.probAway {
+  color: #b91c1c;
+  background: rgba(220, 38, 38, 0.11);
 }
 
 .bkAct {
@@ -259,6 +360,13 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+.finalBlock:hover,
+.finalBlock:focus-within {
+  z-index: 30;
 }
 
 .finalBlock .bkTitle {
@@ -342,6 +450,7 @@
 @media (max-width: 400px) {
   .bkRound { min-width: 140px; }
   .bkM { width: 130px; margin: 4px; padding: 6px; font-size: 11px; }
+  .probPanel { width: 160px; padding: 8px 10px; }
   .bkTitle { font-size: 10px; margin-bottom: 12px; }
   .koInput { width: 28px; height: 20px; font-size: 10px; }
   .crStep { font-size: 11px; padding: 4px 8px; }

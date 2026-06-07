@@ -4,10 +4,25 @@ import { R32D } from '../constants/data';
 import { KNOCKOUT_MATCH_IDS } from '../constants/matchSchedule';
 import styles from './Knockout.module.css';
 
-const Knockout = ({ mode, matchScores, currentGroupStageComplete }) => {
+const formatProbability = (value) => {
+  if (value == null || value === '') return '-';
+  const numeric = Number(value);
+  if (!Number.isFinite(numeric)) return '-';
+  const percent = numeric <= 1 ? numeric * 100 : numeric;
+  return `${percent.toFixed(1)}%`;
+};
+
+const getNumericProbability = (value) => {
+  if (value == null || value === '') return null;
+  const numeric = Number(value);
+  return Number.isFinite(numeric) ? numeric : null;
+};
+
+const Knockout = ({ mode, matchScores, predictionScores, currentGroupStageComplete }) => {
   const hideCurrentKnockoutTeams = mode === 'Current' && !currentGroupStageComplete;
 
   const scoreFor = useCallback((id) => matchScores?.[id] || {}, [matchScores]);
+  const predictionFor = useCallback((id) => predictionScores?.[id] || {}, [predictionScores]);
 
   const resultFor = useCallback((id, ht, at) => {
     const score = scoreFor(id);
@@ -17,9 +32,18 @@ const Knockout = ({ mode, matchScores, currentGroupStageComplete }) => {
     const hVal = Number(h);
     const aVal = Number(a);
     if (Number.isNaN(hVal) || Number.isNaN(aVal)) return null;
-    const winner = hVal > aVal ? ht : aVal > hVal ? at : null;
+    const prediction = predictionFor(id);
+    const probabilityA = getNumericProbability(prediction.Winning_Probability_A ?? score.Winning_Probability_A);
+    const probabilityB = getNumericProbability(prediction.Winning_Probability_B ?? score.Winning_Probability_B);
+    const winner = hVal > aVal
+      ? ht
+      : aVal > hVal
+        ? at
+        : probabilityA != null && probabilityB != null && probabilityA !== probabilityB
+          ? (probabilityA > probabilityB ? ht : at)
+          : null;
     return { h: hVal, a: aVal, w: winner };
-  }, [mode, scoreFor]);
+  }, [mode, predictionFor, scoreFor]);
 
   const teamFor = useCallback((id, field) => {
     if (hideCurrentKnockoutTeams) return null;
@@ -130,6 +154,7 @@ const Knockout = ({ mode, matchScores, currentGroupStageComplete }) => {
 
     const isHomeWinner = m.result?.w === m.ht;
     const isAwayWinner = m.result?.w === m.at;
+    const prediction = predictionFor(m.id);
 
     return (
       <div className={styles.bkM}>
@@ -143,6 +168,27 @@ const Knockout = ({ mode, matchScores, currentGroupStageComplete }) => {
           <Flag team={m.at} size="xs" />
           <span className={`${styles.name} ${isAwayWinner ? styles.w : ''}`}>{m.at}</span>
           {m.result && <span className={styles.sc}>{m.result.a}</span>}
+        </div>
+        <div className={styles.probPanel}>
+          <div className={styles.probTitle}>Win probability</div>
+          <div className={styles.probRow}>
+            <span className={styles.probTeam}>{m.ht}</span>
+            <span className={`${styles.probValue} ${styles.probHome}`}>
+              {formatProbability(prediction.Winning_Probability_A)}
+            </span>
+          </div>
+          <div className={styles.probRow}>
+            <span className={styles.probTeam}>Draw</span>
+            <span className={`${styles.probValue} ${styles.probDraw}`}>
+              {formatProbability(prediction.Draw_Probability)}
+            </span>
+          </div>
+          <div className={styles.probRow}>
+            <span className={styles.probTeam}>{m.at}</span>
+            <span className={`${styles.probValue} ${styles.probAway}`}>
+              {formatProbability(prediction.Winning_Probability_B)}
+            </span>
+          </div>
         </div>
       </div>
     );
@@ -161,43 +207,45 @@ const Knockout = ({ mode, matchScores, currentGroupStageComplete }) => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.topbar}>
-        <div className={styles.statusOk}>
-          {mode} knockout bracket is powered by backend scores.
-        </div>
-      </div>
-      <p className={styles.hint}>👈 Scroll horizontally to view the bracket. Winning teams are highlighted.</p>
-
       <div className={styles.bkWrap}>
-        <div className={styles.bk}>
-          {renderRound('Round of 32', leftR32)}
-          <div className={styles.bkConn} />
-          {renderRound('Round of 16', leftR16)}
-          <div className={styles.bkConn} />
-          {renderRound('Quarterfinals', leftQF)}
-          <div className={styles.bkConn} />
-          {renderRound('Semifinals', sfList.slice(0, 1))}
-          <div className={styles.bkConn} />
-
-          <div className={`${styles.bkRound} ${styles.finalCol}`}>
-            <div className={styles.finalBlock}>
-              <div className={styles.bkTitle}>🏆 Final</div>
-              {renderMatch(finalMatch)}
+        <div className={styles.bkContent}>
+          <div className={styles.topbar}>
+            <div className={styles.statusOk}>
+              {mode} knockout bracket is powered by backend scores.
             </div>
-            <div className={styles.finalBlock}>
-              <div className={styles.bkTitle}>🥉 Third Place</div>
-              {renderMatch(thirdPlaceMatch)}
-            </div>
+            <p className={styles.hint}>👈 Scroll horizontally to view the bracket. Winning teams are highlighted.</p>
           </div>
 
-          <div className={styles.bkConn} />
-          {renderRound('Semifinals', sfList.slice(1))}
-          <div className={styles.bkConn} />
-          {renderRound('Quarterfinals', rightQF)}
-          <div className={styles.bkConn} />
-          {renderRound('Round of 16', rightR16)}
-          <div className={styles.bkConn} />
-          {renderRound('Round of 32', rightR32)}
+          <div className={styles.bk}>
+            {renderRound('Round of 32', leftR32)}
+            <div className={styles.bkConn} />
+            {renderRound('Round of 16', leftR16)}
+            <div className={styles.bkConn} />
+            {renderRound('Quarterfinals', leftQF)}
+            <div className={styles.bkConn} />
+            {renderRound('Semifinals', sfList.slice(0, 1))}
+            <div className={styles.bkConn} />
+
+            <div className={`${styles.bkRound} ${styles.finalCol}`}>
+              <div className={styles.finalBlock}>
+                <div className={styles.bkTitle}>🏆 Final</div>
+                {renderMatch(finalMatch)}
+              </div>
+              <div className={styles.finalBlock}>
+                <div className={styles.bkTitle}>🥉 Third Place</div>
+                {renderMatch(thirdPlaceMatch)}
+              </div>
+            </div>
+
+            <div className={styles.bkConn} />
+            {renderRound('Semifinals', sfList.slice(1))}
+            <div className={styles.bkConn} />
+            {renderRound('Quarterfinals', rightQF)}
+            <div className={styles.bkConn} />
+            {renderRound('Round of 16', rightR16)}
+            <div className={styles.bkConn} />
+            {renderRound('Round of 32', rightR32)}
+          </div>
         </div>
       </div>
     </div>

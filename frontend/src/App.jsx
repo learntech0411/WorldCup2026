@@ -164,6 +164,7 @@ function App() {
           <Knockout
             mode={mode}
             matchScores={currentMatchScores}
+            predictionScores={matchScores.Prediction}
             currentGroupStageComplete={currentGroupStageComplete}
           />
         )}
