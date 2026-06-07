@@ -180,9 +180,11 @@ const Knockout = ({ mode, matchScores, currentGroupStageComplete }) => {
           <div className={styles.bkConn} />
 
           <div className={`${styles.bkRound} ${styles.finalCol}`}>
-            <div className={styles.bkTitle}>🏆 Final</div>
-            {renderMatch(finalMatch)}
-            <div style={{ marginTop: '20px' }}>
+            <div className={styles.finalBlock}>
+              <div className={styles.bkTitle}>🏆 Final</div>
+              {renderMatch(finalMatch)}
+            </div>
+            <div className={styles.finalBlock}>
               <div className={styles.bkTitle}>🥉 Third Place</div>
               {renderMatch(thirdPlaceMatch)}
             </div>
