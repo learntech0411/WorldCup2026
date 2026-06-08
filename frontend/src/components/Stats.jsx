@@ -7,7 +7,6 @@ const Stats = ({ history = [], onLoadHistory = () => {}, onClearHistory = () => 
       <div className={styles.empty}>
         <div style={{ fontSize: '32px', marginBottom: '12px' }}>📊</div>
         <p>No stats available yet.</p>
-        <p style={{ fontSize: '12px', marginTop: '8px' }}>Stats and saved prediction summaries can live here.</p>
       </div>
     );
   }
