@@ -1,7 +1,7 @@
 .hdr {
   text-align: center;
   padding: 40px 20px 24px;
-  background: var(--bg-paper);
+  background: rgba(248, 249, 250, 0.02);
 }
 
 .hdr h1 {
@@ -24,7 +24,7 @@
 }
 
 .sub {
-  color: var(--ink-medium);
+  color: var(--ink-dark);
   font-size: 11px;
   margin-top: 8px;
   font-weight: 500;

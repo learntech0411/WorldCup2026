@@ -28,7 +28,7 @@
 }
 
 .baselineChampCard {
-  background: linear-gradient(135deg, rgba(229, 194, 106, 0.08), var(--bg-card) 65%);
+  background: var(--bg-card);
   border: 1px solid rgba(229, 194, 106, 0.32);
   border-radius: 18px;
   padding: 22px 24px;

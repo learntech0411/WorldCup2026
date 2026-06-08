@@ -269,7 +269,7 @@ td {
 .emptySide {
   text-align: center;
   padding: 40px 20px;
-  color: var(--ink-light);
+  color: var(--ink-dark);
 }
 
 .matchList {

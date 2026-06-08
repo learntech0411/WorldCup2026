@@ -62,7 +62,7 @@
 .hint {
   text-align: center;
   font-size: 14px;
-  color: var(--ink-light);
+  color: var(--ink-dark);
   margin: 0;
 }
 
@@ -106,7 +106,7 @@
   text-align: center;
   font-size: 14px;
   font-weight: 700;
-  color: var(--ink-light);
+  color: #000;
   margin-bottom: 24px;
   text-transform: uppercase;
   letter-spacing: 1px;

@@ -3,30 +3,40 @@ import styles from './Tabs.module.css';
 const Tabs = ({ activeTab, onTabChange }) => {
   const tabs = [
     { id: 'groups', name: 'Group Stage', icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
-        <rect x="4" y="4" width="6" height="6" rx="1"></rect>
-        <rect x="14" y="4" width="6" height="6" rx="1"></rect>
-        <rect x="4" y="14" width="6" height="6" rx="1"></rect>
-        <rect x="14" y="14" width="6" height="6" rx="1"></rect>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M5 5h14"></path>
+        <path d="M5 12h14"></path>
+        <path d="M5 19h14"></path>
+        <path d="M8 3v18"></path>
+        <path d="M16 3v18"></path>
       </svg>
     )},
     { id: 'knockout', name: 'Knockout', icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
-        <path d="M6 6h6v12H6"></path>
-        <path d="M12 12h6"></path>
-        <path d="M18 12l-3-3"></path>
-        <path d="M18 12l-3 3"></path>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M5 6h5"></path>
+        <path d="M5 18h5"></path>
+        <path d="M10 6v12"></path>
+        <path d="M10 12h5"></path>
+        <path d="M15 12h4"></path>
+        <path d="m17 9 3 3-3 3"></path>
       </svg>
     )},
     { id: 'stats', name: 'Stats', icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M4 19V5"></path>
+        <path d="M4 19h16"></path>
+        <path d="M8 16v-5"></path>
+        <path d="M12 16V8"></path>
+        <path d="M16 16v-9"></path>
       </svg>
     )},
     { id: 'how-it-works', name: 'How it works', icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-        <circle cx="12" cy="12" r="9"></circle>
-        <path d="M12 7v5l3 3"></path>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M9 18h6"></path>
+        <path d="M10 22h4"></path>
+        <path d="M12 2a7 7 0 0 0-4 12.74V16h8v-1.26A7 7 0 0 0 12 2Z"></path>
+        <path d="M10 10h4"></path>
+        <path d="M12 8v4"></path>
       </svg>
     )}
   ];
