@@ -397,6 +397,99 @@
   margin-bottom: 10px;
 }
 
+.winnerCard {
+  width: 168px;
+  min-height: 142px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 16px 14px;
+  border-radius: 16px;
+  border: 1px solid rgba(229, 181, 71, 0.52);
+  background:
+    linear-gradient(135deg, rgba(255, 250, 226, 0.92), rgba(255, 255, 255, 0.96) 46%, rgba(247, 221, 136, 0.34)),
+    var(--bg-card);
+  box-shadow:
+    0 16px 34px rgba(151, 111, 20, 0.18),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.68);
+  isolation: isolate;
+}
+
+.winnerCard::before {
+  content: '';
+  position: absolute;
+  inset: -40% -80%;
+  background: linear-gradient(
+    115deg,
+    transparent 35%,
+    rgba(255, 255, 255, 0.2) 44%,
+    rgba(255, 230, 138, 0.78) 50%,
+    rgba(255, 255, 255, 0.22) 56%,
+    transparent 65%
+  );
+  animation: winnerShine 3.2s ease-in-out infinite;
+  z-index: -1;
+}
+
+.winnerCard::after {
+  content: '';
+  position: absolute;
+  inset: 6px;
+  border-radius: 12px;
+  border: 1px solid rgba(229, 181, 71, 0.18);
+  pointer-events: none;
+}
+
+.winnerLabel {
+  color: #8b6416;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+}
+
+.winnerFlag {
+  border: 3px solid rgba(229, 181, 71, 0.82);
+  box-shadow:
+    0 0 0 5px rgba(229, 181, 71, 0.16),
+    0 10px 24px rgba(151, 111, 20, 0.24);
+}
+
+.winnerName {
+  max-width: 100%;
+  color: var(--ink-dark);
+  font-size: 16px;
+  font-weight: 900;
+  line-height: 1.2;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+@keyframes winnerShine {
+  0% {
+    transform: translateX(-30%) rotate(0deg);
+    opacity: 0;
+  }
+
+  18% {
+    opacity: 1;
+  }
+
+  52% {
+    opacity: 1;
+  }
+
+  78%,
+  100% {
+    transform: translateX(30%) rotate(0deg);
+    opacity: 0;
+  }
+}
+
 .champDisplay {
   text-align: center;
   margin-top: 16px;

@@ -205,6 +205,21 @@ const Knockout = ({ mode, onToggleMode, matchScores, predictionScores, currentGr
     </div>
   );
 
+  const renderFinalWinner = () => {
+    const winner = finalMatch.result?.w;
+    if (!winner) return null;
+
+    return (
+      <div className={styles.winnerCard}>
+        <div className={styles.winnerLabel}>
+          {mode === 'Prediction' ? 'Predicted Winner' : 'Winner'}
+        </div>
+        <Flag team={winner} size="lg" className={styles.winnerFlag} />
+        <div className={styles.winnerName}>{winner}</div>
+      </div>
+    );
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.modebar}>
@@ -237,6 +252,7 @@ const Knockout = ({ mode, onToggleMode, matchScores, predictionScores, currentGr
                 <div className={styles.bkTitle}>🏆 Final</div>
                 {renderMatch(finalMatch)}
               </div>
+              {renderFinalWinner()}
               <div className={styles.finalBlock}>
                 <div className={styles.bkTitle}>🥉 Third Place</div>
                 {renderMatch(thirdPlaceMatch)}
