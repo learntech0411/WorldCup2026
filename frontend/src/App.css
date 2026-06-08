@@ -2,9 +2,48 @@
   min-height: 100vh;
 }
 
+.floating-emoji-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 500;
+}
+
+.floating-emoji {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  margin: -16px 0 0 -16px;
+  font-size: 25px;
+  line-height: 1;
+  filter: drop-shadow(0 8px 12px rgba(18, 20, 23, 0.18));
+  animation: floatEmoji 1.35s ease-out forwards;
+  will-change: transform, opacity;
+}
+
 .main-content {
   padding-top: 20px;
   animation: fadeIn 0.4s ease-out;
+}
+
+@keyframes floatEmoji {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 6px, 0) scale(0.72) rotate(0deg);
+  }
+
+  15% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate3d(var(--emoji-drift), -84px, 0) scale(1.2) rotate(var(--emoji-rotation));
+  }
 }
 
 @keyframes fadeIn {
