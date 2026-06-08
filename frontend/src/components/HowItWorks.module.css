@@ -39,7 +39,7 @@
 .blChampLabel {
   font-size: 11px;
   letter-spacing: 2.5px;
-  color: var(--ink-light);
+  color: var(--ink-dark);
   font-weight: 700;
   text-transform: uppercase;
   margin-bottom: 10px;
@@ -152,6 +152,38 @@
   line-height: 1.6;
 }
 
+.dataGroup {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid var(--line-delicate);
+}
+
+.dataGroup h4 {
+  margin: 0 0 8px;
+  color: var(--ink-dark);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+}
+
+.dataGroup ul {
+  margin: 0;
+  padding-left: 18px;
+  color: var(--ink-medium);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.dataGroup li {
+  margin: 5px 0;
+}
+
+.dataGroup strong {
+  color: var(--ink-dark);
+  font-weight: 800;
+}
+
 .blSame {
   color: var(--accent-success);
   font-weight: 700;
@@ -162,7 +194,6 @@
 }
 
 .blPending {
-  color: var(--ink-light);
-  font-style: italic;
+  color: var(--ink-dark);
   font-size: 13px;
 }
