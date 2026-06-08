@@ -97,68 +97,8 @@
   box-shadow: 0 4px 14px rgba(229, 194, 106, 0.32);
 }
 
-.topbar-ctrl {
-  position: fixed;
-  top: 16px;
-  right: 16px;
-  z-index: 200;
-  display: flex;
-  gap: 3px;
-  align-items: center;
-  background: var(--bg-card);
-  border: 1px solid var(--line-delicate);
-  border-radius: 100px;
-  padding: 5px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
-}
-
-.ctrl-icon {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: transparent;
-  border: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  font-size: 17px;
-  color: var(--ink-medium);
-  transition: all 0.2s;
-  font-family: inherit;
-  padding: 0;
-}
-
-.ctrl-icon:hover {
-  background: var(--bg-soft);
-  color: var(--ink-dark);
-}
-
-body.dark .topbar-ctrl {
-  background: transparent;
-  border: none;
-  box-shadow: none;
-  gap: 6px;
-  padding: 0;
-}
-
-body.dark .ctrl-icon:hover {
-  background: rgba(255, 255, 255, 0.06);
-  color: var(--ink-dark);
-}
-
 @media (max-width: 768px) {
   .main-content {
     padding-top: 10px;
-  }
-  .topbar-ctrl {
-    top: 14px;
-    right: 14px;
-    padding: 4px;
-  }
-  .ctrl-icon {
-    width: 32px;
-    height: 32px;
-    font-size: 14px;
   }
 }

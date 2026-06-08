@@ -113,10 +113,6 @@ function App() {
   const [floatingEmojis, setFloatingEmojis] = useState([]);
   const [loadingGroups, setLoadingGroups] = useState(false);
   const [loadingScores, setLoadingScores] = useState({ Current: false, Prediction: false });
-  const [theme, setTheme] = useState(() => {
-    return localStorage.getItem('wc26_theme') ||
-      (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-  });
 
   const fetchGroupMatrix = useCallback(async (targetMode) => {
     if (groupMatrices[targetMode]) return;
@@ -181,19 +177,6 @@ function App() {
     return () => window.clearTimeout(timer);
   }, [fetchMatchScores]);
 
-  useEffect(() => {
-    localStorage.setItem('wc26_theme', theme);
-    if (theme === 'dark') {
-      document.body.classList.add('dark');
-    } else {
-      document.body.classList.remove('dark');
-    }
-  }, [theme]);
-
-  const toggleTheme = () => {
-    setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
-  };
-
   const toggleMode = () => {
     setMode((prev) => (prev === 'Current' ? 'Prediction' : 'Current'));
   };
@@ -253,12 +236,6 @@ function App() {
             {item.emoji}
           </span>
         ))}
-      </div>
-
-      <div className="topbar-ctrl">
-        <button className="ctrl-icon" onClick={toggleTheme} title="Toggle theme">
-          {theme === 'dark' ? '☀' : '🌙'}
-        </button>
       </div>
 
       <Header />
