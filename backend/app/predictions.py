@@ -243,7 +243,7 @@ def set_real_round_of_32_participants_and_run_prediction(
 
     try:
         smallest_match_id = min(int(match_id) for match_id in round_of_32_participants)
-        _reset_matches_from_template(connection, smallest_match_id, 104)
+        _reset_knockout_matches(connection, smallest_match_id)
         _set_round_of_32_participants(connection, round_of_32_participants)
 
         round_of_32_predictions = run_predictions_for_matches(connection, 73, 88)
@@ -340,34 +340,25 @@ def _poisson_probability(goals: int, expected_goals: float) -> float:
     return (expected_goals**goals * exp(-expected_goals)) / factorial(goals)
 
 
-def _reset_matches_from_template(connection: Connection, starting_match_id: int, ending_match_id: int) -> None:
-    template_matches = pd.read_csv(BACKEND_DIR / "world_cup_matches.csv")
-    template_matches = template_matches[
-        (template_matches["Match_ID"] >= starting_match_id)
-        & (template_matches["Match_ID"] <= ending_match_id)
-    ]
+def _reset_knockout_matches(connection: Connection, starting_match_id: int | None = None) -> None:
+    statement = '''
+        UPDATE matches
+        SET "Team_A" = NULL,
+            "Team_B" = NULL,
+            "Predicted_Goals_A" = NULL,
+            "Predicted_Goals_B" = NULL,
+            "Winning_Probability_A" = NULL,
+            "Winning_Probability_B" = NULL,
+            "Draw_Probability" = NULL
+        WHERE "Match_Type" = 'Knockout'
+    '''
 
-    for match in template_matches.itertuples(index=False):
-        connection.execute(
-            text(
-                '''
-                UPDATE matches
-                SET "Team_A" = :team_a,
-                    "Team_B" = :team_b,
-                    "Predicted_Goals_A" = NULL,
-                    "Predicted_Goals_B" = NULL,
-                    "Winning_Probability_A" = NULL,
-                    "Winning_Probability_B" = NULL,
-                    "Draw_Probability" = NULL
-                WHERE "Match_ID" = :match_id
-                '''
-            ),
-            {
-                "match_id": int(match.Match_ID),
-                "team_a": str(match.Team_A),
-                "team_b": str(match.Team_B),
-            },
-        )
+    if starting_match_id is not None:
+        statement += '\n          AND "Match_ID" >= :starting_match_id'
+        connection.execute(text(statement), {"starting_match_id": int(starting_match_id)})
+        return
+
+    connection.execute(text(statement))
 
 
 def _set_round_of_32_participants(
@@ -579,12 +570,6 @@ def _get_connection(db: Session | Connection | Engine) -> Connection:
 def _commit_if_session(db: Session | Connection | Engine) -> None:
     if isinstance(db, Session):
         db.commit()
-
-
-def _is_missing_score(value: object) -> bool:
-    if pd.isna(value):
-        return True
-    return str(value).strip() == ""
 
 
 def _clamp(value: float, minimum: float, maximum: float) -> float:
