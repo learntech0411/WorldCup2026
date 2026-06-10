@@ -65,7 +65,7 @@ def scrape_world_cup_players():
     if not main_table:
         print("Error: Could not find the main countries table.")
         driver.quit()
-        return
+        return pd.DataFrame()
 
     # 1. Master Mapping Dictionary
     # We use this to map Transfermarkt names to our standardized Elo/DB names.
@@ -197,6 +197,7 @@ def scrape_world_cup_players():
     
     df.to_csv('world_cup_players.csv', index=False, encoding='utf-8')
     print("Success! Data saved to 'world_cup_players.csv'")
+    return df
 
 def clean_string(text):
     """Removes accents, normalizes apostrophes, and strips hidden whitespace characters."""
@@ -391,7 +392,7 @@ def scrape_countries_data():
     
     if df.empty:
         print("\nError: DataFrame is empty. Something went wrong with the mapping.")
-        return
+        return df
         
     df = df.sort_values(by=["Group", "Name"]).reset_index(drop=True)
     
@@ -399,6 +400,7 @@ def scrape_countries_data():
     
     df.to_csv('world_cup_countries.csv', index=False, encoding='utf-8')
     print("Data saved to 'world_cup_countries.csv'")
+    return df
 
 def scrape_matches():
     print("Fetching match schedule from Wikipedia main page...")
