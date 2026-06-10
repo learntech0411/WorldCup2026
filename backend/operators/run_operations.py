@@ -15,6 +15,7 @@ from app.predictions import (
     prediction_final_rounds,
     prediction_round_of_32,
     run_predictions_for_matches,
+    set_real_round_of_32_participants_and_run_prediction,
 )
 from app.utilities import (
     calculate_all_group_score_matrices,
@@ -27,7 +28,6 @@ from data_scrapper import scrape_countries_data, scrape_world_cup_players
 
 def run_full_prediction_pipeline(db: Engine = None) -> None:
     db = _engine_or_default(db)
-
     calculate_total_utility_values(db, stage="group")
     calculate_base_strengths(db)
     run_predictions_for_matches(db, 1, 72)
@@ -38,6 +38,7 @@ def run_full_prediction_pipeline(db: Engine = None) -> None:
 
 def update_after_group_match(db: Engine = None) -> None:
     db = _engine_or_default(db)
+    #
     update_player_injuries(db)
     refresh_elo_ratings(db)
     calculate_total_utility_values(db, stage="group")
@@ -46,6 +47,21 @@ def update_after_group_match(db: Engine = None) -> None:
     matrices = calculate_all_group_score_matrices(db, "Prediction")
     pretty_print_group_score_matrices(matrices)
     prediction_round_of_32(db)
+    prediction_final_rounds(db, 89)
+
+def run_once_after_group_stage(db: Engine = None) -> None:
+    db = _engine_or_default(db)
+    round_of_32_participants = [] # create dict where key is match id and value is tuple of strings containing (Team_A, Team_B)
+    set_real_round_of_32_participants_and_run_prediction(db, round_of_32_participants)
+
+def update_after_knockout_match(db: Engine = None) -> None:
+    db = _engine_or_default(db)
+    #
+    update_player_injuries(db)
+    refresh_elo_ratings(db)
+    calculate_total_utility_values(db, stage="group")
+    calculate_base_strengths(db)
+    run_predictions_for_matches(db, 73, 88)
     prediction_final_rounds(db, 89)
 
 def post_match_update(
