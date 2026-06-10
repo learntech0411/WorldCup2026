@@ -22,7 +22,7 @@ from app.utilities import (
     calculate_total_utility_values,
     pretty_print_group_score_matrices,
 )
-from data_scrapper import scrape_countries_data
+from data_scrapper import scrape_countries_data, scrape_world_cup_players
 
 
 def run_full_prediction_pipeline(db: Engine = None) -> None:
@@ -36,6 +36,17 @@ def run_full_prediction_pipeline(db: Engine = None) -> None:
     prediction_round_of_32(db)
     prediction_final_rounds(db, 89)
 
+def update_after_group_match(db: Engine = None) -> None:
+    db = _engine_or_default(db)
+    update_player_injuries(db)
+    refresh_elo_ratings(db)
+    calculate_total_utility_values(db, stage="group")
+    calculate_base_strengths(db)
+    run_predictions_for_matches(db, 1, 72)
+    matrices = calculate_all_group_score_matrices(db, "Prediction")
+    pretty_print_group_score_matrices(matrices)
+    prediction_round_of_32(db)
+    prediction_final_rounds(db, 89)
 
 def post_match_update(
     match_id: int,
@@ -82,26 +93,95 @@ def refresh_elo_ratings(db: Engine = None) -> None:
     original_cwd = Path.cwd()
     try:
         os.chdir(BACKEND_DIR)
-        scrape_countries_data()
-        countries = pd.read_csv(BACKEND_DIR / "world_cup_countries.csv")
+        countries = scrape_countries_data()
     finally:
         os.chdir(original_cwd)
 
+    if countries is None or countries.empty:
+        return
+
+    update_rows = [
+        {"name": row.Name, "base_elo": float(row.Base_Elo)}
+        for row in countries[["Name", "Base_Elo"]].itertuples(index=False)
+    ]
+
+    if not update_rows:
+        return
+
     with db.begin() as connection:
-        for country in countries.itertuples(index=False):
-            connection.execute(
-                text(
-                    '''
-                    UPDATE countries
-                    SET "Base_Elo" = :base_elo
-                    WHERE "Name" = :name
-                    '''
-                ),
-                {
-                    "name": country.Name,
-                    "base_elo": float(country.Base_Elo),
-                },
-            )
+        connection.execute(
+            text(
+                '''
+                UPDATE countries
+                SET "Base_Elo" = :base_elo
+                WHERE "Name" = :name
+                '''
+            ),
+            update_rows,
+        )
+
+
+def update_player_injuries(db: Engine = None) -> None:
+    """Refresh scraped player injuries and update changed rows in players."""
+    db = _engine_or_default(db)
+
+    with db.connect() as connection:
+        players = pd.read_sql_query(
+            text('SELECT "Name", "Country", "Is_Injured" FROM players'),
+            connection,
+        )
+
+    if players.empty:
+        return
+
+    original_cwd = Path.cwd()
+    try:
+        os.chdir(BACKEND_DIR)
+        scraped_players = scrape_world_cup_players()
+    finally:
+        os.chdir(original_cwd)
+
+    if scraped_players is None or scraped_players.empty:
+        return
+
+    scraped_players = scraped_players[["Name", "Country", "Is_Injured"]].copy()
+    players["Is_Injured"] = players["Is_Injured"].map(_normalize_bool)
+    scraped_players["Is_Injured"] = scraped_players["Is_Injured"].map(_normalize_bool)
+
+    changed_players = players.merge(
+        scraped_players,
+        on=["Name", "Country"],
+        how="inner",
+        suffixes=("_current", "_scraped"),
+    )
+    changed_players = changed_players[
+        changed_players["Is_Injured_current"] != changed_players["Is_Injured_scraped"]
+    ]
+
+    if changed_players.empty:
+        return
+
+    update_rows = [
+        {
+            "name": row.Name,
+            "country": row.Country,
+            "is_injured": bool(row.Is_Injured_scraped),
+        }
+        for row in changed_players.itertuples(index=False)
+    ]
+
+    with db.begin() as connection:
+        connection.execute(
+            text(
+                '''
+                UPDATE players
+                SET "Is_Injured" = :is_injured
+                WHERE "Name" = :name
+                  AND "Country" = :country
+                '''
+            ),
+            update_rows,
+        )
 
 
 def reset_goals_from_matches(match_ids: list[int], db: Engine = None) -> None:
@@ -285,6 +365,12 @@ def _match_injured_players_column(connection) -> str | None:
     existing_columns = {column["name"] for column in inspect(connection).get_columns("matches")}
     matching_columns = possible_names & existing_columns
     return sorted(matching_columns)[0] if matching_columns else None
+
+
+def _normalize_bool(value) -> bool:
+    if isinstance(value, str):
+        return value.strip().lower() in {"true", "t", "1", "yes", "y"}
+    return bool(value)
 
 
 def _engine_or_default(db: Engine = None) -> Engine:
