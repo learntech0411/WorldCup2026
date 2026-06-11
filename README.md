@@ -2,6 +2,16 @@
 
 This project predicts World Cup 2026 match results and visualizes the tournament flow in a React app. It combines scraped country, player, location, and match data with a backend prediction model, then displays probabilities, predicted scores, and knockout progression in the frontend.
 
+## App Preview
+
+![Group stage view](screenshot_groupstage.png)
+
+The group-stage view lets users browse all World Cup groups and click on a specific group to see the matches inside it. The app can switch between prediction and current-result views with the `Switch to Prediction Mode` / `Switch to Current Mode` control, so users can compare simulated outcomes with the latest known scores.
+
+![Knockout bracket view](screenshot_knockout.png)
+
+The knockout view shows the tournament bracket and how teams advance through each round. It visualizes the path from the Round of 32 into the Round of 16, quarter-finals, semi-finals, and final, making the predicted tournament progression easy to follow at a glance.
+
 ## How It Works
 
 The project starts by collecting several types of data that can influence a football match. For each country, the backend uses an Elo rating, group assignment, base camp location, and squad data. For each player, it uses transfer value, position, age, club, and injury status. For the tournament itself, it stores all 104 matches, the teams involved, match dates, and stadium locations. Stadiums and base camps are geocoded with GeoPy so the model can calculate distances and timezones.
