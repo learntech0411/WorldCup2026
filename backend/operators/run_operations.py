@@ -396,4 +396,4 @@ def _engine_or_default(db: Engine = None) -> Engine:
 
 
 if __name__ == "__main__":
-    run_full_prediction_pipeline()
+    update_during_group_match()
