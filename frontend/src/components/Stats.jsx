@@ -1,5 +1,4 @@
 import { useEffect, useMemo, useState } from 'react';
-import Flag from './Flag';
 import styles from './Stats.module.css';
 
 const API_PREFIX = import.meta.env.VITE_API_PREFIX || 'http://localhost:8000/api';
@@ -28,12 +27,11 @@ const accuracyEndpoints = [
   },
 ];
 
-const Stats = ({ history = [], onLoadHistory = () => {}, onClearHistory = () => {} }) => {
+const Stats = () => {
   const [accuracy, setAccuracy] = useState(null);
   const [playedMatches, setPlayedMatches] = useState(null);
   const [loadingAccuracy, setLoadingAccuracy] = useState(true);
   const [accuracyError, setAccuracyError] = useState('');
-  const hasHistory = history && history.length > 0;
 
   useEffect(() => {
     let ignore = false;
@@ -129,40 +127,11 @@ const Stats = ({ history = [], onLoadHistory = () => {}, onClearHistory = () => 
                 <div className={styles.accuracyCount}>
                   {item.count} / {playedMatches ?? 0}
                 </div>
-                
               </div>
             ))}
           </div>
         )}
       </section>
-
-      {!hasHistory && (
-        <div className={styles.empty}>
-          <p>No saved champion history yet.</p>
-        </div>
-      )}
-
-      {hasHistory && (
-        <section className={styles.historyCard}>
-          <div className={styles.historyHead}>
-            <span className={styles.historyTitle}>Saved Champions</span>
-            <button className={styles.historyClear} onClick={onClearHistory}>Clear</button>
-          </div>
-          <div className={styles.historyRow}>
-            {history.map((hh, i) => {
-              const d = new Date(hh.t);
-              const ds = (d.getMonth() + 1) + "/" + d.getDate();
-              return (
-                <div key={i} className={styles.historyItem} onClick={() => onLoadHistory(i)} title="Click to load">
-                  <div className={styles.historyFlagWrap}><Flag team={hh.c} size="md" /></div>
-                  <div className={styles.historyChamp}>{hh.c}</div>
-                  <div className={styles.historyDate}>{ds}</div>
-                </div>
-              );
-            })}
-          </div>
-        </section>
-      )}
     </div>
   );
 };
