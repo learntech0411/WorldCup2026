@@ -36,9 +36,27 @@ def run_full_prediction_pipeline(db: Engine = None) -> None:
     prediction_round_of_32(db)
     prediction_final_rounds(db, 89)
 
+
+def export_first_predictions_before_world_cup(db: Engine = None) -> None:
+    """Export all matches rows to first_predictions_before_world_cup.csv."""
+    db = _engine_or_default(db)
+
+    with db.connect() as connection:
+        matches = pd.read_sql_query(
+            text('SELECT * FROM matches ORDER BY "Match_ID"'),
+            connection,
+        )
+
+    matches.to_csv(
+        BACKEND_DIR / "first_predictions_before_world_cup.csv",
+        index=False,
+        encoding="utf-8",
+    )
+
+
 def update_during_group_match(db: Engine = None) -> None:
     db = _engine_or_default(db)
-    #
+    # scrap the matches' Goals_A and Goals_B
     update_player_injuries(db)
     refresh_elo_ratings(db)
     calculate_total_utility_values(db, stage="group")
@@ -56,7 +74,7 @@ def run_once_after_group_stage(db: Engine = None) -> None:
 
 def update_during_knockout_match(db: Engine = None) -> None:
     db = _engine_or_default(db)
-    #
+    # scrap the matches' Goals_A and Goals_B
     update_player_injuries(db)
     refresh_elo_ratings(db)
     calculate_total_utility_values(db, stage="group")
@@ -396,4 +414,5 @@ def _engine_or_default(db: Engine = None) -> Engine:
 
 
 if __name__ == "__main__":
-    update_during_group_match()
+    # update_during_group_match()
+    export_first_predictions_before_world_cup()
