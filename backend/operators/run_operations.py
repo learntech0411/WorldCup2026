@@ -36,7 +36,7 @@ def run_full_prediction_pipeline(db: Engine = None) -> None:
     prediction_round_of_32(db)
     prediction_final_rounds(db, 89)
 
-def update_after_group_match(db: Engine = None) -> None:
+def update_during_group_match(db: Engine = None) -> None:
     db = _engine_or_default(db)
     #
     update_player_injuries(db)
@@ -54,7 +54,7 @@ def run_once_after_group_stage(db: Engine = None) -> None:
     round_of_32_participants = [] # create dict where key is match id and value is tuple of strings containing (Team_A, Team_B)
     set_real_round_of_32_participants_and_run_prediction(db, round_of_32_participants)
 
-def update_after_knockout_match(db: Engine = None) -> None:
+def update_during_knockout_match(db: Engine = None) -> None:
     db = _engine_or_default(db)
     #
     update_player_injuries(db)
