@@ -1,12 +1,99 @@
+.statsWrap {
+  max-width: 920px;
+  margin: 0 auto;
+}
+
+.accuracyCard {
+  background: var(--bg-card);
+  border: 1px solid var(--line-delicate);
+  border-radius: 14px;
+  padding: 18px;
+  margin: 0 auto 16px;
+}
+
+.accuracyHead {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.accuracyTitle {
+  margin: 0 0 5px;
+  color: var(--ink-dark);
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.accuracySubtitle {
+  margin: 0;
+  color: var(--ink-light);
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.accuracyGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.accuracyItem {
+  background: var(--bg-soft);
+  border: 1px solid var(--line-delicate);
+  border-radius: 10px;
+  padding: 14px;
+  min-height: 136px;
+  text-align: center;
+}
+
+.accuracyLabel {
+  color: var(--ink-medium);
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1.25;
+}
+
+.accuracyValue {
+  color: var(--ink-dark);
+  font-size: 30px;
+  font-weight: 900;
+  line-height: 1;
+  margin-top: 10px;
+}
+
+.accuracyCount {
+  color: var(--ink-medium);
+  font-size: 12px;
+  font-weight: 700;
+  margin-top: 6px;
+}
+
+.accuracyDescription {
+  color: var(--ink-light);
+  font-size: 12px;
+  line-height: 1.35;
+  margin: 6px 0 0;
+}
+
+.accuracyState {
+  background: var(--bg-soft);
+  border: 1px solid var(--line-delicate);
+  border-radius: 10px;
+  color: var(--ink-light);
+  font-size: 13px;
+  padding: 16px;
+}
+
 .empty {
   background: var(--bg-card);
   border-radius: 14px;
   border: 1px solid var(--line-delicate);
-  padding: 40px 20px;
+  padding: 22px 20px;
   text-align: center;
   color: var(--ink-light);
-  max-width: 920px;
-  margin: 0 auto;
+  margin: 0 auto 16px;
 }
 
 .historyCard {
@@ -15,7 +102,6 @@
   border-radius: 14px;
   padding: 16px 18px;
   margin: 0 auto 16px;
-  max-width: 920px;
 }
 
 .historyHead {
@@ -89,4 +175,18 @@
   color: var(--ink-light);
   font-size: 11px;
   font-family: monospace;
+}
+
+@media (max-width: 760px) {
+  .accuracyGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .accuracyItem {
+    min-height: 0;
+  }
+
+  .accuracyLabel {
+    min-height: 0;
+  }
 }
