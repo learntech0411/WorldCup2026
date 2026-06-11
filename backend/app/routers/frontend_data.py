@@ -133,6 +133,78 @@ def get_all_current_scores(engine: Engine = Depends(get_engine)):
     return _sanitize([dict(match) for match in matches])
 
 
+@router.get("/correct-outcome-predictions")
+def get_correct_outcome_predictions(engine: Engine = Depends(get_engine)):
+    with engine.connect() as connection:
+        correct_predictions = connection.execute(
+            text(
+                '''
+                SELECT COUNT(*)
+                FROM matches
+                WHERE "Goals_A" IS NOT NULL
+                  AND "Goals_B" IS NOT NULL
+                  AND (
+                      ("Predicted_Goals_A" > "Predicted_Goals_B" AND "Goals_A" > "Goals_B")
+                      OR ("Predicted_Goals_A" < "Predicted_Goals_B" AND "Goals_A" < "Goals_B")
+                      OR ("Predicted_Goals_A" = "Predicted_Goals_B" AND "Goals_A" = "Goals_B")
+                  )
+                '''
+            )
+        ).scalar_one()
+    return {"Correct_Outcome_Predictions": int(correct_predictions)}
+
+
+@router.get("/played-matches-count")
+def get_played_matches_count(engine: Engine = Depends(get_engine)):
+    with engine.connect() as connection:
+        played_matches = connection.execute(
+            text(
+                '''
+                SELECT COUNT(*)
+                FROM matches
+                WHERE "Goals_A" IS NOT NULL
+                  AND "Goals_B" IS NOT NULL
+                '''
+            )
+        ).scalar_one()
+    return {"Played_Matches": int(played_matches)}
+
+
+@router.get("/correct-goal-difference-predictions")
+def get_correct_goal_difference_predictions(engine: Engine = Depends(get_engine)):
+    with engine.connect() as connection:
+        correct_predictions = connection.execute(
+            text(
+                '''
+                SELECT COUNT(*)
+                FROM matches
+                WHERE "Goals_A" IS NOT NULL
+                  AND "Goals_B" IS NOT NULL
+                  AND ("Predicted_Goals_A" - "Predicted_Goals_B") = ("Goals_A" - "Goals_B")
+                '''
+            )
+        ).scalar_one()
+    return {"Correct_Goal_Difference_Predictions": int(correct_predictions)}
+
+
+@router.get("/correct-score-predictions")
+def get_correct_score_predictions(engine: Engine = Depends(get_engine)):
+    with engine.connect() as connection:
+        correct_predictions = connection.execute(
+            text(
+                '''
+                SELECT COUNT(*)
+                FROM matches
+                WHERE "Goals_A" IS NOT NULL
+                  AND "Goals_B" IS NOT NULL
+                  AND "Predicted_Goals_A" = "Goals_A"
+                  AND "Predicted_Goals_B" = "Goals_B"
+                '''
+            )
+        ).scalar_one()
+    return {"Correct_Score_Predictions": int(correct_predictions)}
+
+
 @router.get("/predicted-matrix/{group}")
 def get_predicted_matrix(group: str, engine: Engine = Depends(get_engine)):
     _ensure_group_predictions_available(engine)
