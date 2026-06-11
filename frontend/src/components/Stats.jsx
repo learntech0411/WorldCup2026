@@ -27,6 +27,16 @@ const accuracyEndpoints = [
   },
 ];
 
+const getPercentageClass = (percentage) => {
+  if (percentage > 70) {
+    return styles.accuracyValueGood;
+  }
+  if (percentage < 30) {
+    return styles.accuracyValuePoor;
+  }
+  return styles.accuracyValueMedium;
+};
+
 const Stats = () => {
   const [accuracy, setAccuracy] = useState(null);
   const [playedMatches, setPlayedMatches] = useState(null);
@@ -123,7 +133,9 @@ const Stats = () => {
               <div key={item.key} className={styles.accuracyItem}>
                 <div className={styles.accuracyLabel}>{item.label}</div>
                 <p className={styles.accuracyDescription}>{item.description}</p>
-                <div className={styles.accuracyValue}>{item.percentage.toFixed(1)}%</div>
+                <div className={`${styles.accuracyValue} ${getPercentageClass(item.percentage)}`}>
+                  {item.percentage.toFixed(1)}%
+                </div>
                 <div className={styles.accuracyCount}>
                   {item.count} / {playedMatches ?? 0}
                 </div>

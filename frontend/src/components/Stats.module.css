@@ -14,9 +14,10 @@
 .accuracyHead {
   display: flex;
   align-items: flex-start;
-  justify-content: space-between;
+  justify-content: center;
   gap: 16px;
   margin-bottom: 16px;
+  text-align: center;
 }
 
 .accuracyTitle {
@@ -62,6 +63,18 @@
   font-weight: 900;
   line-height: 1;
   margin-top: 10px;
+}
+
+.accuracyValueGood {
+  color: #22863a;
+}
+
+.accuracyValueMedium {
+  color: #9a6b00;
+}
+
+.accuracyValuePoor {
+  color: #c92a2a;
 }
 
 .accuracyCount {
