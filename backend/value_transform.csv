@@ -43,14 +43,14 @@ José Manuel López,Argentina,25.0,1.0,0.85,0.8,1.0,17.0
 Nahuel Molina,Argentina,15.0,1.0,1.25,0.8,1.06,15.9
 Thiago Almada,Argentina,20.0,1.0,0.85,0.4,1.0,6.800000000000001
 Rodrigo De Paul,Argentina,14.0,1.15,1.0,0.4,1.0,6.4399999999999995
+Lionel Messi,Argentina,15.0,1.0,0.85,0.4,1.0,5.1000000000000005
 Giovani Lo Celso,Argentina,10.0,1.15,1.0,0.4,1.0,4.6000000000000005
 Nicolás Tagliafico,Argentina,4.0,1.15,1.25,0.4,1.0,2.3000000000000003
 Leandro Paredes,Argentina,5.0,1.15,1.0,0.4,1.0,2.3000000000000003
-Gonzalo Montiel,Argentina,4.5,1.0,1.25,0.4,1.0,2.25
 Gerónimo Rulli,Argentina,6.0,1.0,1.5,0.1,1.0,0.9
+Gonzalo Montiel,Argentina,4.5,1.0,1.25,0.1,1.0,0.5625
 Juan Musso,Argentina,3.0,1.15,1.5,0.1,1.0,0.5175
 Nicolás Otamendi,Argentina,1.0,1.0,1.25,0.1,1.0,0.125
-Lionel Messi,Argentina,15.0,1.0,0.85,0.0,1.0,0.0
 Jordan Bos,Australia,12.0,1.0,1.25,1.0,1.0,15.0
 Alessandro Circati,Australia,12.0,0.7,1.25,1.0,1.0,10.499999999999998
 Cristian Volpato,Australia,10.0,0.7,1.0,1.0,1.0,7.0
@@ -174,12 +174,12 @@ Luiz Henrique,Brazil,24.0,1.0,0.85,0.4,1.0,8.16
 Léo Pereira,Brazil,12.0,1.15,1.25,0.4,1.0,6.9
 Fabinho,Brazil,12.0,1.15,1.0,0.4,1.0,5.52
 Douglas Santos,Brazil,7.5,1.15,1.25,0.4,1.0,4.3125
+Neymar,Brazil,8.0,1.0,1.0,0.4,1.0,3.2
 Casemiro,Brazil,6.0,1.0,1.0,0.4,1.0,2.4000000000000004
 Ederson,Brazil,10.0,1.15,1.5,0.1,1.0,1.725
-Danilo,Brazil,2.0,1.0,1.25,0.4,1.0,1.0
+Danilo,Brazil,2.0,1.0,1.25,0.1,1.0,0.25
 Alex Sandro,Brazil,1.0,1.0,1.25,0.1,1.0,0.125
 Weverton,Brazil,0.7,1.0,1.5,0.1,1.0,0.10499999999999998
-Neymar,Brazil,8.0,1.0,1.0,0.0,1.0,0.0
 Jonathan David,Canada,30.0,1.0,0.85,1.0,1.0,25.5
 Ismaël Koné,Canada,25.0,1.0,1.0,1.0,1.0,25.0
 Promise David,Canada,17.0,1.0,0.85,1.0,1.0,14.45
@@ -625,28 +625,28 @@ Kaishu Sano,Japan,40.0,1.0,1.0,1.0,1.0,40.0
 Zion Suzuki,Japan,20.0,1.0,1.5,1.0,1.0,30.0
 Takefusa Kubo,Japan,30.0,1.0,0.85,1.0,1.0,25.5
 Hiroki Ito,Japan,18.0,1.0,1.25,1.0,1.0,22.5
+Yuito Suzuki,Japan,24.0,1.0,0.85,1.0,1.0,20.4
 Ayase Ueda,Japan,17.0,1.0,0.85,1.0,1.02,14.738999999999999
 Ritsu Doan,Japan,17.0,1.0,0.85,1.0,1.0,14.45
 Ao Tanaka,Japan,13.0,1.0,1.0,1.0,1.0,13.0
 Tsuyoshi Watanabe,Japan,10.0,1.0,1.25,1.0,1.02,12.75
 Daizen Maeda,Japan,13.0,1.0,0.85,1.0,1.0,11.049999999999999
-Ko Itakura,Japan,8.0,1.0,1.25,1.0,1.02,10.2
 Daichi Kamada,Japan,10.0,1.0,1.0,1.0,1.0,10.0
+Ko Itakura,Japan,8.0,1.0,1.25,0.8,1.02,8.16
 Keito Nakamura,Japan,10.0,1.0,0.85,0.8,1.0,6.800000000000001
 Yukinari Sugawara,Japan,5.5,1.0,1.25,0.8,1.0,5.5
 Takehiro Tomiyasu,Japan,5.0,1.0,1.25,0.8,1.02,5.1
 Ayumu Seko,Japan,5.0,1.0,1.25,0.8,1.0,5.0
-Keisuke Goto,Japan,10.0,0.7,0.85,0.8,1.0,4.760000000000001
+Keisuke Goto,Japan,10.0,0.7,0.85,0.4,1.0,2.3800000000000003
 Kento Shiogai,Japan,8.0,0.7,0.85,0.4,1.0,1.904
 Wataru Endo,Japan,4.0,1.15,1.0,0.4,1.0,1.8399999999999999
 Junnosuke Suzuki,Japan,3.5,0.7,1.25,0.4,1.0,1.2249999999999999
 Junya Ito,Japan,3.0,1.15,0.85,0.4,1.0,1.1729999999999998
 Koki Ogawa,Japan,2.0,1.0,0.85,0.4,1.0,0.68
-Shogo Taniguchi,Japan,0.75,1.0,1.25,0.4,1.0,0.375
 Keisuke Osako,Japan,2.0,1.0,1.5,0.1,1.0,0.30000000000000004
 Tomoki Hayakawa,Japan,2.0,1.0,1.5,0.1,1.0,0.30000000000000004
+Shogo Taniguchi,Japan,0.75,1.0,1.25,0.1,1.0,0.09375
 Yuto Nagatomo,Japan,0.1,1.0,1.25,0.1,1.0,0.0125
-Yuito Suzuki,Japan,24.0,1.0,0.85,0.0,1.0,0.0
 Mousa Tamari,Jordan,10.0,1.0,0.85,1.0,1.0,8.5
 Yazan Al-Arab,Jordan,1.0,1.15,1.25,1.0,1.0,1.4375
 Mohannad Abu Taha,Jordan,0.55,1.0,1.25,1.0,1.0,0.6875
@@ -1029,14 +1029,14 @@ Seung-ho Paik,South Korea,2.0,1.0,1.0,0.8,1.0,1.6
 Bum-keun Song,South Korea,1.0,1.0,1.5,1.0,1.0,1.5
 Dong-gyeong Lee,South Korea,1.6,1.0,1.0,0.4,1.0,0.6400000000000001
 Ji-sung Eom,South Korea,1.8,1.0,0.85,0.4,1.0,0.6120000000000001
-Tae-hyeon Kim,South Korea,1.2,1.0,1.25,0.4,1.0,0.6000000000000001
 Jin-gyu Kim,South Korea,1.2,1.0,1.0,0.4,1.0,0.48
 Jin-seob Park,South Korea,1.0,1.15,1.0,0.4,1.0,0.45999999999999996
 Moon-hwan Kim,South Korea,0.75,1.15,1.25,0.4,1.0,0.43125
-Gi-hyuk Lee,South Korea,0.8,1.0,1.25,0.1,1.0,0.1
+Gi-hyuk Lee,South Korea,0.8,1.0,1.25,0.4,1.0,0.4
 Hyeon-woo Jo,South Korea,0.65,1.0,1.5,0.1,1.0,0.09750000000000002
 Seung-gyu Kim,South Korea,0.5,1.0,1.5,0.1,1.0,0.07500000000000001
 Wi-je Cho,South Korea,0.55,1.0,1.25,0.1,1.0,0.06875
+Tae-hyeon Kim,South Korea,1.2,1.0,1.25,0.0,1.0,0.0
 Pedri,Spain,150.0,1.0,1.0,1.0,1.1,165.0
 Lamine Yamal,Spain,200.0,0.7,0.85,1.0,1.1,130.9
 Pau Cubarsí,Spain,80.0,0.7,1.25,1.0,1.1,77.0

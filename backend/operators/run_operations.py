@@ -414,5 +414,5 @@ def _engine_or_default(db: Engine = None) -> Engine:
 
 
 if __name__ == "__main__":
-    # update_during_group_match()
-    export_first_predictions_before_world_cup()
+    update_during_group_match()
+    # export_first_predictions_before_world_cup()

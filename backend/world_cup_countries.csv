@@ -1,8 +1,8 @@
 Name,Group,Base_Elo,Base_Camp_City,Total_Utility_Value,Base_Strength
-Czechia,A,1740,Dallas,0.0,0.0
-Mexico,A,1875,Mexico City,0.0,0.0
-South Africa,A,1517,Pachuca,0.0,0.0
-South Korea,A,1758,Guadalajara,0.0,0.0
+Czechia,A,1712,Dallas,0.0,0.0
+Mexico,A,1881,Mexico City,0.0,0.0
+South Africa,A,1511,Pachuca,0.0,0.0
+South Korea,A,1786,Guadalajara,0.0,0.0
 Bosnia and Herzegovina,B,1595,Sandy,0.0,0.0
 Canada,B,1788,Vancouver,0.0,0.0
 Qatar,B,1421,Santa Barbara,0.0,0.0
@@ -35,7 +35,7 @@ France,I,2063,Boston,0.0,0.0
 Iraq,I,1607,Greenbrier County,0.0,0.0
 Norway,I,1914,Greensboro,0.0,0.0
 Senegal,I,1860,New York New Jersey,0.0,0.0
-Algeria,J,1760,Kansas City,0.0,0.0
+Algeria,J,1772,Kansas City,0.0,0.0
 Argentina,J,2115,Kansas City,0.0,0.0
 Austria,J,1830,Goleta,0.0,0.0
 Jordan,J,1680,Portland,0.0,0.0
