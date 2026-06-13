@@ -194,6 +194,12 @@ def scrape_world_cup_players():
         'Market_Value', 'Expected_Utility', 'Is_Injured'
     ]
     df = df[columns_order]
+    df = df.sort_values(
+        by=['Country', 'Model_Position', 'Name'],
+        ascending=True,
+        kind='mergesort',
+        ignore_index=True
+    )
     
     df.to_csv('world_cup_players.csv', index=False, encoding='utf-8')
     print("Success! Data saved to 'world_cup_players.csv'")
