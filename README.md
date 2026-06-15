@@ -2,6 +2,8 @@
 
 This project predicts World Cup 2026 match results and visualizes the tournament flow in a React app. It combines scraped country, player, location, and match data with a backend prediction model, then displays probabilities, predicted scores, and knockout progression in the frontend.
 
+Live app: [world-cup2026-black.vercel.app](https://world-cup2026-black.vercel.app)
+
 ## App Preview
 
 ![Group stage view](screenshot_groupstage.png)
