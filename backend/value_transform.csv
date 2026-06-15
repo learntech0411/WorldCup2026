@@ -114,8 +114,8 @@ Arthur Theate,Belgium,17.0,1.0,1.25,1.0,1.0,21.25
 Matias Fernandez-Pardo,Belgium,35.0,0.7,0.85,1.0,1.02,21.2415
 Alexis Saelemaekers,Belgium,20.0,1.0,1.0,1.0,1.02,20.4
 Leandro Trossard,Belgium,18.0,1.15,0.85,0.8,1.0,14.076
-Joaquin Seys,Belgium,20.0,0.7,1.25,0.8,1.0,14.0
 Diego Moreira,Belgium,25.0,0.7,1.0,0.8,1.0,14.0
+Joaquin Seys,Belgium,20.0,0.7,1.25,0.8,1.0,14.0
 Dodi Lukébakio,Belgium,15.0,1.0,0.85,0.8,1.0,10.200000000000001
 Nicolas Raskin,Belgium,12.0,1.0,1.0,0.8,1.0,9.600000000000001
 Timothy Castagne,Belgium,8.0,1.15,1.25,0.4,1.0,4.6000000000000005
@@ -174,12 +174,12 @@ Luiz Henrique,Brazil,24.0,1.0,0.85,0.4,1.0,8.16
 Léo Pereira,Brazil,12.0,1.15,1.25,0.4,1.0,6.9
 Fabinho,Brazil,12.0,1.15,1.0,0.4,1.0,5.52
 Douglas Santos,Brazil,7.5,1.15,1.25,0.4,1.0,4.3125
-Neymar,Brazil,8.0,1.0,1.0,0.4,1.0,3.2
 Casemiro,Brazil,6.0,1.0,1.0,0.4,1.0,2.4000000000000004
 Ederson,Brazil,10.0,1.15,1.5,0.1,1.0,1.725
-Danilo,Brazil,2.0,1.0,1.25,0.1,1.0,0.25
+Danilo,Brazil,2.0,1.0,1.25,0.4,1.0,1.0
 Alex Sandro,Brazil,1.0,1.0,1.25,0.1,1.0,0.125
 Weverton,Brazil,0.7,1.0,1.5,0.1,1.0,0.10499999999999998
+Neymar,Brazil,8.0,1.0,1.0,0.0,1.0,0.0
 Alphonso Davies,Canada,40.0,1.0,1.25,1.0,1.0,50.0
 Jonathan David,Canada,30.0,1.0,0.85,1.0,1.0,25.5
 Ismaël Koné,Canada,25.0,1.0,1.0,1.0,1.0,25.0
@@ -250,8 +250,8 @@ Juan Portilla,Colombia,5.0,1.0,1.0,0.8,1.0,4.0
 Jáminton Campaz,Colombia,5.5,1.0,0.85,0.4,1.0,1.87
 Yerry Mina,Colombia,2.5,1.15,1.25,0.4,1.0,1.4375
 Gustavo Puerta,Colombia,5.0,0.7,1.0,0.4,1.0,1.4000000000000001
-Johan Mojica,Colombia,1.8,1.15,1.25,0.4,1.0,1.035
 Deiver Machado,Colombia,1.8,1.15,1.25,0.4,1.0,1.035
+Johan Mojica,Colombia,1.8,1.15,1.25,0.4,1.0,1.035
 Juan Fernando Quintero,Colombia,1.8,1.15,1.0,0.4,1.0,0.828
 Santiago Arias,Colombia,1.2,1.0,1.25,0.1,1.0,0.15000000000000002
 James Rodríguez,Colombia,1.5,1.0,1.0,0.1,1.0,0.15000000000000002
@@ -477,8 +477,8 @@ Kai Havertz,Germany,55.0,1.0,0.85,1.0,1.0,46.75
 Lennart Karl,Germany,60.0,0.7,1.0,1.0,1.08,45.36
 Joshua Kimmich,Germany,35.0,1.15,1.0,0.8,1.08,34.776
 Jonathan Tah,Germany,28.0,1.15,1.25,0.8,1.08,34.775999999999996
-Jamie Leweling,Germany,40.0,1.0,0.85,0.8,1.04,28.288000000000004
 Maximilian Beier,Germany,40.0,1.0,0.85,0.8,1.04,28.288000000000004
+Jamie Leweling,Germany,40.0,1.0,0.85,0.8,1.04,28.288000000000004
 Nathaniel Brown,Germany,40.0,0.7,1.25,0.8,1.0,28.0
 Alexander Nübel,Germany,12.0,1.0,1.5,1.0,1.04,18.72
 David Raum,Germany,25.0,1.0,1.25,0.4,1.0,12.5
@@ -562,13 +562,13 @@ Danial Eiri,Iran,1.0,0.7,1.25,0.8,1.0,0.7000000000000001
 Amirmohammad Razzaghinia,Iran,1.2,0.7,1.0,0.4,1.0,0.336
 Ali Nemati,Iran,0.55,1.15,1.25,0.4,1.0,0.31625
 Shahriar Moghanlou,Iran,0.8,1.15,0.85,0.4,1.0,0.31279999999999997
-Roozbeh Cheshmi,Iran,0.45,1.15,1.0,0.4,1.0,0.207
 Alireza Jahanbakhsh,Iran,0.5,1.15,0.85,0.4,1.0,0.1955
 Ehsan Hajsafi,Iran,0.25,1.0,1.25,0.4,1.0,0.125
+Ramin Rezaeian,Iran,0.25,1.0,1.25,0.4,1.0,0.125
 Alireza Beiranvand,Iran,0.65,1.15,1.5,0.1,1.0,0.11212499999999999
 Seyed Hossein Hosseini,Iran,0.5,1.15,1.5,0.1,1.0,0.08625
-Ramin Rezaeian,Iran,0.25,1.0,1.25,0.1,1.0,0.03125
 Shoja Khalilzadeh,Iran,0.1,1.0,1.25,0.1,1.0,0.0125
+Roozbeh Cheshmi,Iran,0.45,1.15,1.0,0.0,1.0,0.0
 Merchas Doski,Iraq,1.7,1.0,1.25,1.0,1.0,2.125
 Ahmed Qasem,Iraq,3.5,0.7,0.85,1.0,1.0,2.0824999999999996
 Aimar Sher,Iraq,1.5,1.0,1.0,1.0,1.0,1.5
@@ -700,7 +700,7 @@ Raúl Jiménez,Mexico,3.0,1.0,0.85,0.1,1.0,0.255
 Guillermo Martínez,Mexico,1.5,1.15,0.85,0.1,1.0,0.14662499999999998
 Guillermo Ochoa,Mexico,0.25,1.0,1.5,0.1,1.0,0.037500000000000006
 Achraf Hakimi,Morocco,80.0,1.0,1.25,1.0,1.0,100.0
-Ismael Saibari,Morocco,40.0,1.0,1.0,1.0,1.0,40.0
+Ismael Saibari,Morocco,40.0,1.0,1.0,1.0,1.02,40.8
 Ayyoub Bouaddi,Morocco,50.0,0.7,1.0,1.0,1.0,35.0
 Brahim Díaz,Morocco,35.0,1.0,0.85,1.0,1.0,29.75
 Bilal El Khannouss,Morocco,35.0,0.7,1.0,1.0,1.0,24.5
@@ -709,35 +709,35 @@ Noussair Mazraoui,Morocco,18.0,1.0,1.25,1.0,1.0,22.5
 Nayef Aguerd,Morocco,15.0,1.15,1.25,1.0,1.0,21.5625
 Zakaria El Ouahdi,Morocco,15.0,1.0,1.25,1.0,1.0,18.75
 Samir El Mourabet,Morocco,22.0,0.7,1.0,1.0,1.0,15.399999999999999
+Anass Salah-Eddine,Morocco,12.0,1.0,1.25,0.8,1.02,12.24
 Chemsdine Talbi,Morocco,25.0,0.7,0.85,0.8,1.0,11.9
 Chadi Riad,Morocco,15.0,0.7,1.25,0.8,1.0,10.5
 Sofyan Amrabat,Morocco,12.0,1.0,1.0,0.8,1.0,9.600000000000001
 Azzedine Ounahi,Morocco,10.0,1.0,1.0,0.8,1.0,8.0
-Issa Diop,Morocco,8.0,1.0,1.25,0.8,1.0,8.0
 Yassine Bounou,Morocco,3.0,1.0,1.5,1.0,1.0,4.5
+Issa Diop,Morocco,8.0,1.0,1.25,0.4,1.0,4.0
 Gessime Yassine,Morocco,12.0,0.7,0.85,0.4,1.0,2.856
 Ayoube Amaimouni-Echghouyab,Morocco,10.0,0.7,0.85,0.4,1.0,2.3800000000000003
 Soufiane Rahimi,Morocco,6.0,1.15,0.85,0.4,1.0,2.3459999999999996
 Ayoub El Kaabi,Morocco,5.0,1.15,0.85,0.4,1.0,1.955
 Redouane Halhal,Morocco,3.0,1.0,1.25,0.4,1.0,1.5
-Youssef Belammari,Morocco,1.2,1.0,1.25,0.4,1.0,0.6000000000000001
+Youssef Belammari,Morocco,1.2,1.0,1.25,0.1,1.0,0.15000000000000002
 Ahmed Reda Tagnaouti,Morocco,0.8,1.15,1.5,0.1,1.0,0.13799999999999998
 Munir El Kajoui,Morocco,0.7,1.0,1.5,0.1,1.0,0.10499999999999998
-Anass Salah-Eddine,Morocco,12.0,1.0,1.25,0.0,1.0,0.0
 Abde Ezzalzouli,Morocco,30.0,1.0,0.85,0.0,1.0,0.0
 Ryan Gravenberch,Netherlands,80.0,1.0,1.0,1.0,1.04,83.2
 Micky van de Ven,Netherlands,50.0,1.0,1.25,1.0,1.0,62.5
-Jan Paul van Hecke,Netherlands,45.0,1.0,1.25,1.0,1.02,57.375
+Bart Verbruggen,Netherlands,40.0,1.0,1.5,1.0,1.04,62.400000000000006
+Jan Paul van Hecke,Netherlands,45.0,1.0,1.25,1.0,1.04,58.5
 Cody Gakpo,Netherlands,60.0,1.0,0.85,1.0,1.04,53.04
 Tijjani Reijnders,Netherlands,50.0,1.0,1.0,1.0,1.0,50.0
 Frenkie de Jong,Netherlands,45.0,1.0,1.0,1.0,1.0,45.0
-Robin Roefs,Netherlands,28.0,1.0,1.5,1.0,1.02,42.84
 Donyell Malen,Netherlands,45.0,1.0,0.85,1.0,1.0,38.25
 Denzel Dumfries,Netherlands,25.0,1.15,1.25,1.0,1.0,35.93749999999999
 Jorrel Hato,Netherlands,40.0,0.7,1.25,1.0,1.0,35.0
-Mats Wieffer,Netherlands,25.0,1.0,1.25,1.0,1.02,31.875
+Mats Wieffer,Netherlands,25.0,1.0,1.25,1.0,1.04,32.5
 Crysencio Summerville,Netherlands,35.0,1.0,0.85,0.8,1.0,23.8
-Brian Brobbey,Netherlands,30.0,1.0,0.85,0.8,1.02,20.808000000000003
+Brian Brobbey,Netherlands,30.0,1.0,0.85,0.8,1.0,20.400000000000002
 Quinten Timber,Netherlands,25.0,1.0,1.0,0.8,1.0,20.0
 Justin Kluivert,Netherlands,25.0,1.0,1.0,0.8,1.0,20.0
 Virgil van Dijk,Netherlands,15.0,1.0,1.25,0.8,1.04,15.600000000000001
@@ -745,12 +745,12 @@ Noa Lang,Netherlands,22.0,1.0,0.85,0.4,1.0,7.48
 Nathan Aké,Netherlands,12.0,1.15,1.25,0.4,1.0,6.9
 Guus Til,Netherlands,15.0,1.0,1.0,0.4,1.0,6.0
 Teun Koopmeiners,Netherlands,14.0,1.0,1.0,0.4,1.0,5.6000000000000005
+Robin Roefs,Netherlands,28.0,1.0,1.5,0.1,1.0,4.2
 Memphis Depay,Netherlands,7.0,1.15,0.85,0.4,1.0,2.7369999999999997
 Marten de Roon,Netherlands,3.2,1.0,1.0,0.4,1.0,1.2800000000000002
 Mark Flekken,Netherlands,6.0,1.15,1.5,0.1,1.0,1.035
 Wout Weghorst,Netherlands,2.0,1.15,0.85,0.1,1.0,0.1955
 Jurriën Timber,Netherlands,70.0,1.0,1.25,0.0,1.0,0.0
-Bart Verbruggen,Netherlands,40.0,1.0,1.5,0.0,1.0,0.0
 Chris Wood,New Zealand,5.0,1.0,0.85,1.0,1.0,4.25
 Joe Bell,New Zealand,3.5,1.0,1.0,1.0,1.0,3.5
 Liberato Cacace,New Zealand,2.5,1.0,1.25,1.0,1.0,3.125
@@ -914,25 +914,25 @@ Hassan Tambakti,Saudi Arabia,1.8,1.0,1.25,1.0,1.08,2.43
 Mohammed Abu Al-Shamat,Saudi Arabia,1.8,1.0,1.25,1.0,1.04,2.34
 Khalid Al-Ghannam,Saudi Arabia,2.5,1.0,0.85,1.0,1.0,2.125
 Moteb Al-Harbi,Saudi Arabia,1.4,1.0,1.25,1.0,1.08,1.8900000000000001
-Abdulelah Al-Amri,Saudi Arabia,1.4,1.0,1.25,1.0,1.04,1.82
-Nawaf Boushal,Saudi Arabia,1.4,1.0,1.25,1.0,1.04,1.82
+Abdulelah Al-Amri,Saudi Arabia,1.4,1.0,1.25,1.0,1.06,1.855
+Nawaf Boushal,Saudi Arabia,1.4,1.0,1.25,1.0,1.06,1.855
 Ali Majrashi,Saudi Arabia,1.4,1.0,1.25,1.0,1.02,1.7850000000000001
+Ayman Yahya,Saudi Arabia,1.2,1.0,1.25,0.8,1.06,1.2720000000000002
 Jehad Thakri,Saudi Arabia,1.2,1.0,1.25,0.8,1.04,1.2480000000000002
-Ayman Yahya,Saudi Arabia,1.2,1.0,1.25,0.8,1.04,1.2480000000000002
+Nawaf Al-Aqidi,Saudi Arabia,0.65,1.0,1.5,1.0,1.06,1.0335
 Ali Lajami,Saudi Arabia,0.75,1.15,1.25,0.8,1.08,0.9315000000000001
 Salem Al-Dawsari,Saudi Arabia,1.2,1.0,0.85,0.8,1.08,0.8812800000000002
 Mohamed Kanno,Saudi Arabia,0.8,1.15,1.0,0.8,1.08,0.79488
-Mohammed Al-Owais,Saudi Arabia,0.275,1.0,1.5,1.0,1.0,0.41250000000000003
 Nasser Al-Dawsari,Saudi Arabia,0.9,1.0,1.0,0.4,1.0,0.36000000000000004
 Ziyad Al-Johani,Saudi Arabia,0.8,1.0,1.0,0.4,1.0,0.32000000000000006
 Abdullah Al-Khaibari,Saudi Arabia,0.75,1.0,1.0,0.4,1.0,0.30000000000000004
 Saleh Al-Shehri,Saudi Arabia,0.5,1.15,0.85,0.4,1.0,0.1955
 Hassan Kadesh,Saudi Arabia,0.275,1.15,1.25,0.4,1.0,0.158125
 Alaa Hejji,Saudi Arabia,0.3,1.15,1.0,0.4,1.0,0.13799999999999998
+Mohammed Al-Owais,Saudi Arabia,0.275,1.0,1.5,0.1,1.0,0.04125000000000001
 Sultan Mandash,Saudi Arabia,0.35,1.15,0.85,0.1,1.0,0.0342125
 Abdullah Al-Hamdan,Saudi Arabia,0.35,1.0,0.85,0.1,1.0,0.02975
 Ahmed Al-Kassar,Saudi Arabia,0.175,1.0,1.5,0.1,1.0,0.026249999999999996
-Nawaf Al-Aqidi,Saudi Arabia,0.65,1.0,1.5,0.0,1.0,0.0
 Scott McTominay,Scotland,40.0,1.0,1.0,1.0,1.0,40.0
 Aaron Hickey,Scotland,16.0,1.0,1.25,1.0,1.0,20.0
 John McGinn,Scotland,13.0,1.15,1.0,1.0,1.0,14.95
