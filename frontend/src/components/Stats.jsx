@@ -11,20 +11,6 @@ const accuracyEndpoints = [
     endpoint: '/correct-outcome-predictions',
     responseKey: 'Correct_Outcome_Predictions',
   },
-  {
-    key: 'goalDifference',
-    label: 'Correct Goal Difference',
-    description: 'Predicted goal margin matched the result.',
-    endpoint: '/correct-goal-difference-predictions',
-    responseKey: 'Correct_Goal_Difference_Predictions',
-  },
-  {
-    key: 'score',
-    label: 'Correct Score',
-    description: 'Predicted exact score matched the result.',
-    endpoint: '/correct-score-predictions',
-    responseKey: 'Correct_Score_Predictions',
-  },
 ];
 
 const getPercentageClass = (percentage) => {
