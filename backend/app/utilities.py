@@ -198,6 +198,79 @@ def calculate_base_strengths(db: Session | Connection | Engine) -> pd.DataFrame:
             connection.close()
 
 
+def calculate_country_synergies(db: Session | Connection | Engine) -> pd.DataFrame:
+    """Calculate and store each country's repeated-club player synergies."""
+    connection = _get_connection(db)
+    transaction = connection.begin() if isinstance(db, Engine) else None
+    should_close = isinstance(db, Engine)
+
+    try:
+        _ensure_column(connection, "countries", "Synergies", "TEXT DEFAULT ''")
+
+        countries = pd.read_sql_query(text('SELECT "Name" FROM countries'), connection)
+        players = pd.read_sql_query(text('SELECT "Country", "Club" FROM players'), connection)
+
+        if countries.empty:
+            if transaction is not None:
+                transaction.commit()
+            _commit_if_session(db)
+            return _empty_country_synergy_result()
+
+        result = _country_synergy_rows(countries, players)
+        _update_country_synergies(connection, result)
+
+        if transaction is not None:
+            transaction.commit()
+        _commit_if_session(db)
+
+        return result
+    except Exception:
+        if transaction is not None:
+            transaction.rollback()
+        raise
+    finally:
+        if should_close:
+            connection.close()
+
+
+def calculate_country_injured_players(db: Session | Connection | Engine) -> pd.DataFrame:
+    """Calculate and store each country's injured player list."""
+    connection = _get_connection(db)
+    transaction = connection.begin() if isinstance(db, Engine) else None
+    should_close = isinstance(db, Engine)
+
+    try:
+        _ensure_column(connection, "countries", "Injured_Players", "TEXT DEFAULT ''")
+
+        countries = pd.read_sql_query(text('SELECT "Name" FROM countries'), connection)
+        players = pd.read_sql_query(
+            text('SELECT "Name", "Country", "Is_Injured" FROM players'),
+            connection,
+        )
+
+        if countries.empty:
+            if transaction is not None:
+                transaction.commit()
+            _commit_if_session(db)
+            return _empty_country_injured_players_result()
+
+        result = _country_injured_player_rows(countries, players)
+        _update_country_injured_players(connection, result)
+
+        if transaction is not None:
+            transaction.commit()
+        _commit_if_session(db)
+
+        return result
+    except Exception:
+        if transaction is not None:
+            transaction.rollback()
+        raise
+    finally:
+        if should_close:
+            connection.close()
+
+
 def calculate_match_power_score(
     db: Session | Connection | Engine,
     match_id: int,
@@ -423,6 +496,85 @@ def _calculate_player_values(players: pd.DataFrame, stage: Stage) -> pd.DataFram
         )
 
     return players
+
+
+def _country_synergy_rows(countries: pd.DataFrame, players: pd.DataFrame) -> pd.DataFrame:
+    result = countries[["Name"]].copy()
+    result["Synergies"] = ""
+
+    if players.empty:
+        return result
+
+    players = players[["Country", "Club"]].copy()
+    players["Country"] = players["Country"].astype(str).str.strip()
+    players["Club"] = players["Club"].apply(_club_key)
+    players = players[~players["Club"].apply(_is_free_agent)]
+
+    if players.empty:
+        return result
+
+    club_counts = (
+        players.groupby(["Country", "Club"], as_index=False)
+        .size()
+        .rename(columns={"size": "Player_Count"})
+    )
+    club_counts = club_counts[club_counts["Player_Count"] >= 2].sort_values(
+        ["Country", "Player_Count", "Club"],
+        ascending=[True, False, True],
+    )
+
+    if club_counts.empty:
+        return result
+
+    synergies = (
+        club_counts.assign(
+            Synergy_Text=club_counts.apply(
+                lambda row: f'{row["Club"]} ({int(row["Player_Count"])})',
+                axis=1,
+            )
+        )
+        .groupby("Country")["Synergy_Text"]
+        .apply(", ".join)
+        .reset_index(name="Synergies")
+    )
+
+    return result.drop(columns=["Synergies"]).merge(
+        synergies,
+        left_on="Name",
+        right_on="Country",
+        how="left",
+    )[["Name", "Synergies"]].fillna({"Synergies": ""})
+
+
+def _country_injured_player_rows(countries: pd.DataFrame, players: pd.DataFrame) -> pd.DataFrame:
+    result = countries[["Name"]].copy()
+    result["Injured_Players"] = ""
+
+    if players.empty:
+        return result
+
+    players = players[["Name", "Country", "Is_Injured"]].copy()
+    players["Name"] = players["Name"].astype(str).str.strip()
+    players["Country"] = players["Country"].astype(str).str.strip()
+    players["Is_Injured"] = players["Is_Injured"].apply(_is_injured)
+    injured_players = players[(players["Is_Injured"]) & (players["Name"] != "")]
+
+    if injured_players.empty:
+        return result
+
+    injured_players = injured_players.sort_values(["Country", "Name"])
+    injured_by_country = (
+        injured_players.groupby("Country")["Name"]
+        .apply(", ".join)
+        .reset_index(name="Injured_Players")
+    )
+
+    return result.drop(columns=["Injured_Players"]).merge(
+        injured_by_country,
+        left_on="Name",
+        right_on="Country",
+        how="left",
+    )[["Name", "Injured_Players"]].fillna({"Injured_Players": ""})
 
 
 def _get_match(matches: pd.DataFrame, match_id: int) -> pd.Series:
@@ -958,6 +1110,42 @@ def _update_country_base_strengths(connection: Connection, countries: pd.DataFra
     connection.execute(update_query, params)
 
 
+def _update_country_synergies(connection: Connection, countries: pd.DataFrame) -> None:
+    update_query = text(
+        '''
+        UPDATE countries
+        SET "Synergies" = :synergies
+        WHERE "Name" = :country
+        '''
+    )
+    params = [
+        {
+            "country": row.Name,
+            "synergies": str(row.Synergies),
+        }
+        for row in countries.itertuples(index=False)
+    ]
+    connection.execute(update_query, params)
+
+
+def _update_country_injured_players(connection: Connection, countries: pd.DataFrame) -> None:
+    update_query = text(
+        '''
+        UPDATE countries
+        SET "Injured_Players" = :injured_players
+        WHERE "Name" = :country
+        '''
+    )
+    params = [
+        {
+            "country": row.Name,
+            "injured_players": str(row.Injured_Players),
+        }
+        for row in countries.itertuples(index=False)
+    ]
+    connection.execute(update_query, params)
+
+
 def _get_connection(db: Session | Connection | Engine) -> Connection:
     if isinstance(db, Session):
         return db.connection()
@@ -1004,3 +1192,11 @@ def _empty_base_strength_result() -> pd.DataFrame:
             "Base_Strength",
         ]
     )
+
+
+def _empty_country_synergy_result() -> pd.DataFrame:
+    return pd.DataFrame(columns=["Name", "Synergies"])
+
+
+def _empty_country_injured_players_result() -> pd.DataFrame:
+    return pd.DataFrame(columns=["Name", "Injured_Players"])
