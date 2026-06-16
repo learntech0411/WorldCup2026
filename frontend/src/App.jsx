@@ -3,7 +3,7 @@ import Header from './components/Header';
 import Tabs from './components/Tabs';
 import GroupStage from './components/GroupStage';
 import Knockout from './components/Knockout';
-import Stats from './components/Stats';
+import MatchPrediction from './components/MatchPrediction';
 import HowItWorks from './components/HowItWorks';
 import { FC } from './constants/data';
 import './App.css';
@@ -261,8 +261,8 @@ function App() {
             currentGroupStageComplete={currentGroupStageComplete}
           />
         )}
-        {activeTab === 'stats' && (
-          <Stats />
+        {activeTab === 'match-prediction' && (
+          <MatchPrediction />
         )}
         {activeTab === 'how-it-works' && (
           <HowItWorks />

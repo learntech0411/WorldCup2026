@@ -21,13 +21,13 @@ const Tabs = ({ activeTab, onTabChange }) => {
         <path d="m17 9 3 3-3 3"></path>
       </svg>
     )},
-    { id: 'stats', name: 'Stats', icon: (
+    { id: 'match-prediction', name: 'Match Prediction', icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M4 19V5"></path>
-        <path d="M4 19h16"></path>
-        <path d="M8 16v-5"></path>
-        <path d="M12 16V8"></path>
-        <path d="M16 16v-9"></path>
+        <path d="M7 7h10"></path>
+        <path d="M7 17h10"></path>
+        <path d="M9 5v4"></path>
+        <path d="M15 15v4"></path>
+        <path d="m11 12 2-2 2 2-2 2-2-2Z"></path>
       </svg>
     )},
     { id: 'how-it-works', name: 'How it works', icon: (
