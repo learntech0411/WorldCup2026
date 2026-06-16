@@ -1,49 +1,49 @@
-Name,Group,Base_Elo,Base_Camp_City,Total_Utility_Value,Base_Strength
-Czechia,A,1712,Dallas,0.0,0.0
-Mexico,A,1881,Mexico City,0.0,0.0
-South Africa,A,1511,Pachuca,0.0,0.0
-South Korea,A,1786,Guadalajara,0.0,0.0
-Bosnia and Herzegovina,B,1616,Sandy,0.0,0.0
-Canada,B,1767,Vancouver,0.0,0.0
-Qatar,B,1447,Santa Barbara,0.0,0.0
-Switzerland,B,1865,San Diego,0.0,0.0
-Brazil,C,1978,New York New Jersey,0.0,0.0
-Haiti,C,1536,New York New Jersey,0.0,0.0
-Morocco,C,1840,New York New Jersey,0.0,0.0
-Scotland,C,1794,Charlotte,0.0,0.0
-Australia,D,1839,San Francisco Bay Area,0.0,0.0
-Paraguay,D,1780,San Francisco Bay Area,0.0,0.0
-Turkey,D,1849,Mesa,0.0,0.0
-United States,D,1780,Irvine,0.0,0.0
-Curacao,E,1427,Boca Raton,0.0,0.0
-Ecuador,E,1938,Columbus,0.0,0.0
-Germany,E,1939,Winston-Salem,0.0,0.0
-Ivory Coast,E,1695,Philadelphia,0.0,0.0
-Japan,F,1910,Nashville,0.0,0.0
-Netherlands,F,1944,Kansas City,0.0,0.0
-Sweden,F,1712,Dallas,0.0,0.0
-Tunisia,F,1628,Monterrey,0.0,0.0
-Belgium,G,1894,Renton,0.0,0.0
-Egypt,G,1696,Spokane,0.0,0.0
-Iran,G,1772,Tijuana,0.0,0.0
-New Zealand,G,1562,San Diego,0.0,0.0
-Cape Verde,H,1578,Tampa,0.0,0.0
-Saudi Arabia,H,1576,Austin,0.0,0.0
-Spain,H,2157,Chattanooga,0.0,0.0
-Uruguay,H,1892,Cancun,0.0,0.0
-France,I,2063,Boston,0.0,0.0
-Iraq,I,1607,Greenbrier County,0.0,0.0
-Norway,I,1914,Greensboro,0.0,0.0
-Senegal,I,1860,New York New Jersey,0.0,0.0
-Algeria,J,1772,Kansas City,0.0,0.0
-Argentina,J,2115,Kansas City,0.0,0.0
-Austria,J,1830,Goleta,0.0,0.0
-Jordan,J,1680,Portland,0.0,0.0
-Colombia,K,1982,Guadalajara,0.0,0.0
-DR Congo,K,1652,Houston,0.0,0.0
-Portugal,K,1989,Palm Beach Gardens,0.0,0.0
-Uzbekistan,K,1714,Atlanta,0.0,0.0
-Croatia,L,1912,Alexandria,0.0,0.0
-England,L,2024,Kansas City,0.0,0.0
-Ghana,L,1510,Boston,0.0,0.0
-Panama,L,1730,New Tecumseth,0.0,0.0
+Name,Group,Base_Elo,Base_Camp_City,Total_Utility_Value,Base_Strength,Synergies,Injured_Players
+Czechia,A,1712,Dallas,0.0,0.0,,
+Mexico,A,1881,Mexico City,0.0,0.0,,
+South Africa,A,1511,Pachuca,0.0,0.0,,
+South Korea,A,1786,Guadalajara,0.0,0.0,,
+Bosnia and Herzegovina,B,1616,Sandy,0.0,0.0,,
+Canada,B,1767,Vancouver,0.0,0.0,,
+Qatar,B,1447,Santa Barbara,0.0,0.0,,
+Switzerland,B,1865,San Diego,0.0,0.0,,
+Brazil,C,1978,New York New Jersey,0.0,0.0,,
+Haiti,C,1536,New York New Jersey,0.0,0.0,,
+Morocco,C,1840,New York New Jersey,0.0,0.0,,
+Scotland,C,1794,Charlotte,0.0,0.0,,
+Australia,D,1839,San Francisco Bay Area,0.0,0.0,,
+Paraguay,D,1780,San Francisco Bay Area,0.0,0.0,,
+Turkey,D,1849,Mesa,0.0,0.0,,
+United States,D,1780,Irvine,0.0,0.0,,
+Curacao,E,1427,Boca Raton,0.0,0.0,,
+Ecuador,E,1890,Columbus,0.0,0.0,,
+Germany,E,1939,Winston-Salem,0.0,0.0,,
+Ivory Coast,E,1743,Philadelphia,0.0,0.0,,
+Japan,F,1910,Nashville,0.0,0.0,,
+Netherlands,F,1944,Kansas City,0.0,0.0,,
+Sweden,F,1755,Dallas,0.0,0.0,,
+Tunisia,F,1585,Monterrey,0.0,0.0,,
+Belgium,G,1879,Renton,0.0,0.0,,
+Egypt,G,1711,Spokane,0.0,0.0,,
+Iran,G,1756,Tijuana,0.0,0.0,,
+New Zealand,G,1578,San Diego,0.0,0.0,,
+Cape Verde,H,1606,Tampa,0.0,0.0,,
+Saudi Arabia,H,1598,Austin,0.0,0.0,,
+Spain,H,2129,Chattanooga,0.0,0.0,,
+Uruguay,H,1870,Cancun,0.0,0.0,,
+France,I,2084,Boston,0.0,0.0,,
+Iraq,I,1607,Greenbrier County,0.0,0.0,,
+Norway,I,1914,Greensboro,0.0,0.0,,
+Senegal,I,1839,New York New Jersey,0.0,0.0,,
+Algeria,J,1772,Kansas City,0.0,0.0,,
+Argentina,J,2115,Kansas City,0.0,0.0,,
+Austria,J,1830,Goleta,0.0,0.0,,
+Jordan,J,1680,Portland,0.0,0.0,,
+Colombia,K,1982,Guadalajara,0.0,0.0,,
+DR Congo,K,1652,Houston,0.0,0.0,,
+Portugal,K,1989,Palm Beach Gardens,0.0,0.0,,
+Uzbekistan,K,1714,Atlanta,0.0,0.0,,
+Croatia,L,1912,Alexandria,0.0,0.0,,
+England,L,2024,Kansas City,0.0,0.0,,
+Ghana,L,1510,Boston,0.0,0.0,,
+Panama,L,1730,New Tecumseth,0.0,0.0,,
