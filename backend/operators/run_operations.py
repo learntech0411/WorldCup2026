@@ -20,6 +20,8 @@ from app.predictions import (
 from app.utilities import (
     calculate_all_group_score_matrices,
     calculate_base_strengths,
+    calculate_country_injured_players,
+    calculate_country_synergies,
     calculate_total_utility_values,
     pretty_print_group_score_matrices,
 )
@@ -28,8 +30,8 @@ from data_scrapper import scrape_countries_data, scrape_world_cup_players
 
 def run_full_prediction_pipeline(db: Engine = None) -> None:
     db = _engine_or_default(db)
-    calculate_total_utility_values(db, stage="group")
-    calculate_base_strengths(db)
+    #calculate_total_utility_values(db, stage="group")
+    #calculate_base_strengths(db)
     run_predictions_for_matches(db, 1, 72)
     matrices = calculate_all_group_score_matrices(db, "Prediction")
     pretty_print_group_score_matrices(matrices)
@@ -59,6 +61,8 @@ def update_during_group_match(db: Engine = None) -> None:
     # scrap the matches' Goals_A and Goals_B
     update_player_injuries(db)
     refresh_elo_ratings(db)
+    update_country_synergies(db)
+    update_country_injured_players(db)
     calculate_total_utility_values(db, stage="group")
     calculate_base_strengths(db)
     run_predictions_for_matches(db, 1, 72)
@@ -77,6 +81,8 @@ def update_during_knockout_match(db: Engine = None) -> None:
     # scrap the matches' Goals_A and Goals_B
     update_player_injuries(db)
     refresh_elo_ratings(db)
+    update_country_synergies(db)
+    update_country_injured_players(db)
     calculate_total_utility_values(db, stage="group")
     calculate_base_strengths(db)
     run_predictions_for_matches(db, 73, 88)
@@ -216,6 +222,18 @@ def update_player_injuries(db: Engine = None) -> None:
             ),
             update_rows,
         )
+
+
+def update_country_synergies(db: Engine = None) -> pd.DataFrame:
+    """Update countries.Synergies from repeated club memberships in players."""
+    db = _engine_or_default(db)
+    return calculate_country_synergies(db)
+
+
+def update_country_injured_players(db: Engine = None) -> pd.DataFrame:
+    """Update countries.Injured_Players from injured players in players."""
+    db = _engine_or_default(db)
+    return calculate_country_injured_players(db)
 
 
 def reset_goals_from_matches(match_ids: list[int], db: Engine = None) -> None:
@@ -414,5 +432,7 @@ def _engine_or_default(db: Engine = None) -> Engine:
 
 
 if __name__ == "__main__":
-    update_during_group_match()
+    run_full_prediction_pipeline()
+    # update_country_injured_players()
+    #update_during_group_match()
     # export_first_predictions_before_world_cup()
