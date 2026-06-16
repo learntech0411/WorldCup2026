@@ -24,6 +24,8 @@ class CountryBase(BaseModel):
     Base_Elo: float
     Base_Camp_City: str
     Total_Utility_Value: float
+    Synergies: str
+    Injured_Players: str = ""
 
 class Country(CountryBase):
     class Config:
