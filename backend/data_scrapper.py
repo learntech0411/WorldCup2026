@@ -387,6 +387,8 @@ def scrape_countries_data():
                 "Base_Camp_City": city,
                 "Total_Utility_Value": 0.0,
                 "Base_Strength": 0.0,
+                "Synergies": "",
+                "Injured_Players": "",
             })
         else:
             print(f"Warning: Could not find Elo rating for mapped key: {elo_lookup_key}")
