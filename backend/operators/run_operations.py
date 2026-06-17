@@ -5,6 +5,9 @@ import sys
 import pandas as pd
 from sqlalchemy import inspect, text
 from sqlalchemy.engine import Engine
+import logging
+
+logging.basicConfig(level=logging.INFO)
 
 
 BACKEND_DIR = Path(__file__).resolve().parents[1]
@@ -14,6 +17,7 @@ from app.database import get_engine
 from app.predictions import (
     prediction_final_rounds,
     prediction_round_of_32,
+    reset_knockout_matches,
     run_predictions_for_matches,
     set_real_round_of_32_participants_and_run_prediction,
 )
@@ -32,6 +36,7 @@ def run_full_prediction_pipeline(db: Engine = None) -> None:
     db = _engine_or_default(db)
     #calculate_total_utility_values(db, stage="group")
     #calculate_base_strengths(db)
+    reset_knockout_matches(db)
     run_predictions_for_matches(db, 1, 72)
     matrices = calculate_all_group_score_matrices(db, "Prediction")
     pretty_print_group_score_matrices(matrices)

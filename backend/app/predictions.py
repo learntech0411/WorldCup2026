@@ -1,3 +1,4 @@
+import logging
 from math import exp, factorial
 from pathlib import Path
 from typing import Optional
@@ -21,6 +22,7 @@ MAX_EXPECTED_GOALS = 7.0
 MAX_GOALS_IN_MATRIX = 7
 DIXON_COLES_RHO = 0.05
 BACKEND_DIR = Path(__file__).resolve().parents[1]
+logger = logging.getLogger(__name__)
 
 
 def winner_prediction(
@@ -142,14 +144,18 @@ def prediction_round_of_32(db: Session | Connection | Engine) -> pd.DataFrame:
     try:
         group_score_matrices = calculate_all_group_score_matrices(connection, "Prediction")
         third_place_opponents = get_third_place_opponents_dict(connection)
+        template_slots = _template_match_slots(73, 88)
         matches = connection.execute(
             text('SELECT * FROM matches WHERE "Match_ID" BETWEEN 73 AND 88 ORDER BY "Match_ID"')
         ).mappings().all()
 
         updates = []
         for match in matches:
-            original_team_a = str(match["Team_A"])
-            original_team_b = str(match["Team_B"])
+            match_id = int(match["Match_ID"])
+            original_team_a, original_team_b = template_slots.get(
+                match_id,
+                (str(match["Team_A"]), str(match["Team_B"])),
+            )
             team_a = _resolve_round_of_32_slot(original_team_a, group_score_matrices)
             team_b = _resolve_round_of_32_slot(original_team_b, group_score_matrices)
 
@@ -168,7 +174,7 @@ def prediction_round_of_32(db: Session | Connection | Engine) -> pd.DataFrame:
                 
             updates.append(
                 {
-                    "match_id": int(match["Match_ID"]),
+                    "match_id": match_id,
                     "team_a": team_a,
                     "team_b": team_b,
                 }
@@ -206,10 +212,19 @@ def prediction_final_rounds(
         all_predictions = []
         while starting_id <= round_endings[-1]:
             ending_id = _next_round_ending(starting_id, round_endings)
+            logger.info("Running final-round predictions for matches %s-%s", starting_id, ending_id)
             _fill_final_round_teams(connection, starting_id, ending_id)
             predictions = run_predictions_for_matches(connection, starting_id, ending_id)
             if not predictions.empty:
+                logger.info(
+                    "Final-round prediction results for matches %s-%s:\n%s",
+                    starting_id,
+                    ending_id,
+                    predictions.to_string(index=False),
+                )
                 all_predictions.append(predictions)
+            else:
+                logger.info("No final-round predictions produced for matches %s-%s", starting_id, ending_id)
 
             if ending_id >= round_endings[-1]:
                 break
@@ -258,6 +273,29 @@ def set_real_round_of_32_participants_and_run_prediction(
         if round_of_32_predictions.empty:
             return final_round_predictions
         return pd.concat([round_of_32_predictions, final_round_predictions], ignore_index=True)
+    except Exception:
+        if transaction is not None:
+            transaction.rollback()
+        raise
+    finally:
+        if should_close:
+            connection.close()
+
+
+def reset_knockout_matches(
+    db: Session | Connection | Engine,
+    starting_match_id: int | None = None,
+) -> None:
+    """Reset knockout teams and prediction columns."""
+    connection = _get_connection(db)
+    transaction = connection.begin() if isinstance(db, Engine) else None
+    should_close = isinstance(db, Engine)
+
+    try:
+        _reset_knockout_matches(connection, starting_match_id)
+        if transaction is not None:
+            transaction.commit()
+        _commit_if_session(db)
     except Exception:
         if transaction is not None:
             transaction.rollback()
@@ -392,6 +430,7 @@ def _fill_final_round_teams(connection: Connection, starting_id: int, ending_id:
         str(row["Name"])
         for row in connection.execute(text('SELECT "Name" FROM countries')).mappings()
     }
+    template_slots = _template_match_slots(starting_id, ending_id)
     round_matches = connection.execute(
         text(
             '''
@@ -409,17 +448,35 @@ def _fill_final_round_teams(connection: Connection, starting_id: int, ending_id:
 
     updates = []
     for match in round_matches:
-        team_a = _resolve_final_round_team(connection, str(match["Team_A"]), country_names)
-        team_b = _resolve_final_round_team(connection, str(match["Team_B"]), country_names)
+        match_id = int(match["Match_ID"])
+        original_team_a, original_team_b = template_slots.get(
+            match_id,
+            (str(match["Team_A"]), str(match["Team_B"])),
+        )
+        team_a = _resolve_final_round_team(connection, original_team_a, country_names)
+        team_b = _resolve_final_round_team(connection, original_team_b, country_names)
         updates.append(
             {
-                "match_id": int(match["Match_ID"]),
+                "match_id": match_id,
                 "team_a": team_a,
                 "team_b": team_b,
             }
         )
 
     _update_round_of_32_teams(connection, updates)
+
+
+def _template_match_slots(starting_match_id: int, ending_match_id: int) -> dict[int, tuple[str, str]]:
+    template_matches = pd.read_csv(BACKEND_DIR / "world_cup_matches.csv")
+    template_matches = template_matches[
+        (template_matches["Match_ID"] >= int(starting_match_id))
+        & (template_matches["Match_ID"] <= int(ending_match_id))
+    ]
+
+    return {
+        int(match.Match_ID): (str(match.Team_A), str(match.Team_B))
+        for match in template_matches.itertuples(index=False)
+    }
 
 
 def _resolve_final_round_team(connection: Connection, team_value: str, country_names: set[str]) -> str:
@@ -443,8 +500,27 @@ def _resolve_final_round_team(connection: Connection, team_value: str, country_n
 
 
 def _predicted_winner_and_loser(match: pd.Series) -> tuple[str, str]:
+    match_id = match["Match_ID"]
     team_a = str(match["Team_A"])
     team_b = str(match["Team_B"])
+
+    probability_a = pd.to_numeric(match["Winning_Probability_A"], errors="coerce")
+    probability_b = pd.to_numeric(match["Winning_Probability_B"], errors="coerce")
+    if not pd.isna(probability_a) and not pd.isna(probability_b) and probability_a != probability_b:
+        winner, loser = (team_a, team_b) if probability_a > probability_b else (team_b, team_a)
+        logger.info(
+            "Predicted winner for match %s: %s over %s based on winning probabilities "
+            "(%s=%s, %s=%s)",
+            match_id,
+            winner,
+            loser,
+            team_a,
+            probability_a,
+            team_b,
+            probability_b,
+        )
+        return winner, loser
+
     goals_a = pd.to_numeric(match["Predicted_Goals_A"], errors="coerce")
     goals_b = pd.to_numeric(match["Predicted_Goals_B"], errors="coerce")
 
@@ -452,15 +528,45 @@ def _predicted_winner_and_loser(match: pd.Series) -> tuple[str, str]:
         raise ValueError(f"Match {match['Match_ID']} does not have predicted goals yet")
 
     if goals_a > goals_b:
+        logger.info(
+            "Predicted winner for match %s: %s over %s based on predicted goals "
+            "(%s=%s, %s=%s)",
+            match_id,
+            team_a,
+            team_b,
+            team_a,
+            goals_a,
+            team_b,
+            goals_b,
+        )
         return team_a, team_b
     if goals_b > goals_a:
+        logger.info(
+            "Predicted winner for match %s: %s over %s based on predicted goals "
+            "(%s=%s, %s=%s)",
+            match_id,
+            team_b,
+            team_a,
+            team_a,
+            goals_a,
+            team_b,
+            goals_b,
+        )
         return team_b, team_a
 
-    probability_a = pd.to_numeric(match["Winning_Probability_A"], errors="coerce")
-    probability_b = pd.to_numeric(match["Winning_Probability_B"], errors="coerce")
-    if not pd.isna(probability_a) and not pd.isna(probability_b) and probability_a != probability_b:
-        return (team_a, team_b) if probability_a > probability_b else (team_b, team_a)
-
+    logger.info(
+        "Predicted winner for match %s: %s over %s by default because winning probabilities "
+        "and predicted goals are tied (%s probability=%s, goals=%s; %s probability=%s, goals=%s)",
+        match_id,
+        team_a,
+        team_b,
+        team_a,
+        probability_a,
+        goals_a,
+        team_b,
+        probability_b,
+        goals_b,
+    )
     return team_a, team_b
 
 
