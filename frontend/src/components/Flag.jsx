@@ -1,4 +1,3 @@
-import React from 'react';
 import { FC } from '../constants/data';
 import styles from './Flag.module.css';
 

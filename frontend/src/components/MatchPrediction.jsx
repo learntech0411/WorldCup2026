@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { FC } from '../constants/data';
+import Flag from './Flag';
 import styles from './MatchPrediction.module.css';
 
 const API_PREFIX = import.meta.env.VITE_API_PREFIX || 'http://localhost:8000/api';
@@ -30,18 +31,34 @@ const countryMatches = (value) => {
 
 const formatValue = (value, type) => {
   if (value == null || value === '') return 'None';
-  if (type === 'percent') return `${(Number(value) * 100).toFixed(1)}%`;
-  if (type === 'distance') return `${Number(value).toFixed(1)} km`;
-  if (type === 'market') return `€${Number(value).toFixed(1)}m`;
+  const numericValue = Number(value);
+  if (['percent', 'distance', 'market', 'number'].includes(type) && !Number.isFinite(numericValue)) {
+    return 'None';
+  }
+  if (type === 'percent') return `${(numericValue * 100).toFixed(1)}%`;
+  if (type === 'distance') return `${numericValue.toFixed(1)} km`;
+  if (type === 'market') return `€${numericValue.toFixed(1)}m`;
   if (type === 'boolean') return value ? 'Yes' : 'No';
-  if (type === 'number') return Number(value).toFixed(1);
+  if (type === 'number') return numericValue.toFixed(1);
   return String(value);
 };
+
+const statValueClass = (type, value) => {
+  if (type === 'boolean') {
+    return value ? styles.badgePositive : styles.badgeNeutral;
+  }
+  if (type === 'percent') return styles.probabilityValue;
+  if (type === 'text' && (value == null || value === '')) return styles.mutedValue;
+  return '';
+};
+
+const flagTeamName = (teamName) => (teamName === 'Curaçao' ? 'Curacao' : teamName);
 
 const TeamInput = ({ label, value, onChange, onSelect }) => {
   const [open, setOpen] = useState(false);
   const wrapRef = useRef(null);
   const matches = useMemo(() => countryMatches(value), [value]);
+  const hasExactMatch = Boolean(exactCountry(value));
 
   useEffect(() => {
     const closeOnOutsideClick = (event) => {
@@ -59,8 +76,10 @@ const TeamInput = ({ label, value, onChange, onSelect }) => {
       <label className={styles.inputLabel}>
         <span>{label}</span>
         <input
+          className={`${styles.countryInput} ${hasExactMatch ? styles.countryInputReady : ''}`}
           type="text"
           value={value}
+          placeholder="Country"
           onChange={(event) => {
             onChange(event.target.value);
             setOpen(true);
@@ -91,13 +110,26 @@ const TeamInput = ({ label, value, onChange, onSelect }) => {
 };
 
 const TeamPanel = ({ team }) => (
-  <section className={styles.teamPanel}>
-    <h2>{team.Team}</h2>
+  <section className={`${styles.teamPanel} ${team.Home_Advantage ? styles.homePanel : ''}`}>
+    <div className={styles.teamHead}>
+      <div className={styles.flagFrame}>
+        <Flag team={flagTeamName(team.Team)} size="lg" />
+      </div>
+      <div className={styles.teamTitleGroup}>
+        <span className={team.Home_Advantage ? styles.homeBadge : styles.neutralBadge}>
+          {team.Home_Advantage ? 'Home advantage' : 'Away / neutral'}
+        </span>
+        <h2>{team.Team}</h2>
+      </div>
+    </div>
     <dl className={styles.statsList}>
       {STAT_ROWS.map(([label, key, type]) => (
-        <div key={key} className={styles.statRow}>
+        <div
+          key={key}
+          className={`${styles.statRow} ${key === 'Winning_Probability' ? styles.statRowPrimary : ''}`}
+        >
           <dt>{label}</dt>
-          <dd>{formatValue(team[key], type)}</dd>
+          <dd className={statValueClass(type, team[key])}>{formatValue(team[key], type)}</dd>
         </div>
       ))}
     </dl>
@@ -183,9 +215,22 @@ const MatchPrediction = () => {
       {!loading && error && <div className={styles.state}>{error}</div>}
 
       {!loading && !error && matchData?.Teams?.length === 2 && (
-        <div className={styles.resultsGrid}>
-          <TeamPanel team={matchData.Teams[0]} />
-          <TeamPanel team={matchData.Teams[1]} />
+        <>
+          <div className={styles.matchSummary}>
+            <span>Match {matchData.Match_ID}</span>
+            <strong>{matchData.Team_A} vs {matchData.Team_B}</strong>
+          </div>
+          <div className={styles.resultsGrid}>
+            <TeamPanel team={matchData.Teams[0]} />
+            <TeamPanel team={matchData.Teams[1]} />
+          </div>
+        </>
+      )}
+
+      {!loading && !error && !matchData && (
+        <div className={styles.emptyState}>
+          <strong>Awaiting matchup</strong>
+          <span>Completed fixture data will appear here.</span>
         </div>
       )}
     </div>
