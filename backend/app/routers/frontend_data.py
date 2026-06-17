@@ -331,14 +331,9 @@ def _get_played_match_between(connection: Connection, team_1: str, team_2: str) 
             '''
             SELECT *
             FROM matches
-            WHERE "Goals_A" IS NOT NULL
-              AND "Goals_B" IS NOT NULL
-              AND CAST("Goals_A" AS TEXT) != ''
-              AND CAST("Goals_B" AS TEXT) != ''
-              AND (
+            WHERE 
                 ("Team_A" IN :team_1_variants AND "Team_B" IN :team_2_variants)
                 OR ("Team_A" IN :team_2_variants AND "Team_B" IN :team_1_variants)
-              )
             ORDER BY "Match_ID" DESC
             LIMIT 1
             '''
