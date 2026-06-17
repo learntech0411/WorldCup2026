@@ -8,7 +8,11 @@ from sqlalchemy.engine import Connection, Engine
 
 from app.database import get_engine
 from app.predictions import run_predictions_for_matches, winner_prediction
-from app.utilities import calculate_all_group_score_matrices, calculate_match_power_score
+from app.utilities import (
+    HOME_COUNTRY_STADIUMS,
+    calculate_all_group_score_matrices,
+    calculate_match_power_score,
+)
 
 
 router = APIRouter(prefix="/api", tags=["frontend-data"])
@@ -366,8 +370,8 @@ def _match_team_data(
         "Team": team_name,
         "Winning_Probability": match[f"Winning_Probability_{side}"],
         "Match_Score": power_score[f"Match_Power_Score_{side}"],
-        "Elo_Score": country.get("Base_Elo"),
-        "Base_Strength": country.get("Base_Strength"),
+        "Total_Transfer_Market_Value": _total_transfer_market_value(connection, team_name),
+        "Home_Advantage": _has_home_advantage(team_name, str(match["Stadium_Name"])),
         "Club_Synergies": country.get("Synergies", ""),
         "Injured_Players": country.get("Injured_Players", ""),
         "Days_Rested": _days_rested(connection, match, team_name),
@@ -403,10 +407,29 @@ def _get_country(connection: Connection, country_name: str) -> dict:
     return dict(country)
 
 
+def _total_transfer_market_value(connection: Connection, team_name: str) -> float:
+    total_value = connection.execute(
+        text(
+            '''
+            SELECT COALESCE(SUM("Market_Value"), 0)
+            FROM players
+            WHERE "Country" IN :country_variants
+            '''
+        ).bindparams(bindparam("country_variants", expanding=True)),
+        {"country_variants": tuple(_country_name_variants(team_name))},
+    ).scalar_one()
+    return float(total_value or 0.0)
+
+
+def _has_home_advantage(team_name: str, stadium_name: str) -> bool:
+    team_variants = _country_name_variants(team_name)
+    return any(stadium_name in HOME_COUNTRY_STADIUMS.get(team, set()) for team in team_variants)
+
+
 def _days_rested(connection: Connection, match: dict, team_name: str) -> int | str | None:
     previous_match = _previous_played_match(connection, int(match["Match_ID"]), team_name)
     if previous_match is None:
-        return "No games played yet."
+        return "No games played in WC before yet."
 
     match_date = _parse_match_date(match.get("Date"))
     previous_date = _parse_match_date(previous_match.get("Date"))

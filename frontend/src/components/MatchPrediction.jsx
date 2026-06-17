@@ -10,12 +10,12 @@ const COUNTRY_OPTIONS = Object.keys(FC)
 const STAT_ROWS = [
   ['Winning Probability', 'Winning_Probability', 'percent'],
   ['Match Score', 'Match_Score', 'number'],
-  ['Elo Score', 'Elo_Score', 'number'],
-  ['Base Strength', 'Base_Strength', 'number'],
+  ['Total Transfer Market Value', 'Total_Transfer_Market_Value', 'market'],
   ['Club synergies', 'Club_Synergies', 'text'],
   ['Injured Players', 'Injured_Players', 'text'],
   ['Days Rested', 'Days_Rested', 'text'],
   ['Travel Fatigue KM', 'Travel_Distance_KM', 'distance'],
+  ['Home Advantage', 'Home_Advantage', 'boolean'],
 ];
 
 const exactCountry = (value) => (
@@ -32,6 +32,8 @@ const formatValue = (value, type) => {
   if (value == null || value === '') return 'None';
   if (type === 'percent') return `${(Number(value) * 100).toFixed(1)}%`;
   if (type === 'distance') return `${Number(value).toFixed(1)} km`;
+  if (type === 'market') return `€${Number(value).toFixed(1)}m`;
+  if (type === 'boolean') return value ? 'Yes' : 'No';
   if (type === 'number') return Number(value).toFixed(1);
   return String(value);
 };
