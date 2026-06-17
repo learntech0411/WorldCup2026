@@ -54,6 +54,29 @@ const statValueClass = (type, value) => {
 
 const flagTeamName = (teamName) => (teamName === 'Curaçao' ? 'Curacao' : teamName);
 
+const scoreRangeFromDistribution = (distribution) => {
+  const goals = distribution?.Matrix?.flatMap((item) => [item.Goals_A, item.Goals_B]) || [];
+  const maxGoal = goals.length ? Math.max(...goals) : 7;
+  return Array.from({ length: maxGoal + 1 }, (_, index) => index);
+};
+
+const matrixProbability = (distribution, goalsA, goalsB) => (
+  distribution?.Matrix?.find((item) => item.Goals_A === goalsA && item.Goals_B === goalsB)?.Probability || 0
+);
+
+const heatStyle = (goalsA, goalsB, probability, maxProbability) => {
+  const intensity = maxProbability > 0 ? Math.min(1, probability / maxProbability) : 0;
+  const alpha = 0.12 + intensity * 0.56;
+
+  if (goalsA > goalsB) {
+    return { backgroundColor: `rgba(5, 150, 105, ${alpha})` };
+  }
+  if (goalsB > goalsA) {
+    return { backgroundColor: `rgba(66, 165, 245, ${alpha})` };
+  }
+  return { backgroundColor: `rgba(229, 181, 71, ${alpha})` };
+};
+
 const TeamInput = ({ label, value, onChange, onSelect }) => {
   const [open, setOpen] = useState(false);
   const wrapRef = useRef(null);
@@ -136,12 +159,80 @@ const TeamPanel = ({ team }) => (
   </section>
 );
 
+const ScoreDistribution = ({ distribution, teams }) => {
+  if (!distribution?.Matrix?.length || teams.length !== 2) return null;
+
+  const goals = scoreRangeFromDistribution(distribution);
+  const maxProbability = Math.max(...distribution.Matrix.map((item) => item.Probability));
+
+  return (
+    <section className={styles.matrixCard}>
+      <div className={styles.matrixHead}>
+        <div>
+          <span>Score distribution</span>
+          <h2>{teams[0].Team} vs {teams[1].Team}</h2>
+        </div>
+        <div className={styles.xgPills}>
+          <span>xG {teams[0].Team}: {distribution.Expected_Goals_A.toFixed(2)}</span>
+          <span>xG {teams[1].Team}: {distribution.Expected_Goals_B.toFixed(2)}</span>
+        </div>
+      </div>
+
+      <div className={styles.matrixLegend}>
+        <span className={styles.legendWinA}>{teams[0].Team} win</span>
+        <span className={styles.legendDraw}>Draw</span>
+        <span className={styles.legendWinB}>{teams[1].Team} win</span>
+      </div>
+
+      <div className={styles.axisCaption}>
+        <span>Rows: {teams[0].Team} goals</span>
+        <span>Columns: {teams[1].Team} goals</span>
+      </div>
+
+      <div
+        className={styles.matrixGrid}
+        style={{ gridTemplateColumns: `68px repeat(${goals.length}, minmax(52px, 1fr))` }}
+      >
+        <div className={styles.axisCorner}>Score</div>
+        {goals.map((goalsB) => (
+          <div key={`col-${goalsB}`} className={styles.axisHeader}>
+            {goalsB}
+          </div>
+        ))}
+
+        {goals.map((goalsA) => (
+          <div key={`row-${goalsA}`} className={styles.matrixRow}>
+            <div className={styles.axisHeader}>{goalsA}</div>
+            {goals.map((goalsB) => {
+              const probability = matrixProbability(distribution, goalsA, goalsB);
+              return (
+                <div
+                  key={`${goalsA}-${goalsB}`}
+                  className={styles.matrixCell}
+                  style={heatStyle(goalsA, goalsB, probability, maxProbability)}
+                  title={`${teams[0].Team} ${goalsA}-${goalsB} ${teams[1].Team}: ${(probability * 100).toFixed(2)}%`}
+                >
+                  <strong>{goalsA}-{goalsB}</strong>
+                  <span>{(probability * 100).toFixed(1)}%</span>
+                </div>
+              );
+            })}
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+};
+
 const MatchPrediction = () => {
   const [teamOne, setTeamOne] = useState('');
   const [teamTwo, setTeamTwo] = useState('');
   const [matchData, setMatchData] = useState(null);
+  const [scoreDistribution, setScoreDistribution] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [loadingDistribution, setLoadingDistribution] = useState(false);
   const [error, setError] = useState('');
+  const [distributionError, setDistributionError] = useState('');
 
   const selectedTeamOne = exactCountry(teamOne);
   const selectedTeamTwo = exactCountry(teamTwo);
@@ -152,7 +243,9 @@ const MatchPrediction = () => {
     const loadMatchData = async () => {
       if (!selectedTeamOne || !selectedTeamTwo || selectedTeamOne === selectedTeamTwo) {
         setMatchData(null);
+        setScoreDistribution(null);
         setError('');
+        setDistributionError('');
         return;
       }
 
@@ -173,6 +266,8 @@ const MatchPrediction = () => {
 
         if (!ignore) {
           setMatchData(data);
+          setScoreDistribution(null);
+          setDistributionError('');
         }
       } catch (requestError) {
         if (!ignore) {
@@ -192,6 +287,54 @@ const MatchPrediction = () => {
       ignore = true;
     };
   }, [selectedTeamOne, selectedTeamTwo]);
+
+  useEffect(() => {
+    let ignore = false;
+
+    const loadScoreDistribution = async () => {
+      const teams = matchData?.Teams;
+      if (!teams || teams.length !== 2) {
+        setScoreDistribution(null);
+        setDistributionError('');
+        return;
+      }
+
+      setLoadingDistribution(true);
+      setDistributionError('');
+
+      try {
+        const params = new URLSearchParams({
+          match_score_a: teams[0].Match_Score,
+          match_score_b: teams[1].Match_Score,
+        });
+        const response = await fetch(`${API_PREFIX}/score-distribution?${params.toString()}`);
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(data.detail || 'Could not load score distribution.');
+        }
+
+        if (!ignore) {
+          setScoreDistribution(data);
+        }
+      } catch (requestError) {
+        if (!ignore) {
+          setScoreDistribution(null);
+          setDistributionError(requestError.message || 'Could not load score distribution.');
+        }
+      } finally {
+        if (!ignore) {
+          setLoadingDistribution(false);
+        }
+      }
+    };
+
+    loadScoreDistribution();
+
+    return () => {
+      ignore = true;
+    };
+  }, [matchData]);
 
   return (
     <div className={styles.wrap}>
@@ -224,6 +367,13 @@ const MatchPrediction = () => {
             <TeamPanel team={matchData.Teams[0]} />
             <TeamPanel team={matchData.Teams[1]} />
           </div>
+          {loadingDistribution && <div className={styles.state}>Loading score distribution...</div>}
+          {!loadingDistribution && distributionError && (
+            <div className={styles.state}>{distributionError}</div>
+          )}
+          {!loadingDistribution && !distributionError && scoreDistribution && (
+            <ScoreDistribution distribution={scoreDistribution} teams={matchData.Teams} />
+          )}
         </>
       )}
 

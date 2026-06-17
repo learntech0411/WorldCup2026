@@ -7,7 +7,12 @@ from sqlalchemy import bindparam, text
 from sqlalchemy.engine import Connection, Engine
 
 from app.database import get_engine
-from app.predictions import run_predictions_for_matches, winner_prediction
+from app.predictions import (
+    _dixon_coles_matrix,
+    _expected_goals,
+    run_predictions_for_matches,
+    winner_prediction,
+)
 from app.utilities import (
     HOME_COUNTRY_STADIUMS,
     calculate_all_group_score_matrices,
@@ -133,6 +138,30 @@ def get_match_data(team_1: str, team_2: str, engine: Engine = Depends(get_engine
             "Team_A": match["Team_A"],
             "Team_B": match["Team_B"],
             "Teams": team_payload,
+        }
+    )
+
+
+@router.get("/score-distribution")
+def get_score_distribution(match_score_a: float, match_score_b: float):
+    xg_a, xg_b = _expected_goals(match_score_a, match_score_b)
+    matrix = _dixon_coles_matrix(xg_a, xg_b)
+    matrix_rows = [
+        {
+            "Goals_A": int(goals_a),
+            "Goals_B": int(goals_b),
+            "Probability": float(probability),
+        }
+        for (goals_a, goals_b), probability in sorted(matrix.items())
+    ]
+
+    return _sanitize(
+        {
+            "Match_Score_A": float(match_score_a),
+            "Match_Score_B": float(match_score_b),
+            "Expected_Goals_A": float(xg_a),
+            "Expected_Goals_B": float(xg_b),
+            "Matrix": matrix_rows,
         }
     )
 
