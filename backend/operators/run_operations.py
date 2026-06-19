@@ -64,6 +64,7 @@ def export_first_predictions_before_world_cup(db: Engine = None) -> None:
 def update_during_group_match(db: Engine = None) -> None:
     db = _engine_or_default(db)
     # scrap the matches' Goals_A and Goals_B
+    reset_knockout_matches(db)
     update_player_injuries(db)
     refresh_elo_ratings(db)
     update_country_synergies(db)
@@ -78,6 +79,7 @@ def update_during_group_match(db: Engine = None) -> None:
 
 def run_once_after_group_stage(db: Engine = None) -> None:
     db = _engine_or_default(db)
+    reset_knockout_matches(db)
     round_of_32_participants = [] # create dict where key is match id and value is tuple of strings containing (Team_A, Team_B)
     set_real_round_of_32_participants_and_run_prediction(db, round_of_32_participants)
 
@@ -437,7 +439,7 @@ def _engine_or_default(db: Engine = None) -> Engine:
 
 
 if __name__ == "__main__":
-    run_full_prediction_pipeline()
+    # run_full_prediction_pipeline()
     # update_country_injured_players()
-    #update_during_group_match()
+    update_during_group_match()
     # export_first_predictions_before_world_cup()
