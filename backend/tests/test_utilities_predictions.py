@@ -10,7 +10,11 @@ BACKEND_DIR = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(BACKEND_DIR))
 
 from app.predictions import winner_prediction  # noqa: E402
-from app.utilities import calculate_base_strengths, calculate_total_utility_values  # noqa: E402
+from app.utilities import (  # noqa: E402
+    calculate_all_group_score_matrices,
+    calculate_base_strengths,
+    calculate_total_utility_values,
+)
 
 
 def test_player_expected_utility_uses_age_position_and_rank_multipliers():
@@ -117,6 +121,37 @@ def test_winner_prediction_updates_match_with_probabilities_and_predicted_score(
         + float(match["Draw_Probability"])
     )
     assert round(probability_sum, 6) == 1.0
+
+
+def test_prediction_group_matrix_uses_actual_score_before_predicted_score():
+    engine = create_engine("sqlite:///:memory:")
+    seed_countries(
+        engine,
+        [
+            {"Name": "Actual Winner", "Group": "A", "Base_Elo": 1700},
+            {"Name": "Predicted Winner", "Group": "A", "Base_Elo": 1800},
+        ],
+    )
+    pd.DataFrame(
+        [
+            {
+                "Match_ID": 1,
+                "Team_A": "Actual Winner",
+                "Team_B": "Predicted Winner",
+                "Match_Type": "Group",
+                "Goals_A": 2,
+                "Goals_B": 0,
+                "Predicted_Goals_A": 0,
+                "Predicted_Goals_B": 3,
+            }
+        ]
+    ).to_sql("matches", engine, index=False)
+
+    table = calculate_all_group_score_matrices(engine, "Prediction")["A"].set_index("Team")
+
+    assert table.loc["Actual Winner", "Pts"] == 3
+    assert table.loc["Actual Winner", "GF"] == 2
+    assert table.loc["Predicted Winner", "Pts"] == 0
 
 
 def seed_countries(engine, countries):

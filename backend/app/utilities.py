@@ -352,7 +352,8 @@ def calculate_all_group_score_matrices(
 
     Args:
         db: SQLAlchemy Session, Connection, or Engine connected to the app database.
-        mode: "Prediction" uses predicted goals. "Current" uses actual goals.
+        mode: "Prediction" uses actual goals when present, then predicted goals.
+            "Current" uses actual goals only.
 
     Returns:
         A dictionary keyed by group name, with one standings DataFrame per group.
@@ -373,11 +374,9 @@ def calculate_all_group_score_matrices(
         if matches.empty:
             return _rank_all_groups(group_tables)
 
-        goals_a_column, goals_b_column = _score_columns_for_mode(mode)
         group_matches = matches[matches["Match_Type"] == "Group"].copy()
         for match in group_matches.itertuples(index=False):
-            goals_a = getattr(match, goals_a_column)
-            goals_b = getattr(match, goals_b_column)
+            goals_a, goals_b = _goals_for_score_mode(match, mode)
             if _is_missing_score(goals_a) or _is_missing_score(goals_b):
                 continue
 
@@ -870,6 +869,17 @@ def _score_columns_for_mode(mode: ScoreMode) -> tuple[str, str]:
     if mode == "Prediction":
         return "Predicted_Goals_A", "Predicted_Goals_B"
     return "Goals_A", "Goals_B"
+
+
+def _goals_for_score_mode(match: object, mode: ScoreMode) -> tuple[object, object]:
+    if mode == "Prediction":
+        actual_goals_a = getattr(match, "Goals_A")
+        actual_goals_b = getattr(match, "Goals_B")
+        if not _is_missing_score(actual_goals_a) and not _is_missing_score(actual_goals_b):
+            return actual_goals_a, actual_goals_b
+
+    goals_a_column, goals_b_column = _score_columns_for_mode(mode)
+    return getattr(match, goals_a_column), getattr(match, goals_b_column)
 
 
 def _apply_group_match_result(
