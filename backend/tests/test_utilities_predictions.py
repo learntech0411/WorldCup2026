@@ -9,7 +9,7 @@ from sqlalchemy import create_engine, text
 BACKEND_DIR = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(BACKEND_DIR))
 
-from app.predictions import winner_prediction  # noqa: E402
+from app.predictions import reset_knockout_matches, winner_prediction  # noqa: E402
 from app.utilities import (  # noqa: E402
     calculate_all_group_score_matrices,
     calculate_base_strengths,
@@ -152,6 +152,51 @@ def test_prediction_group_matrix_uses_actual_score_before_predicted_score():
     assert table.loc["Actual Winner", "Pts"] == 3
     assert table.loc["Actual Winner", "GF"] == 2
     assert table.loc["Predicted Winner", "Pts"] == 0
+
+
+def test_reset_knockout_matches_keeps_played_matches():
+    engine = create_engine("sqlite:///:memory:")
+    pd.DataFrame(
+        [
+            {
+                "Match_ID": 73,
+                "Team_A": "Played A",
+                "Team_B": "Played B",
+                "Match_Type": "Knockout",
+                "Goals_A": 1,
+                "Goals_B": 0,
+                "Predicted_Goals_A": 2,
+                "Predicted_Goals_B": 1,
+                "Winning_Probability_A": 0.6,
+                "Winning_Probability_B": 0.2,
+                "Draw_Probability": 0.2,
+            },
+            {
+                "Match_ID": 74,
+                "Team_A": "Unplayed A",
+                "Team_B": "Unplayed B",
+                "Match_Type": "Knockout",
+                "Goals_A": None,
+                "Goals_B": None,
+                "Predicted_Goals_A": 1,
+                "Predicted_Goals_B": 1,
+                "Winning_Probability_A": 0.4,
+                "Winning_Probability_B": 0.3,
+                "Draw_Probability": 0.3,
+            },
+        ]
+    ).to_sql("matches", engine, index=False)
+
+    reset_knockout_matches(engine)
+
+    matches = pd.read_sql_query(text('SELECT * FROM matches ORDER BY "Match_ID"'), engine)
+    played_match = matches[matches["Match_ID"] == 73].iloc[0]
+    unplayed_match = matches[matches["Match_ID"] == 74].iloc[0]
+
+    assert played_match["Team_A"] == "Played A"
+    assert played_match["Predicted_Goals_A"] == 2
+    assert pd.isna(unplayed_match["Team_A"])
+    assert pd.isna(unplayed_match["Predicted_Goals_A"])
 
 
 def seed_countries(engine, countries):

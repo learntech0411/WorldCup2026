@@ -286,7 +286,7 @@ def reset_knockout_matches(
     db: Session | Connection | Engine,
     starting_match_id: int | None = None,
 ) -> None:
-    """Reset knockout teams and prediction columns."""
+    """Reset knockout teams and prediction columns for unplayed matches."""
     connection = _get_connection(db)
     transaction = connection.begin() if isinstance(db, Engine) else None
     should_close = isinstance(db, Engine)
@@ -389,6 +389,12 @@ def _reset_knockout_matches(connection: Connection, starting_match_id: int | Non
             "Winning_Probability_B" = NULL,
             "Draw_Probability" = NULL
         WHERE "Match_Type" = 'Knockout'
+          AND (
+            "Goals_A" IS NULL
+            OR "Goals_B" IS NULL
+            OR CAST("Goals_A" AS TEXT) = ''
+            OR CAST("Goals_B" AS TEXT) = ''
+          )
     '''
 
     if starting_match_id is not None:
