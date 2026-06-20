@@ -23,7 +23,11 @@ def get_database_url() -> str:
 
 @lru_cache(maxsize=1)
 def get_engine() -> Engine:
-    return create_engine(get_database_url())
+    return create_engine(
+        get_database_url(),
+        pool_pre_ping=True,
+        pool_recycle=300,
+    )
 
 
 def get_connection() -> Generator[Connection, None, None]:

@@ -17,7 +17,11 @@ def initialize_database():
         db_url = db_url.replace("postgres://", "postgresql://", 1)
 
     print("Connecting to Neon database...")
-    engine = create_engine(db_url)
+    engine = create_engine(
+        db_url,
+        pool_pre_ping=True,
+        pool_recycle=300,
+    )
 
     csv_to_tables = {
         "world_cup_players.csv": "players",
