@@ -102,7 +102,6 @@ Alessandro Schöpf,Austria,0.8,1.15,1.0,0.4,1.0,0.368
 Florian Wiegele,Austria,2.2,1.0,1.5,0.1,1.0,0.33000000000000007
 Patrick Pentz,Austria,2.2,1.0,1.5,0.1,1.0,0.33000000000000007
 Stefan Posch,Austria,6.0,1.0,1.25,0.0,1.0,0.0
-Jérémy Doku,Belgium,75.0,1.0,0.85,1.0,1.0,63.75
 Senne Lammens,Belgium,35.0,1.0,1.5,1.0,1.0,52.5
 Amadou Onana,Belgium,45.0,1.0,1.0,1.0,1.02,45.9
 Youri Tielemans,Belgium,30.0,1.0,1.0,1.0,1.02,30.6
@@ -113,12 +112,12 @@ Nathan Ngoy,Belgium,25.0,0.7,1.25,1.0,1.02,22.3125
 Arthur Theate,Belgium,17.0,1.0,1.25,1.0,1.0,21.25
 Matias Fernandez-Pardo,Belgium,35.0,0.7,0.85,1.0,1.02,21.2415
 Alexis Saelemaekers,Belgium,20.0,1.0,1.0,1.0,1.02,20.4
-Leandro Trossard,Belgium,18.0,1.15,0.85,0.8,1.0,14.076
+Leandro Trossard,Belgium,18.0,1.15,0.85,1.0,1.0,17.595
 Diego Moreira,Belgium,25.0,0.7,1.0,0.8,1.0,14.0
 Joaquin Seys,Belgium,20.0,0.7,1.25,0.8,1.0,14.0
 Dodi Lukébakio,Belgium,15.0,1.0,0.85,0.8,1.0,10.200000000000001
 Nicolas Raskin,Belgium,12.0,1.0,1.0,0.8,1.0,9.600000000000001
-Timothy Castagne,Belgium,8.0,1.15,1.25,0.4,1.0,4.6000000000000005
+Timothy Castagne,Belgium,8.0,1.15,1.25,0.8,1.0,9.200000000000001
 Kevin De Bruyne,Belgium,8.0,1.0,1.0,0.4,1.0,3.2
 Thibaut Courtois,Belgium,18.0,1.0,1.5,0.1,1.0,2.7
 Mike Penders,Belgium,25.0,0.7,1.5,0.1,1.0,2.625
@@ -126,7 +125,8 @@ Romelu Lukaku,Belgium,6.0,1.15,0.85,0.4,1.0,2.3459999999999996
 Hans Vanaken,Belgium,5.0,1.15,1.0,0.4,1.0,2.3000000000000003
 Brandon Mechele,Belgium,2.8,1.15,1.25,0.4,1.0,1.6099999999999999
 Thomas Meunier,Belgium,1.5,1.0,1.25,0.4,1.0,0.75
-Axel Witsel,Belgium,1.4,1.0,1.0,0.1,1.0,0.13999999999999999
+Axel Witsel,Belgium,1.4,1.0,1.0,0.4,1.0,0.5599999999999999
+Jérémy Doku,Belgium,75.0,1.0,0.85,0.0,1.0,0.0
 Zeno Debast,Belgium,28.0,0.7,1.25,0.0,1.0,0.0
 Tarik Muharemović,Bosnia and Herzegovina,25.0,1.0,1.25,1.0,1.0,31.25
 Amar Dedić,Bosnia and Herzegovina,16.0,1.0,1.25,1.0,1.0,20.0
@@ -157,29 +157,29 @@ Mladen Jurkas,Bosnia and Herzegovina,0.7,0.7,1.5,0.1,1.0,0.0735
 Vinicius Junior,Brazil,150.0,1.0,0.85,1.0,1.0,127.5
 Gabriel,Brazil,75.0,1.0,1.25,1.0,1.02,95.625
 Bruno Guimarães,Brazil,70.0,1.0,1.0,1.0,1.0,70.0
-Raphinha,Brazil,80.0,1.0,0.85,1.0,1.0,68.0
 Matheus Cunha,Brazil,75.0,1.0,0.85,1.0,1.0,63.75
 Igor Thiago,Brazil,65.0,1.0,0.85,1.0,1.0,55.25
 Bremer,Brazil,35.0,1.0,1.25,1.0,1.0,43.75
 Marquinhos,Brazil,28.0,1.15,1.25,1.0,1.0,40.24999999999999
 Gabriel Martinelli,Brazil,45.0,1.0,0.85,1.0,1.02,39.015
 Rayan,Brazil,60.0,0.7,0.85,1.0,1.0,35.699999999999996
-Wesley,Brazil,40.0,0.7,1.25,0.8,1.0,28.0
+Wesley,Brazil,40.0,0.7,1.25,1.0,1.0,35.0
 Alisson,Brazil,15.0,1.15,1.5,1.0,1.0,25.875
 Danilo,Brazil,32.0,1.0,1.0,0.8,1.0,25.6
 Lucas Paquetá,Brazil,32.0,1.0,1.0,0.8,1.0,25.6
 Endrick,Brazil,40.0,0.7,0.85,0.8,1.0,19.040000000000003
 Roger Ibañez,Brazil,18.0,1.0,1.25,0.8,1.0,18.0
-Luiz Henrique,Brazil,24.0,1.0,0.85,0.4,1.0,8.16
+Luiz Henrique,Brazil,24.0,1.0,0.85,0.8,1.0,16.32
 Léo Pereira,Brazil,12.0,1.15,1.25,0.4,1.0,6.9
 Fabinho,Brazil,12.0,1.15,1.0,0.4,1.0,5.52
 Douglas Santos,Brazil,7.5,1.15,1.25,0.4,1.0,4.3125
 Casemiro,Brazil,6.0,1.0,1.0,0.4,1.0,2.4000000000000004
 Ederson,Brazil,10.0,1.15,1.5,0.1,1.0,1.725
 Danilo,Brazil,2.0,1.0,1.25,0.4,1.0,1.0
-Alex Sandro,Brazil,1.0,1.0,1.25,0.1,1.0,0.125
+Alex Sandro,Brazil,1.0,1.0,1.25,0.4,1.0,0.5
 Weverton,Brazil,0.7,1.0,1.5,0.1,1.0,0.10499999999999998
 Neymar,Brazil,8.0,1.0,1.0,0.0,1.0,0.0
+Raphinha,Brazil,80.0,1.0,0.85,0.0,1.0,0.0
 Alphonso Davies,Canada,40.0,1.0,1.25,1.0,1.0,50.0
 Jonathan David,Canada,30.0,1.0,0.85,1.0,1.0,25.5
 Promise David,Canada,17.0,1.0,0.85,1.0,1.0,14.45
@@ -623,7 +623,6 @@ Oumar Diakité,Ivory Coast,5.0,0.7,0.85,0.1,1.0,0.29750000000000004
 Jean Michaël Seri,Ivory Coast,0.1,1.0,1.0,0.1,1.0,0.010000000000000002
 Kaishu Sano,Japan,40.0,1.0,1.0,1.0,1.0,40.0
 Zion Suzuki,Japan,20.0,1.0,1.5,1.0,1.0,30.0
-Takefusa Kubo,Japan,30.0,1.0,0.85,1.0,1.0,25.5
 Hiroki Ito,Japan,18.0,1.0,1.25,1.0,1.0,22.5
 Yuito Suzuki,Japan,24.0,1.0,0.85,1.0,1.0,20.4
 Ayase Ueda,Japan,17.0,1.0,0.85,1.0,1.02,14.738999999999999
@@ -631,13 +630,13 @@ Ritsu Doan,Japan,17.0,1.0,0.85,1.0,1.0,14.45
 Ao Tanaka,Japan,13.0,1.0,1.0,1.0,1.0,13.0
 Tsuyoshi Watanabe,Japan,10.0,1.0,1.25,1.0,1.02,12.75
 Daizen Maeda,Japan,13.0,1.0,0.85,1.0,1.0,11.049999999999999
+Ko Itakura,Japan,8.0,1.0,1.25,1.0,1.02,10.2
 Daichi Kamada,Japan,10.0,1.0,1.0,1.0,1.0,10.0
-Ko Itakura,Japan,8.0,1.0,1.25,0.8,1.02,8.16
 Keito Nakamura,Japan,10.0,1.0,0.85,0.8,1.0,6.800000000000001
 Yukinari Sugawara,Japan,5.5,1.0,1.25,0.8,1.0,5.5
 Takehiro Tomiyasu,Japan,5.0,1.0,1.25,0.8,1.02,5.1
 Ayumu Seko,Japan,5.0,1.0,1.25,0.8,1.0,5.0
-Keisuke Goto,Japan,10.0,0.7,0.85,0.4,1.0,2.3800000000000003
+Keisuke Goto,Japan,10.0,0.7,0.85,0.8,1.0,4.760000000000001
 Kento Shiogai,Japan,8.0,0.7,0.85,0.4,1.0,1.904
 Junnosuke Suzuki,Japan,3.5,0.7,1.25,0.4,1.0,1.2249999999999999
 Junya Ito,Japan,3.0,1.15,0.85,0.4,1.0,1.1729999999999998
@@ -645,8 +644,9 @@ Koki Ogawa,Japan,2.0,1.0,0.85,0.4,1.0,0.68
 Shogo Taniguchi,Japan,0.75,1.0,1.25,0.4,1.0,0.375
 Keisuke Osako,Japan,2.0,1.0,1.5,0.1,1.0,0.30000000000000004
 Tomoki Hayakawa,Japan,2.0,1.0,1.5,0.1,1.0,0.30000000000000004
-Yuto Nagatomo,Japan,0.1,1.0,1.25,0.1,1.0,0.0125
+Yuto Nagatomo,Japan,0.1,1.0,1.25,0.4,1.0,0.05
 Wataru Endo,Japan,4.0,1.15,1.0,0.0,1.0,0.0
+Takefusa Kubo,Japan,30.0,1.0,0.85,0.0,1.0,0.0
 Mousa Tamari,Jordan,10.0,1.0,0.85,1.0,1.0,8.5
 Yazan Al-Arab,Jordan,1.0,1.15,1.25,1.0,1.0,1.4375
 Mohannad Abu Taha,Jordan,0.55,1.0,1.25,1.0,1.0,0.6875
@@ -1168,7 +1168,6 @@ Kaan Ayhan,Turkey,1.5,1.15,1.0,0.1,1.0,0.1725
 Samet Akaydin,Turkey,1.2,1.15,1.25,0.1,1.0,0.1725
 Mert Günok,Turkey,0.5,1.0,1.5,0.1,1.0,0.07500000000000001
 Chris Richards,United States,28.0,1.0,1.25,1.0,1.0,35.0
-Christian Pulisic,United States,40.0,1.0,0.85,1.0,1.0,34.0
 Folarin Balogun,United States,40.0,1.0,0.85,1.0,1.0,34.0
 Malik Tillman,United States,30.0,1.0,1.0,1.0,1.0,30.0
 Weston McKennie,United States,30.0,1.0,1.0,1.0,1.0,30.0
@@ -1177,22 +1176,23 @@ Ricardo Pepi,United States,30.0,1.0,0.85,1.0,1.02,26.01
 Tyler Adams,United States,25.0,1.0,1.0,1.0,1.0,25.0
 Sergiño Dest,United States,18.0,1.0,1.25,1.0,1.02,22.95
 Brenden Aaronson,United States,22.0,1.0,1.0,1.0,1.0,22.0
-Timothy Weah,United States,20.0,1.0,1.0,0.8,1.0,16.0
+Timothy Weah,United States,20.0,1.0,1.0,1.0,1.0,20.0
 Haji Wright,United States,16.0,1.0,0.85,0.8,1.0,10.88
 Mark McKenzie,United States,7.0,1.0,1.25,0.8,1.0,7.0
 Joe Scally,United States,7.0,1.0,1.25,0.8,1.0,7.0
 Álex Zendejas,United States,10.0,1.0,0.85,0.8,1.0,6.800000000000001
+Sebastian Berhalter,United States,8.0,1.0,1.0,0.8,1.0,6.4
 Matt Turner,United States,2.5,1.15,1.5,1.0,1.0,4.3125
-Sebastian Berhalter,United States,8.0,1.0,1.0,0.4,1.0,3.2
 Auston Trusty,United States,6.0,1.0,1.25,0.4,1.0,3.0
 Miles Robinson,United States,3.5,1.0,1.25,0.4,1.0,1.75
 Max Arfsten,United States,5.0,1.0,0.85,0.4,1.0,1.7000000000000002
 Cristian Roldán,United States,3.5,1.15,1.0,0.4,1.0,1.6099999999999999
 Giovanni Reyna,United States,4.0,1.0,1.0,0.4,1.0,1.6
-Alex Freeman,United States,3.5,0.7,1.25,0.1,1.0,0.30624999999999997
+Alex Freeman,United States,3.5,0.7,1.25,0.4,1.0,1.2249999999999999
 Matt Freese,United States,2.0,1.0,1.5,0.1,1.0,0.30000000000000004
 Chris Brady,United States,2.5,0.7,1.5,0.1,1.0,0.2625
 Tim Ream,United States,0.15,1.0,1.25,0.1,1.0,0.018750000000000003
+Christian Pulisic,United States,40.0,1.0,0.85,0.0,1.0,0.0
 Federico Valverde,Uruguay,120.0,1.0,1.0,1.0,1.0,120.0
 Maxi Araújo,Uruguay,35.0,1.0,1.25,1.0,1.0,43.75
 Rodrigo Zalazar,Uruguay,30.0,1.0,1.0,1.0,1.0,30.0
