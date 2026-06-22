@@ -89,19 +89,19 @@ David Affengruber,Austria,9.0,1.0,1.25,1.0,1.0,11.25
 Patrick Wimmer,Austria,12.0,1.0,0.85,1.0,1.0,10.2
 Xaver Schlager,Austria,10.0,1.0,1.0,0.8,1.02,8.16
 Alexander Prass,Austria,9.0,1.0,1.0,0.8,1.0,7.2
+Stefan Posch,Austria,6.0,1.0,1.25,0.8,1.0,6.0
 Marcel Sabitzer,Austria,6.0,1.15,1.0,0.8,1.02,5.6304
 David Alaba,Austria,3.5,1.15,1.25,0.8,1.0,4.0249999999999995
-Michael Svoboda,Austria,3.5,1.0,1.25,0.8,1.0,3.5
 Alexander Schlager,Austria,2.0,1.15,1.5,1.0,1.0,3.4499999999999997
+Michael Svoboda,Austria,3.5,1.0,1.25,0.4,1.0,1.75
 Sasa Kalajdzic,Austria,4.0,1.0,0.85,0.4,1.0,1.36
 Florian Grillitsch,Austria,2.5,1.15,1.0,0.4,1.0,1.1500000000000001
 Phillipp Mwene,Austria,1.5,1.15,1.25,0.4,1.0,0.8625
 Marko Arnautovic,Austria,2.5,1.0,0.85,0.4,1.0,0.8500000000000001
 Michael Gregoritsch,Austria,1.5,1.15,0.85,0.4,1.0,0.5864999999999999
-Alessandro Schöpf,Austria,0.8,1.15,1.0,0.4,1.0,0.368
 Florian Wiegele,Austria,2.2,1.0,1.5,0.1,1.0,0.33000000000000007
 Patrick Pentz,Austria,2.2,1.0,1.5,0.1,1.0,0.33000000000000007
-Stefan Posch,Austria,6.0,1.0,1.25,0.0,1.0,0.0
+Alessandro Schöpf,Austria,0.8,1.15,1.0,0.1,1.0,0.092
 Senne Lammens,Belgium,35.0,1.0,1.5,1.0,1.0,52.5
 Amadou Onana,Belgium,45.0,1.0,1.0,1.0,1.02,45.9
 Youri Tielemans,Belgium,30.0,1.0,1.0,1.0,1.02,30.6
@@ -163,14 +163,13 @@ Bremer,Brazil,35.0,1.0,1.25,1.0,1.0,43.75
 Marquinhos,Brazil,28.0,1.15,1.25,1.0,1.0,40.24999999999999
 Gabriel Martinelli,Brazil,45.0,1.0,0.85,1.0,1.02,39.015
 Rayan,Brazil,60.0,0.7,0.85,1.0,1.0,35.699999999999996
-Wesley,Brazil,40.0,0.7,1.25,1.0,1.0,35.0
+Danilo,Brazil,32.0,1.0,1.0,1.0,1.0,32.0
+Lucas Paquetá,Brazil,32.0,1.0,1.0,0.8,1.02,26.112000000000002
 Alisson,Brazil,15.0,1.15,1.5,1.0,1.0,25.875
-Danilo,Brazil,32.0,1.0,1.0,0.8,1.0,25.6
-Lucas Paquetá,Brazil,32.0,1.0,1.0,0.8,1.0,25.6
 Endrick,Brazil,40.0,0.7,0.85,0.8,1.0,19.040000000000003
 Roger Ibañez,Brazil,18.0,1.0,1.25,0.8,1.0,18.0
 Luiz Henrique,Brazil,24.0,1.0,0.85,0.8,1.0,16.32
-Léo Pereira,Brazil,12.0,1.15,1.25,0.4,1.0,6.9
+Léo Pereira,Brazil,12.0,1.15,1.25,0.8,1.02,14.076
 Fabinho,Brazil,12.0,1.15,1.0,0.4,1.0,5.52
 Douglas Santos,Brazil,7.5,1.15,1.25,0.4,1.0,4.3125
 Casemiro,Brazil,6.0,1.0,1.0,0.4,1.0,2.4000000000000004
@@ -178,6 +177,7 @@ Ederson,Brazil,10.0,1.15,1.5,0.1,1.0,1.725
 Danilo,Brazil,2.0,1.0,1.25,0.4,1.0,1.0
 Alex Sandro,Brazil,1.0,1.0,1.25,0.4,1.0,0.5
 Weverton,Brazil,0.7,1.0,1.5,0.1,1.0,0.10499999999999998
+Wesley,Brazil,40.0,0.7,1.25,0.0,1.0,0.0
 Neymar,Brazil,8.0,1.0,1.0,0.0,1.0,0.0
 Raphinha,Brazil,80.0,1.0,0.85,0.0,1.0,0.0
 Alphonso Davies,Canada,40.0,1.0,1.25,1.0,1.0,50.0
@@ -467,30 +467,30 @@ Lucas Digne,France,6.0,1.15,1.25,0.1,1.0,0.8625
 N'Golo Kanté,France,4.0,1.0,1.0,0.1,1.0,0.4
 Jamal Musiala,Germany,100.0,1.0,1.0,1.0,1.08,108.0
 Florian Wirtz,Germany,100.0,1.0,1.0,1.0,1.0,100.0
-Nico Schlotterbeck,Germany,55.0,1.0,1.25,1.0,1.04,71.5
 Aleksandar Pavlovic,Germany,90.0,0.7,1.0,1.0,1.08,68.03999999999999
 Malick Thiaw,Germany,45.0,1.0,1.25,1.0,1.02,57.375
-Felix Nmecha,Germany,50.0,1.0,1.0,1.0,1.04,52.0
+Felix Nmecha,Germany,50.0,1.0,1.0,1.0,1.02,51.0
 Nick Woltemade,Germany,55.0,1.0,0.85,1.0,1.02,47.685
 Angelo Stiller,Germany,45.0,1.0,1.0,1.0,1.04,46.800000000000004
 Kai Havertz,Germany,55.0,1.0,0.85,1.0,1.0,46.75
 Lennart Karl,Germany,60.0,0.7,1.0,1.0,1.08,45.36
-Joshua Kimmich,Germany,35.0,1.15,1.0,0.8,1.08,34.776
+Joshua Kimmich,Germany,35.0,1.15,1.0,1.0,1.08,43.470000000000006
 Jonathan Tah,Germany,28.0,1.15,1.25,0.8,1.08,34.775999999999996
-Maximilian Beier,Germany,40.0,1.0,0.85,0.8,1.04,28.288000000000004
 Jamie Leweling,Germany,40.0,1.0,0.85,0.8,1.04,28.288000000000004
 Nathaniel Brown,Germany,40.0,0.7,1.25,0.8,1.0,28.0
+Maximilian Beier,Germany,40.0,1.0,0.85,0.8,1.02,27.744000000000003
+David Raum,Germany,25.0,1.0,1.25,0.8,1.0,25.0
 Alexander Nübel,Germany,12.0,1.0,1.5,1.0,1.04,18.72
-David Raum,Germany,25.0,1.0,1.25,0.4,1.0,12.5
 Waldemar Anton,Germany,18.0,1.0,1.25,0.4,1.0,9.0
 Leroy Sané,Germany,20.0,1.15,0.85,0.4,1.0,7.82
 Deniz Undav,Germany,22.0,1.0,0.85,0.4,1.0,7.48
 Nadiem Amiri,Germany,17.0,1.0,1.0,0.4,1.0,6.800000000000001
 Leon Goretzka,Germany,12.0,1.15,1.0,0.4,1.0,5.52
-Antonio Rüdiger,Germany,9.0,1.15,1.25,0.1,1.0,1.2937500000000002
+Antonio Rüdiger,Germany,9.0,1.15,1.25,0.4,1.0,5.175000000000001
 Manuel Neuer,Germany,4.0,1.0,1.5,0.1,1.0,0.6000000000000001
 Oliver Baumann,Germany,2.5,1.0,1.5,0.1,1.0,0.375
 Pascal Groß,Germany,2.5,1.0,1.0,0.1,1.0,0.25
+Nico Schlotterbeck,Germany,55.0,1.0,1.25,0.0,1.0,0.0
 Antoine Semenyo,Ghana,80.0,1.0,0.85,1.0,1.0,68.0
 Kamaldeen Sulemana,Ghana,17.0,1.0,0.85,1.0,1.0,14.45
 Brandon Thomas-Asante,Ghana,16.0,1.0,0.85,1.0,1.0,13.6
@@ -599,28 +599,28 @@ Yan Diomande,Ivory Coast,90.0,0.7,0.85,1.0,1.0,53.54999999999999
 Evan Ndicka,Ivory Coast,35.0,1.0,1.25,1.0,1.0,43.75
 Amad Diallo,Ivory Coast,45.0,1.0,0.85,1.0,1.0,38.25
 Ousmane Diomande,Ivory Coast,42.0,0.7,1.25,1.0,1.0,36.75
-Wilfried Singo,Ivory Coast,23.0,1.0,1.25,1.0,1.0,28.75
 Guéla Doué,Ivory Coast,20.0,1.0,1.25,1.0,1.0,25.0
 Bazoumana Touré,Ivory Coast,40.0,0.7,0.85,1.0,1.0,23.8
 Evann Guessand,Ivory Coast,25.0,1.0,0.85,1.0,1.0,21.25
 Ange-Yoan Bonny,Ivory Coast,35.0,0.7,0.85,1.0,1.0,20.825
 Ibrahim Sangaré,Ivory Coast,20.0,1.0,1.0,1.0,1.0,20.0
-Emmanuel Agbadou,Ivory Coast,16.0,1.0,1.25,0.8,1.0,16.0
+Emmanuel Agbadou,Ivory Coast,16.0,1.0,1.25,1.0,1.0,20.0
 Odilon Kossounou,Ivory Coast,15.0,1.0,1.25,0.8,1.0,15.0
 Simon Adingra,Ivory Coast,22.0,1.0,0.85,0.8,1.0,14.96
 Christ Inao Oulaï,Ivory Coast,23.0,0.7,1.0,0.8,1.0,12.879999999999999
 Elye Wahi,Ivory Coast,18.0,1.0,0.85,0.8,1.0,12.24
+Franck Kessié,Ivory Coast,12.0,1.0,1.0,0.8,1.0,9.600000000000001
 Yahia Fofana,Ivory Coast,5.0,1.0,1.5,1.0,1.0,7.5
-Franck Kessié,Ivory Coast,12.0,1.0,1.0,0.4,1.0,4.800000000000001
 Seko Fofana,Ivory Coast,8.0,1.15,1.0,0.4,1.0,3.6799999999999997
 Nicolas Pépé,Ivory Coast,6.0,1.15,0.85,0.4,1.0,2.3459999999999996
 Christopher Operi,Ivory Coast,4.0,1.0,1.25,0.4,1.0,2.0
 Ghislain Konan,Ivory Coast,3.0,1.15,1.25,0.4,1.0,1.725
 Parfait Guiagon,Ivory Coast,5.0,1.0,0.85,0.4,1.0,1.7000000000000002
+Oumar Diakité,Ivory Coast,5.0,0.7,0.85,0.4,1.0,1.1900000000000002
 Alban Lafont,Ivory Coast,3.0,1.0,1.5,0.1,1.0,0.45
 Mohamed Koné,Ivory Coast,2.0,1.0,1.5,0.1,1.0,0.30000000000000004
-Oumar Diakité,Ivory Coast,5.0,0.7,0.85,0.1,1.0,0.29750000000000004
 Jean Michaël Seri,Ivory Coast,0.1,1.0,1.0,0.1,1.0,0.010000000000000002
+Wilfried Singo,Ivory Coast,23.0,1.0,1.25,0.0,1.0,0.0
 Kaishu Sano,Japan,40.0,1.0,1.0,1.0,1.0,40.0
 Zion Suzuki,Japan,20.0,1.0,1.5,1.0,1.0,30.0
 Hiroki Ito,Japan,18.0,1.0,1.25,1.0,1.0,22.5
