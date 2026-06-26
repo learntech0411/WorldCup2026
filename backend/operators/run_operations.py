@@ -80,7 +80,24 @@ def update_during_group_match(db: Engine = None) -> None:
 def run_once_after_group_stage(db: Engine = None) -> None:
     db = _engine_or_default(db)
     reset_knockout_matches(db)
-    round_of_32_participants = [] # create dict where key is match id and value is tuple of strings containing (Team_A, Team_B)
+    round_of_32_participants = {
+        73: ("South Africa", "Canada"),
+        74: ("Germany", ""),
+        75: ("Netherlands", "Morocco"),
+        76: ("Brazil", "Japan"),
+        77: ("", ""),
+        78: ("Ivory Coast", ""),
+        79: ("Mexico", ""),
+        80: ("", ""),
+        81: ("United States", "Bosnia and Herzegovina"),
+        82: ("", ""),
+        83: ("", ""),
+        84: ("", ""),
+        85: ("Switzerland", ""),
+        86: ("Argentina", ""),
+        87: ("", ""),
+        88: ("Australia", ""),
+    } # create dict where key is match id and value is tuple of strings containing (Team_A, Team_B)
     set_real_round_of_32_participants_and_run_prediction(db, round_of_32_participants)
 
 def update_during_knockout_match(db: Engine = None) -> None:
