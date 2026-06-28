@@ -61,6 +61,30 @@ def export_first_predictions_before_world_cup(db: Engine = None) -> None:
     )
 
 
+def export_predictions_before_first_knockout(db: Engine = None) -> None:
+    """Export knockout match rows to predictions_before_first_knockout.csv."""
+    db = _engine_or_default(db)
+
+    with db.connect() as connection:
+        knockout_matches = pd.read_sql_query(
+            text(
+                '''
+                SELECT *
+                FROM matches
+                WHERE "Match_Type" = 'Knockout'
+                ORDER BY "Match_ID"
+                '''
+            ),
+            connection,
+        )
+
+    knockout_matches.to_csv(
+        BACKEND_DIR / "predictions_before_first_knockout.csv",
+        index=False,
+        encoding="utf-8",
+    )
+
+
 def update_during_group_match(db: Engine = None) -> None:
     db = _engine_or_default(db)
     # scrap the matches' Goals_A and Goals_B
