@@ -361,8 +361,8 @@ Timothy Fayulu,DR Congo,0.8,1.0,1.5,0.1,1.0,0.12000000000000002
 Lionel Mpasi-Nzau,DR Congo,0.4,1.15,1.5,0.1,1.0,0.06899999999999999
 Gaël Kakuta,DR Congo,0.3,1.0,1.0,0.1,1.0,0.03
 Aaron Tshibola,DR Congo,0.15,1.15,1.0,0.1,1.0,0.017249999999999998
-Moisés Caicedo,Ecuador,100.0,1.0,1.0,1.0,1.0,100.0
 Willian Pacho,Ecuador,80.0,1.0,1.25,1.0,1.0,100.0
+Moisés Caicedo,Ecuador,100.0,1.0,1.0,1.0,1.0,100.0
 Piero Hincapié,Ecuador,50.0,1.0,1.25,1.0,1.0,62.5
 Joel Ordóñez,Ecuador,33.0,0.7,1.25,1.0,1.0,28.874999999999996
 Pervis Estupiñán,Ecuador,12.0,1.0,1.25,1.0,1.0,15.0
@@ -521,8 +521,8 @@ Jean-Ricner Bellegarde,Haiti,16.0,1.0,1.0,1.0,1.0,16.0
 Wilson Isidor,Haiti,18.0,1.0,0.85,1.0,1.0,15.299999999999999
 Danley Jean Jacques,Haiti,3.0,1.0,1.0,1.0,1.0,3.0
 Josué Casimir,Haiti,3.0,1.0,0.85,1.0,1.0,2.55
-Hannes Delcroix,Haiti,2.0,1.0,1.25,1.0,1.0,2.5
 Jean-Kévin Duverne,Haiti,2.0,1.0,1.25,1.0,1.0,2.5
+Hannes Delcroix,Haiti,2.0,1.0,1.25,1.0,1.0,2.5
 Carlens Arcus,Haiti,1.8,1.0,1.25,1.0,1.0,2.25
 Lenny Joseph,Haiti,2.0,1.0,0.85,1.0,1.0,1.7
 Frantzdy Pierrot,Haiti,1.5,1.15,0.85,1.0,1.0,1.4662499999999998
@@ -780,29 +780,29 @@ Tommy Smith,New Zealand,0.05,1.0,1.25,0.1,1.0,0.00625
 Erling Haaland,Norway,200.0,1.0,0.85,1.0,1.0,170.0
 Martin Ødegaard,Norway,65.0,1.0,1.0,1.0,1.0,65.0
 Jørgen Strand Larsen,Norway,40.0,1.0,0.85,1.0,1.0,34.0
+Julian Ryerson,Norway,25.0,1.0,1.25,1.0,1.0,31.25
 Sander Berge,Norway,25.0,1.0,1.0,1.0,1.02,25.5
 Kristoffer Ajer,Norway,18.0,1.0,1.25,1.0,1.0,22.5
 Alexander Sørloth,Norway,20.0,1.15,0.85,1.0,1.0,19.55
 Antonio Nusa,Norway,32.0,0.7,0.85,1.0,1.0,19.04
 Andreas Schjelderup,Norway,30.0,0.7,0.85,1.0,1.02,18.206999999999997
 Fredrik Aursnes,Norway,15.0,1.15,1.0,1.0,1.02,17.595
-Oscar Bobb,Norway,28.0,0.7,0.85,1.0,1.02,16.993199999999998
+Oscar Bobb,Norway,28.0,0.7,0.85,0.8,1.02,13.594559999999998
 Torbjørn Heggem,Norway,13.0,1.0,1.25,0.8,1.0,13.0
 Leo Østigård,Norway,13.0,1.0,1.25,0.8,1.0,13.0
 Kristian Thorstvedt,Norway,12.0,1.0,1.0,0.8,1.0,9.600000000000001
 Jens Petter Hauge,Norway,12.0,1.0,0.85,0.8,1.0,8.16
-David Møller Wolfe,Norway,8.0,1.0,1.25,0.8,1.0,8.0
 Sander Tangvik,Norway,3.0,1.0,1.5,1.0,1.0,4.5
+David Møller Wolfe,Norway,8.0,1.0,1.25,0.4,1.0,4.0
 Patrick Berg,Norway,8.0,1.0,1.0,0.4,1.0,3.2
 Henrik Falchener,Norway,6.0,1.0,1.25,0.4,1.0,3.0
 Sondre Langås,Norway,4.0,1.0,1.25,0.4,1.0,2.0
 Fredrik Bjørkan,Norway,3.5,1.0,1.25,0.4,1.0,1.75
 Marcus Pedersen,Norway,3.5,1.0,1.25,0.4,1.0,1.75
-Morten Thorsby,Norway,2.8,1.15,1.0,0.4,1.0,1.288
+Morten Thorsby,Norway,2.8,1.15,1.0,0.1,1.0,0.322
 Thelo Aasgaard,Norway,2.8,1.0,1.0,0.1,1.0,0.27999999999999997
 Egil Selvik,Norway,1.5,1.0,1.5,0.1,1.0,0.225
 Ørjan Nyland,Norway,0.9,1.0,1.5,0.1,1.0,0.135
-Julian Ryerson,Norway,25.0,1.0,1.25,0.0,1.0,0.0
 Amir Murillo,Panama,7.0,1.15,1.25,1.0,1.0,10.062499999999998
 José Córdoba,Panama,5.0,1.0,1.25,1.0,1.0,6.25
 Adalberto Carrasquilla,Panama,4.0,1.0,1.0,1.0,1.0,4.0
@@ -981,10 +981,10 @@ Sadio Mané,Senegal,6.0,1.0,0.85,0.4,1.0,2.04
 Cherif Ndiaye,Senegal,5.0,1.15,0.85,0.4,1.0,1.955
 Bara Sapoko Ndiaye,Senegal,4.0,0.7,1.0,0.4,1.0,1.1199999999999999
 Pathé Ciss,Senegal,2.0,1.15,1.0,0.4,1.0,0.9199999999999999
-Edouard Mendy,Senegal,4.0,1.0,1.5,0.1,1.0,0.6000000000000001
 Mory Diaw,Senegal,0.9,1.15,1.5,0.1,1.0,0.15525
 Abdoulaye Seck,Senegal,0.5,1.0,1.25,0.1,1.0,0.0625
 Idrissa Gueye,Senegal,0.5,1.0,1.0,0.1,1.0,0.05
+Edouard Mendy,Senegal,4.0,1.0,1.5,0.0,1.0,0.0
 Lyle Foster,South Africa,8.0,1.0,0.85,1.0,1.0,6.8
 Iqraam Rayners,South Africa,3.0,1.15,0.85,1.0,1.08,3.1671
 Mbekezeli Mbokazi,South Africa,3.5,0.7,1.25,1.0,1.0,3.0624999999999996
@@ -1015,8 +1015,8 @@ Kang-in Lee,South Korea,28.0,1.0,1.0,1.0,1.0,28.0
 Min-jae Kim,South Korea,20.0,1.0,1.25,1.0,1.0,25.0
 Heung-min Son,South Korea,15.0,1.15,0.85,1.0,1.0,14.6625
 Hyeon-gyu Oh,South Korea,15.0,1.0,0.85,1.0,1.0,12.75
-Jens Castrop,South Korea,10.0,0.7,1.0,1.0,1.0,7.0
 In-beom Hwang,South Korea,7.0,1.0,1.0,1.0,1.0,7.0
+Jens Castrop,South Korea,10.0,0.7,1.0,1.0,1.0,7.0
 Young-woo Seol,South Korea,5.0,1.0,1.25,1.0,1.0,6.25
 Hee-chan Hwang,South Korea,6.0,1.15,0.85,1.0,1.0,5.864999999999999
 Hyun-jun Yang,South Korea,5.0,1.0,0.85,1.0,1.0,4.25
