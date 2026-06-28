@@ -82,27 +82,27 @@ def run_once_after_group_stage(db: Engine = None) -> None:
     reset_knockout_matches(db)
     round_of_32_participants = {
         73: ("South Africa", "Canada"),
-        74: ("Germany", ""),
+        74: ("Germany", "Paraguay"),
         75: ("Netherlands", "Morocco"),
         76: ("Brazil", "Japan"),
-        77: ("", ""),
-        78: ("Ivory Coast", ""),
-        79: ("Mexico", ""),
-        80: ("", ""),
+        77: ("France", "Sweden"),
+        78: ("Ivory Coast", "Norway"),
+        79: ("Mexico", "Ecuador"),
+        80: ("England", "DR Congo"),
         81: ("United States", "Bosnia and Herzegovina"),
-        82: ("", ""),
-        83: ("", ""),
-        84: ("", ""),
-        85: ("Switzerland", ""),
-        86: ("Argentina", ""),
-        87: ("", ""),
-        88: ("Australia", ""),
+        82: ("Belgium", "Senegal"),
+        83: ("Portugal", "Croatia"),
+        84: ("Spain", "Austria"),
+        85: ("Switzerland", "Algeria"),
+        86: ("Argentina", "Cape Verde"),
+        87: ("Colombia", "Ghana"),
+        88: ("Australia", "Egypt"),
     } # create dict where key is match id and value is tuple of strings containing (Team_A, Team_B)
     set_real_round_of_32_participants_and_run_prediction(db, round_of_32_participants)
 
 def update_during_knockout_match(db: Engine = None) -> None:
     db = _engine_or_default(db)
-    # scrap the matches' Goals_A and Goals_B
+    reset_knockout_matches(db)
     update_player_injuries(db)
     refresh_elo_ratings(db)
     update_country_synergies(db)
@@ -458,5 +458,5 @@ def _engine_or_default(db: Engine = None) -> Engine:
 if __name__ == "__main__":
     # run_full_prediction_pipeline()
     # update_country_injured_players()
-    update_during_group_match()
+    run_once_after_group_stage()
     # export_first_predictions_before_world_cup()
