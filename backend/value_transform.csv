@@ -642,8 +642,8 @@ Junnosuke Suzuki,Japan,3.5,0.7,1.25,0.4,1.0,1.2249999999999999
 Junya Ito,Japan,3.0,1.15,0.85,0.4,1.0,1.1729999999999998
 Koki Ogawa,Japan,2.0,1.0,0.85,0.4,1.0,0.68
 Shogo Taniguchi,Japan,0.75,1.0,1.25,0.4,1.0,0.375
-Keisuke Osako,Japan,2.0,1.0,1.5,0.1,1.0,0.30000000000000004
 Tomoki Hayakawa,Japan,2.0,1.0,1.5,0.1,1.0,0.30000000000000004
+Keisuke Osako,Japan,2.0,1.0,1.5,0.1,1.0,0.30000000000000004
 Yuto Nagatomo,Japan,0.1,1.0,1.25,0.4,1.0,0.05
 Wataru Endo,Japan,4.0,1.15,1.0,0.0,1.0,0.0
 Takefusa Kubo,Japan,30.0,1.0,0.85,0.0,1.0,0.0
@@ -806,8 +806,8 @@ Egil Selvik,Norway,1.5,1.0,1.5,0.1,1.0,0.225
 Amir Murillo,Panama,7.0,1.15,1.25,1.0,1.0,10.062499999999998
 José Córdoba,Panama,5.0,1.0,1.25,1.0,1.0,6.25
 Adalberto Carrasquilla,Panama,4.0,1.0,1.0,1.0,1.0,4.0
-Andrés Andrade,Panama,2.5,1.0,1.25,1.0,1.0,3.125
 César Blackman,Panama,2.5,1.0,1.25,1.0,1.0,3.125
+Andrés Andrade,Panama,2.5,1.0,1.25,1.0,1.0,3.125
 José Luis Rodríguez,Panama,2.5,1.0,0.85,1.0,1.0,2.125
 Ismael Díaz,Panama,1.8,1.0,0.85,1.0,1.0,1.53
 Orlando Mosquera,Panama,0.7,1.15,1.5,1.0,1.0,1.2075
@@ -1075,10 +1075,10 @@ Viktor Johansson,Sweden,12.0,1.0,1.5,1.0,1.0,18.0
 Benjamin Nygren,Sweden,14.0,1.0,1.0,1.0,1.0,14.0
 Gustaf Lagerbielke,Sweden,10.0,1.0,1.25,1.0,1.0,12.5
 Mattias Svanberg,Sweden,8.0,1.0,1.0,0.8,1.0,6.4
-Victor Lindelöf,Sweden,5.0,1.15,1.25,0.8,1.0,5.75
 Carl Starfelt,Sweden,5.0,1.15,1.25,0.8,1.0,5.75
-Hjalmar Ekdal,Sweden,5.0,1.0,1.25,0.8,1.0,5.0
+Victor Lindelöf,Sweden,5.0,1.15,1.25,0.8,1.0,5.75
 Eric Smith,Sweden,5.0,1.0,1.25,0.8,1.0,5.0
+Hjalmar Ekdal,Sweden,5.0,1.0,1.25,0.8,1.0,5.0
 Jesper Karlström,Sweden,4.0,1.15,1.0,0.4,1.0,1.8399999999999999
 Besfort Zeneli,Sweden,4.5,1.0,1.0,0.4,1.0,1.8
 Elliot Stroud,Sweden,3.0,1.0,1.0,0.4,1.0,1.2000000000000002

@@ -126,7 +126,7 @@ def run_once_after_group_stage(db: Engine = None) -> None:
 
 def update_during_knockout_match(db: Engine = None) -> None:
     db = _engine_or_default(db)
-    reset_knockout_matches(db)
+    run_once_after_group_stage(db)
     update_player_injuries(db)
     refresh_elo_ratings(db)
     update_country_synergies(db)
@@ -482,5 +482,5 @@ def _engine_or_default(db: Engine = None) -> Engine:
 if __name__ == "__main__":
     # run_full_prediction_pipeline()
     # update_country_injured_players()
-    run_once_after_group_stage()
+    update_during_knockout_match()
     # export_first_predictions_before_world_cup()

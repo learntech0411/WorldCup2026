@@ -47,7 +47,7 @@ Alexis Mac Allister,Argentina,27,20,Central Midfield,Midfielder,Liverpool FC,70.
 Enzo Fernández,Argentina,25,24,Central Midfield,Midfielder,Chelsea FC,90.0,,False
 Exequiel Palacios,Argentina,27,14,Central Midfield,Midfielder,Bayer 04 Leverkusen,25.0,,False
 Giovani Lo Celso,Argentina,30,11,Attacking Midfield,Midfielder,Real Betis Balompié,8.0,,False
-Leandro Paredes,Argentina,31,5,Defensive Midfield,Midfielder,CA Boca Juniors,5.0,,False
+Leandro Paredes,Argentina,32,5,Defensive Midfield,Midfielder,CA Boca Juniors,5.0,,False
 Nico Paz,Argentina,21,18,Attacking Midfield,Midfielder,Como 1907,80.0,,False
 Rodrigo De Paul,Argentina,32,7,Central Midfield,Midfielder,Inter Miami CF,14.0,,False
 Valentín Barco,Argentina,21,8,Central Midfield,Midfielder,RC Strasbourg Alsace,40.0,,False
@@ -383,10 +383,10 @@ Dean Henderson,England,29,13,Goalkeeper,Goalkeeper,Crystal Palace,28.0,,False
 James Trafford,England,23,23,Goalkeeper,Goalkeeper,Manchester City,25.0,,False
 Jordan Pickford,England,32,1,Goalkeeper,Goalkeeper,Everton FC,13.0,,False
 Declan Rice,England,27,4,Central Midfield,Midfielder,Arsenal FC,120.0,,False
-Eberechi Eze,England,27,21,Attacking Midfield,Midfielder,Arsenal FC,65.0,,False
+Eberechi Eze,England,28,21,Attacking Midfield,Midfielder,Arsenal FC,65.0,,False
 Elliot Anderson,England,23,8,Central Midfield,Midfielder,Nottingham Forest,75.0,,False
 Jordan Henderson,England,36,14,Defensive Midfield,Midfielder,Brentford FC,1.2,,False
-Jude Bellingham,England,22,10,Attacking Midfield,Midfielder,Real Madrid,130.0,,False
+Jude Bellingham,England,23,10,Attacking Midfield,Midfielder,Real Madrid,130.0,,False
 Kobbie Mainoo,England,21,16,Central Midfield,Midfielder,Manchester United,70.0,,False
 Morgan Rogers,England,23,17,Attacking Midfield,Midfielder,Aston Villa,90.0,,False
 Bradley Barcola,France,23,12,Left Winger,Attacker,Paris Saint-Germain,70.0,,False
@@ -773,7 +773,7 @@ Kristoffer Nordfeldt,Sweden,37,23,Goalkeeper,Goalkeeper,AIK,0.175,,False
 Viktor Johansson,Sweden,27,12,Goalkeeper,Goalkeeper,Stoke City,12.0,,False
 Benjamin Nygren,Sweden,24,10,Attacking Midfield,Midfielder,Celtic FC,14.0,,False
 Besfort Zeneli,Sweden,23,22,Central Midfield,Midfielder,Union Saint-Gilloise,6.0,,False
-Elliot Stroud,Sweden,24,24,Left Midfield,Midfielder,Mjällby AIF,5.0,,False
+Elliot Stroud,Sweden,24,24,Left Midfield,Midfielder,Mjällby AIF,8.0,,False
 Herman Johansson,Sweden,28,6,Right Midfield,Midfielder,FC Dallas,1.8,,False
 Jesper Karlström,Sweden,31,16,Defensive Midfield,Midfielder,Udinese Calcio,4.0,,False
 Lucas Bergvall,Sweden,20,7,Central Midfield,Midfielder,Tottenham Hotspur,35.0,,False
@@ -805,63 +805,29 @@ Granit Xhaka,Switzerland,33,10,Defensive Midfield,Midfielder,Sunderland AFC,8.0,
 Johan Manzambi,Switzerland,20,9,Central Midfield,Midfielder,SC Freiburg,50.0,,False
 Michel Aebischer,Switzerland,29,20,Central Midfield,Midfielder,Pisa Sporting Club,4.0,,False
 Remo Freuler,Switzerland,34,8,Central Midfield,Midfielder,Bologna FC 1909,3.0,,False
-Brian White,United States,28,-,Centre-Forward,Attacker,Vancouver Whitecaps FC,3.5,,False
-Christian Pulisic,United States,26,10,Right Winger,Attacker,AC Milan,50.0,,False
-Damion Downs,United States,20,-,Centre-Forward,Attacker,Hamburger SV,3.0,,False
-Folarin Balogun,United States,23,20,Centre-Forward,Attacker,AS Monaco,25.0,,False
-Haji Wright,United States,26,19,Centre-Forward,Attacker,Coventry City,8.5,,False
-Indiana Vassilev,United States,23,-,Right Winger,Attacker,Philadelphia Union,2.0,,False
-Josh Sargent,United States,24,-,Centre-Forward,Attacker,Toronto FC,13.0,,False
-Max Arfsten,United States,23,18,Left Winger,Attacker,Columbus Crew,1.2,,False
-Patrick Agyemang,United States,24,-,Centre-Forward,Attacker,Derby County,2.5,,True
-Ricardo Pepi,United States,21,9,Centre-Forward,Attacker,PSV Eindhoven,18.0,,False
-Álex Zendejas,United States,26,26,Right Winger,Attacker,CF América,5.0,,False
-Alex Freeman,United States,20,16,Right-Back,Defender,Villarreal CF,0.15,,False
-Auston Trusty,United States,26,6,Centre-Back,Defender,Celtic FC,8.0,,False
-Cameron Carter-Vickers,United States,27,-,Centre-Back,Defender,Celtic FC,14.0,,True
-Chris Richards,United States,24,3,Centre-Back,Defender,Crystal Palace,12.0,,False
-DeJuan Jones,United States,27,-,Left-Back,Defender,San Jose Earthquakes,3.5,,True
-George Campbell,United States,23,-,Centre-Back,Defender,West Bromwich Albion,1.2,,False
-Joe Scally,United States,22,23,Right-Back,Defender,Borussia Mönchengladbach,10.0,,False
-John Tolkin,United States,22,-,Left-Back,Defender,Holstein Kiel,4.0,,False
-Mark McKenzie,United States,25,22,Centre-Back,Defender,FC Toulouse,6.0,,False
-Marlon Fossey,United States,26,-,Right-Back,Defender,Standard Liège,4.0,,False
-Miles Robinson,United States,27,12,Centre-Back,Defender,FC Cincinnati,5.0,,False
-Nathan Harriel,United States,23,-,Right-Back,Defender,Philadelphia Union,1.2,,False
-Noahkai Banks,United States,18,-,Centre-Back,Defender,FC Augsburg,0.15,,False
-Sergiño Dest,United States,24,2,Right-Back,Defender,PSV Eindhoven,22.0,,False
-Shaq Moore,United States,28,-,Right-Back,Defender,FC Dallas,1.2,,False
-Tim Ream,United States,37,13,Centre-Back,Defender,Charlotte FC,0.4,,False
-Tristan Blackmon,United States,28,-,Centre-Back,Defender,Vancouver Whitecaps FC,2.0,,False
-Walker Zimmerman,United States,31,-,Centre-Back,Defender,Toronto FC,3.5,,False
-Chris Brady,United States,20,25,Goalkeeper,Goalkeeper,Chicago Fire FC,2.5,,False
-Jonathan Klinsmann,United States,27,-,Goalkeeper,Goalkeeper,Cesena FC,0.4,,False
-Matt Freese,United States,26,24,Goalkeeper,Goalkeeper,New York City FC,0.6,,False
-Matt Turner,United States,30,1,Goalkeeper,Goalkeeper,New England Revolution,4.0,,False
-Patrick Schulte,United States,23,-,Goalkeeper,Goalkeeper,Columbus Crew,3.5,,False
-Roman Celentano,United States,24,-,Goalkeeper,Goalkeeper,FC Cincinnati,2.5,,False
-Zack Steffen,United States,29,-,Goalkeeper,Goalkeeper,Colorado Rapids,2.0,,True
-Aidan Morris,United States,23,-,Central Midfield,Midfielder,Middlesbrough FC,3.5,,False
-Benja Cremaschi,United States,19,-,Central Midfield,Midfielder,Parma Calcio 1913,4.0,,False
-Brenden Aaronson,United States,24,11,Attacking Midfield,Midfielder,Leeds United,12.0,,False
-Brian Gutiérrez,United States,21,-,Attacking Midfield,Midfielder,Deportivo Guadalajara,4.0,,False
-Caden Clark,United States,21,-,Attacking Midfield,Midfielder,D.C. United,2.0,,False
-Cristian Roldán,United States,29,15,Central Midfield,Midfielder,Seattle Sounders FC,4.0,,False
-Diego Luna,United States,21,-,Left Midfield,Midfielder,Real Salt Lake City,6.0,,True
-Emeka Eneli,United States,25,-,Defensive Midfield,Midfielder,Real Salt Lake City,1.5,,True
-Giovanni Reyna,United States,22,7,Attacking Midfield,Midfielder,Borussia Mönchengladbach,12.0,,False
-Jack McGlynn,United States,21,-,Central Midfield,Midfielder,Houston Dynamo FC,4.5,,False
-James Sands,United States,24,-,Defensive Midfield,Midfielder,FC St. Pauli,3.0,,True
-Johnny Cardoso,United States,23,-,Central Midfield,Midfielder,Atlético de Madrid,20.0,,True
-Luca de la Torre,United States,26,-,Central Midfield,Midfielder,Charlotte FC,1.5,,False
-Malik Tillman,United States,22,17,Attacking Midfield,Midfielder,Bayer 04 Leverkusen,30.0,,False
-Matko Miljevic,United States,23,-,Attacking Midfield,Midfielder,Racing Club,0.7,,False
-Paxten Aaronson,United States,21,-,Attacking Midfield,Midfielder,Colorado Rapids,6.0,,False
-Quinn Sullivan,United States,20,-,Central Midfield,Midfielder,Philadelphia Union,4.5,,True
-Sebastian Berhalter,United States,23,14,Central Midfield,Midfielder,Vancouver Whitecaps FC,1.0,,False
-Tanner Tessmann,United States,23,-,Defensive Midfield,Midfielder,Olympique Lyon,6.0,,True
-Timothy Tillman,United States,25,-,Central Midfield,Midfielder,Los Angeles FC,2.5,,False
-Timothy Weah,United States,24,21,Right Midfield,Midfielder,Olympique Marseille,17.0,,False
-Tyler Adams,United States,25,4,Defensive Midfield,Midfielder,AFC Bournemouth,15.0,,False
-Weston McKennie,United States,26,8,Central Midfield,Midfielder,Juventus FC,24.0,,False
-Yunus Musah,United States,22,-,Central Midfield,Midfielder,Atalanta BC,22.0,,False
+Christian Pulisic,United States,27,10,Right Winger,Attacker,AC Milan,40.0,,False
+Folarin Balogun,United States,24,20,Centre-Forward,Attacker,AS Monaco,40.0,,False
+Haji Wright,United States,28,19,Centre-Forward,Attacker,Coventry City,16.0,,False
+Max Arfsten,United States,25,18,Left Winger,Attacker,Columbus Crew,5.0,,False
+Ricardo Pepi,United States,23,9,Centre-Forward,Attacker,PSV Eindhoven,30.0,,False
+Álex Zendejas,United States,28,26,Right Winger,Attacker,CF América,10.0,,False
+Alex Freeman,United States,21,16,Right-Back,Defender,Villarreal CF,3.5,,False
+Antonee Robinson,United States,28,5,Left-Back,Defender,Fulham FC,22.0,,False
+Auston Trusty,United States,27,6,Centre-Back,Defender,Celtic FC,6.0,,False
+Chris Richards,United States,26,3,Centre-Back,Defender,Crystal Palace,28.0,,False
+Joe Scally,United States,23,23,Right-Back,Defender,Borussia Mönchengladbach,7.0,,False
+Mark McKenzie,United States,27,22,Centre-Back,Defender,FC Toulouse,7.0,,False
+Miles Robinson,United States,29,12,Centre-Back,Defender,FC Cincinnati,3.5,,False
+Sergiño Dest,United States,25,2,Right-Back,Defender,PSV Eindhoven,18.0,,False
+Tim Ream,United States,38,13,Centre-Back,Defender,Charlotte FC,0.15,,False
+Chris Brady,United States,22,25,Goalkeeper,Goalkeeper,Chicago Fire FC,2.5,,False
+Matt Freese,United States,27,24,Goalkeeper,Goalkeeper,New York City FC,2.0,,False
+Matt Turner,United States,32,1,Goalkeeper,Goalkeeper,New England Revolution,2.5,,False
+Brenden Aaronson,United States,25,11,Attacking Midfield,Midfielder,Leeds United,22.0,,False
+Cristian Roldán,United States,31,15,Central Midfield,Midfielder,Seattle Sounders FC,3.5,,False
+Giovanni Reyna,United States,23,7,Attacking Midfield,Midfielder,Borussia Mönchengladbach,4.0,,False
+Malik Tillman,United States,24,17,Attacking Midfield,Midfielder,Bayer 04 Leverkusen,30.0,,False
+Sebastian Berhalter,United States,25,14,Central Midfield,Midfielder,Vancouver Whitecaps FC,8.0,,False
+Timothy Weah,United States,26,21,Right Midfield,Midfielder,Olympique Marseille,20.0,,False
+Tyler Adams,United States,27,4,Defensive Midfield,Midfielder,AFC Bournemouth,25.0,,False
+Weston McKennie,United States,27,8,Central Midfield,Midfielder,Juventus FC,30.0,,False
