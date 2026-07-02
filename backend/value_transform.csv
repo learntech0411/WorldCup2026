@@ -164,13 +164,12 @@ Marquinhos,Brazil,28.0,1.15,1.25,1.0,1.0,40.24999999999999
 Gabriel Martinelli,Brazil,45.0,1.0,0.85,1.0,1.02,39.015
 Rayan,Brazil,60.0,0.7,0.85,1.0,1.0,35.699999999999996
 Danilo,Brazil,32.0,1.0,1.0,1.0,1.0,32.0
-Lucas Paquetá,Brazil,32.0,1.0,1.0,0.8,1.02,26.112000000000002
 Alisson,Brazil,15.0,1.15,1.5,1.0,1.0,25.875
 Endrick,Brazil,40.0,0.7,0.85,0.8,1.0,19.040000000000003
 Roger Ibañez,Brazil,18.0,1.0,1.25,0.8,1.0,18.0
 Luiz Henrique,Brazil,24.0,1.0,0.85,0.8,1.0,16.32
-Léo Pereira,Brazil,12.0,1.15,1.25,0.8,1.02,14.076
-Fabinho,Brazil,12.0,1.15,1.0,0.4,1.0,5.52
+Léo Pereira,Brazil,12.0,1.15,1.25,0.8,1.0,13.8
+Fabinho,Brazil,12.0,1.15,1.0,0.8,1.0,11.04
 Douglas Santos,Brazil,7.5,1.15,1.25,0.4,1.0,4.3125
 Neymar,Brazil,8.0,1.0,1.0,0.4,1.0,3.2
 Casemiro,Brazil,6.0,1.0,1.0,0.4,1.0,2.4000000000000004
@@ -178,6 +177,7 @@ Ederson,Brazil,10.0,1.15,1.5,0.1,1.0,1.725
 Danilo,Brazil,2.0,1.0,1.25,0.4,1.0,1.0
 Alex Sandro,Brazil,1.0,1.0,1.25,0.4,1.0,0.5
 Weverton,Brazil,0.7,1.0,1.5,0.1,1.0,0.10499999999999998
+Lucas Paquetá,Brazil,32.0,1.0,1.0,0.0,1.0,0.0
 Wesley,Brazil,40.0,0.7,1.25,0.0,1.0,0.0
 Raphinha,Brazil,80.0,1.0,0.85,0.0,1.0,0.0
 Alphonso Davies,Canada,40.0,1.0,1.25,1.0,1.0,50.0
@@ -207,8 +207,8 @@ Owen Goodman,Canada,0.55,0.7,1.5,0.1,1.0,0.05775
 Ismaël Koné,Canada,25.0,1.0,1.0,0.0,1.0,0.0
 Logan Costa,Cape Verde,18.0,1.0,1.25,1.0,1.0,22.5
 Wagner Pina,Cape Verde,11.0,1.0,1.25,1.0,1.0,13.75
-Sidny Lopes Cabral,Cape Verde,4.0,1.0,1.25,1.0,1.0,5.0
 Kevin Lenini,Cape Verde,5.0,1.0,1.0,1.0,1.0,5.0
+Sidny Lopes Cabral,Cape Verde,4.0,1.0,1.25,1.0,1.0,5.0
 Telmo Arcanjo,Cape Verde,3.0,1.0,0.85,1.0,1.0,2.55
 Steven Moreira,Cape Verde,1.5,1.15,1.25,1.0,1.0,2.15625
 Deroy Duarte,Cape Verde,1.8,1.0,1.0,1.0,1.0,1.8
@@ -623,6 +623,7 @@ Oumar Diakité,Ivory Coast,5.0,0.7,0.85,0.1,1.0,0.29750000000000004
 Jean Michaël Seri,Ivory Coast,0.1,1.0,1.0,0.1,1.0,0.010000000000000002
 Kaishu Sano,Japan,40.0,1.0,1.0,1.0,1.0,40.0
 Zion Suzuki,Japan,20.0,1.0,1.5,1.0,1.0,30.0
+Takefusa Kubo,Japan,30.0,1.0,0.85,1.0,1.0,25.5
 Hiroki Ito,Japan,18.0,1.0,1.25,1.0,1.0,22.5
 Yuito Suzuki,Japan,24.0,1.0,0.85,1.0,1.0,20.4
 Ayase Ueda,Japan,17.0,1.0,0.85,1.0,1.02,14.738999999999999
@@ -630,13 +631,13 @@ Ritsu Doan,Japan,17.0,1.0,0.85,1.0,1.0,14.45
 Ao Tanaka,Japan,13.0,1.0,1.0,1.0,1.0,13.0
 Tsuyoshi Watanabe,Japan,10.0,1.0,1.25,1.0,1.02,12.75
 Daizen Maeda,Japan,13.0,1.0,0.85,1.0,1.0,11.049999999999999
-Ko Itakura,Japan,8.0,1.0,1.25,1.0,1.02,10.2
 Daichi Kamada,Japan,10.0,1.0,1.0,1.0,1.0,10.0
+Ko Itakura,Japan,8.0,1.0,1.25,0.8,1.02,8.16
 Keito Nakamura,Japan,10.0,1.0,0.85,0.8,1.0,6.800000000000001
 Yukinari Sugawara,Japan,5.5,1.0,1.25,0.8,1.0,5.5
 Takehiro Tomiyasu,Japan,5.0,1.0,1.25,0.8,1.02,5.1
 Ayumu Seko,Japan,5.0,1.0,1.25,0.8,1.0,5.0
-Keisuke Goto,Japan,10.0,0.7,0.85,0.8,1.0,4.760000000000001
+Keisuke Goto,Japan,10.0,0.7,0.85,0.4,1.0,2.3800000000000003
 Kento Shiogai,Japan,8.0,0.7,0.85,0.4,1.0,1.904
 Junnosuke Suzuki,Japan,3.5,0.7,1.25,0.4,1.0,1.2249999999999999
 Junya Ito,Japan,3.0,1.15,0.85,0.4,1.0,1.1729999999999998
@@ -644,9 +645,8 @@ Koki Ogawa,Japan,2.0,1.0,0.85,0.4,1.0,0.68
 Shogo Taniguchi,Japan,0.75,1.0,1.25,0.4,1.0,0.375
 Tomoki Hayakawa,Japan,2.0,1.0,1.5,0.1,1.0,0.30000000000000004
 Keisuke Osako,Japan,2.0,1.0,1.5,0.1,1.0,0.30000000000000004
-Yuto Nagatomo,Japan,0.1,1.0,1.25,0.4,1.0,0.05
+Yuto Nagatomo,Japan,0.1,1.0,1.25,0.1,1.0,0.0125
 Wataru Endo,Japan,4.0,1.15,1.0,0.0,1.0,0.0
-Takefusa Kubo,Japan,30.0,1.0,0.85,0.0,1.0,0.0
 Mousa Tamari,Jordan,10.0,1.0,0.85,1.0,1.0,8.5
 Yazan Al-Arab,Jordan,1.0,1.15,1.25,1.0,1.0,1.4375
 Mohannad Abu Taha,Jordan,0.55,1.0,1.25,1.0,1.0,0.6875
@@ -1048,24 +1048,23 @@ Rodri,Spain,50.0,1.0,1.0,1.0,1.0,50.0
 Eric García,Spain,35.0,1.0,1.25,1.0,1.1,48.12500000000001
 Ferran Torres,Spain,50.0,1.0,0.85,1.0,1.1,46.75000000000001
 Pedro Porro,Spain,35.0,1.0,1.25,1.0,1.0,43.75
-Nico Williams,Spain,50.0,1.0,0.85,0.8,1.0,34.0
 Álex Baena,Spain,45.0,1.0,0.85,0.8,1.02,31.212000000000003
 Fabián Ruiz,Spain,30.0,1.15,1.0,0.8,1.0,27.6
 Marcos Llorente,Spain,22.0,1.15,1.25,0.8,1.02,25.805999999999997
 Alejandro Grimaldo,Spain,20.0,1.15,1.25,0.8,1.0,23.0
-Yéremy Pino,Spain,30.0,1.0,0.85,0.4,1.0,10.200000000000001
+Yéremy Pino,Spain,30.0,1.0,0.85,0.8,1.0,20.400000000000002
 Mikel Merino,Spain,25.0,1.0,1.0,0.4,1.0,10.0
 Marc Pubill,Spain,28.0,0.7,1.25,0.4,1.0,9.799999999999999
 Mikel Oyarzabal,Spain,25.0,1.0,0.85,0.4,1.0,8.5
 Gavi,Spain,30.0,0.7,1.0,0.4,1.0,8.4
 David Raya,Spain,30.0,1.15,1.5,0.1,1.0,5.175000000000001
 Aymeric Laporte,Spain,9.0,1.15,1.25,0.4,1.0,5.175000000000001
+Víctor Muñoz,Spain,20.0,0.7,0.85,0.4,1.0,4.760000000000001
 Unai Simón,Spain,25.0,1.0,1.5,0.1,1.0,3.75
-Víctor Muñoz,Spain,20.0,0.7,0.85,0.1,1.0,1.1900000000000002
 Borja Iglesias,Spain,3.0,1.15,0.85,0.1,1.0,0.29324999999999996
+Nico Williams,Spain,50.0,1.0,0.85,0.0,1.0,0.0
 Alexander Isak,Sweden,85.0,1.0,0.85,1.0,1.0,72.25
 Viktor Gyökeres,Sweden,65.0,1.0,0.85,1.0,1.0,55.25
-Isak Hien,Sweden,22.0,1.0,1.25,1.0,1.0,27.5
 Daniel Svensson,Sweden,22.0,1.0,1.25,1.0,1.0,27.5
 Anthony Elanga,Sweden,32.0,1.0,0.85,1.0,1.0,27.2
 Gabriel Gudmundsson,Sweden,20.0,1.0,1.25,1.0,1.0,25.0
@@ -1074,21 +1073,22 @@ Lucas Bergvall,Sweden,35.0,0.7,1.0,1.0,1.0,24.5
 Viktor Johansson,Sweden,12.0,1.0,1.5,1.0,1.0,18.0
 Benjamin Nygren,Sweden,14.0,1.0,1.0,1.0,1.0,14.0
 Gustaf Lagerbielke,Sweden,10.0,1.0,1.25,1.0,1.0,12.5
-Mattias Svanberg,Sweden,8.0,1.0,1.0,0.8,1.0,6.4
+Mattias Svanberg,Sweden,8.0,1.0,1.0,1.0,1.0,8.0
 Carl Starfelt,Sweden,5.0,1.15,1.25,0.8,1.0,5.75
 Victor Lindelöf,Sweden,5.0,1.15,1.25,0.8,1.0,5.75
 Eric Smith,Sweden,5.0,1.0,1.25,0.8,1.0,5.0
 Hjalmar Ekdal,Sweden,5.0,1.0,1.25,0.8,1.0,5.0
-Jesper Karlström,Sweden,4.0,1.15,1.0,0.4,1.0,1.8399999999999999
+Jesper Karlström,Sweden,4.0,1.15,1.0,0.8,1.0,3.6799999999999997
 Besfort Zeneli,Sweden,4.5,1.0,1.0,0.4,1.0,1.8
 Elliot Stroud,Sweden,3.0,1.0,1.0,0.4,1.0,1.2000000000000002
 Alexander Bernhardsson,Sweden,3.0,1.0,0.85,0.4,1.0,1.02
 Herman Johansson,Sweden,1.8,1.0,1.0,0.4,1.0,0.7200000000000001
 Gustaf Nilsson,Sweden,2.0,1.0,0.85,0.4,1.0,0.68
+Ken Sema,Sweden,0.8,1.15,1.25,0.4,1.0,0.45999999999999996
 Jacob Widell Zetterström,Sweden,2.5,1.0,1.5,0.1,1.0,0.375
-Ken Sema,Sweden,0.8,1.15,1.25,0.1,1.0,0.11499999999999999
 Taha Ali,Sweden,1.2,1.0,0.85,0.1,1.0,0.10200000000000001
 Kristoffer Nordfeldt,Sweden,0.175,1.0,1.5,0.1,1.0,0.026249999999999996
+Isak Hien,Sweden,22.0,1.0,1.25,0.0,1.0,0.0
 Gregor Kobel,Switzerland,40.0,1.0,1.5,1.0,1.0,60.0
 Johan Manzambi,Switzerland,50.0,0.7,1.0,1.0,1.0,35.0
 Dan Ndoye,Switzerland,32.0,1.0,0.85,1.0,1.0,27.2
