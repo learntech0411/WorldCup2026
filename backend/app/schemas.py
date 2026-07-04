@@ -66,10 +66,12 @@ class MatchBase(BaseModel):
     # Actual Results (Nullable until the match happens)
     Goals_A: Optional[int] = None
     Goals_B: Optional[int] = None
+    Actual_Winner: Optional[str] = None
     
     # Model Predictions (Nullable until predicted)
     Predicted_Goals_A: Optional[float] = None
     Predicted_Goals_B: Optional[float] = None
+    Predicted_Winner: Optional[str] = None
     Winning_Probability_A: Optional[float] = None
     Winning_Probability_B: Optional[float] = None
     Draw_Probability: Optional[float] = None
