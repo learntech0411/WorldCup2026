@@ -1048,21 +1048,21 @@ Rodri,Spain,50.0,1.0,1.0,1.0,1.0,50.0
 Eric García,Spain,35.0,1.0,1.25,1.0,1.1,48.12500000000001
 Ferran Torres,Spain,50.0,1.0,0.85,1.0,1.1,46.75000000000001
 Pedro Porro,Spain,35.0,1.0,1.25,1.0,1.0,43.75
+Nico Williams,Spain,50.0,1.0,0.85,0.8,1.0,34.0
 Álex Baena,Spain,45.0,1.0,0.85,0.8,1.02,31.212000000000003
 Fabián Ruiz,Spain,30.0,1.15,1.0,0.8,1.0,27.6
 Marcos Llorente,Spain,22.0,1.15,1.25,0.8,1.02,25.805999999999997
 Alejandro Grimaldo,Spain,20.0,1.15,1.25,0.8,1.0,23.0
-Yéremy Pino,Spain,30.0,1.0,0.85,0.8,1.0,20.400000000000002
+Yéremy Pino,Spain,30.0,1.0,0.85,0.4,1.0,10.200000000000001
 Mikel Merino,Spain,25.0,1.0,1.0,0.4,1.0,10.0
 Marc Pubill,Spain,28.0,0.7,1.25,0.4,1.0,9.799999999999999
 Mikel Oyarzabal,Spain,25.0,1.0,0.85,0.4,1.0,8.5
 Gavi,Spain,30.0,0.7,1.0,0.4,1.0,8.4
 David Raya,Spain,30.0,1.15,1.5,0.1,1.0,5.175000000000001
 Aymeric Laporte,Spain,9.0,1.15,1.25,0.4,1.0,5.175000000000001
-Víctor Muñoz,Spain,20.0,0.7,0.85,0.4,1.0,4.760000000000001
 Unai Simón,Spain,25.0,1.0,1.5,0.1,1.0,3.75
+Víctor Muñoz,Spain,20.0,0.7,0.85,0.1,1.0,1.1900000000000002
 Borja Iglesias,Spain,3.0,1.15,0.85,0.1,1.0,0.29324999999999996
-Nico Williams,Spain,50.0,1.0,0.85,0.0,1.0,0.0
 Alexander Isak,Sweden,85.0,1.0,0.85,1.0,1.0,72.25
 Viktor Gyökeres,Sweden,65.0,1.0,0.85,1.0,1.0,55.25
 Daniel Svensson,Sweden,22.0,1.0,1.25,1.0,1.0,27.5
@@ -1097,13 +1097,13 @@ Ardon Jashari,Switzerland,25.0,1.0,1.0,1.0,1.0,25.0
 Manuel Akanji,Switzerland,17.0,1.15,1.25,1.0,1.0,24.437499999999996
 Noah Okafor,Switzerland,25.0,1.0,0.85,1.0,1.0,21.25
 Breel Embolo,Switzerland,15.0,1.0,0.85,1.0,1.0,12.75
-Luca Jaquez,Switzerland,10.0,1.0,1.25,1.0,1.0,12.5
 Fabian Rieder,Switzerland,12.0,1.0,1.0,1.0,1.0,12.0
 Rubén Vargas,Switzerland,12.0,1.0,0.85,1.0,1.02,10.404
-Nico Elvedi,Switzerland,8.0,1.0,1.25,0.8,1.0,8.0
+Nico Elvedi,Switzerland,8.0,1.0,1.25,1.0,1.0,10.0
 Granit Xhaka,Switzerland,8.0,1.15,1.0,0.8,1.0,7.359999999999999
 Aurèle Amenda,Switzerland,10.0,0.7,1.25,0.8,1.0,7.0
 Djibril Sow,Switzerland,7.5,1.0,1.0,0.8,1.02,6.12
+Miro Muheim,Switzerland,5.0,1.0,1.25,0.8,1.0,5.0
 Zeki Amdouni,Switzerland,7.0,1.0,0.85,0.8,1.0,4.760000000000001
 Michel Aebischer,Switzerland,4.0,1.0,1.0,0.4,1.0,1.6
 Eray Cömert,Switzerland,2.5,1.0,1.25,0.4,1.0,1.25
@@ -1114,7 +1114,7 @@ Ricardo Rodríguez,Switzerland,1.5,1.15,1.25,0.4,1.0,0.8625
 Cedric Itten,Switzerland,1.8,1.0,0.85,0.4,1.0,0.6120000000000001
 Yvon Mvogo,Switzerland,2.5,1.15,1.5,0.1,1.0,0.43125
 Silvan Widmer,Switzerland,0.8,1.15,1.25,0.1,1.0,0.11499999999999999
-Miro Muheim,Switzerland,5.0,1.0,1.25,0.0,1.0,0.0
+Luca Jaquez,Switzerland,10.0,1.0,1.25,0.0,1.0,0.0
 Hannibal,Tunisia,15.0,1.0,1.0,1.0,1.0,15.0
 Montassar Talbi,Tunisia,8.0,1.0,1.25,1.0,1.0,10.0
 Ellyes Skhiri,Tunisia,5.0,1.15,1.0,1.0,1.0,5.75
