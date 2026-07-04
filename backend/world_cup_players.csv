@@ -1,30 +1,4 @@
 Name,Country,Age,Player_Number,Raw_Position,Model_Position,Club,Market_Value,Expected_Utility,Is_Injured
-Adil Boulbina,Algeria,23,20,Left Winger,Attacker,Al-Duhail SC,3.0,,False
-Amine Gouiri,Algeria,26,9,Centre-Forward,Attacker,Olympique Marseille,28.0,,False
-Anis Hadj Moussa,Algeria,24,11,Right Winger,Attacker,Feyenoord Rotterdam,23.0,,False
-Farès Ghedjemis,Algeria,23,25,Right Winger,Attacker,Frosinone Calcio,7.5,,False
-Mohamed Amoura,Algeria,26,18,Centre-Forward,Attacker,VfL Wolfsburg,20.0,,False
-Nadhir Benbouali,Algeria,26,12,Centre-Forward,Attacker,ETO FC,1.2,,False
-Riyad Mahrez,Algeria,35,7,Right Winger,Attacker,Al-Ahli SFC,5.0,,False
-Achref Abada,Algeria,27,3,Centre-Back,Defender,USM Alger,1.0,,False
-Aïssa Mandi,Algeria,34,2,Centre-Back,Defender,LOSC Lille,1.0,,False
-Jaouen Hadjam,Algeria,23,13,Left-Back,Defender,BSC Young Boys,7.0,,False
-Mohamed Amine Tougai,Algeria,26,4,Centre-Back,Defender,Esperance Tunis,1.3,,False
-Rafik Belghali,Algeria,24,17,Right-Back,Defender,Hellas Verona,7.0,,False
-Ramy Bensebaini,Algeria,31,21,Centre-Back,Defender,Borussia Dortmund,7.0,,False
-Rayan Aït-Nouri,Algeria,25,15,Left-Back,Defender,Manchester City,40.0,,False
-Samir Chergui,Algeria,27,26,Centre-Back,Defender,Paris FC,3.0,,False
-Zineddine Belaid,Algeria,27,5,Centre-Back,Defender,JS Kabylie,1.8,,False
-Luca Zidane,Algeria,28,23,Goalkeeper,Goalkeeper,Granada CF,1.0,,False
-Melvin Mastil,Algeria,26,1,Goalkeeper,Goalkeeper,FC Lausanne-Sport,0.25,,False
-Oussama Benbout,Algeria,31,16,Goalkeeper,Goalkeeper,USM Alger,0.85,,False
-Farès Chaïbi,Algeria,23,10,Attacking Midfield,Midfielder,Eintracht Frankfurt,15.0,,False
-Hicham Boudaoui,Algeria,26,14,Central Midfield,Midfielder,OGC Nice,12.0,,False
-Houssem Aouar,Algeria,28,8,Attacking Midfield,Midfielder,Al-Ittihad Club,8.0,,False
-Ibrahim Maza,Algeria,20,22,Attacking Midfield,Midfielder,Bayer 04 Leverkusen,45.0,,False
-Nabil Bentaleb,Algeria,31,19,Defensive Midfield,Midfielder,LOSC Lille,4.5,,False
-Ramiz Zerrouki,Algeria,28,6,Defensive Midfield,Midfielder,Feyenoord Rotterdam,6.5,,False
-Yassine Titraoui,Algeria,22,24,Central Midfield,Midfielder,Royal Charleroi SC,7.0,,False
 Flaco López,Argentina,25,21,Centre-Forward,Attacker,Sociedade Esportiva Palmeiras,25.0,,False
 Giuliano Simeone,Argentina,23,17,Right Winger,Attacker,Atlético de Madrid,40.0,,False
 Julián Alvarez,Argentina,26,9,Centre-Forward,Attacker,Atlético de Madrid,100.0,,False
@@ -51,58 +25,6 @@ Leandro Paredes,Argentina,32,5,Defensive Midfield,Midfielder,CA Boca Juniors,5.0
 Nico Paz,Argentina,21,18,Attacking Midfield,Midfielder,Como 1907,80.0,,False
 Rodrigo De Paul,Argentina,32,7,Central Midfield,Midfielder,Inter Miami CF,14.0,,False
 Valentín Barco,Argentina,21,8,Central Midfield,Midfielder,RC Strasbourg Alsace,40.0,,False
-Awer Mabil,Australia,30,11,Left Winger,Attacker,CD Castellón,0.5,,False
-Mathew Leckie,Australia,35,7,Left Winger,Attacker,Melbourne City FC,0.3,,False
-Mohamed Touré,Australia,22,9,Centre-Forward,Attacker,Norwich City,8.0,,False
-Nestory Irankunda,Australia,20,17,Right Winger,Attacker,Watford FC,8.0,,False
-Nishan Velupillay,Australia,25,23,Left Winger,Attacker,Without Club,0.65,,False
-Tete Yengi,Australia,25,26,Centre-Forward,Attacker,Livingston FC,0.45,,False
-Alessandro Circati,Australia,22,3,Centre-Back,Defender,Parma Calcio 1913,12.0,,False
-Aziz Behich,Australia,35,16,Left-Back,Defender,Melbourne City FC,0.25,,False
-Cameron Burgess,Australia,30,21,Centre-Back,Defender,Swansea City,1.5,,False
-Harry Souttar,Australia,27,19,Centre-Back,Defender,Leicester City,3.5,,False
-Jacob Italiano,Australia,24,4,Right-Back,Defender,Grazer AK 1902,0.6,,False
-Jason Geria,Australia,33,6,Right-Back,Defender,Albirex Niigata,0.35,,False
-Jordan Bos,Australia,23,5,Left-Back,Defender,Feyenoord Rotterdam,12.0,,False
-Lucas Herrington,Australia,18,25,Centre-Back,Defender,Colorado Rapids,4.5,,False
-Milos Degenek,Australia,32,2,Centre-Back,Defender,APOEL Nicosia,0.45,,False
-Mathew Ryan,Australia,34,1,Goalkeeper,Goalkeeper,Without Club,1.8,,False
-Patrick Beach,Australia,22,18,Goalkeeper,Goalkeeper,Melbourne City FC,1.0,,False
-Paul Izzo,Australia,31,12,Goalkeeper,Goalkeeper,Randers FC,0.5,,False
-Aiden O'Neill,Australia,27,13,Defensive Midfield,Midfielder,New York City FC,3.0,,False
-Ajdin Hrustic,Australia,29,10,Central Midfield,Midfielder,Without Club,0.6,,False
-Cammy Devlin,Australia,28,14,Central Midfield,Midfielder,Heart of Midlothian FC,2.0,,False
-Connor Metcalfe,Australia,26,8,Central Midfield,Midfielder,FC St. Pauli,1.5,,False
-Cristian Volpato,Australia,22,20,Attacking Midfield,Midfielder,US Sassuolo,10.0,,False
-Jackson Irvine,Australia,33,22,Central Midfield,Midfielder,FC St. Pauli,1.0,,False
-Kai Trewin,Australia,25,15,Defensive Midfield,Midfielder,New York City FC,1.8,,False
-Paul Okon-Engstler,Australia,21,24,Defensive Midfield,Midfielder,Sydney FC,1.2,,False
-Marko Arnautovic,Austria,37,7,Centre-Forward,Attacker,Red Star Belgrade,2.0,,False
-Michael Gregoritsch,Austria,32,11,Centre-Forward,Attacker,FC Augsburg,1.5,,False
-Patrick Wimmer,Austria,25,21,Right Winger,Attacker,TSG 1899 Hoffenheim,12.0,,False
-Sasa Kalajdzic,Austria,28,14,Centre-Forward,Attacker,Wolverhampton Wanderers,4.0,,False
-David Affengruber,Austria,25,2,Centre-Back,Defender,Elche CF,20.0,,False
-David Alaba,Austria,34,8,Centre-Back,Defender,Without Club,3.0,,False
-Kevin Danso,Austria,27,3,Centre-Back,Defender,Tottenham Hotspur,20.0,,False
-Konrad Laimer,Austria,29,20,Right-Back,Defender,Bayern Munich,32.0,,False
-Marco Friedl,Austria,28,23,Centre-Back,Defender,SV Werder Bremen,10.0,,False
-Michael Svoboda,Austria,27,25,Centre-Back,Defender,Brighton & Hove Albion,3.5,,False
-Philipp Lienhart,Austria,29,15,Centre-Back,Defender,SC Freiburg,10.0,,False
-Phillipp Mwene,Austria,32,16,Left-Back,Defender,1.FSV Mainz 05,1.5,,False
-Stefan Posch,Austria,29,5,Centre-Back,Defender,Como 1907,6.0,,False
-Alexander Schlager,Austria,30,1,Goalkeeper,Goalkeeper,Red Bull Salzburg,2.0,,False
-Florian Wiegele,Austria,25,12,Goalkeeper,Goalkeeper,FC Viktoria Plzen,2.2,,False
-Patrick Pentz,Austria,29,13,Goalkeeper,Goalkeeper,Bröndby IF,2.2,,False
-Alessandro Schöpf,Austria,32,26,Central Midfield,Midfielder,LASK,0.8,,False
-Alexander Prass,Austria,25,22,Left Midfield,Midfielder,TSG 1899 Hoffenheim,9.0,,False
-Carney Chukwuemeka,Austria,22,17,Central Midfield,Midfielder,Borussia Dortmund,20.0,,False
-Dejan Ljubicic,Austria,28,19,Defensive Midfield,Midfielder,FC Schalke 04,3.0,,False
-Florian Grillitsch,Austria,30,10,Defensive Midfield,Midfielder,Without Club,2.5,,False
-Marcel Sabitzer,Austria,32,9,Central Midfield,Midfielder,Borussia Dortmund,6.0,,False
-Nicolas Seiwald,Austria,25,6,Defensive Midfield,Midfielder,RB Leipzig,25.0,,False
-Paul Wanner,Austria,20,24,Central Midfield,Midfielder,PSV Eindhoven,22.0,,False
-Romano Schmid,Austria,26,18,Attacking Midfield,Midfielder,SV Werder Bremen,15.0,,False
-Xaver Schlager,Austria,28,4,Central Midfield,Midfielder,Without Club,10.0,,False
 Dodi Lukébakio,Belgium,28,14,Right Winger,Attacker,SL Benfica,15.0,,False
 Jérémy Doku,Belgium,24,11,Left Winger,Attacker,Manchester City,75.0,,False
 Leandro Trossard,Belgium,31,10,Left Winger,Attacker,Arsenal FC,18.0,,False
@@ -129,32 +51,6 @@ Hans Vanaken,Belgium,33,20,Attacking Midfield,Midfielder,Club Brugge KV,5.0,,Fal
 Kevin De Bruyne,Belgium,35,7,Attacking Midfield,Midfielder,SSC Napoli,8.0,,False
 Nicolas Raskin,Belgium,25,23,Defensive Midfield,Midfielder,Rangers FC,12.0,,False
 Youri Tielemans,Belgium,29,8,Central Midfield,Midfielder,Aston Villa,30.0,,False
-Edin Dzeko,Bosnia and Herzegovina,40,11,Centre-Forward,Attacker,Without Club,1.0,,False
-Ermedin Demirovic,Bosnia and Herzegovina,28,10,Centre-Forward,Attacker,VfB Stuttgart,22.0,,False
-Esmir Bajraktarevic,Bosnia and Herzegovina,21,20,Right Winger,Attacker,PSV Eindhoven,8.0,,False
-Haris Tabakovic,Bosnia and Herzegovina,32,23,Centre-Forward,Attacker,TSG 1899 Hoffenheim,3.5,,False
-Jovo Lukić,Bosnia and Herzegovina,27,25,Centre-Forward,Attacker,FC Universitatea Cluj,2.2,,False
-Kerim Alajbegovic,Bosnia and Herzegovina,18,19,Left Winger,Attacker,Bayer 04 Leverkusen,22.0,,False
-Samed Bazdar,Bosnia and Herzegovina,22,9,Centre-Forward,Attacker,Real Zaragoza,1.5,,False
-Amar Dedić,Bosnia and Herzegovina,23,7,Right-Back,Defender,SL Benfica,16.0,,False
-Arjan Malic,Bosnia and Herzegovina,20,24,Right-Back,Defender,SK Sturm Graz,1.8,,False
-Dennis Hadzikadunic,Bosnia and Herzegovina,27,3,Centre-Back,Defender,Without Club,1.2,,False
-Nihad Mujakic,Bosnia and Herzegovina,28,2,Centre-Back,Defender,FK Partizan Belgrade,1.2,,False
-Nikola Katic,Bosnia and Herzegovina,29,18,Centre-Back,Defender,FC Schalke 04,1.8,,False
-Sead Kolasinac,Bosnia and Herzegovina,33,5,Centre-Back,Defender,Atalanta BC,4.0,,False
-Stjepan Radeljic,Bosnia and Herzegovina,28,21,Centre-Back,Defender,GNK Dinamo Zagreb,2.8,,False
-Tarik Muharemović,Bosnia and Herzegovina,23,4,Centre-Back,Defender,US Sassuolo,25.0,,False
-Martin Zlomislic,Bosnia and Herzegovina,27,22,Goalkeeper,Goalkeeper,Qarabağ FK,2.0,,False
-Mladen Jurkas,Bosnia and Herzegovina,18,12,Goalkeeper,Goalkeeper,FK Borac Banja Luka,0.7,,False
-Nikola Vasilj,Bosnia and Herzegovina,30,1,Goalkeeper,Goalkeeper,Without Club,4.5,,False
-Amar Memić,Bosnia and Herzegovina,25,15,Right Midfield,Midfielder,FC Viktoria Plzen,4.5,,False
-Amir Hadziahmetovic,Bosnia and Herzegovina,29,16,Defensive Midfield,Midfielder,Besiktas JK,4.0,,False
-Armin Gigovic,Bosnia and Herzegovina,24,8,Central Midfield,Midfielder,BSC Young Boys,2.5,,False
-Benjamin Tahirović,Bosnia and Herzegovina,23,6,Central Midfield,Midfielder,Bröndby IF,4.5,,False
-Dzenis Burnic,Bosnia and Herzegovina,28,17,Defensive Midfield,Midfielder,Without Club,1.2,,False
-Ermin Mahmic,Bosnia and Herzegovina,21,26,Attacking Midfield,Midfielder,FC Slovan Liberec,5.0,,False
-Ivan Basic,Bosnia and Herzegovina,24,13,Central Midfield,Midfielder,FC Astana,1.5,,False
-Ivan Šunjić,Bosnia and Herzegovina,29,14,Defensive Midfield,Midfielder,Pafos FC,2.0,,False
 Endrick,Brazil,19,19,Centre-Forward,Attacker,Real Madrid,40.0,,False
 Gabriel Martinelli,Brazil,25,22,Left Winger,Attacker,Arsenal FC,45.0,,False
 Igor Thiago,Brazil,25,25,Centre-Forward,Attacker,Brentford FC,65.0,,False
@@ -186,7 +82,7 @@ Jacob Shaffelburg,Canada,26,14,Left Winger,Attacker,Los Angeles FC,2.5,,False
 Jayden Nelson,Canada,23,26,Left Winger,Attacker,Austin FC,2.0,,False
 Jonathan David,Canada,26,10,Centre-Forward,Attacker,Juventus FC,30.0,,False
 Liam Millar,Canada,26,11,Left Winger,Attacker,Hull City,3.0,,False
-Promise David,Canada,24,24,Centre-Forward,Attacker,Union Saint-Gilloise,17.0,,False
+Promise David,Canada,25,24,Centre-Forward,Attacker,Union Saint-Gilloise,17.0,,False
 Tajon Buchanan,Canada,27,17,Right Winger,Attacker,Villarreal CF,12.0,,False
 Tani Oluwaseyi,Canada,26,12,Centre-Forward,Attacker,Villarreal CF,7.0,,False
 Alfie Jones,Canada,28,3,Centre-Back,Defender,Middlesbrough FC,6.0,,False
@@ -207,32 +103,6 @@ Mathieu Choinière,Canada,27,6,Central Midfield,Midfielder,Los Angeles FC,0.8,,F
 Nathan-Dylan Saliba,Canada,22,25,Central Midfield,Midfielder,RSC Anderlecht,7.5,,False
 Niko Sigur,Canada,22,23,Defensive Midfield,Midfielder,HNK Hajduk Split,4.0,,False
 Stephen Eustaquio,Canada,29,7,Central Midfield,Midfielder,FC Porto,6.0,,False
-Dailon Livramento,Cape Verde,25,19,Centre-Forward,Attacker,Hellas Verona,0.8,,False
-Garry Rodrigues,Cape Verde,35,11,Right Winger,Attacker,Apollon Limassol,0.3,,False
-Gilson Benchimol,Cape Verde,24,9,Centre-Forward,Attacker,Akron Tolyatti,1.2,,False
-Hélio Varela,Cape Verde,24,26,Left Winger,Attacker,Maccabi Tel Aviv,2.5,,False
-Jovane Cabral,Cape Verde,28,7,Left Winger,Attacker,Without Club,1.0,,False
-Nuno da Costa,Cape Verde,35,21,Centre-Forward,Attacker,Basaksehir FK,0.4,,False
-Ryan Mendes,Cape Verde,36,20,Left Winger,Attacker,Without Club,0.2,,False
-Telmo Arcanjo,Cape Verde,25,18,Right Winger,Attacker,Vitória Guimarães SC,3.0,,False
-Willy Semedo,Cape Verde,32,17,Left Winger,Attacker,Without Club,1.0,,False
-Diney Borges,Cape Verde,31,3,Centre-Back,Defender,Al-Bataeh CSC,0.9,,False
-Kelvin Pires,Cape Verde,26,25,Centre-Back,Defender,SJK Seinäjoki,0.4,,False
-Logan Costa,Cape Verde,25,5,Centre-Back,Defender,Villarreal CF,15.0,,False
-Roberto Lopes,Cape Verde,34,4,Centre-Back,Defender,Shamrock Rovers,0.25,,False
-Sidny Lopes Cabral,Cape Verde,23,13,Left-Back,Defender,Trabzonspor,4.0,,False
-Steven Moreira,Cape Verde,31,22,Right-Back,Defender,Columbus Crew,1.5,,False
-Stopira,Cape Verde,38,2,Centre-Back,Defender,SC União Torreense,0.05,,False
-Wagner Pina,Cape Verde,23,24,Right-Back,Defender,Trabzonspor,11.0,,False
-CJ dos Santos,Cape Verde,25,23,Goalkeeper,Goalkeeper,San Diego FC,1.0,,False
-Márcio Rosa,Cape Verde,29,12,Goalkeeper,Goalkeeper,Montana,0.35,,False
-Vozinha,Cape Verde,40,1,Goalkeeper,Goalkeeper,Without Club,0.05,,False
-Deroy Duarte,Cape Verde,26,14,Central Midfield,Midfielder,Ludogorets Razgrad,1.8,,False
-Jamiro Monteiro,Cape Verde,32,10,Central Midfield,Midfielder,Without Club,0.65,,False
-João Paulo,Cape Verde,28,8,Defensive Midfield,Midfielder,FCSB,0.9,,False
-Kevin Pina,Cape Verde,29,6,Defensive Midfield,Midfielder,FC Krasnodar,5.0,,False
-Laros Duarte,Cape Verde,29,15,Defensive Midfield,Midfielder,Puskás Akadémia FC,1.0,,False
-Yannick Semedo,Cape Verde,30,16,Central Midfield,Midfielder,Without Club,0.25,,False
 Andrés Gómez,Colombia,23,26,Left Winger,Attacker,Clube de Regatas Vasco da Gama,11.0,,False
 Cucho Hernández,Colombia,27,19,Centre-Forward,Attacker,Real Betis Balompié,18.0,,False
 Jhon Arias,Colombia,28,11,Right Winger,Attacker,Sociedade Esportiva Palmeiras,15.0,,False
@@ -259,84 +129,6 @@ Juan Fernando Quintero,Colombia,33,20,Attacking Midfield,Midfielder,CA River Pla
 Juan Portilla,Colombia,27,15,Central Midfield,Midfielder,Club Athletico Paranaense,5.0,,False
 Kevin Castaño,Colombia,25,5,Defensive Midfield,Midfielder,CA River Plate,5.0,,False
 Richard Ríos,Colombia,26,6,Defensive Midfield,Midfielder,SL Benfica,25.0,,False
-Ante Budimir,Croatia,34,11,Centre-Forward,Attacker,CA Osasuna,2.8,,False
-Igor Matanovic,Croatia,23,20,Centre-Forward,Attacker,SC Freiburg,22.0,,False
-Ivan Perišić,Croatia,37,14,Left Winger,Attacker,PSV Eindhoven,1.2,,False
-Marco Pašalić,Croatia,25,24,Right Winger,Attacker,Orlando City SC,6.5,,False
-Petar Musa,Croatia,28,26,Centre-Forward,Attacker,FC Dallas,12.0,,False
-Duje Caleta-Car,Croatia,29,5,Centre-Back,Defender,Olympique Lyon,2.8,,False
-Josip Stanisic,Croatia,26,2,Right-Back,Defender,Bayern Munich,40.0,,False
-Josip Sutalo,Croatia,26,6,Centre-Back,Defender,Ajax Amsterdam,12.0,,False
-Josko Gvardiol,Croatia,24,4,Centre-Back,Defender,Manchester City,70.0,,False
-Luka Vuskovic,Croatia,19,22,Centre-Back,Defender,Tottenham Hotspur,60.0,,False
-Marin Pongracic,Croatia,28,3,Centre-Back,Defender,ACF Fiorentina,6.5,,False
-Martin Erlić,Croatia,28,25,Centre-Back,Defender,FC Midtjylland,4.0,,False
-Dominik Kotarski,Croatia,26,23,Goalkeeper,Goalkeeper,FC Copenhagen,5.0,,False
-Dominik Livakovic,Croatia,31,1,Goalkeeper,Goalkeeper,Fenerbahce,4.0,,False
-Ivor Pandur,Croatia,26,12,Goalkeeper,Goalkeeper,Rangers FC,4.5,,False
-Andrej Kramaric,Croatia,35,9,Attacking Midfield,Midfielder,TSG 1899 Hoffenheim,2.5,,False
-Kristijan Jakic,Croatia,29,18,Defensive Midfield,Midfielder,FC Augsburg,6.0,,False
-Luka Modrić,Croatia,40,10,Central Midfield,Midfielder,Without Club,3.5,,False
-Luka Sucic,Croatia,23,21,Central Midfield,Midfielder,Real Sociedad,10.0,,False
-Mario Pašalić,Croatia,31,15,Central Midfield,Midfielder,Atalanta BC,6.0,,False
-Martin Baturina,Croatia,23,16,Attacking Midfield,Midfielder,Como 1907,30.0,,False
-Mateo Kovacic,Croatia,32,8,Central Midfield,Midfielder,Manchester City,10.0,,False
-Nikola Moro,Croatia,28,7,Defensive Midfield,Midfielder,Bologna FC 1909,7.0,,False
-Nikola Vlašić,Croatia,28,13,Attacking Midfield,Midfielder,Torino FC,10.0,,False
-Petar Sučić,Croatia,22,17,Central Midfield,Midfielder,Inter Milan,40.0,,False
-Toni Fruk,Croatia,25,19,Attacking Midfield,Midfielder,HNK Rijeka,9.0,,False
-Brian Cipenga,DR Congo,28,9,Left Winger,Attacker,UD Almería,2.0,,False
-Cédric Bakambu,DR Congo,35,17,Centre-Forward,Attacker,Without Club,1.2,,False
-Fiston Mayele,DR Congo,32,19,Centre-Forward,Attacker,Without Club,1.8,,False
-Meschack Elia,DR Congo,28,13,Centre-Forward,Attacker,Alanyaspor,1.5,,False
-Nathanaël Mbuku,DR Congo,24,7,Left Winger,Attacker,FC Augsburg,2.0,,False
-Simon Banza,DR Congo,29,23,Centre-Forward,Attacker,Al-Jazira Club,10.0,,False
-Théo Bongonda,DR Congo,30,10,Right Winger,Attacker,Without Club,3.0,,False
-Yoane Wissa,DR Congo,29,20,Centre-Forward,Attacker,Newcastle United,25.0,,False
-Aaron Wan-Bissaka,DR Congo,28,2,Right-Back,Defender,West Ham United,15.0,,False
-Arthur Masuaku,DR Congo,32,26,Left-Back,Defender,Sunderland AFC,2.0,,False
-Axel Tuanzebe,DR Congo,28,4,Centre-Back,Defender,Burnley FC,5.0,,False
-Chancel Mbemba,DR Congo,31,22,Centre-Back,Defender,LOSC Lille,2.0,,False
-Dylan Batubinsika,DR Congo,30,5,Centre-Back,Defender,Without Club,0.6,,False
-Gédéon Kalulu,DR Congo,28,24,Right-Back,Defender,Aris Limassol,1.0,,False
-Joris Kayembe,DR Congo,31,12,Left-Back,Defender,KRC Genk,2.0,,False
-Steve Kapuadi,DR Congo,28,3,Centre-Back,Defender,Widzew Lodz,2.5,,False
-Lionel Mpasi-Nzau,DR Congo,31,1,Goalkeeper,Goalkeeper,Le Havre AC,0.4,,False
-Matthieu Epolo,DR Congo,21,21,Goalkeeper,Goalkeeper,Standard Liège,8.0,,False
-Timothy Fayulu,DR Congo,26,16,Goalkeeper,Goalkeeper,FC Sion,0.8,,False
-Aaron Tshibola,DR Congo,31,15,Central Midfield,Midfielder,Kilmarnock FC,0.15,,False
-Charles Pickel,DR Congo,29,18,Defensive Midfield,Midfielder,US Cremonese,2.5,,False
-Edo Kayembe,DR Congo,28,25,Central Midfield,Midfielder,Watford FC,4.0,,False
-Gaël Kakuta,DR Congo,35,11,Attacking Midfield,Midfielder,Without Club,0.25,,False
-Ngal'ayel Mukau,DR Congo,21,6,Defensive Midfield,Midfielder,LOSC Lille,15.0,,False
-Noah Sadiki,DR Congo,21,14,Central Midfield,Midfielder,Sunderland AFC,35.0,,False
-Samuel Moutoussamy,DR Congo,29,8,Central Midfield,Midfielder,Atromitos Athens,1.2,,False
-Alan Minda,Ecuador,23,14,Right Winger,Attacker,Clube Atlético Mineiro,3.0,,False
-Anthony Valencia,Ecuador,22,8,Right Winger,Attacker,Royal Antwerp FC,1.8,,False
-Enner Valencia,Ecuador,36,13,Centre-Forward,Attacker,CF Pachuca,1.0,,False
-Gonzalo Plata,Ecuador,25,19,Right Winger,Attacker,CR Flamengo,9.0,,False
-Jeremy Arévalo,Ecuador,21,24,Centre-Forward,Attacker,VfB Stuttgart,7.0,,False
-John Yeboah,Ecuador,26,9,Second Striker,Attacker,Venezia FC,5.5,,False
-Jordy Caicedo,Ecuador,28,16,Centre-Forward,Attacker,CA Huracán,2.0,,False
-Kevin Rodríguez,Ecuador,26,11,Centre-Forward,Attacker,Union Saint-Gilloise,6.0,,False
-Nilson Angulo,Ecuador,23,20,Left Winger,Attacker,Sunderland AFC,17.0,,False
-Angelo Preciado,Ecuador,28,17,Right-Back,Defender,Clube Atlético Mineiro,3.5,,False
-Félix Torres,Ecuador,29,2,Centre-Back,Defender,Sport Club Internacional,1.0,,False
-Jackson Porozo,Ecuador,25,25,Centre-Back,Defender,Club Tijuana,2.5,,False
-Joel Ordóñez,Ecuador,22,4,Centre-Back,Defender,Club Brugge KV,33.0,,False
-Pervis Estupiñán,Ecuador,28,7,Left-Back,Defender,AC Milan,12.0,,False
-Piero Hincapié,Ecuador,24,3,Centre-Back,Defender,Arsenal FC,50.0,,False
-Willian Pacho,Ecuador,24,6,Centre-Back,Defender,Paris Saint-Germain,80.0,,False
-Yaimar Medina,Ecuador,21,26,Left-Back,Defender,KRC Genk,4.0,,False
-Gonzalo Valle,Ecuador,30,22,Goalkeeper,Goalkeeper,LDU Quito,1.8,,False
-Hernán Galíndez,Ecuador,39,1,Goalkeeper,Goalkeeper,CA Huracán,0.3,,False
-Moisés Ramírez,Ecuador,25,12,Goalkeeper,Goalkeeper,AE Kifisia,0.8,,False
-Alan Franco,Ecuador,27,21,Central Midfield,Midfielder,Clube Atlético Mineiro,4.5,,False
-Denil Castillo,Ecuador,22,18,Central Midfield,Midfielder,FC Midtjylland,7.0,,False
-Jordy Alcívar,Ecuador,26,5,Defensive Midfield,Midfielder,Independiente del Valle,2.0,,False
-Kendry Páez,Ecuador,19,10,Attacking Midfield,Midfielder,CA River Plate,8.0,,False
-Moisés Caicedo,Ecuador,24,23,Defensive Midfield,Midfielder,Chelsea FC,100.0,,False
-Pedro Vite,Ecuador,24,15,Central Midfield,Midfielder,UNAM Pumas,6.0,,False
 Haissem Hassan,Egypt,24,12,Right Winger,Attacker,Real Oviedo,3.5,,False
 Hamza Abdelkarim,Egypt,18,9,Centre-Forward,Attacker,FC Barcelona Atlètic,1.5,,False
 Ibrahim Adel,Egypt,25,20,Left Winger,Attacker,FC Nordsjaelland,2.5,,False
@@ -384,7 +176,7 @@ James Trafford,England,23,23,Goalkeeper,Goalkeeper,Manchester City,25.0,,False
 Jordan Pickford,England,32,1,Goalkeeper,Goalkeeper,Everton FC,13.0,,False
 Declan Rice,England,27,4,Central Midfield,Midfielder,Arsenal FC,120.0,,False
 Eberechi Eze,England,28,21,Attacking Midfield,Midfielder,Arsenal FC,65.0,,False
-Elliot Anderson,England,23,8,Central Midfield,Midfielder,Nottingham Forest,75.0,,False
+Elliot Anderson,England,23,8,Central Midfield,Midfielder,Manchester City,75.0,,False
 Jordan Henderson,England,36,14,Defensive Midfield,Midfielder,Brentford FC,1.2,,False
 Jude Bellingham,England,23,10,Attacking Midfield,Midfielder,Real Madrid,130.0,,False
 Kobbie Mainoo,England,21,16,Central Midfield,Midfielder,Manchester United,70.0,,False
@@ -407,7 +199,7 @@ Maxence Lacroix,France,26,26,Centre-Back,Defender,Crystal Palace,50.0,,False
 Theo Hernández,France,28,19,Left-Back,Defender,Al-Hilal SFC,20.0,,False
 William Saliba,France,25,17,Centre-Back,Defender,Arsenal FC,100.0,,False
 Brice Samba,France,32,1,Goalkeeper,Goalkeeper,Stade Rennais FC,7.0,,False
-Mike Maignan,France,30,16,Goalkeeper,Goalkeeper,AC Milan,20.0,,False
+Mike Maignan,France,31,16,Goalkeeper,Goalkeeper,AC Milan,20.0,,False
 Robin Risser,France,21,23,Goalkeeper,Goalkeeper,RC Lens,30.0,,False
 Adrien Rabiot,France,31,14,Central Midfield,Midfielder,AC Milan,18.0,,False
 Aurélien Tchouaméni,France,26,8,Defensive Midfield,Midfielder,Real Madrid,70.0,,False
@@ -415,110 +207,6 @@ Manu Koné,France,25,6,Central Midfield,Midfielder,AS Roma,50.0,,False
 N'Golo Kanté,France,35,13,Defensive Midfield,Midfielder,Fenerbahce,4.0,,False
 Rayan Cherki,France,22,24,Attacking Midfield,Midfielder,Manchester City,90.0,,False
 Warren Zaïre-Emery,France,20,18,Central Midfield,Midfielder,Paris Saint-Germain,80.0,,False
-Deniz Undav,Germany,29,26,Centre-Forward,Attacker,VfB Stuttgart,22.0,,False
-Jamie Leweling,Germany,25,9,Right Winger,Attacker,VfB Stuttgart,40.0,,False
-Kai Havertz,Germany,27,7,Centre-Forward,Attacker,Arsenal FC,55.0,,False
-Leroy Sané,Germany,30,19,Right Winger,Attacker,Galatasaray,20.0,,False
-Maximilian Beier,Germany,23,14,Centre-Forward,Attacker,Borussia Dortmund,40.0,,False
-Nick Woltemade,Germany,24,11,Centre-Forward,Attacker,Newcastle United,55.0,,False
-Antonio Rüdiger,Germany,33,2,Centre-Back,Defender,Real Madrid,6.0,,False
-David Raum,Germany,28,22,Left-Back,Defender,RB Leipzig,25.0,,False
-Jonathan Tah,Germany,30,4,Centre-Back,Defender,Bayern Munich,28.0,,False
-Malick Thiaw,Germany,24,24,Centre-Back,Defender,Newcastle United,45.0,,False
-Nathaniel Brown,Germany,23,18,Left-Back,Defender,Eintracht Frankfurt,40.0,,False
-Nico Schlotterbeck,Germany,26,15,Centre-Back,Defender,Borussia Dortmund,55.0,,True
-Waldemar Anton,Germany,29,3,Centre-Back,Defender,Borussia Dortmund,18.0,,False
-Alexander Nübel,Germany,29,21,Goalkeeper,Goalkeeper,Bayern Munich,12.0,,False
-Manuel Neuer,Germany,40,1,Goalkeeper,Goalkeeper,Bayern Munich,4.0,,False
-Oliver Baumann,Germany,36,12,Goalkeeper,Goalkeeper,TSG 1899 Hoffenheim,2.5,,False
-Aleksandar Pavlovic,Germany,22,5,Defensive Midfield,Midfielder,Bayern Munich,90.0,,False
-Angelo Stiller,Germany,25,16,Defensive Midfield,Midfielder,VfB Stuttgart,45.0,,False
-Assan Ouédraogo,Germany,20,25,Central Midfield,Midfielder,RB Leipzig,28.0,,False
-Felix Nmecha,Germany,25,23,Central Midfield,Midfielder,Borussia Dortmund,50.0,,False
-Florian Wirtz,Germany,23,17,Attacking Midfield,Midfielder,Liverpool FC,100.0,,False
-Jamal Musiala,Germany,23,10,Attacking Midfield,Midfielder,Bayern Munich,100.0,,False
-Joshua Kimmich,Germany,31,6,Defensive Midfield,Midfielder,Bayern Munich,35.0,,False
-Leon Goretzka,Germany,31,8,Central Midfield,Midfielder,Without Club,12.0,,False
-Nadiem Amiri,Germany,29,20,Central Midfield,Midfielder,1.FSV Mainz 05,17.0,,False
-Pascal Groß,Germany,35,13,Central Midfield,Midfielder,Brighton & Hove Albion,2.5,,False
-Abdul Fatawu,Ghana,22,7,Right Winger,Attacker,Leicester City,20.0,,False
-Antoine Semenyo,Ghana,26,11,Right Winger,Attacker,Manchester City,80.0,,False
-Brandon Thomas-Asante,Ghana,27,10,Centre-Forward,Attacker,Coventry City,16.0,,False
-Christopher Bonsu Baah,Ghana,21,13,Left Winger,Attacker,Al-Qadsiah FC,14.0,,False
-Ernest Nuamah,Ghana,22,24,Right Winger,Attacker,Olympique Lyon,10.0,,False
-Iñaki Williams,Ghana,32,19,Right Winger,Attacker,Athletic Bilbao,8.0,,False
-Jordan Ayew,Ghana,34,9,Centre-Forward,Attacker,Without Club,1.0,,False
-Kamaldeen Sulemana,Ghana,24,22,Left Winger,Attacker,Atalanta BC,17.0,,False
-Prince Adu,Ghana,22,25,Centre-Forward,Attacker,FC Viktoria Plzen,3.0,,False
-Abdul Mumin,Ghana,28,6,Centre-Back,Defender,Without Club,3.0,,False
-Abdul Rahman Baba,Ghana,32,17,Left-Back,Defender,Without Club,2.0,,False
-Alidu Seidu,Ghana,26,2,Centre-Back,Defender,Stade Rennais FC,6.0,,False
-Derrick Luckassen,Ghana,30,23,Centre-Back,Defender,Without Club,1.0,,False
-Gideon Mensah,Ghana,27,14,Left-Back,Defender,Without Club,4.0,,False
-Jerome Opoku,Ghana,27,18,Centre-Back,Defender,Basaksehir FK,5.0,,False
-Jonas Adjetey,Ghana,22,4,Centre-Back,Defender,VfL Wolfsburg,6.0,,False
-Kojo Peprah Oppong,Ghana,22,21,Centre-Back,Defender,OGC Nice,10.0,,False
-Marvin Senaya,Ghana,25,26,Right-Back,Defender,AJ Auxerre,3.0,,False
-Benjamin Asare,Ghana,33,16,Goalkeeper,Goalkeeper,Hearts of Oak,0.1,,False
-Joseph Anang,Ghana,26,12,Goalkeeper,Goalkeeper,St. Patrick's Athletic,0.35,,False
-Lawrence Ati Zigi,Ghana,29,1,Goalkeeper,Goalkeeper,FC St. Gallen 1879,1.5,,False
-Augustine Boakye,Ghana,25,20,Attacking Midfield,Midfielder,AS Saint-Étienne,6.0,,False
-Caleb Yirenkyi,Ghana,20,3,Central Midfield,Midfielder,FC Nordsjaelland,10.0,,False
-Elisha Owusu,Ghana,28,15,Defensive Midfield,Midfielder,AJ Auxerre,4.0,,False
-Kwasi Sibo,Ghana,28,8,Central Midfield,Midfielder,Without Club,1.4,,False
-Thomas Partey,Ghana,33,5,Defensive Midfield,Midfielder,Without Club,2.0,,False
-Amad Diallo,Ivory Coast,23,15,Right Winger,Attacker,Manchester United,45.0,,False
-Ange-Yoan Bonny,Ivory Coast,22,9,Centre-Forward,Attacker,Inter Milan,35.0,,False
-Bazoumana Touré,Ivory Coast,20,24,Left Winger,Attacker,TSG 1899 Hoffenheim,40.0,,False
-Elye Wahi,Ivory Coast,23,12,Centre-Forward,Attacker,Eintracht Frankfurt,18.0,,False
-Evann Guessand,Ivory Coast,25,22,Right Winger,Attacker,Aston Villa,25.0,,False
-Nicolas Pépé,Ivory Coast,31,19,Right Winger,Attacker,Villarreal CF,6.0,,False
-Oumar Diakité,Ivory Coast,22,14,Centre-Forward,Attacker,Stade Reims,5.0,,False
-Parfait Guiagon,Ivory Coast,25,25,Left Winger,Attacker,Royal Charleroi SC,5.0,,False
-Simon Adingra,Ivory Coast,24,10,Left Winger,Attacker,Sunderland AFC,22.0,,False
-Yan Diomande,Ivory Coast,19,11,Left Winger,Attacker,RB Leipzig,90.0,,False
-Christopher Operi,Ivory Coast,29,13,Left-Back,Defender,Basaksehir FK,4.0,,False
-Emmanuel Agbadou,Ivory Coast,29,20,Centre-Back,Defender,Besiktas JK,16.0,,False
-Evan Ndicka,Ivory Coast,26,21,Centre-Back,Defender,AS Roma,35.0,,False
-Ghislain Konan,Ivory Coast,30,3,Left-Back,Defender,Gil Vicente FC,3.0,,False
-Guéla Doué,Ivory Coast,23,17,Right-Back,Defender,RC Strasbourg Alsace,20.0,,False
-Odilon Kossounou,Ivory Coast,25,7,Centre-Back,Defender,Atalanta BC,15.0,,False
-Ousmane Diomande,Ivory Coast,22,2,Centre-Back,Defender,Sporting CP,42.0,,False
-Wilfried Singo,Ivory Coast,25,5,Right-Back,Defender,Galatasaray,23.0,,False
-Alban Lafont,Ivory Coast,27,23,Goalkeeper,Goalkeeper,FC Nantes,3.0,,False
-Mohamed Koné,Ivory Coast,24,16,Goalkeeper,Goalkeeper,Royal Charleroi SC,2.0,,False
-Yahia Fofana,Ivory Coast,25,1,Goalkeeper,Goalkeeper,Caykur Rizespor,5.0,,False
-Christ Inao Oulaï,Ivory Coast,20,26,Central Midfield,Midfielder,Trabzonspor,23.0,,False
-Franck Kessié,Ivory Coast,29,8,Central Midfield,Midfielder,Without Club,12.0,,False
-Ibrahim Sangaré,Ivory Coast,28,18,Defensive Midfield,Midfielder,Nottingham Forest,20.0,,False
-Jean Michaël Seri,Ivory Coast,34,4,Defensive Midfield,Midfielder,NK Maribor,0.1,,False
-Seko Fofana,Ivory Coast,31,6,Central Midfield,Midfielder,Stade Rennais FC,8.0,,False
-Ayase Ueda,Japan,27,18,Centre-Forward,Attacker,Feyenoord Rotterdam,17.0,,False
-Daizen Maeda,Japan,28,11,Left Winger,Attacker,Celtic FC,13.0,,False
-Junya Ito,Japan,33,14,Right Winger,Attacker,KRC Genk,3.0,,False
-Keisuke Goto,Japan,21,9,Centre-Forward,Attacker,SC Freiburg,10.0,,False
-Keito Nakamura,Japan,25,13,Left Winger,Attacker,Stade Reims,10.0,,False
-Kento Shiogai,Japan,21,26,Centre-Forward,Attacker,VfL Wolfsburg,8.0,,False
-Koki Ogawa,Japan,28,19,Centre-Forward,Attacker,NEC Nijmegen,2.0,,False
-Ritsu Doan,Japan,28,10,Right Winger,Attacker,Eintracht Frankfurt,17.0,,False
-Shuto Machino,Japan,26,6,Centre-Forward,Attacker,Borussia Mönchengladbach,4.0,,False
-Takefusa Kubo,Japan,25,8,Right Winger,Attacker,Real Sociedad,20.0,,False
-Yuito Suzuki,Japan,24,17,Second Striker,Attacker,SC Freiburg,24.0,,False
-Ayumu Seko,Japan,26,20,Centre-Back,Defender,Le Havre AC,5.0,,False
-Hiroki Ito,Japan,27,21,Centre-Back,Defender,Bayern Munich,18.0,,False
-Junnosuke Suzuki,Japan,22,25,Centre-Back,Defender,FC Copenhagen,3.5,,False
-Ko Itakura,Japan,29,4,Centre-Back,Defender,Ajax Amsterdam,8.0,,False
-Shogo Taniguchi,Japan,34,3,Centre-Back,Defender,Sint-Truidense VV,0.75,,False
-Takehiro Tomiyasu,Japan,27,22,Centre-Back,Defender,Without Club,5.0,,False
-Tsuyoshi Watanabe,Japan,29,16,Centre-Back,Defender,Feyenoord Rotterdam,10.0,,False
-Yukinari Sugawara,Japan,26,2,Right-Back,Defender,Southampton FC,5.5,,False
-Yuto Nagatomo,Japan,39,5,Left-Back,Defender,FC Tokyo,0.1,,False
-Keisuke Osako,Japan,26,12,Goalkeeper,Goalkeeper,Sanfrecce Hiroshima,2.0,,False
-Tomoki Hayakawa,Japan,27,23,Goalkeeper,Goalkeeper,Kashima Antlers,2.0,,False
-Zion Suzuki,Japan,23,1,Goalkeeper,Goalkeeper,Parma Calcio 1913,20.0,,False
-Ao Tanaka,Japan,27,7,Central Midfield,Midfielder,Leeds United,13.0,,False
-Daichi Kamada,Japan,29,15,Attacking Midfield,Midfielder,Without Club,10.0,,False
-Kaishu Sano,Japan,25,24,Defensive Midfield,Midfielder,1.FSV Mainz 05,40.0,,False
 Alexis Vega,Mexico,28,10,Left Winger,Attacker,Deportivo Toluca,8.0,,False
 Armando González,Mexico,23,14,Centre-Forward,Attacker,Deportivo Guadalajara,15.0,,False
 César Huerta,Mexico,25,21,Left Winger,Attacker,RSC Anderlecht,3.5,,False
@@ -571,32 +259,6 @@ Ismael Saibari,Morocco,25,11,Attacking Midfield,Midfielder,Bayern Munich,40.0,,F
 Neil El Aynaoui,Morocco,25,24,Central Midfield,Midfielder,AS Roma,23.0,,False
 Samir El Mourabet,Morocco,20,15,Central Midfield,Midfielder,RC Strasbourg Alsace,22.0,,False
 Sofyan Amrabat,Morocco,29,4,Defensive Midfield,Midfielder,Fenerbahce,10.0,,False
-Brian Brobbey,Netherlands,24,19,Centre-Forward,Attacker,Sunderland AFC,30.0,,False
-Cody Gakpo,Netherlands,27,11,Left Winger,Attacker,Liverpool FC,60.0,,False
-Crysencio Summerville,Netherlands,24,24,Left Winger,Attacker,West Ham United,35.0,,False
-Donyell Malen,Netherlands,27,18,Centre-Forward,Attacker,AS Roma,45.0,,False
-Memphis Depay,Netherlands,32,10,Centre-Forward,Attacker,Sport Club Corinthians Paulista,7.0,,False
-Noa Lang,Netherlands,27,17,Left Winger,Attacker,SSC Napoli,22.0,,False
-Wout Weghorst,Netherlands,33,9,Centre-Forward,Attacker,FC Twente Enschede,2.0,,False
-Denzel Dumfries,Netherlands,30,22,Right-Back,Defender,Inter Milan,25.0,,False
-Jan Paul van Hecke,Netherlands,26,6,Centre-Back,Defender,Tottenham Hotspur,45.0,,False
-Jorrel Hato,Netherlands,20,25,Left-Back,Defender,Chelsea FC,40.0,,False
-Lutsharel Geertruida,Netherlands,25,2,Right-Back,Defender,RB Leipzig,20.0,,False
-Mats Wieffer,Netherlands,26,12,Right-Back,Defender,Brighton & Hove Albion,25.0,,False
-Micky van de Ven,Netherlands,25,15,Centre-Back,Defender,Tottenham Hotspur,50.0,,False
-Nathan Aké,Netherlands,31,5,Centre-Back,Defender,Manchester City,12.0,,False
-Virgil van Dijk,Netherlands,34,4,Centre-Back,Defender,Liverpool FC,15.0,,False
-Bart Verbruggen,Netherlands,23,1,Goalkeeper,Goalkeeper,Brighton & Hove Albion,40.0,,False
-Mark Flekken,Netherlands,33,23,Goalkeeper,Goalkeeper,Bayer 04 Leverkusen,6.0,,False
-Robin Roefs,Netherlands,23,13,Goalkeeper,Goalkeeper,Sunderland AFC,28.0,,False
-Frenkie de Jong,Netherlands,29,21,Central Midfield,Midfielder,FC Barcelona,35.0,,False
-Guus Til,Netherlands,28,16,Attacking Midfield,Midfielder,PSV Eindhoven,15.0,,False
-Justin Kluivert,Netherlands,27,7,Attacking Midfield,Midfielder,AFC Bournemouth,25.0,,False
-Marten de Roon,Netherlands,35,3,Defensive Midfield,Midfielder,Atalanta BC,3.2,,False
-Quinten Timber,Netherlands,25,26,Central Midfield,Midfielder,Olympique Marseille,25.0,,False
-Ryan Gravenberch,Netherlands,24,8,Defensive Midfield,Midfielder,Liverpool FC,80.0,,False
-Teun Koopmeiners,Netherlands,28,20,Defensive Midfield,Midfielder,Juventus FC,14.0,,False
-Tijjani Reijnders,Netherlands,27,14,Central Midfield,Midfielder,Manchester City,50.0,,False
 Alexander Sørloth,Norway,30,7,Centre-Forward,Attacker,Atlético de Madrid,18.0,,False
 Andreas Schjelderup,Norway,22,21,Left Winger,Attacker,SL Benfica,30.0,,False
 Antonio Nusa,Norway,21,20,Left Winger,Attacker,RB Leipzig,32.0,,False
@@ -675,63 +337,11 @@ João Neves,Portugal,21,15,Central Midfield,Midfielder,Paris Saint-Germain,140.0
 Rúben Neves,Portugal,29,21,Defensive Midfield,Midfielder,Al-Hilal SFC,25.0,,False
 Samú Costa,Portugal,25,24,Defensive Midfield,Midfielder,RCD Mallorca,15.0,,False
 Vitinha,Portugal,26,23,Defensive Midfield,Midfielder,Paris Saint-Germain,140.0,,False
-Assane Diao,Senegal,20,7,Left Winger,Attacker,Como 1907,30.0,,False
-Bamba Dieng,Senegal,26,9,Centre-Forward,Attacker,Without Club,15.0,,False
-Cherif Ndiaye,Senegal,30,12,Centre-Forward,Attacker,Samsunspor,5.0,,False
-Ibrahim Mbaye,Senegal,18,20,Right Winger,Attacker,Paris Saint-Germain,30.0,,False
-Iliman Ndiaye,Senegal,26,13,Right Winger,Attacker,Everton FC,55.0,,False
-Ismaïla Sarr,Senegal,28,18,Right Winger,Attacker,Crystal Palace,40.0,,False
-Nicolas Jackson,Senegal,25,11,Centre-Forward,Attacker,Chelsea FC,40.0,,False
-Sadio Mané,Senegal,34,10,Left Winger,Attacker,Al-Nassr FC,6.0,,False
-Abdoulaye Seck,Senegal,34,4,Centre-Back,Defender,Without Club,0.4,,False
-Antoine Mendy,Senegal,22,24,Centre-Back,Defender,OGC Nice,10.0,,False
-El Hadji Malick Diouf,Senegal,21,25,Left-Back,Defender,West Ham United,28.0,,False
-Ismail Jakobs,Senegal,26,14,Left-Back,Defender,Galatasaray,8.0,,False
-Kalidou Koulibaly,Senegal,35,3,Centre-Back,Defender,Al-Hilal SFC,4.5,,False
-Mamadou Sarr,Senegal,20,2,Centre-Back,Defender,Chelsea FC,22.0,,False
-Moussa Niakhaté,Senegal,30,19,Centre-Back,Defender,Olympique Lyon,15.0,,False
-Edouard Mendy,Senegal,34,16,Goalkeeper,Goalkeeper,Al-Ahli SFC,4.0,,True
-Mory Diaw,Senegal,33,23,Goalkeeper,Goalkeeper,Le Havre AC,0.9,,False
-Yehvann Diouf,Senegal,26,1,Goalkeeper,Goalkeeper,OGC Nice,7.0,,False
-Bara Sapoko Ndiaye,Senegal,18,22,Central Midfield,Midfielder,Gambinos Stars,4.0,,False
-Habib Diarra,Senegal,22,21,Central Midfield,Midfielder,Sunderland AFC,35.0,,False
-Idrissa Gueye,Senegal,36,5,Defensive Midfield,Midfielder,Without Club,0.5,,False
-Krépin Diatta,Senegal,27,15,Right Midfield,Midfielder,Without Club,6.0,,False
-Lamine Camara,Senegal,22,8,Central Midfield,Midfielder,AS Monaco,40.0,,False
-Pape Gueye,Senegal,27,26,Central Midfield,Midfielder,Villarreal CF,40.0,,False
-Pape Matar Sarr,Senegal,23,17,Central Midfield,Midfielder,Tottenham Hotspur,30.0,,False
-Pathé Ciss,Senegal,32,6,Central Midfield,Midfielder,Rayo Vallecano,1.8,,False
-Evidence Makgopa,South Africa,26,17,Centre-Forward,Attacker,Orlando Pirates,1.4,,False
-Iqraam Rayners,South Africa,30,15,Centre-Forward,Attacker,Mamelodi Sundowns FC,2.8,,False
-Lyle Foster,South Africa,25,9,Centre-Forward,Attacker,Burnley FC,8.0,,False
-Oswin Appollis,South Africa,24,7,Left Winger,Attacker,Orlando Pirates,2.5,,False
-Relebohile Mofokeng,South Africa,21,10,Left Winger,Attacker,Union Saint-Gilloise,3.0,,False
-Thapelo Maseko,South Africa,22,12,Right Winger,Attacker,Mamelodi Sundowns FC,0.75,,False
-Tshepang Moremi,South Africa,25,8,Left Winger,Attacker,Orlando Pirates,1.4,,False
-Aubrey Modiba,South Africa,30,6,Left-Back,Defender,Mamelodi Sundowns FC,1.8,,False
-Bradley Cross,South Africa,25,26,Left-Back,Defender,Kaizer Chiefs,1.0,,False
-Ime Okon,South Africa,22,21,Centre-Back,Defender,Hannover 96,2.0,,False
-Kamogelo Sebelebele,South Africa,23,25,Right-Back,Defender,Orlando Pirates,1.2,,False
-Khuliso Mudau,South Africa,31,20,Right-Back,Defender,Mamelodi Sundowns FC,1.2,,False
-Khulumani Ndamane,South Africa,22,3,Centre-Back,Defender,Mamelodi Sundowns FC,1.2,,False
-Mbekezeli Mbokazi,South Africa,20,14,Centre-Back,Defender,Chicago Fire FC,3.5,,False
-Nkosinathi Sibisi,South Africa,30,19,Centre-Back,Defender,Orlando Pirates,1.6,,False
-Olwethu Makhanya,South Africa,22,24,Centre-Back,Defender,Philadelphia Union,2.0,,False
-Samukele Kabini,South Africa,22,18,Left-Back,Defender,Molde FK,2.5,,False
-Thabang Matuludi,South Africa,27,2,Right-Back,Defender,Polokwane City FC,1.2,,False
-Ricardo Goss,South Africa,32,22,Goalkeeper,Goalkeeper,Mamelodi Sundowns FC,0.35,,False
-Ronwen Williams,South Africa,34,1,Goalkeeper,Goalkeeper,Mamelodi Sundowns FC,0.8,,False
-Sipho Chaine,South Africa,29,16,Goalkeeper,Goalkeeper,Orlando Pirates,1.6,,False
-Jayden Adams,South Africa,25,23,Central Midfield,Midfielder,Mamelodi Sundowns FC,1.8,,False
-Teboho Mokoena,South Africa,29,4,Defensive Midfield,Midfielder,Mamelodi Sundowns FC,2.8,,False
-Thalente Mbatha,South Africa,26,5,Central Midfield,Midfielder,Orlando Pirates,2.0,,False
-Themba Zwane,South Africa,36,11,Attacking Midfield,Midfielder,Mamelodi Sundowns FC,0.25,,False
-Yaya Sithole,South Africa,27,13,Central Midfield,Midfielder,CD Tondela,0.6,,False
 Borja Iglesias,Spain,33,26,Centre-Forward,Attacker,Celta de Vigo,2.8,,False
 Ferran Torres,Spain,26,7,Centre-Forward,Attacker,FC Barcelona,50.0,,False
 Lamine Yamal,Spain,18,19,Right Winger,Attacker,FC Barcelona,200.0,,False
 Mikel Oyarzabal,Spain,29,21,Centre-Forward,Attacker,Real Sociedad,25.0,,False
-Nico Williams,Spain,23,17,Left Winger,Attacker,Athletic Bilbao,40.0,,True
+Nico Williams,Spain,23,17,Left Winger,Attacker,Athletic Bilbao,40.0,,False
 Víctor Muñoz,Spain,22,25,Left Winger,Attacker,Liverpool FC,30.0,,False
 Yéremy Pino,Spain,23,11,Right Winger,Attacker,Crystal Palace,30.0,,False
 Álex Baena,Spain,24,15,Left Winger,Attacker,Atlético de Madrid,40.0,,False
@@ -753,32 +363,6 @@ Martín Zubimendi,Spain,27,18,Defensive Midfield,Midfielder,Arsenal FC,75.0,,Fal
 Mikel Merino,Spain,30,6,Central Midfield,Midfielder,Arsenal FC,25.0,,False
 Pedri,Spain,23,20,Central Midfield,Midfielder,FC Barcelona,150.0,,False
 Rodri,Spain,30,16,Defensive Midfield,Midfielder,Manchester City,50.0,,False
-Alexander Bernhardsson,Sweden,27,21,Right Winger,Attacker,Holstein Kiel,3.0,,False
-Alexander Isak,Sweden,26,9,Centre-Forward,Attacker,Liverpool FC,85.0,,False
-Anthony Elanga,Sweden,24,11,Right Winger,Attacker,Newcastle United,32.0,,False
-Gustaf Nilsson,Sweden,29,25,Centre-Forward,Attacker,Club Brugge KV,1.8,,False
-Taha Ali,Sweden,28,26,Left Winger,Attacker,Malmö FF,1.5,,False
-Viktor Gyökeres,Sweden,28,17,Centre-Forward,Attacker,Arsenal FC,65.0,,False
-Carl Starfelt,Sweden,31,15,Centre-Back,Defender,Celta de Vigo,4.5,,False
-Daniel Svensson,Sweden,24,8,Left-Back,Defender,Borussia Dortmund,22.0,,False
-Eric Smith,Sweden,29,20,Centre-Back,Defender,FC St. Pauli,5.0,,False
-Gabriel Gudmundsson,Sweden,27,5,Left-Back,Defender,Leeds United,20.0,,False
-Gustaf Lagerbielke,Sweden,26,2,Centre-Back,Defender,SC Braga,10.0,,False
-Hjalmar Ekdal,Sweden,27,14,Centre-Back,Defender,Burnley FC,5.0,,False
-Isak Hien,Sweden,27,4,Centre-Back,Defender,Atalanta BC,22.0,,True
-Ken Sema,Sweden,32,13,Left-Back,Defender,Pafos FC,0.8,,False
-Victor Lindelöf,Sweden,31,3,Centre-Back,Defender,Aston Villa,5.0,,False
-Jacob Widell Zetterström,Sweden,27,1,Goalkeeper,Goalkeeper,Derby County,2.5,,False
-Kristoffer Nordfeldt,Sweden,37,23,Goalkeeper,Goalkeeper,AIK,0.175,,False
-Viktor Johansson,Sweden,27,12,Goalkeeper,Goalkeeper,Stoke City,12.0,,False
-Benjamin Nygren,Sweden,24,10,Attacking Midfield,Midfielder,Celtic FC,14.0,,False
-Besfort Zeneli,Sweden,23,22,Central Midfield,Midfielder,Union Saint-Gilloise,6.0,,False
-Elliot Stroud,Sweden,24,24,Left Midfield,Midfielder,Mjällby AIF,8.0,,False
-Herman Johansson,Sweden,28,6,Right Midfield,Midfielder,FC Dallas,1.8,,False
-Jesper Karlström,Sweden,31,16,Defensive Midfield,Midfielder,Udinese Calcio,4.0,,False
-Lucas Bergvall,Sweden,20,7,Central Midfield,Midfielder,Tottenham Hotspur,35.0,,False
-Mattias Svanberg,Sweden,27,19,Central Midfield,Midfielder,VfL Wolfsburg,8.0,,False
-Yasin Ayari,Sweden,22,18,Central Midfield,Midfielder,Brighton & Hove Albion,35.0,,False
 Breel Embolo,Switzerland,29,7,Centre-Forward,Attacker,Stade Rennais FC,15.0,,False
 Cedric Itten,Switzerland,29,26,Centre-Forward,Attacker,SV Werder Bremen,1.8,,False
 Christian Fassnacht,Switzerland,32,16,Right Winger,Attacker,BSC Young Boys,2.0,,False
@@ -788,14 +372,14 @@ Rubén Vargas,Switzerland,27,17,Left Winger,Attacker,Sevilla FC,12.0,,False
 Zeki Amdouni,Switzerland,25,23,Centre-Forward,Attacker,Burnley FC,7.0,,False
 Aurèle Amenda,Switzerland,22,24,Centre-Back,Defender,Eintracht Frankfurt,10.0,,False
 Eray Cömert,Switzerland,28,18,Centre-Back,Defender,Without Club,2.5,,False
-Luca Jaquez,Switzerland,23,25,Centre-Back,Defender,VfB Stuttgart,10.0,,False
+Luca Jaquez,Switzerland,23,25,Centre-Back,Defender,VfB Stuttgart,10.0,,True
 Manuel Akanji,Switzerland,30,5,Centre-Back,Defender,Inter Milan,17.0,,False
-Miro Muheim,Switzerland,28,2,Left-Back,Defender,Hamburger SV,5.0,,True
+Miro Muheim,Switzerland,28,2,Left-Back,Defender,Hamburger SV,5.0,,False
 Nico Elvedi,Switzerland,29,4,Centre-Back,Defender,Borussia Mönchengladbach,8.0,,False
 Ricardo Rodríguez,Switzerland,33,13,Left-Back,Defender,Without Club,1.4,,False
 Silvan Widmer,Switzerland,33,3,Right-Back,Defender,1.FSV Mainz 05,0.8,,False
 Gregor Kobel,Switzerland,28,1,Goalkeeper,Goalkeeper,Borussia Dortmund,40.0,,False
-Marvin Keller,Switzerland,23,21,Goalkeeper,Goalkeeper,BSC Young Boys,6.0,,False
+Marvin Keller,Switzerland,24,21,Goalkeeper,Goalkeeper,BSC Young Boys,6.0,,False
 Yvon Mvogo,Switzerland,32,12,Goalkeeper,Goalkeeper,FC Lorient,2.5,,False
 Ardon Jashari,Switzerland,23,14,Defensive Midfield,Midfielder,AC Milan,25.0,,False
 Denis Zakaria,Switzerland,29,6,Defensive Midfield,Midfielder,AS Monaco,25.0,,False
@@ -806,7 +390,7 @@ Johan Manzambi,Switzerland,20,9,Central Midfield,Midfielder,SC Freiburg,50.0,,Fa
 Michel Aebischer,Switzerland,29,20,Central Midfield,Midfielder,Pisa Sporting Club,4.0,,False
 Remo Freuler,Switzerland,34,8,Central Midfield,Midfielder,Without Club,3.0,,False
 Christian Pulisic,United States,27,10,Right Winger,Attacker,AC Milan,40.0,,False
-Folarin Balogun,United States,24,20,Centre-Forward,Attacker,AS Monaco,40.0,,False
+Folarin Balogun,United States,25,20,Centre-Forward,Attacker,AS Monaco,40.0,,False
 Haji Wright,United States,28,19,Centre-Forward,Attacker,Coventry City,16.0,,False
 Max Arfsten,United States,25,18,Left Winger,Attacker,Columbus Crew,5.0,,False
 Ricardo Pepi,United States,23,9,Centre-Forward,Attacker,PSV Eindhoven,30.0,,False
