@@ -49,6 +49,10 @@ def initialize_database():
             print(f"Reading '{file_name}'...")
             try:
                 df = pd.read_csv(file_name)
+                if table_name == "matches" and "Actual_Winner" not in df.columns:
+                    df["Actual_Winner"] = None
+                if table_name == "matches" and "Predicted_Winner" not in df.columns:
+                    df["Predicted_Winner"] = None
                 # Write the dataframe to SQL
                 df.to_sql(table_name, con=conn, if_exists='replace', index=False)
                 print(f" ✓ Successfully imported {len(df)} rows into '{table_name}'.")
