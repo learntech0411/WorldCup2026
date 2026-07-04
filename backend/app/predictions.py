@@ -30,7 +30,7 @@ def winner_prediction(
     match_id: int,
     match_power_score_a: float,
     match_power_score_b: float,
-) -> dict[str, float]:
+) -> dict[str, object]:
     """Predict a match result and update the Matches table."""
     connection = _get_connection(db)
     transaction = connection.begin() if isinstance(db, Engine) else None
@@ -42,10 +42,17 @@ def winner_prediction(
         xg_a, xg_b = _expected_goals(match_power_score_a, match_power_score_b)
         probability_matrix = _dixon_coles_matrix(xg_a, xg_b)
         prediction = _summarize_probability_matrix(probability_matrix)
+        prediction["Predicted_Winner"] = _predicted_winner_for_match(
+            connection,
+            match_id,
+            prediction["Winning_Probability_A"],
+            prediction["Winning_Probability_B"],
+        )
 
         _update_match_prediction(
             connection,
             match_id,
+            prediction["Predicted_Winner"],
             prediction["Predicted_Goals_A"],
             prediction["Predicted_Goals_B"],
             prediction["Winning_Probability_A"],
@@ -335,7 +342,7 @@ def _dixon_coles_matrix(xg_a: float, xg_b: float) -> dict[tuple[int, int], float
     }
 
 
-def _summarize_probability_matrix(matrix: dict[tuple[int, int], float]) -> dict[str, float]:
+def _summarize_probability_matrix(matrix: dict[tuple[int, int], float]) -> dict[str, object]:
     winning_probability_a = sum(
         probability
         for (goals_a, goals_b), probability in matrix.items()
@@ -379,14 +386,17 @@ def _poisson_probability(goals: int, expected_goals: float) -> float:
 
 
 def _reset_knockout_matches(connection: Connection, starting_match_id: int | None = None) -> None:
+    _ensure_prediction_columns(connection)
     statement = '''
         UPDATE matches
         SET "Team_A" = NULL,
             "Team_B" = NULL,
+            "Actual_Winner" = NULL,
             "Predicted_Goals_A" = NULL,
             "Predicted_Goals_B" = NULL,
             "Winning_Probability_A" = NULL,
             "Winning_Probability_B" = NULL,
+            "Predicted_Winner" = NULL,
             "Draw_Probability" = NULL
         WHERE "Match_Type" = 'Knockout'
           AND (
@@ -501,8 +511,62 @@ def _resolve_final_round_team(connection: Connection, team_value: str, country_n
     if source_match is None:
         raise ValueError(f"Source match not found for slot {team_value}")
 
-    winner, loser = _predicted_winner_and_loser(source_match)
+    winner, loser = _winner_and_loser_for_advancement(source_match)
     return winner if marker == "W" else loser
+
+
+def _winner_and_loser_for_advancement(match: pd.Series) -> tuple[str, str]:
+    match_id = match["Match_ID"]
+    team_a = str(match["Team_A"])
+    team_b = str(match["Team_B"])
+
+    actual_winner = _actual_winner(match)
+    if actual_winner is not None:
+        if actual_winner == team_a:
+            logger.info(
+                "Winner for match %s: %s over %s based on Actual_Winner",
+                match_id,
+                team_a,
+                team_b,
+            )
+            return team_a, team_b
+        if actual_winner == team_b:
+            logger.info(
+                "Winner for match %s: %s over %s based on Actual_Winner",
+                match_id,
+                team_b,
+                team_a,
+            )
+            return team_b, team_a
+        raise ValueError(
+            f'Match {match_id} has Actual_Winner "{actual_winner}", '
+            f'but teams are "{team_a}" and "{team_b}"'
+        )
+
+    predicted_winner = _stored_predicted_winner(match)
+    if predicted_winner is not None:
+        if predicted_winner == team_a:
+            logger.info(
+                "Winner for match %s: %s over %s based on Predicted_Winner",
+                match_id,
+                team_a,
+                team_b,
+            )
+            return team_a, team_b
+        if predicted_winner == team_b:
+            logger.info(
+                "Winner for match %s: %s over %s based on Predicted_Winner",
+                match_id,
+                team_b,
+                team_a,
+            )
+            return team_b, team_a
+        raise ValueError(
+            f'Match {match_id} has Predicted_Winner "{predicted_winner}", '
+            f'but teams are "{team_a}" and "{team_b}"'
+        )
+
+    return _predicted_winner_and_loser(match)
 
 
 def _predicted_winner_and_loser(match: pd.Series) -> tuple[str, str]:
@@ -576,6 +640,30 @@ def _predicted_winner_and_loser(match: pd.Series) -> tuple[str, str]:
     return team_a, team_b
 
 
+def _actual_winner(match: pd.Series) -> Optional[str]:
+    if "Actual_Winner" not in match.keys():
+        return None
+
+    actual_winner = match["Actual_Winner"]
+    if pd.isna(actual_winner):
+        return None
+
+    actual_winner = str(actual_winner).strip()
+    return actual_winner or None
+
+
+def _stored_predicted_winner(match: pd.Series) -> Optional[str]:
+    if "Predicted_Winner" not in match.keys():
+        return None
+
+    predicted_winner = match["Predicted_Winner"]
+    if pd.isna(predicted_winner):
+        return None
+
+    predicted_winner = str(predicted_winner).strip()
+    return predicted_winner or None
+
+
 def _resolve_round_of_32_slot(slot: str, group_score_matrices: dict[str, pd.DataFrame]) -> str:
     slot = str(slot)
     if len(slot) != 2:
@@ -622,9 +710,36 @@ def _update_round_of_32_teams(connection: Connection, updates: list[dict[str, ob
     )
 
 
+def _predicted_winner_for_match(
+    connection: Connection,
+    match_id: int,
+    winning_probability_a: float,
+    winning_probability_b: float,
+) -> Optional[str]:
+    match = connection.execute(
+        text(
+            '''
+            SELECT "Team_A", "Team_B", "Match_Type"
+            FROM matches
+            WHERE "Match_ID" = :match_id
+            '''
+        ),
+        {"match_id": int(match_id)},
+    ).mappings().first()
+    if match is None or match["Match_Type"] != "Knockout":
+        return None
+
+    if winning_probability_a > winning_probability_b:
+        return str(match["Team_A"])
+    if winning_probability_b > winning_probability_a:
+        return str(match["Team_B"])
+    return None
+
+
 def _update_match_prediction(
     connection: Connection,
     match_id: int,
+    predicted_winner: Optional[str],
     predicted_goals_a: float,
     predicted_goals_b: float,
     winning_probability_a: float,
@@ -635,7 +750,8 @@ def _update_match_prediction(
         text(
             '''
             UPDATE matches
-            SET "Predicted_Goals_A" = :predicted_goals_a,
+            SET "Predicted_Winner" = :predicted_winner,
+                "Predicted_Goals_A" = :predicted_goals_a,
                 "Predicted_Goals_B" = :predicted_goals_b,
                 "Winning_Probability_A" = :winning_probability_a,
                 "Winning_Probability_B" = :winning_probability_b,
@@ -645,6 +761,7 @@ def _update_match_prediction(
         ),
         {
             "match_id": int(match_id),
+            "predicted_winner": predicted_winner,
             "predicted_goals_a": float(predicted_goals_a),
             "predicted_goals_b": float(predicted_goals_b),
             "winning_probability_a": float(winning_probability_a),
@@ -655,6 +772,8 @@ def _update_match_prediction(
 
 
 def _ensure_prediction_columns(connection: Connection) -> None:
+    _ensure_actual_winner_column(connection)
+    _ensure_column(connection, "matches", "Predicted_Winner", "TEXT")
     for column_name in (
         "Predicted_Goals_A",
         "Predicted_Goals_B",
@@ -663,6 +782,10 @@ def _ensure_prediction_columns(connection: Connection) -> None:
         "Draw_Probability",
     ):
         _ensure_column(connection, "matches", column_name, "FLOAT")
+
+
+def _ensure_actual_winner_column(connection: Connection) -> None:
+    _ensure_column(connection, "matches", "Actual_Winner", "TEXT")
 
 
 def _ensure_column(connection: Connection, table_name: str, column_name: str, column_type: str) -> None:
@@ -700,6 +823,7 @@ def _empty_prediction_result() -> pd.DataFrame:
             "Expected_Goals_B",
             "Predicted_Goals_A",
             "Predicted_Goals_B",
+            "Predicted_Winner",
             "Winning_Probability_A",
             "Winning_Probability_B",
             "Draw_Probability",
