@@ -9,7 +9,11 @@ from sqlalchemy import create_engine, text
 BACKEND_DIR = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(BACKEND_DIR))
 
-from app.predictions import reset_knockout_matches, winner_prediction  # noqa: E402
+from app.predictions import (  # noqa: E402
+    _winner_and_loser_for_advancement,
+    reset_knockout_matches,
+    winner_prediction,
+)
 from app.utilities import (  # noqa: E402
     calculate_all_group_score_matrices,
     calculate_base_strengths,
@@ -114,6 +118,7 @@ def test_winner_prediction_updates_match_with_probabilities_and_predicted_score(
     assert float(match["Winning_Probability_A"]) > float(match["Winning_Probability_B"])
     assert match["Predicted_Goals_A"] is not None
     assert match["Predicted_Goals_B"] is not None
+    assert pd.isna(match["Predicted_Winner"])
 
     probability_sum = (
         float(match["Winning_Probability_A"])
@@ -121,6 +126,36 @@ def test_winner_prediction_updates_match_with_probabilities_and_predicted_score(
         + float(match["Draw_Probability"])
     )
     assert round(probability_sum, 6) == 1.0
+
+
+def test_winner_prediction_sets_predicted_winner_for_knockout_match():
+    engine = create_engine("sqlite:///:memory:")
+    pd.DataFrame(
+        [
+            {
+                "Match_ID": 73,
+                "Date": "June 28, 2026",
+                "Team_A": "Stronger",
+                "Team_B": "Weaker",
+                "Stadium_Name": "Test Stadium",
+                "Match_Type": "Knockout",
+                "Goals_A": None,
+                "Goals_B": None,
+                "Predicted_Goals_A": None,
+                "Predicted_Goals_B": None,
+                "Predicted_Winner": None,
+                "Winning_Probability_A": None,
+                "Winning_Probability_B": None,
+                "Draw_Probability": None,
+            }
+        ]
+    ).to_sql("matches", engine, index=False)
+
+    prediction = winner_prediction(engine, 73, match_power_score_a=1900, match_power_score_b=1500)
+    match = pd.read_sql_query(text('SELECT * FROM matches WHERE "Match_ID" = 73'), engine).iloc[0]
+
+    assert prediction["Predicted_Winner"] == "Stronger"
+    assert match["Predicted_Winner"] == "Stronger"
 
 
 def test_prediction_group_matrix_uses_actual_score_before_predicted_score():
@@ -197,6 +232,67 @@ def test_reset_knockout_matches_keeps_played_matches():
     assert played_match["Predicted_Goals_A"] == 2
     assert pd.isna(unplayed_match["Team_A"])
     assert pd.isna(unplayed_match["Predicted_Goals_A"])
+
+
+def test_knockout_winner_uses_actual_winner_before_probabilities():
+    winner, loser = _winner_and_loser_for_advancement(
+        pd.Series(
+            {
+                "Match_ID": 73,
+                "Team_A": "Probability Favorite",
+                "Team_B": "Actual Winner",
+                "Actual_Winner": "Actual Winner",
+                "Winning_Probability_A": 0.8,
+                "Winning_Probability_B": 0.2,
+                "Predicted_Goals_A": 3,
+                "Predicted_Goals_B": 0,
+            }
+        )
+    )
+
+    assert winner == "Actual Winner"
+    assert loser == "Probability Favorite"
+
+
+def test_knockout_winner_falls_back_to_probabilities_without_actual_winner():
+    winner, loser = _winner_and_loser_for_advancement(
+        pd.Series(
+            {
+                "Match_ID": 73,
+                "Team_A": "Probability Favorite",
+                "Team_B": "Actual Winner",
+                "Actual_Winner": "",
+                "Winning_Probability_A": 0.8,
+                "Winning_Probability_B": 0.2,
+                "Predicted_Goals_A": 1,
+                "Predicted_Goals_B": 1,
+            }
+        )
+    )
+
+    assert winner == "Probability Favorite"
+    assert loser == "Actual Winner"
+
+
+def test_knockout_advancement_uses_stored_predicted_winner_before_probabilities():
+    winner, loser = _winner_and_loser_for_advancement(
+        pd.Series(
+            {
+                "Match_ID": 73,
+                "Team_A": "Probability Favorite",
+                "Team_B": "Stored Predicted Winner",
+                "Actual_Winner": "",
+                "Predicted_Winner": "Stored Predicted Winner",
+                "Winning_Probability_A": 0.8,
+                "Winning_Probability_B": 0.2,
+                "Predicted_Goals_A": 3,
+                "Predicted_Goals_B": 0,
+            }
+        )
+    )
+
+    assert winner == "Stored Predicted Winner"
+    assert loser == "Probability Favorite"
 
 
 def seed_countries(engine, countries):
