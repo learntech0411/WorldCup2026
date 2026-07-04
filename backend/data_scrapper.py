@@ -506,8 +506,10 @@ def scrape_matches():
                     "Match_Type": match_type,
                     "Goals_A": None,
                     "Goals_B": None,
+                    "Actual_Winner": None,
                     "Predicted_Goals_A": None,
                     "Predicted_Goals_B": None,
+                    "Predicted_Winner": None,
                     "Winning_Probability_A": None,
                     "Winning_Probability_B": None,
                     "Draw_Probability": None,
@@ -527,7 +529,7 @@ def scrape_matches():
     df_matches = df_matches.sort_values(by="Match_ID").reset_index(drop=True)
     
     # Rearrange columns exactly to your desired schema
-    columns_order = ["Match_ID", "Date", "Team_A", "Team_B", "Stadium_Name", "City", "Match_Type", "Goals_A", "Goals_B", "Predicted_Goals_A", "Predicted_Goals_B", "Winning_Probability_A", "Winning_Probability_B", "Draw_Probability"]
+    columns_order = ["Match_ID", "Date", "Team_A", "Team_B", "Stadium_Name", "City", "Match_Type", "Goals_A", "Goals_B", "Actual_Winner", "Predicted_Goals_A", "Predicted_Goals_B", "Predicted_Winner", "Winning_Probability_A", "Winning_Probability_B", "Draw_Probability"]
     df_matches = df_matches[columns_order]
     
     print(f"\nSuccessfully scraped {len(df_matches)} matches.")
