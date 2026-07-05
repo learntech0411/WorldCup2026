@@ -18,8 +18,13 @@
   display: flex;
   justify-content: center;
   gap: 12px;
-  margin: 24px 0 32px;
+  margin: 0 0 24px;
+  padding: 8px 0 12px;
   flex-wrap: wrap;
+  position: sticky;
+  top: 76px;
+  z-index: 90;
+  background: linear-gradient(180deg, rgba(248, 249, 250, 0.02) 60%, rgba(248, 249, 250, 0) 100%);
 }
 
 .topbar {
