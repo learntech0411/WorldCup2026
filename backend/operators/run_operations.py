@@ -293,6 +293,8 @@ def reset_goals_from_matches(match_ids: list[int], db: Engine = None) -> None:
     with db.begin() as connection:
         injured_column = _match_injured_players_column(connection)
         assignments = ['"Goals_A" = NULL', '"Goals_B" = NULL']
+        if _match_has_column(connection, "Actual_Winner"):
+            assignments.append('"Actual_Winner" = NULL')
         if injured_column is not None:
             assignments.append(f'"{injured_column}" = NULL')
 
@@ -316,8 +318,10 @@ def reset_knockout_stage_matches(match_ids: list[int] = None, db: Engine = None)
     reset_columns = [
         "Team_A",
         "Team_B",
+        "Actual_Winner",
         "Predicted_Goals_A",
         "Predicted_Goals_B",
+        "Predicted_Winner",
         "Winning_Probability_A",
         "Winning_Probability_B",
         "Draw_Probability",
@@ -325,6 +329,8 @@ def reset_knockout_stage_matches(match_ids: list[int] = None, db: Engine = None)
     assignments = ", ".join(f'"{column}" = NULL' for column in reset_columns)
 
     with db.begin() as connection:
+        _ensure_match_column(connection, "Actual_Winner", "TEXT")
+        _ensure_match_column(connection, "Predicted_Winner", "TEXT")
         if match_ids:
             for match_id in match_ids:
                 connection.execute(
@@ -351,12 +357,18 @@ def reset_knockout_stage_matches(match_ids: list[int] = None, db: Engine = None)
 
 
 def _upsert_match_result(connection, match_id: int, score_a: int, score_b: int) -> None:
+    _ensure_match_column(connection, "Actual_Winner", "TEXT")
     updated = connection.execute(
         text(
             '''
             UPDATE matches
             SET "Goals_A" = :score_a,
-                "Goals_B" = :score_b
+                "Goals_B" = :score_b,
+                "Actual_Winner" = CASE
+                    WHEN :score_a > :score_b THEN "Team_A"
+                    WHEN :score_b > :score_a THEN "Team_B"
+                    ELSE NULL
+                END
             WHERE "Match_ID" = :match_id
             '''
         ),
@@ -437,6 +449,8 @@ def _reset_match_placeholders(db: Engine, starting_match_id: int, ending_match_i
     ]
 
     with db.begin() as connection:
+        _ensure_match_column(connection, "Actual_Winner", "TEXT")
+        _ensure_match_column(connection, "Predicted_Winner", "TEXT")
         for match in template_matches.itertuples(index=False):
             connection.execute(
                 text(
@@ -444,8 +458,10 @@ def _reset_match_placeholders(db: Engine, starting_match_id: int, ending_match_i
                     UPDATE matches
                     SET "Team_A" = :team_a,
                         "Team_B" = :team_b,
+                        "Actual_Winner" = NULL,
                         "Predicted_Goals_A" = NULL,
                         "Predicted_Goals_B" = NULL,
+                        "Predicted_Winner" = NULL,
                         "Winning_Probability_A" = NULL,
                         "Winning_Probability_B" = NULL,
                         "Draw_Probability" = NULL
@@ -465,6 +481,15 @@ def _match_injured_players_column(connection) -> str | None:
     existing_columns = {column["name"] for column in inspect(connection).get_columns("matches")}
     matching_columns = possible_names & existing_columns
     return sorted(matching_columns)[0] if matching_columns else None
+
+
+def _match_has_column(connection, column_name: str) -> bool:
+    return column_name in {column["name"] for column in inspect(connection).get_columns("matches")}
+
+
+def _ensure_match_column(connection, column_name: str, column_type: str) -> None:
+    if not _match_has_column(connection, column_name):
+        connection.execute(text(f'ALTER TABLE matches ADD COLUMN "{column_name}" {column_type};'))
 
 
 def _normalize_bool(value) -> bool:
