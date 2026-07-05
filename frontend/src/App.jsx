@@ -92,6 +92,7 @@ const normalizeScore = (score, targetMode) => {
       ...base,
       Goals_A: score.Goals_A ?? null,
       Goals_B: score.Goals_B ?? null,
+      Actual_Winner: score.Actual_Winner ?? null,
     };
   }
 

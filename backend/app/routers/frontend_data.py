@@ -207,7 +207,8 @@ def get_all_current_scores(engine: Engine = Depends(get_engine)):
                     "Team_A",
                     "Team_B",
                     "Goals_A",
-                    "Goals_B"
+                    "Goals_B",
+                    "Actual_Winner"
                 FROM matches
                 ORDER BY "Match_ID"
                 '''

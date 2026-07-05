@@ -4,6 +4,25 @@ import { R32D } from '../constants/data';
 import { KNOCKOUT_MATCH_IDS } from '../constants/matchSchedule';
 import styles from './Knockout.module.css';
 
+const NEXT_ROUND_SLOTS = {
+  89: ['W74', 'W77'],
+  90: ['W73', 'W75'],
+  91: ['W76', 'W78'],
+  92: ['W79', 'W80'],
+  93: ['W83', 'W84'],
+  94: ['W81', 'W82'],
+  95: ['W86', 'W88'],
+  96: ['W85', 'W87'],
+  97: ['W89', 'W90'],
+  98: ['W93', 'W94'],
+  99: ['W91', 'W92'],
+  100: ['W95', 'W96'],
+  101: ['W97', 'W98'],
+  102: ['W99', 'W100'],
+  103: ['L101', 'L102'],
+  104: ['W101', 'W102'],
+};
+
 const formatProbability = (value) => {
   if (value == null || value === '') return '-';
   const numeric = Number(value);
@@ -18,11 +37,56 @@ const getNumericProbability = (value) => {
   return Number.isFinite(numeric) ? numeric : null;
 };
 
+const hasScore = (score) => (
+  score?.Goals_A != null
+  && score?.Goals_B != null
+  && score.Goals_A !== ''
+  && score.Goals_B !== ''
+);
+
+const cleanTeam = (team) => {
+  if (team == null || String(team).trim() === '') return null;
+  return String(team);
+};
+
 const Knockout = ({ mode, onToggleMode, matchScores, predictionScores, currentGroupStageComplete }) => {
   const hideCurrentKnockoutTeams = mode === 'Current' && !currentGroupStageComplete;
 
   const scoreFor = useCallback((id) => matchScores?.[id] || {}, [matchScores]);
   const predictionFor = useCallback((id) => predictionScores?.[id] || {}, [predictionScores]);
+
+  const actualWinnerFor = useCallback((id) => {
+    const score = scoreFor(id);
+    const teamA = cleanTeam(score.Team_A);
+    const teamB = cleanTeam(score.Team_B);
+    const actualWinner = cleanTeam(score.Actual_Winner);
+
+    if (actualWinner) {
+      if (actualWinner === teamA) return { winner: teamA, loser: teamB };
+      if (actualWinner === teamB) return { winner: teamB, loser: teamA };
+      return { winner: actualWinner, loser: null };
+    }
+
+    if (!hasScore(score) || !teamA || !teamB) return null;
+
+    const goalsA = Number(score.Goals_A);
+    const goalsB = Number(score.Goals_B);
+    if (!Number.isFinite(goalsA) || !Number.isFinite(goalsB) || goalsA === goalsB) return null;
+
+    return goalsA > goalsB
+      ? { winner: teamA, loser: teamB }
+      : { winner: teamB, loser: teamA };
+  }, [scoreFor]);
+
+  const inferredCurrentTeam = useCallback((slot) => {
+    const marker = slot.slice(0, 1);
+    const sourceMatchId = Number(slot.slice(1));
+    if (!['W', 'L'].includes(marker) || !Number.isFinite(sourceMatchId)) return null;
+
+    const result = actualWinnerFor(sourceMatchId);
+    if (!result) return null;
+    return marker === 'W' ? result.winner : result.loser;
+  }, [actualWinnerFor]);
 
   const resultFor = useCallback((id, ht, at) => {
     const score = scoreFor(id);
@@ -35,7 +99,10 @@ const Knockout = ({ mode, onToggleMode, matchScores, predictionScores, currentGr
     const prediction = predictionFor(id);
     const probabilityA = getNumericProbability(prediction.Winning_Probability_A ?? score.Winning_Probability_A);
     const probabilityB = getNumericProbability(prediction.Winning_Probability_B ?? score.Winning_Probability_B);
-    const winner = hVal > aVal
+    const actualWinner = mode === 'Current' ? cleanTeam(score.Actual_Winner) : null;
+    const winner = actualWinner === ht || actualWinner === at
+      ? actualWinner
+      : hVal > aVal
       ? ht
       : aVal > hVal
         ? at
@@ -47,10 +114,20 @@ const Knockout = ({ mode, onToggleMode, matchScores, predictionScores, currentGr
 
   const teamFor = useCallback((id, field) => {
     if (hideCurrentKnockoutTeams) return null;
-    const team = scoreFor(id)[field];
-    if (team == null || String(team).trim() === '') return null;
-    return team;
-  }, [hideCurrentKnockoutTeams, scoreFor]);
+    const score = scoreFor(id);
+
+    if (mode !== 'Current') {
+      return cleanTeam(score[field]);
+    }
+
+    if (hasScore(score) || KNOCKOUT_MATCH_IDS.R32.includes(id)) {
+      return cleanTeam(score[field]);
+    }
+
+    const slots = NEXT_ROUND_SLOTS[id];
+    if (!slots) return null;
+    return inferredCurrentTeam(field === 'Team_A' ? slots[0] : slots[1]);
+  }, [hideCurrentKnockoutTeams, inferredCurrentTeam, mode, scoreFor]);
 
   const buildMatch = useCallback((id) => {
     const ht = teamFor(id, 'Team_A');
