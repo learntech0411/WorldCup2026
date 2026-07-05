@@ -106,7 +106,7 @@ Stephen Eustaquio,Canada,29,7,Central Midfield,Midfielder,FC Porto,6.0,,False
 Andrés Gómez,Colombia,23,26,Left Winger,Attacker,Clube de Regatas Vasco da Gama,11.0,,False
 Cucho Hernández,Colombia,27,19,Centre-Forward,Attacker,Real Betis Balompié,18.0,,False
 Jhon Arias,Colombia,28,11,Right Winger,Attacker,Sociedade Esportiva Palmeiras,15.0,,False
-Jhon Córdoba,Colombia,33,9,Centre-Forward,Attacker,FC Krasnodar,10.0,,False
+Jhon Córdoba,Colombia,33,9,Centre-Forward,Attacker,FC Krasnodar,10.0,,True
 Jáminton Campaz,Colombia,26,21,Left Winger,Attacker,CA Rosario Central,5.5,,False
 Luis Díaz,Colombia,29,7,Left Winger,Attacker,Bayern Munich,70.0,,False
 Luis Suárez,Colombia,28,25,Centre-Forward,Attacker,Sporting CP,30.0,,False
@@ -119,10 +119,10 @@ Santiago Arias,Colombia,34,4,Right-Back,Defender,CA Independiente,1.2,,False
 Willer Ditta,Colombia,28,18,Centre-Back,Defender,CD Cruz Azul,5.5,,False
 Yerry Mina,Colombia,31,13,Centre-Back,Defender,Cagliari Calcio,2.5,,False
 Camilo Vargas,Colombia,37,12,Goalkeeper,Goalkeeper,Atlas Guadalajara,0.45,,False
-David Ospina,Colombia,37,1,Goalkeeper,Goalkeeper,Atlético Nacional,0.1,,False
+David Ospina,Colombia,37,1,Goalkeeper,Goalkeeper,Without Club,0.1,,False
 Álvaro Montero,Colombia,31,24,Goalkeeper,Goalkeeper,CA Vélez Sarsfield,2.5,,False
 Gustavo Puerta,Colombia,22,14,Central Midfield,Midfielder,Racing Santander,10.0,,False
-James Rodríguez,Colombia,34,10,Attacking Midfield,Midfielder,Minnesota United FC,1.5,,False
+James Rodríguez,Colombia,34,10,Attacking Midfield,Midfielder,Without Club,1.5,,False
 Jefferson Lerma,Colombia,31,16,Defensive Midfield,Midfielder,Crystal Palace,6.0,,False
 Jorge Carrascal,Colombia,28,8,Attacking Midfield,Midfielder,CR Flamengo,13.0,,False
 Juan Fernando Quintero,Colombia,33,20,Attacking Midfield,Midfielder,CA River Plate,1.8,,False
@@ -170,7 +170,7 @@ John Stones,England,32,5,Centre-Back,Defender,Without Club,12.0,,False
 Marc Guéhi,England,25,6,Centre-Back,Defender,Manchester City,70.0,,False
 Nico O'Reilly,England,21,3,Left-Back,Defender,Manchester City,70.0,,False
 Reece James,England,26,24,Right-Back,Defender,Chelsea FC,60.0,,False
-Trevoh Chalobah,England,26,12,Centre-Back,Defender,Chelsea FC,40.0,,False
+Trevoh Chalobah,England,27,12,Centre-Back,Defender,Chelsea FC,40.0,,False
 Dean Henderson,England,29,13,Goalkeeper,Goalkeeper,Crystal Palace,28.0,,False
 James Trafford,England,23,23,Goalkeeper,Goalkeeper,Manchester City,25.0,,False
 Jordan Pickford,England,32,1,Goalkeeper,Goalkeeper,Everton FC,13.0,,False
@@ -365,7 +365,6 @@ Pedri,Spain,23,20,Central Midfield,Midfielder,FC Barcelona,150.0,,False
 Rodri,Spain,30,16,Defensive Midfield,Midfielder,Manchester City,50.0,,False
 Breel Embolo,Switzerland,29,7,Centre-Forward,Attacker,Stade Rennais FC,15.0,,False
 Cedric Itten,Switzerland,29,26,Centre-Forward,Attacker,SV Werder Bremen,1.8,,False
-Christian Fassnacht,Switzerland,32,16,Right Winger,Attacker,BSC Young Boys,2.0,,False
 Dan Ndoye,Switzerland,25,11,Right Winger,Attacker,Nottingham Forest,32.0,,False
 Noah Okafor,Switzerland,26,19,Left Winger,Attacker,Leeds United,25.0,,False
 Rubén Vargas,Switzerland,27,17,Left Winger,Attacker,Sevilla FC,12.0,,False
@@ -382,6 +381,7 @@ Gregor Kobel,Switzerland,28,1,Goalkeeper,Goalkeeper,Borussia Dortmund,40.0,,Fals
 Marvin Keller,Switzerland,24,21,Goalkeeper,Goalkeeper,BSC Young Boys,6.0,,False
 Yvon Mvogo,Switzerland,32,12,Goalkeeper,Goalkeeper,FC Lorient,2.5,,False
 Ardon Jashari,Switzerland,23,14,Defensive Midfield,Midfielder,AC Milan,25.0,,False
+Christian Fassnacht,Switzerland,32,16,Right Midfield,Midfielder,BSC Young Boys,2.0,,False
 Denis Zakaria,Switzerland,29,6,Defensive Midfield,Midfielder,AS Monaco,25.0,,False
 Djibril Sow,Switzerland,29,15,Central Midfield,Midfielder,Sevilla FC,7.5,,False
 Fabian Rieder,Switzerland,24,22,Attacking Midfield,Midfielder,FC Augsburg,12.0,,False
