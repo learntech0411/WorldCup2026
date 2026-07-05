@@ -9,6 +9,7 @@ from sqlalchemy.engine import Connection, Engine
 from app.database import get_engine
 from app.predictions import (
     _dixon_coles_matrix,
+    _ensure_prediction_columns,
     _expected_goals,
     run_predictions_for_matches,
     winner_prediction,
@@ -50,6 +51,8 @@ def keep_alive():
 
 @router.get("/predicted-score/{match_id}")
 def get_predicted_score(match_id: int, engine: Engine = Depends(get_engine)):
+    with engine.begin() as connection:
+        _ensure_prediction_columns(connection)
     match = _get_match(engine, match_id)
     prediction_columns = [
         "Predicted_Goals_A",
@@ -59,7 +62,7 @@ def get_predicted_score(match_id: int, engine: Engine = Depends(get_engine)):
         "Draw_Probability",
     ]
 
-    if any(_is_missing(match[column]) for column in prediction_columns):
+    if any(_is_missing(match.get(column)) for column in prediction_columns):
         # Prevent crashing by checking if teams are resolved (countries don't contain digits)
         team_a, team_b = str(match["Team_A"]), str(match["Team_B"])
         if any(char.isdigit() for char in team_a) or any(char.isdigit() for char in team_b):
@@ -67,6 +70,7 @@ def get_predicted_score(match_id: int, engine: Engine = Depends(get_engine)):
                 "Match_ID": match_id,
                 "Predicted_Goals_A": None,
                 "Predicted_Goals_B": None,
+                "Predicted_Winner": None,
                 "Winning_Probability_A": None,
                 "Winning_Probability_B": None,
                 "Draw_Probability": None,
@@ -86,6 +90,7 @@ def get_predicted_score(match_id: int, engine: Engine = Depends(get_engine)):
             "Match_ID": match_id,
             "Predicted_Goals_A": match["Predicted_Goals_A"],
             "Predicted_Goals_B": match["Predicted_Goals_B"],
+            "Predicted_Winner": match.get("Predicted_Winner"),
             "Winning_Probability_A": match["Winning_Probability_A"],
             "Winning_Probability_B": match["Winning_Probability_B"],
             "Draw_Probability": match["Draw_Probability"],
@@ -168,7 +173,8 @@ def get_score_distribution(match_score_a: float, match_score_b: float):
 
 @router.get("/all-predicted-scores")
 def get_all_predicted_scores(engine: Engine = Depends(get_engine)):
-    with engine.connect() as connection:
+    with engine.begin() as connection:
+        _ensure_prediction_columns(connection)
         matches = connection.execute(
             text(
                 '''
@@ -178,6 +184,7 @@ def get_all_predicted_scores(engine: Engine = Depends(get_engine)):
                     "Team_B",
                     "Predicted_Goals_A",
                     "Predicted_Goals_B",
+                    "Predicted_Winner",
                     "Winning_Probability_A",
                     "Winning_Probability_B",
                     "Draw_Probability"
