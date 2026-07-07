@@ -38,12 +38,12 @@ Maxim De Cuyper,Belgium,25,5,Left-Back,Defender,Brighton & Hove Albion,22.0,,Fal
 Nathan Ngoy,Belgium,23,25,Centre-Back,Defender,LOSC Lille,25.0,,False
 Thomas Meunier,Belgium,34,15,Right-Back,Defender,Without Club,1.5,,False
 Timothy Castagne,Belgium,30,21,Right-Back,Defender,Fulham FC,8.0,,False
-Zeno Debast,Belgium,22,2,Centre-Back,Defender,Sporting CP,28.0,,True
+Zeno Debast,Belgium,22,2,Centre-Back,Defender,Sporting CP,28.0,,False
 Mike Penders,Belgium,20,13,Goalkeeper,Goalkeeper,Chelsea FC,25.0,,False
-Senne Lammens,Belgium,23,12,Goalkeeper,Goalkeeper,Manchester United,35.0,,False
+Senne Lammens,Belgium,24,12,Goalkeeper,Goalkeeper,Manchester United,35.0,,False
 Thibaut Courtois,Belgium,34,1,Goalkeeper,Goalkeeper,Real Madrid,15.0,,False
 Alexis Saelemaekers,Belgium,27,22,Right Midfield,Midfielder,AC Milan,20.0,,False
-Amadou Onana,Belgium,24,24,Defensive Midfield,Midfielder,Aston Villa,45.0,,False
+Amadou Onana,Belgium,24,24,Defensive Midfield,Midfielder,Aston Villa,45.0,,True
 Axel Witsel,Belgium,37,6,Defensive Midfield,Midfielder,Without Club,1.2,,False
 Charles De Ketelaere,Belgium,25,17,Attacking Midfield,Midfielder,Atalanta BC,30.0,,False
 Diego Moreira,Belgium,21,19,Left Midfield,Midfielder,RC Strasbourg Alsace,25.0,,False
@@ -56,7 +56,7 @@ Gabriel Martinelli,Brazil,25,22,Left Winger,Attacker,Arsenal FC,45.0,,False
 Igor Thiago,Brazil,25,25,Centre-Forward,Attacker,Brentford FC,65.0,,False
 Luiz Henrique,Brazil,25,21,Right Winger,Attacker,Zenit St. Petersburg,24.0,,False
 Matheus Cunha,Brazil,27,9,Centre-Forward,Attacker,Manchester United,75.0,,False
-Raphinha,Brazil,29,11,Left Winger,Attacker,FC Barcelona,70.0,,True
+Raphinha,Brazil,29,11,Left Winger,Attacker,FC Barcelona,70.0,,False
 Rayan,Brazil,19,26,Right Winger,Attacker,AFC Bournemouth,60.0,,False
 Vinicius Junior,Brazil,25,7,Left Winger,Attacker,Real Madrid,140.0,,False
 Alex Sandro,Brazil,35,6,Left-Back,Defender,CR Flamengo,1.0,,False
@@ -76,7 +76,7 @@ Danilo,Brazil,25,18,Central Midfield,Midfielder,Botafogo de Futebol e Regatas,32
 Fabinho,Brazil,32,17,Defensive Midfield,Midfielder,Without Club,12.0,,False
 Lucas Paquetá,Brazil,28,20,Attacking Midfield,Midfielder,CR Flamengo,32.0,,True
 Neymar,Brazil,34,10,Attacking Midfield,Midfielder,Santos FC,8.0,,False
-Éderson,Brazil,26,2,Central Midfield,Midfielder,Atalanta BC,45.0,,False
+Éderson,Brazil,27,2,Central Midfield,Midfielder,Atalanta BC,45.0,,False
 Cyle Larin,Canada,31,9,Centre-Forward,Attacker,Southampton FC,2.5,,False
 Jacob Shaffelburg,Canada,26,14,Left Winger,Attacker,Los Angeles FC,2.5,,False
 Jayden Nelson,Canada,23,26,Left Winger,Attacker,Austin FC,2.0,,False
@@ -137,10 +137,10 @@ Mostafa Ziko,Egypt,29,11,Left Winger,Attacker,Pyramids FC,1.8,,False
 Omar Marmoush,Egypt,27,22,Centre-Forward,Attacker,Manchester City,50.0,,False
 Trezeguet,Egypt,31,7,Left Winger,Attacker,Al Ahly FC,4.5,,False
 Zizo,Egypt,30,25,Right Winger,Attacker,Al Ahly FC,3.5,,False
-Ahmed Fatouh,Egypt,28,13,Left-Back,Defender,Zamalek SC,1.0,,False
+Ahmed Fatouh,Egypt,28,13,Left-Back,Defender,Zamalek SC,1.0,,True
 Hossam Abdelmaguid,Egypt,25,4,Centre-Back,Defender,Zamalek SC,2.0,,False
 Karim Hafez,Egypt,30,15,Left-Back,Defender,Pyramids FC,0.7,,False
-Mohamed Abdelmonem,Egypt,27,6,Centre-Back,Defender,OGC Nice,2.5,,False
+Mohamed Abdelmonem,Egypt,27,6,Centre-Back,Defender,OGC Nice,2.5,,True
 Mohamed Hany,Egypt,30,3,Right-Back,Defender,Al Ahly FC,1.5,,False
 Ramy Rabia,Egypt,33,5,Centre-Back,Defender,Al-Ain FC,0.6,,False
 Tarek Alaa,Egypt,24,24,Right-Back,Defender,Pyramids FC,0.25,,False
@@ -177,7 +177,7 @@ Jordan Pickford,England,32,1,Goalkeeper,Goalkeeper,Everton FC,13.0,,False
 Declan Rice,England,27,4,Central Midfield,Midfielder,Arsenal FC,120.0,,False
 Eberechi Eze,England,28,21,Attacking Midfield,Midfielder,Arsenal FC,65.0,,False
 Elliot Anderson,England,23,8,Central Midfield,Midfielder,Manchester City,75.0,,False
-Jordan Henderson,England,36,14,Defensive Midfield,Midfielder,Brentford FC,1.2,,False
+Jordan Henderson,England,36,14,Defensive Midfield,Midfielder,Brentford FC,1.2,,True
 Jude Bellingham,England,23,10,Attacking Midfield,Midfielder,Real Madrid,130.0,,False
 Kobbie Mainoo,England,21,16,Central Midfield,Midfielder,Manchester United,70.0,,False
 Morgan Rogers,England,23,17,Attacking Midfield,Midfielder,Aston Villa,90.0,,False
@@ -223,7 +223,7 @@ Jorge Sánchez,Mexico,28,2,Right-Back,Defender,PAOK Thessaloniki,2.0,,False
 Luis Romo,Mexico,31,7,Centre-Back,Defender,Deportivo Guadalajara,3.0,,False
 Mateo Chávez,Mexico,22,20,Left-Back,Defender,AZ Alkmaar,4.0,,False
 Carlos Acevedo,Mexico,30,12,Goalkeeper,Goalkeeper,Santos Laguna,2.8,,False
-Guillermo Ochoa,Mexico,40,13,Goalkeeper,Goalkeeper,AEL Limassol,0.25,,False
+Guillermo Ochoa,Mexico,40,13,Goalkeeper,Goalkeeper,Without Club,0.25,,False
 Raúl Rangel,Mexico,26,1,Goalkeeper,Goalkeeper,Deportivo Guadalajara,6.5,,False
 Brian Gutiérrez,Mexico,23,26,Attacking Midfield,Midfielder,Deportivo Guadalajara,8.0,,False
 Edson Álvarez,Mexico,28,4,Defensive Midfield,Midfielder,West Ham United,15.0,,False
@@ -255,7 +255,7 @@ Yassine Bounou,Morocco,35,1,Goalkeeper,Goalkeeper,Al-Hilal SFC,3.0,,False
 Ayyoub Bouaddi,Morocco,18,6,Central Midfield,Midfielder,LOSC Lille,50.0,,False
 Azzedine Ounahi,Morocco,26,8,Central Midfield,Midfielder,Girona FC,10.0,,False
 Bilal El Khannouss,Morocco,22,23,Attacking Midfield,Midfielder,VfB Stuttgart,35.0,,False
-Ismael Saibari,Morocco,25,11,Attacking Midfield,Midfielder,Bayern Munich,40.0,,False
+Ismael Saibari,Morocco,25,11,Attacking Midfield,Midfielder,Bayern Munich,40.0,,True
 Neil El Aynaoui,Morocco,25,24,Central Midfield,Midfielder,AS Roma,23.0,,False
 Samir El Mourabet,Morocco,20,15,Central Midfield,Midfielder,RC Strasbourg Alsace,22.0,,False
 Sofyan Amrabat,Morocco,29,4,Defensive Midfield,Midfielder,Fenerbahce,10.0,,False
@@ -322,7 +322,7 @@ Diogo Dalot,Portugal,27,5,Right-Back,Defender,Manchester United,30.0,,False
 Gonçalo Inácio,Portugal,24,14,Centre-Back,Defender,Sporting CP,40.0,,False
 João Cancelo,Portugal,32,20,Right-Back,Defender,Al-Hilal SFC,8.0,,False
 Matheus Nunes,Portugal,27,6,Right-Back,Defender,Manchester City,50.0,,False
-Nuno Mendes,Portugal,24,25,Left-Back,Defender,Paris Saint-Germain,80.0,,False
+Nuno Mendes,Portugal,24,25,Left-Back,Defender,Paris Saint-Germain,80.0,,True
 Nélson Semedo,Portugal,32,2,Right-Back,Defender,Fenerbahce,6.0,,False
 Renato Veiga,Portugal,22,13,Centre-Back,Defender,Villarreal CF,25.0,,False
 Rúben Dias,Portugal,29,3,Centre-Back,Defender,Manchester City,55.0,,False
@@ -386,7 +386,7 @@ Denis Zakaria,Switzerland,29,6,Defensive Midfield,Midfielder,AS Monaco,25.0,,Fal
 Djibril Sow,Switzerland,29,15,Central Midfield,Midfielder,Sevilla FC,7.5,,False
 Fabian Rieder,Switzerland,24,22,Attacking Midfield,Midfielder,FC Augsburg,12.0,,False
 Granit Xhaka,Switzerland,33,10,Defensive Midfield,Midfielder,Sunderland AFC,8.0,,False
-Johan Manzambi,Switzerland,20,9,Central Midfield,Midfielder,SC Freiburg,50.0,,False
+Johan Manzambi,Switzerland,20,9,Central Midfield,Midfielder,SC Freiburg,50.0,,True
 Michel Aebischer,Switzerland,29,20,Central Midfield,Midfielder,Pisa Sporting Club,4.0,,False
 Remo Freuler,Switzerland,34,8,Central Midfield,Midfielder,Without Club,3.0,,False
 Christian Pulisic,United States,27,10,Right Winger,Attacker,AC Milan,40.0,,False
